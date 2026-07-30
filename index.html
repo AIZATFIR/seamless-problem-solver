@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Terra — Seamless Problem Solver | Rooted in Calm</title>
-  <meta name="description" content="Kendalikan pikiran, temukan ketenangan, dan selesaikan masalah hidup dengan filosofi Stoik interaktif." />
+  <title>Terra — Interactive Flowchart & Problem Solver Engine</title>
+  <meta name="description" content="Platform flowchart interaktif, pemecah masalah kehidupan, komunitas Stoik & humor, serta custom flowchart builder gratis." />
   
   <!-- Fonts: Literata (Serif) & Nunito Sans (Sans) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -63,43 +63,65 @@
   </div>
 
   <!-- Navigation Bar -->
-  <header class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-primary/10 transition-colors duration-300">
-    <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+  <header class="sticky top-0 z-40 bg-background/85 backdrop-blur-md border-b border-primary/10 transition-colors duration-300">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-4">
       
       <!-- Brand Logo -->
-      <a href="#" id="brand-logo" class="flex items-center gap-3 group">
+      <a href="#" id="brand-logo" class="flex items-center gap-3 group" onclick="app.showSection('player', 'default')">
         <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center group-hover:scale-105 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300 shadow-terra-soft">
-          <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">spa</span>
+          <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">schema</span>
         </div>
         <div class="flex flex-col">
           <span class="font-headline font-bold text-2xl tracking-tight text-primary leading-none">Terra</span>
-          <span class="text-[10px] font-semibold tracking-widest uppercase text-on-surface-variant/70">Problem Solver</span>
+          <span class="text-[10px] font-semibold tracking-widest uppercase text-on-surface-variant/70" data-i18n="brandTag">Flowchart & Problem Solver</span>
         </div>
       </a>
 
+      <!-- Navigation Tabs -->
+      <div class="flex items-center gap-1 sm:gap-2 bg-surface-container/70 p-1.5 rounded-2xl border border-primary/10">
+        <button id="nav-btn-home" class="nav-tab-btn active-tab px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all" onclick="app.showSection('player', 'default')">
+          <span class="material-symbols-outlined text-lg">spa</span>
+          <span data-i18n="navHome">Main Flow</span>
+        </button>
+        <button id="nav-btn-community" class="nav-tab-btn px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all text-on-surface-variant hover:text-primary" onclick="app.showSection('community')">
+          <span class="material-symbols-outlined text-lg">forum</span>
+          <span data-i18n="navCommunity">Komunitas & Admin</span>
+        </button>
+        <button id="nav-btn-builder" class="nav-tab-btn px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all text-on-surface-variant hover:text-primary" onclick="app.openBuilderModal()">
+          <span class="material-symbols-outlined text-lg">add_box</span>
+          <span data-i18n="navCreate">Buat Flowchart</span>
+        </button>
+      </div>
+
       <!-- Quick Controls -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Ads Manager Quick Button -->
+        <button id="btn-ads-manager" class="nav-control-btn flex items-center gap-1.5 px-3 py-2 rounded-xl bg-tertiary/10 text-tertiary hover:bg-tertiary/20 transition-all text-xs sm:text-sm font-bold" title="Monetization & Ads Manager" onclick="app.openAdsManagerModal()">
+          <span class="material-symbols-outlined text-base">monetization_on</span>
+          <span class="hidden md:inline" data-i18n="navAds">Ads Setup</span>
+        </button>
+
         <!-- Sound Ambient Generator -->
         <button id="btn-ambient" class="nav-control-btn flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-all text-sm font-semibold" title="Suara Alam / Ambient Sound">
           <span class="material-symbols-outlined text-lg" id="icon-sound">volume_off</span>
-          <span class="hidden sm:inline" id="txt-ambient">Suara Alam</span>
+          <span class="hidden xl:inline" id="txt-ambient">Suara Alam</span>
         </button>
 
         <!-- Breathing Exercise Modal Toggle -->
         <button id="btn-breathing-modal" class="nav-control-btn flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-all text-sm font-semibold" title="Latihan Napas 4-7-8">
           <span class="material-symbols-outlined text-lg">air</span>
-          <span class="hidden sm:inline" data-i18n="navBreathing">Napas Calm</span>
+          <span class="hidden lg:inline" data-i18n="navBreathing">Napas Calm</span>
         </button>
 
         <!-- Journal Drawer Toggle -->
         <button id="btn-journal-toggle" class="nav-control-btn flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-all text-sm font-semibold relative" title="Jurnal Ketenangan">
           <span class="material-symbols-outlined text-lg">edit_note</span>
-          <span class="hidden sm:inline" data-i18n="navJournal">Jurnal</span>
+          <span class="hidden lg:inline" data-i18n="navJournal">Jurnal</span>
           <span id="journal-badge" class="hidden absolute -top-1 -right-1 w-2.5 h-2.5 bg-tertiary rounded-full"></span>
         </button>
 
         <!-- Language Switcher -->
-        <button id="btn-lang" class="nav-control-btn flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary transition-all text-sm font-bold uppercase tracking-wider" title="Ganti Bahasa">
+        <button id="btn-lang" class="nav-control-btn flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary transition-all text-xs font-bold uppercase tracking-wider" title="Ganti Bahasa">
           <span class="material-symbols-outlined text-base">translate</span>
           <span id="txt-lang">ID</span>
         </button>
@@ -113,182 +135,345 @@
     </nav>
   </header>
 
-  <!-- Main Hero Canvas -->
-  <main class="flex-grow flex flex-col justify-center items-center px-4 py-12 relative z-10">
-    <div class="max-w-3xl w-full text-center">
-      
-      <!-- Progress Bar & Indicator -->
-      <div class="mb-8 flex items-center justify-center gap-2" id="flow-indicator-bar">
-        <div class="step-dot active-dot" id="dot-1"></div>
-        <div class="w-8 h-0.5 bg-outline-variant/30 rounded-full transition-colors duration-500" id="line-1"></div>
-        <div class="step-dot" id="dot-2"></div>
-        <div class="w-8 h-0.5 bg-outline-variant/30 rounded-full transition-colors duration-500" id="line-2"></div>
-        <div class="step-dot" id="dot-3"></div>
-      </div>
+  <!-- Dynamic Content Container -->
+  <div class="flex-grow flex flex-col relative z-10">
 
-      <!-- Card Canvas Container -->
-      <div class="relative min-h-[380px] flex items-center justify-center">
+    <!-- SECTION 1: Dynamic Flowchart Player View -->
+    <main id="section-player" class="flex-grow flex flex-col justify-center items-center px-4 py-12 relative">
+      <div class="max-w-3xl w-full text-center">
         
-        <!-- STEP 1: Initial Question -->
-        <div id="step-1" class="flow-card active-card flex flex-col items-center">
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wider uppercase mb-6 shadow-sm">
-            <span class="material-symbols-outlined text-sm">psychology</span>
-            <span data-i18n="step1Tag">Refleksi Pertama</span>
-          </div>
-
-          <h1 class="font-headline text-4xl sm:text-5xl lg:text-6xl font-bold text-on-surface mb-8 leading-[1.15] tracking-tight">
-            <span data-i18n="step1Title">Punya Masalah dalam Hidup?</span>
-          </h1>
-
-          <p class="text-on-surface-variant/80 text-base sm:text-lg max-w-lg mb-10 font-body leading-relaxed" data-i18n="step1Sub">
-            Jawab dengan jujur. Semua berawal dari keberanian mengakui kondisi pikiran kita saat ini.
-          </p>
-
-          <div class="flex flex-col sm:flex-row gap-5 w-full justify-center max-w-md">
-            <button class="btn-terra btn-primary flex-1 py-4 px-8 rounded-xl font-bold text-lg text-on-primary shadow-terra-soft hover:shadow-terra-deep hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2" onclick="app.goToStep(2)">
-              <span data-i18n="btnYes">YA</span>
-              <span class="material-symbols-outlined text-xl">arrow_forward</span>
-            </button>
-            <button class="btn-terra btn-secondary flex-1 py-4 px-8 rounded-xl font-bold text-lg text-primary border-2 border-primary/20 bg-surface-container shadow-terra-soft hover:shadow-terra-deep hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2" onclick="app.goToStep(3, 'no_problem')">
-              <span data-i18n="btnNo">TIDAK</span>
-              <span class="material-symbols-outlined text-xl">sentiment_satisfied_alt</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- STEP 2: Control Check -->
-        <div id="step-2" class="flow-card hidden-card flex flex-col items-center">
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-tertiary/10 text-tertiary text-xs font-bold tracking-wider uppercase mb-6 shadow-sm">
-            <span class="material-symbols-outlined text-sm">eco</span>
-            <span data-i18n="step2Tag">Lingkaran Kendali</span>
-          </div>
-
-          <h2 class="font-headline text-4xl sm:text-5xl lg:text-6xl font-bold text-on-surface mb-8 leading-[1.15] tracking-tight">
-            <span data-i18n="step2Title">Bisa melakukan sesuatu?</span>
-          </h2>
-
-          <p class="text-on-surface-variant/80 text-base sm:text-lg max-w-lg mb-10 font-body leading-relaxed" data-i18n="step2Sub">
-            Apakah solusi berada dalam jangkauan tindakanmu hari ini, atau masalah ini di luar kendalimu?
-          </p>
-
-          <div class="flex flex-col sm:flex-row gap-5 w-full justify-center max-w-md">
-            <button class="btn-terra btn-primary flex-1 py-4 px-8 rounded-xl font-bold text-lg text-on-primary shadow-terra-soft hover:shadow-terra-deep hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2" onclick="app.goToStep(3, 'can_act')">
-              <span data-i18n="btnYesAction">YA, BISA</span>
-              <span class="material-symbols-outlined text-xl">build</span>
-            </button>
-            <button class="btn-terra btn-primary flex-1 py-4 px-8 rounded-xl font-bold text-lg text-on-primary shadow-terra-soft hover:shadow-terra-deep hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2" onclick="app.goToStep(3, 'cannot_act')">
-              <span data-i18n="btnNoAction">TIDAK BISA</span>
-              <span class="material-symbols-outlined text-xl">nature_people</span>
-            </button>
-          </div>
-
-          <button class="mt-8 text-on-surface-variant/60 hover:text-primary flex items-center gap-1.5 transition-colors font-semibold text-sm" onclick="app.goToStep(1)">
-            <span class="material-symbols-outlined text-sm">arrow_back</span>
-            <span data-i18n="btnBack">Kembali</span>
+        <!-- Active Flowchart Banner Header -->
+        <div id="player-flow-meta" class="mb-6 inline-flex flex-wrap items-center justify-center gap-2 bg-surface-container/80 px-4 py-2 rounded-2xl border border-primary/15 shadow-sm text-xs">
+          <span id="player-badge" class="px-2 py-0.5 rounded-md bg-primary text-on-primary font-bold uppercase tracking-wider text-[10px]">MAIN</span>
+          <span id="player-title" class="font-headline font-bold text-on-surface text-sm sm:text-base">Terra Stoic Problem Solver</span>
+          <span id="player-author" class="text-on-surface-variant/70 italic sm:inline">by Terra Admin</span>
+          <button id="btn-back-community" class="hidden ml-2 text-primary hover:underline font-bold flex items-center gap-1" onclick="app.showSection('community')">
+            <span class="material-symbols-outlined text-sm">grid_view</span>
+            <span data-i18n="btnAllFlows">Lihat Semua Flowchart</span>
           </button>
         </div>
 
-        <!-- STEP 3: Resolution & Enlightenment -->
-        <div id="step-3" class="flow-card hidden-card flex flex-col items-center">
-          <div class="w-20 h-20 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-6 animate-pulse shadow-terra-glow">
-            <span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">spa</span>
-          </div>
+        <!-- Progress Indicator Dots -->
+        <div class="mb-8 flex items-center justify-center gap-2" id="flow-indicator-bar">
+          <div class="step-dot active-dot" id="dot-1"></div>
+          <div class="w-8 h-0.5 bg-outline-variant/30 rounded-full transition-colors duration-500" id="line-1"></div>
+          <div class="step-dot" id="dot-2"></div>
+          <div class="w-8 h-0.5 bg-outline-variant/30 rounded-full transition-colors duration-500" id="line-2"></div>
+          <div class="step-dot" id="dot-3"></div>
+        </div>
 
-          <h2 class="font-headline text-4xl sm:text-5xl lg:text-6xl font-black text-primary mb-6 leading-tight" id="result-heading" data-i18n="step3Title">
-            Lalu Kenapa Khawatir?
-          </h2>
-
-          <div class="terra-card p-6 sm:p-8 rounded-2xl max-w-xl w-full mb-8 text-center border border-primary/10">
-            <p class="text-on-surface text-lg sm:text-xl font-headline font-semibold mb-4 leading-relaxed italic" id="result-message">
-              "Berakar dalam ketenangan. Lepaskan apa yang tidak bisa dikendalikan, dan percayalah pada prosesnya."
-            </p>
-            <div class="h-0.5 w-16 bg-primary/30 mx-auto mb-4"></div>
-            <p class="text-on-surface-variant text-sm font-body leading-relaxed" id="result-advice">
-              Fokuskan energi pada tindakan nyata yang dapat kamu kendalikan hari ini. Sisanya adalah riak air yang akan tenang dengan sendirinya.
-            </p>
-          </div>
-
-          <div class="flex flex-wrap gap-4 justify-center">
-            <button class="btn-terra flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-on-primary font-bold shadow-terra-soft hover:scale-105 active:scale-95" onclick="app.resetProcess()">
-              <span class="material-symbols-outlined">restart_alt</span>
-              <span data-i18n="btnRestart">Mulai Lagi</span>
-            </button>
-
-            <button class="btn-terra flex items-center gap-2 px-6 py-3 rounded-xl bg-surface-container text-primary font-bold border border-primary/20 hover:bg-primary/10 active:scale-95" onclick="app.openJournalWithContext()">
-              <span class="material-symbols-outlined">edit_note</span>
-              <span data-i18n="btnWriteJournal">Tulis Catatan Refleksi</span>
-            </button>
-
-            <button class="btn-terra flex items-center gap-2 px-5 py-3 rounded-xl bg-surface-container text-on-surface-variant font-semibold hover:text-primary active:scale-95" onclick="app.shareResult()">
-              <span class="material-symbols-outlined text-lg">share</span>
-              <span data-i18n="btnShare">Bagikan Ketenangan</span>
-            </button>
-          </div>
+        <!-- Dynamic Card Canvas Container -->
+        <div class="relative min-h-[380px] flex items-center justify-center" id="player-canvas">
+          <!-- Flowchart Card rendered dynamically by app.js -->
         </div>
 
       </div>
+    </main>
 
-    </div>
-  </main>
-
-  <!-- Stoic & Zen Philosophy Cards Section -->
-  <section class="max-w-7xl mx-auto px-6 py-16 w-full relative z-10">
-    <div class="text-center mb-12">
-      <h2 class="font-headline text-3xl sm:text-4xl font-bold text-on-surface mb-3" data-i18n="sectionTitle">Tiga Tangan Ketenangan</h2>
-      <p class="text-on-surface-variant/80 text-base max-w-xl mx-auto font-body" data-i18n="sectionSubtitle">Prinsip dasar Stoikisme untuk menjaga pikiran tetap jernih di tengah badai kehidupan.</p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- SECTION 2: Community & Admin Flowcharts Gallery -->
+    <section id="section-community" class="hidden flex-grow max-w-7xl mx-auto px-4 sm:px-6 py-12 w-full">
       
-      <!-- Card 1 -->
-      <div class="terra-card p-8 rounded-2xl flex flex-col items-center text-center group border border-outline-variant/15 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
-        <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-on-primary transition-all">
-          <span class="material-symbols-outlined text-3xl">psychology_alt</span>
+      <!-- Admin Official / Featured Flowcharts Header -->
+      <div class="mb-10 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-4 bg-gradient-to-r from-primary/10 via-surface-container to-tertiary/10 p-6 sm:p-8 rounded-3xl border border-primary/20">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary text-on-primary text-xs font-bold uppercase tracking-wider mb-2">
+            <span class="material-symbols-outlined text-sm">verified</span>
+            <span data-i18n="adminBadgeLabel">Flowchart Pilihan Admin (5 Unique Presets)</span>
+          </div>
+          <h2 class="font-headline text-2xl sm:text-3xl font-bold text-on-surface" data-i18n="communityHeaderTitle">Flowchart Unik & Komunitas</h2>
+          <p class="text-on-surface-variant text-sm sm:text-base font-body mt-1" data-i18n="communityHeaderSub">Jelajahi flowchart kocak, stoik, dan logika sehari-hari yang siap dimainkan & disesuaikan.</p>
         </div>
-        <h3 class="font-headline text-2xl font-bold mb-3 text-on-surface" data-i18n="card1Title">Kesadaran</h3>
-        <p class="text-on-surface-variant font-body leading-relaxed text-sm" data-i18n="card1Desc">Mengenali dan memisahkan fakta obyektif dari persepsi emosional adalah langkah pertama menuju kedamaian.</p>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="terra-card p-8 rounded-2xl flex flex-col items-center text-center group border border-outline-variant/15 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
-        <div class="w-14 h-14 bg-tertiary/10 rounded-2xl flex items-center justify-center text-tertiary mb-6 group-hover:scale-110 group-hover:bg-tertiary group-hover:text-on-primary transition-all">
-          <span class="material-symbols-outlined text-3xl">auto_fix_high</span>
-        </div>
-        <h3 class="font-headline text-2xl font-bold mb-3 text-on-surface" data-i18n="card2Title">Tindakan Jernih</h3>
-        <p class="text-on-surface-variant font-body leading-relaxed text-sm" data-i18n="card2Desc">Fokuskan seluruh perhatian dan usaha pada hal-hal yang berada langsung dalam pengaruh kendalimu.</p>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="terra-card p-8 rounded-2xl flex flex-col items-center text-center group border border-outline-variant/15 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
-        <div class="w-14 h-14 bg-secondary-container rounded-2xl flex items-center justify-center text-secondary mb-6 group-hover:scale-110 group-hover:bg-secondary group-hover:text-on-primary transition-all">
-          <span class="material-symbols-outlined text-3xl">self_improvement</span>
-        </div>
-        <h3 class="font-headline text-2xl font-bold mb-3 text-on-surface" data-i18n="card3Title">Penerimaan Tulus</h3>
-        <p class="text-on-surface-variant font-body leading-relaxed text-sm" data-i18n="card3Desc">Kedamaian tak tergoyahkan ditemukan saat kita berdamai dengan hasil akhir yang di luar kendali.</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Daily Wisdom Quote Banner -->
-  <section class="max-w-4xl mx-auto px-6 mb-16 w-full relative z-10">
-    <div class="terra-card p-8 rounded-3xl border border-primary/20 relative overflow-hidden bg-gradient-to-br from-surface to-surface-container">
-      <div class="absolute -right-10 -bottom-10 opacity-5 text-primary pointer-events-none">
-        <span class="material-symbols-outlined text-[180px]">format_quote</span>
-      </div>
-      <div class="relative z-10 text-center">
-        <span class="text-xs font-bold tracking-widest uppercase text-tertiary mb-3 inline-block" data-i18n="wisdomLabel">Kutipan Bijak Hari Ini</span>
-        <blockquote class="font-headline text-xl sm:text-2xl text-on-surface font-semibold italic mb-4 leading-relaxed" id="wisdom-quote">
-          "Kita menderita lebih sering dalam imajinasi daripada dalam kenyataan."
-        </blockquote>
-        <cite class="text-sm font-bold text-primary not-italic block" id="wisdom-author">— Seneca</cite>
-        <button class="mt-4 text-xs font-bold text-on-surface-variant/70 hover:text-primary transition-colors flex items-center gap-1 mx-auto" onclick="app.nextQuote()">
-          <span class="material-symbols-outlined text-sm">refresh</span>
-          <span data-i18n="btnNewQuote">Kutipan Lain</span>
+        <button class="btn-terra btn-primary px-6 py-3 rounded-2xl font-bold text-sm shadow-terra-soft flex items-center gap-2 shrink-0" onclick="app.openBuilderModal()">
+          <span class="material-symbols-outlined">add</span>
+          <span data-i18n="btnCreateNewFlow">Buat Costum Flowchart</span>
         </button>
       </div>
+
+      <!-- Search & Filters -->
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
+        
+        <!-- Search Input -->
+        <div class="relative w-full md:w-80">
+          <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant/60">search</span>
+          <input type="text" id="community-search" class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-surface-container border border-outline-variant/30 text-on-surface text-sm focus:outline-none focus:border-primary transition-all" placeholder="Cari flowchart..." oninput="app.filterCommunityFlows()" data-i18n-ph="phSearchFlow" />
+        </div>
+
+        <!-- Category Tabs -->
+        <div class="flex flex-wrap gap-2 justify-center" id="community-category-filters">
+          <button class="cat-filter-btn active-cat px-4 py-1.5 rounded-xl text-xs font-bold transition-all" data-cat="all" onclick="app.setCommunityCategory('all')" data-i18n="catAll">Semua</button>
+          <button class="cat-filter-btn px-4 py-1.5 rounded-xl text-xs font-bold transition-all text-on-surface-variant hover:text-primary bg-surface-container" data-cat="admin" onclick="app.setCommunityCategory('admin')" data-i18n="catAdmin">🔥 Official Admin</button>
+          <button class="cat-filter-btn px-4 py-1.5 rounded-xl text-xs font-bold transition-all text-on-surface-variant hover:text-primary bg-surface-container" data-cat="humor" onclick="app.setCommunityCategory('humor')" data-i18n="catHumor">Humor & Meme</button>
+          <button class="cat-filter-btn px-4 py-1.5 rounded-xl text-xs font-bold transition-all text-on-surface-variant hover:text-primary bg-surface-container" data-cat="stoic" onclick="app.setCommunityCategory('stoic')" data-i18n="catStoic">Stoik & Hidup</button>
+          <button class="cat-filter-btn px-4 py-1.5 rounded-xl text-xs font-bold transition-all text-on-surface-variant hover:text-primary bg-surface-container" data-cat="work" onclick="app.setCommunityCategory('work')" data-i18n="catWork">Kerja & Logika</button>
+        </div>
+      </div>
+
+      <!-- Flowcharts Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="community-grid">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+    </section>
+
+    <!-- Stoic & Zen Philosophy Cards Section -->
+    <section class="max-w-7xl mx-auto px-6 py-16 w-full relative z-10 border-t border-primary/10">
+      <div class="text-center mb-12">
+        <h2 class="font-headline text-3xl sm:text-4xl font-bold text-on-surface mb-3" data-i18n="sectionTitle">Tiga Tangan Ketenangan</h2>
+        <p class="text-on-surface-variant/80 text-base max-w-xl mx-auto font-body" data-i18n="sectionSubtitle">Prinsip dasar Stoikisme untuk menjaga pikiran tetap jernih di tengah badai kehidupan.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Card 1 -->
+        <div class="terra-card p-8 rounded-2xl flex flex-col items-center text-center group border border-outline-variant/15 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
+          <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-on-primary transition-all">
+            <span class="material-symbols-outlined text-3xl">psychology_alt</span>
+          </div>
+          <h3 class="font-headline text-2xl font-bold mb-3 text-on-surface" data-i18n="card1Title">Kesadaran</h3>
+          <p class="text-on-surface-variant font-body leading-relaxed text-sm" data-i18n="card1Desc">Mengenali dan memisahkan fakta obyektif dari persepsi emosional adalah langkah pertama menuju kedamaian.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="terra-card p-8 rounded-2xl flex flex-col items-center text-center group border border-outline-variant/15 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
+          <div class="w-14 h-14 bg-tertiary/10 rounded-2xl flex items-center justify-center text-tertiary mb-6 group-hover:scale-110 group-hover:bg-tertiary group-hover:text-on-primary transition-all">
+            <span class="material-symbols-outlined text-3xl">auto_fix_high</span>
+          </div>
+          <h3 class="font-headline text-2xl font-bold mb-3 text-on-surface" data-i18n="card2Title">Tindakan Jernih</h3>
+          <p class="text-on-surface-variant font-body leading-relaxed text-sm" data-i18n="card2Desc">Fokuskan seluruh perhatian dan usaha pada hal-hal yang berada langsung dalam pengaruh kendalimu.</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="terra-card p-8 rounded-2xl flex flex-col items-center text-center group border border-outline-variant/15 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
+          <div class="w-14 h-14 bg-secondary-container rounded-2xl flex items-center justify-center text-secondary mb-6 group-hover:scale-110 group-hover:bg-secondary group-hover:text-on-primary transition-all">
+            <span class="material-symbols-outlined text-3xl">self_improvement</span>
+          </div>
+          <h3 class="font-headline text-2xl font-bold mb-3 text-on-surface" data-i18n="card3Title">Penerimaan Tulus</h3>
+          <p class="text-on-surface-variant font-body leading-relaxed text-sm" data-i18n="card3Desc">Kedamaian tak tergoyahkan ditemukan saat kita berdamai dengan hasil akhir yang di luar kendali.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Daily Wisdom Quote Banner -->
+    <section class="max-w-4xl mx-auto px-6 mb-16 w-full relative z-10">
+      <div class="terra-card p-8 rounded-3xl border border-primary/20 relative overflow-hidden bg-gradient-to-br from-surface to-surface-container">
+        <div class="absolute -right-10 -bottom-10 opacity-5 text-primary pointer-events-none">
+          <span class="material-symbols-outlined text-[180px]">format_quote</span>
+        </div>
+        <div class="relative z-10 text-center">
+          <span class="text-xs font-bold tracking-widest uppercase text-tertiary mb-3 inline-block" data-i18n="wisdomLabel">Kutipan Bijak Hari Ini</span>
+          <blockquote class="font-headline text-xl sm:text-2xl text-on-surface font-semibold italic mb-4 leading-relaxed" id="wisdom-quote">
+            "Kita menderita lebih sering dalam imajinasi daripada dalam kenyataan."
+          </blockquote>
+          <cite class="text-sm font-bold text-primary not-italic block" id="wisdom-author">— Seneca</cite>
+          <button class="mt-4 text-xs font-bold text-on-surface-variant/70 hover:text-primary transition-colors flex items-center gap-1 mx-auto" onclick="app.nextQuote()">
+            <span class="material-symbols-outlined text-sm">refresh</span>
+            <span data-i18n="btnNewQuote">Kutipan Lain</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- MODAL 1: Custom Flowchart Builder -->
+  <div id="modal-builder" class="fixed inset-0 z-50 bg-on-background/50 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="terra-card p-6 sm:p-8 rounded-3xl max-w-3xl w-full max-h-[90vh] flex flex-col relative border border-primary/20 shadow-terra-deep scale-95 transition-transform duration-300" id="modal-builder-card">
+      
+      <button class="absolute top-4 right-4 p-2 text-on-surface-variant hover:text-primary transition-colors" onclick="app.closeBuilderModal()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div class="mb-6">
+        <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary mb-1">
+          <span class="material-symbols-outlined text-base">edit_square</span>
+          <span data-i18n="builderTag">Interactive Flowchart Creator</span>
+        </div>
+        <h3 class="font-headline text-2xl font-bold text-on-surface" data-i18n="builderTitle">Buat Custom Flowchart Kamu</h3>
+        <p class="text-xs text-on-surface-variant" data-i18n="builderSub">Buat diagram alur keputusanmu sendiri dengan mudah. Tanpa bayar hosting, 100% gratis!</p>
+      </div>
+
+      <!-- Builder Scrollable Form -->
+      <div class="flex-grow overflow-y-auto space-y-6 pr-2">
+        
+        <!-- Metadata Fields -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase text-on-surface-variant mb-1" data-i18n="lblFlowTitle">Judul Flowchart *</label>
+            <input type="text" id="builder-title" class="w-full p-2.5 rounded-xl bg-surface-container border border-outline-variant/30 text-on-surface text-sm focus:outline-none focus:border-primary" placeholder="Contoh: Mau Beli Kopi Mahal?" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-on-surface-variant mb-1" data-i18n="lblFlowAuthor">Nama Pembuat / Author</label>
+            <input type="text" id="builder-author" class="w-full p-2.5 rounded-xl bg-surface-container border border-outline-variant/30 text-on-surface text-sm focus:outline-none focus:border-primary" placeholder="Nama Kamu" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold uppercase text-on-surface-variant mb-1" data-i18n="lblFlowCategory">Kategori</label>
+            <select id="builder-category" class="w-full p-2.5 rounded-xl bg-surface-container border border-outline-variant/30 text-on-surface text-sm focus:outline-none focus:border-primary">
+              <option value="humor">Humor & Meme</option>
+              <option value="stoic">Stoik & Hidup</option>
+              <option value="work">Kerja & Logika</option>
+              <option value="social">Sosial & Relasi</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-on-surface-variant mb-1" data-i18n="lblFlowDesc">Deskripsi Singkat</label>
+            <input type="text" id="builder-desc" class="w-full p-2.5 rounded-xl bg-surface-container border border-outline-variant/30 text-on-surface text-sm focus:outline-none focus:border-primary" placeholder="Panduan mengambil keputusan saat lapar..." />
+          </div>
+        </div>
+
+        <hr class="border-outline-variant/20" />
+
+        <!-- Nodes Step Builder -->
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <h4 class="font-headline font-bold text-base text-on-surface" data-i18n="builderStepsTitle">Langkah & Pertanyaan Flowchart</h4>
+            <button type="button" class="px-3 py-1.5 rounded-xl bg-primary/10 text-primary text-xs font-bold hover:bg-primary/20 transition-all flex items-center gap-1" onclick="app.addBuilderNode()">
+              <span class="material-symbols-outlined text-sm">add</span>
+              <span data-i18n="btnAddNode">Tambah Langkah</span>
+            </button>
+          </div>
+
+          <div id="builder-nodes-list" class="space-y-4">
+            <!-- Node forms generated dynamically -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Builder Action Footer -->
+      <div class="pt-6 border-t border-outline-variant/20 flex flex-wrap gap-3 justify-between items-center">
+        <div class="flex gap-2">
+          <button type="button" class="px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary text-xs font-bold flex items-center gap-1" onclick="app.exportBuilderJSON()">
+            <span class="material-symbols-outlined text-sm">download</span>
+            <span data-i18n="btnExportJSON">Ekspor JSON</span>
+          </button>
+          <label class="px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary text-xs font-bold cursor-pointer flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">upload</span>
+            <span data-i18n="btnImportJSON">Impor JSON</span>
+            <input type="file" id="input-import-json" class="hidden" accept=".json" onchange="app.importBuilderJSON(event)" />
+          </label>
+        </div>
+
+        <div class="flex gap-3">
+          <button type="button" class="btn-terra px-5 py-2.5 rounded-xl bg-surface-container text-primary font-bold text-sm border border-primary/20" onclick="app.previewCustomFlowchart()">
+            <span data-i18n="btnTestFlow">Uji Flowchart</span>
+          </button>
+          <button type="button" class="btn-terra btn-primary px-6 py-2.5 rounded-xl font-bold text-sm shadow-terra-soft" onclick="app.saveAndPublishFlowchart()">
+            <span data-i18n="btnPublishFlow">Simpan & Terbitkan</span>
+          </button>
+        </div>
+      </div>
+
     </div>
-  </section>
+  </div>
+
+  <!-- MODAL 2: Interstitial Transition Ad Banner -->
+  <div id="modal-ad-interstitial" class="fixed inset-0 z-50 bg-on-background/70 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="terra-card p-6 sm:p-8 rounded-3xl max-w-md w-full text-center relative border border-tertiary/30 shadow-terra-deep scale-95 transition-transform duration-300" id="modal-ad-card">
+      
+      <div class="w-12 h-12 bg-tertiary/20 rounded-2xl text-tertiary flex items-center justify-center mx-auto mb-4 animate-bounce">
+        <span class="material-symbols-outlined text-2xl">workspace_premium</span>
+      </div>
+
+      <span class="text-[10px] font-mono tracking-widest uppercase text-tertiary bg-tertiary/10 px-2.5 py-1 rounded-full mb-3 inline-block" data-i18n="adTagSponsor">SPONSORED ADVERTISEMENT</span>
+
+      <h4 class="font-headline text-xl font-bold text-on-surface mb-2" id="ad-interstitial-title">Menyiapkan Flowchart Kamu...</h4>
+      <p class="text-xs text-on-surface-variant mb-6" data-i18n="adSubText">Dukung layanan Terra tetap 100% gratis dengan iklan ramah pengguna.</p>
+
+      <!-- Ad Graphic Banner Display Container -->
+      <div class="p-6 rounded-2xl bg-gradient-to-br from-tertiary/10 via-surface-container to-primary/10 border border-tertiary/20 mb-6 relative overflow-hidden" id="ad-banner-slot">
+        <span class="text-xs font-bold text-on-surface block mb-1">🌿 Terra Premium Coffee & Zen App</span>
+        <span class="text-[11px] text-on-surface-variant block mb-3">Nikmati ketenangan tanpa beban pikiran setiap hari.</span>
+        <div class="px-4 py-2 rounded-xl bg-tertiary text-on-primary font-bold text-xs inline-block shadow-sm cursor-pointer" onclick="app.recordAdClick('interstitial')">
+          Kunjungi Sponsor
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <span class="text-xs text-on-surface-variant font-mono" id="ad-countdown-text">Lanjut otomatis dalam 3 detik...</span>
+        <button id="btn-skip-ad" class="btn-terra px-4 py-2 rounded-xl bg-primary text-on-primary font-bold text-xs shadow-sm disabled:opacity-50" onclick="app.closeAdInterstitial(true)" disabled>
+          <span data-i18n="btnSkipAd">Lewati (3s)</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL 3: Ads Manager & Profitability Settings Panel -->
+  <div id="modal-ads-manager" class="fixed inset-0 z-50 bg-on-background/50 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="terra-card p-6 sm:p-8 rounded-3xl max-w-xl w-full relative border border-primary/20 shadow-terra-deep scale-95 transition-transform duration-300">
+      
+      <button class="absolute top-4 right-4 p-2 text-on-surface-variant hover:text-primary transition-colors" onclick="app.closeAdsManagerModal()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-tertiary/20 text-tertiary flex items-center justify-center">
+          <span class="material-symbols-outlined text-2xl">monetization_on</span>
+        </div>
+        <div>
+          <h3 class="font-headline text-2xl font-bold text-on-surface" data-i18n="adsManagerTitle">Pengaturan Iklan & Monetisasi</h3>
+          <p class="text-xs text-on-surface-variant" data-i18n="adsManagerSub">Pantau estimasi pendapatan & pasang kode Google AdSense milikmu.</p>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="grid grid-cols-3 gap-4 mb-6">
+        <div class="p-4 rounded-2xl bg-surface-container text-center border border-primary/10">
+          <span class="text-[10px] font-bold uppercase text-on-surface-variant" data-i18n="statImpressions">Tayangan Iklan</span>
+          <span class="font-headline font-black text-xl sm:text-2xl text-primary block mt-1" id="stat-impressions">0</span>
+        </div>
+        <div class="p-4 rounded-2xl bg-surface-container text-center border border-primary/10">
+          <span class="text-[10px] font-bold uppercase text-on-surface-variant" data-i18n="statClicks">Klik Iklan</span>
+          <span class="font-headline font-black text-xl sm:text-2xl text-tertiary block mt-1" id="stat-clicks">0</span>
+        </div>
+        <div class="p-4 rounded-2xl bg-surface-container text-center border border-primary/10">
+          <span class="text-[10px] font-bold uppercase text-on-surface-variant" data-i18n="statEarnings">Est. Pendapatan</span>
+          <span class="font-headline font-black text-xl sm:text-2xl text-green-600 block mt-1" id="stat-earnings">$0.00</span>
+        </div>
+      </div>
+
+      <!-- AdSense Code Form -->
+      <div class="space-y-4 mb-6">
+        <div>
+          <label class="block text-xs font-bold uppercase text-on-surface-variant mb-1" data-i18n="lblAdsenseId">Google AdSense Publisher ID (ca-pub-xxx)</label>
+          <input type="text" id="input-adsense-pub" class="w-full p-2.5 rounded-xl bg-surface-container border border-outline-variant/30 text-on-surface text-sm focus:outline-none focus:border-primary" placeholder="ca-pub-1234567890123456" />
+        </div>
+        
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-on-surface" data-i18n="lblEnableCornerAd">Tampilkan Floating Corner Ad Banner</span>
+          <input type="checkbox" id="chk-corner-ad" class="w-5 h-5 accent-primary cursor-pointer" checked onchange="app.toggleCornerAdVisibility(this.checked)" />
+        </div>
+      </div>
+
+      <div class="flex gap-3 justify-end">
+        <button class="btn-terra btn-primary px-6 py-2.5 rounded-xl font-bold text-sm" onclick="app.saveAdsSettings()">
+          <span data-i18n="btnSaveAdsSetup">Simpan Pengaturan</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FLOATING CORNER AD BANNER (Non-intrusive bottom corner ad) -->
+  <div id="corner-ad-banner" class="fixed bottom-4 right-4 z-30 max-w-xs w-full bg-surface-container/95 backdrop-blur-md p-4 rounded-2xl border border-primary/20 shadow-terra-deep transition-all duration-300">
+    <div class="flex justify-between items-center mb-2">
+      <span class="text-[9px] font-mono font-bold uppercase tracking-wider text-tertiary bg-tertiary/10 px-2 py-0.5 rounded" data-i18n="adTagCorner">SPONSOR AD</span>
+      <button class="text-on-surface-variant/60 hover:text-on-surface text-xs font-bold p-1" onclick="app.toggleCornerAdVisibility(false)" title="Tutup Iklan">✕</button>
+    </div>
+    <div class="flex items-center gap-3 cursor-pointer" onclick="app.recordAdClick('corner')">
+      <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center shrink-0">
+        <span class="material-symbols-outlined text-xl">energy_savings_leaf</span>
+      </div>
+      <div>
+        <h5 class="text-xs font-bold text-on-surface leading-snug">Terra Zen & Calm Hub</h5>
+        <p class="text-[10px] text-on-surface-variant/80">Solusi damai tanpa biaya bulanan.</p>
+      </div>
+    </div>
+  </div>
 
   <!-- 4-7-8 Breathing Guide Drawer/Modal -->
   <div id="modal-breathing" class="fixed inset-0 z-50 bg-on-background/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
@@ -368,13 +553,14 @@
   <footer class="mt-auto py-10 bg-surface-container border-t border-primary/10 relative z-10">
     <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-6">
       <div class="flex items-center gap-2">
-        <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">spa</span>
+        <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">schema</span>
         <span class="font-headline font-bold text-xl text-on-surface">Terra</span>
-        <span class="text-xs text-on-surface-variant/60 font-body ml-2">© 2026 Rooted in Calm</span>
+        <span class="text-xs text-on-surface-variant/60 font-body ml-2">© 2026 Interactive Flowcharts & Stoic Wisdom</span>
       </div>
 
       <div class="flex gap-8 font-body text-xs font-bold tracking-wider text-on-surface-variant uppercase">
-        <a href="#" class="hover:text-primary transition-colors" data-i18n="footerPhilosophy" onclick="app.goToStep(1)">Filosofi</a>
+        <a href="#" class="hover:text-primary transition-colors" data-i18n="footerPhilosophy" onclick="app.showSection('player', 'default')">Filosofi</a>
+        <a href="#" class="hover:text-primary transition-colors" data-i18n="footerCommunity" onclick="app.showSection('community')">Komunitas</a>
         <a href="#" class="hover:text-primary transition-colors" data-i18n="footerBreathing" onclick="app.openBreathingModal()">Latihan Napas</a>
         <a href="#" class="hover:text-primary transition-colors" data-i18n="footerJournal" onclick="app.toggleJournalDrawer(true)">Jurnal Refleksi</a>
       </div>

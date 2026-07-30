@@ -1,26 +1,69 @@
 /**
- * Terra — Seamless Problem Solver Core Application JavaScript
+ * Terra 2.0 — Interactive Flowchart & Problem Solver Core Application
  */
 
 const translations = {
   id: {
+    brandTag: "Flowchart & Problem Solver",
+    navHome: "Main Flow",
+    navCommunity: "Komunitas & Admin",
+    navCreate: "Buat Flowchart",
+    navAds: "Ads Setup",
     navBreathing: "Napas Calm",
     navJournal: "Jurnal",
-    step1Tag: "Refleksi Pertama",
-    step1Title: "Punya Masalah dalam Hidup?",
-    step1Sub: "Jawab dengan jujur. Semua berawal dari keberanian mengakui kondisi pikiran kita saat ini.",
-    btnYes: "YA",
-    btnNo: "TIDAK",
-    step2Tag: "Lingkaran Kendali",
-    step2Title: "Bisa melakukan sesuatu?",
-    step2Sub: "Apakah solusi berada dalam jangkauan tindakanmu hari ini, atau masalah ini di luar kendalimu?",
-    btnYesAction: "YA, BISA",
-    btnNoAction: "TIDAK BISA",
-    btnBack: "Kembali",
-    step3Title: "Lalu Kenapa Khawatir?",
-    btnRestart: "Mulai Lagi",
+    ambientLabelOn: "Heningkan",
+    ambientLabelOff: "Suara Alam",
+    btnAllFlows: "Lihat Semua Flowchart",
+
+    // Flow Player
+    btnBackNode: "Kembali",
+    btnRestartFlow: "Mainkan Lagi",
     btnWriteJournal: "Tulis Catatan Refleksi",
-    btnShare: "Bagikan Ketenangan",
+    btnShareFlow: "Bagikan Flowchart",
+
+    // Community
+    adminBadgeLabel: "Flowchart Pilihan Admin (5 Unique Presets)",
+    communityHeaderTitle: "Flowchart Unik & Komunitas",
+    communityHeaderSub: "Jelajahi flowchart kocak, stoik, dan logika sehari-hari yang siap dimainkan & disesuaikan.",
+    btnCreateNewFlow: "Buat Costum Flowchart",
+    phSearchFlow: "Cari flowchart...",
+    catAll: "Semua",
+    catAdmin: "🔥 Official Admin",
+    catHumor: "Humor & Meme",
+    catStoic: "Stoik & Hidup",
+    catWork: "Kerja & Logika",
+    btnPlayFlow: "Mainkan Flowchart",
+
+    // Builder
+    builderTag: "Interactive Flowchart Creator",
+    builderTitle: "Buat Custom Flowchart Kamu",
+    builderSub: "Buat diagram alur keputusanmu sendiri dengan mudah. Tanpa bayar hosting, 100% gratis!",
+    lblFlowTitle: "Judul Flowchart *",
+    lblFlowAuthor: "Nama Pembuat / Author",
+    lblFlowCategory: "Kategori",
+    lblFlowDesc: "Deskripsi Singkat",
+    builderStepsTitle: "Langkah & Pertanyaan Flowchart",
+    btnAddNode: "Tambah Langkah",
+    btnExportJSON: "Ekspor JSON",
+    btnImportJSON: "Impor JSON",
+    btnTestFlow: "Uji Flowchart",
+    btnPublishFlow: "Simpan & Terbitkan",
+
+    // Ads & Monetization
+    adTagSponsor: "SPONSORED ADVERTISEMENT",
+    adSubText: "Dukung layanan Terra tetap 100% gratis dengan iklan ramah pengguna.",
+    btnSkipAd: "Lewati",
+    adsManagerTitle: "Pengaturan Iklan & Monetisasi",
+    adsManagerSub: "Pantau estimasi pendapatan & pasang kode Google AdSense milikmu.",
+    statImpressions: "Tayangan Iklan",
+    statClicks: "Klik Iklan",
+    statEarnings: "Est. Pendapatan",
+    lblAdsenseId: "Google AdSense Publisher ID (ca-pub-xxx)",
+    lblEnableCornerAd: "Tampilkan Floating Corner Ad Banner",
+    btnSaveAdsSetup: "Simpan Pengaturan",
+    adTagCorner: "SPONSOR AD",
+
+    // Section 3
     sectionTitle: "Tiga Pilar Ketenangan",
     sectionSubtitle: "Prinsip dasar Stoikisme untuk menjaga pikiran tetap jernih di tengah badai kehidupan.",
     card1Title: "Kesadaran",
@@ -31,6 +74,8 @@ const translations = {
     card3Desc: "Kedamaian tak tergoyahkan ditemukan saat kita berdamai dengan hasil akhir yang di luar kendali.",
     wisdomLabel: "Kutipan Bijak Hari Ini",
     btnNewQuote: "Kutipan Lain",
+
+    // Breathing & Journal
     breathingModalTitle: "Napas Relaksasi 4-7-8",
     breathingModalSub: "Tarik napas 4 detik, tahan 7 detik, hembuskan 8 detik.",
     btnStart: "Mulai Napas",
@@ -41,37 +86,71 @@ const translations = {
     btnSaveJournal: "Simpan Catatan",
     journalListTitle: "Riwayat Refleksi",
     footerPhilosophy: "Filosofi",
+    footerCommunity: "Komunitas",
     footerBreathing: "Latihan Napas",
-    footerJournal: "Jurnal Refleksi",
-    ambientLabelOn: "Heningkan",
-    ambientLabelOff: "Suara Alam",
-    
-    // Result messages
-    resNoProblemMsg: "\"Hati yang tidak terdistraksi oleh keinginan palsu adalah benteng ketenangan terkuat.\"",
-    resNoProblemAdv: "Nikmati setiap detik ketenangan saat ini. Bersyukurlah atas pikiran yang damai.",
-    resCanActMsg: "\"Bukan hal yang terjadi yang mencemaskan kita, melainkan persepsi kita tentang hal itu. Fokuslah pada aksimu.\"",
-    resCanActAdv: "Ambil tindakan kecil pertama sekarang. Kejelasan lahir dari aksi nyata, bukan overthinking.",
-    resCannotActMsg: "\"Berakar dalam ketenangan. Lepaskan apa yang tidak bisa dikendalikan, dan percayalah pada prosesnya.\"",
-    resCannotActAdv: "Lepaskan ikatan ekspektasi. Apa yang di luar kendalimu bukanlah bebanmu untuk dipikul."
+    footerJournal: "Jurnal Refleksi"
   },
   en: {
+    brandTag: "Flowchart & Problem Solver",
+    navHome: "Main Flow",
+    navCommunity: "Community & Admin",
+    navCreate: "Create Flowchart",
+    navAds: "Ads Setup",
     navBreathing: "Calm Breath",
     navJournal: "Journal",
-    step1Tag: "First Reflection",
-    step1Title: "Do you have a problem in life?",
-    step1Sub: "Answer honestly. Everything starts with the courage to acknowledge our current state of mind.",
-    btnYes: "YES",
-    btnNo: "NO",
-    step2Tag: "Circle of Control",
-    step2Title: "Can you do something about it?",
-    step2Sub: "Is the solution within reach of your actions today, or is this outside your control?",
-    btnYesAction: "YES, I CAN",
-    btnNoAction: "NO, I CAN'T",
-    btnBack: "Back",
-    step3Title: "Then Why Worry?",
-    btnRestart: "Start Again",
+    ambientLabelOn: "Mute",
+    ambientLabelOff: "Nature Sound",
+    btnAllFlows: "View All Flowcharts",
+
+    // Flow Player
+    btnBackNode: "Back",
+    btnRestartFlow: "Play Again",
     btnWriteJournal: "Write Reflection Journal",
-    btnShare: "Share Serenity",
+    btnShareFlow: "Share Flowchart",
+
+    // Community
+    adminBadgeLabel: "Admin Featured Flowcharts (5 Unique Presets)",
+    communityHeaderTitle: "Unique & Community Flowcharts",
+    communityHeaderSub: "Explore hilarious memes, Stoic wisdom, and everyday logic flowcharts ready to play & customize.",
+    btnCreateNewFlow: "Create Custom Flowchart",
+    phSearchFlow: "Search flowchart...",
+    catAll: "All",
+    catAdmin: "🔥 Official Admin",
+    catHumor: "Humor & Meme",
+    catStoic: "Stoic & Life",
+    catWork: "Work & Logic",
+    btnPlayFlow: "Play Flowchart",
+
+    // Builder
+    builderTag: "Interactive Flowchart Creator",
+    builderTitle: "Create Your Custom Flowchart",
+    builderSub: "Design your own custom decision tree easily. 100% free with zero hosting cost!",
+    lblFlowTitle: "Flowchart Title *",
+    lblFlowAuthor: "Author Name",
+    lblFlowCategory: "Category",
+    lblFlowDesc: "Short Description",
+    builderStepsTitle: "Flowchart Steps & Questions",
+    btnAddNode: "Add Step",
+    btnExportJSON: "Export JSON",
+    btnImportJSON: "Import JSON",
+    btnTestFlow: "Test Flowchart",
+    btnPublishFlow: "Save & Publish",
+
+    // Ads & Monetization
+    adTagSponsor: "SPONSORED ADVERTISEMENT",
+    adSubText: "Support Terra free service with friendly non-intrusive ads.",
+    btnSkipAd: "Skip",
+    adsManagerTitle: "Ads & Monetization Settings",
+    adsManagerSub: "Track estimated earnings & configure your Google AdSense code.",
+    statImpressions: "Ad Impressions",
+    statClicks: "Ad Clicks",
+    statEarnings: "Est. Earnings",
+    lblAdsenseId: "Google AdSense Publisher ID (ca-pub-xxx)",
+    lblEnableCornerAd: "Display Floating Corner Ad Banner",
+    btnSaveAdsSetup: "Save Settings",
+    adTagCorner: "SPONSOR AD",
+
+    // Section 3
     sectionTitle: "Three Pillars of Calm",
     sectionSubtitle: "Core Stoic principles to keep your mind crystal clear amidst life's storms.",
     card1Title: "Awareness",
@@ -82,6 +161,8 @@ const translations = {
     card3Desc: "Unshakable peace is found when we accept outcomes that are beyond our control.",
     wisdomLabel: "Daily Wisdom Quote",
     btnNewQuote: "Another Quote",
+
+    // Breathing & Journal
     breathingModalTitle: "4-7-8 Relaxation Breath",
     breathingModalSub: "Inhale 4 seconds, hold 7 seconds, exhale 8 seconds.",
     btnStart: "Start Breathing",
@@ -92,48 +173,476 @@ const translations = {
     btnSaveJournal: "Save Entry",
     journalListTitle: "Reflection History",
     footerPhilosophy: "Philosophy",
+    footerCommunity: "Community",
     footerBreathing: "Breathing Exercise",
-    footerJournal: "Reflection Journal",
-    ambientLabelOn: "Mute",
-    ambientLabelOff: "Nature Sound",
-    
-    // Result messages
-    resNoProblemMsg: "\"A mind undistracted by false desires is a fortress of inner peace.\"",
-    resNoProblemAdv: "Savor every second of this quiet moment. Be grateful for a peaceful mind.",
-    resCanActMsg: "\"It's not what happens to you, but how you react to it that matters. Focus on your actions.\"",
-    resCanActAdv: "Take your first small step now. Clarity is born from action, not overthinking.",
-    resCannotActMsg: "\"Rooted in calm. Release what cannot be controlled, and trust the process.\"",
-    resCannotActAdv: "Let go of the weight of expectation. What is beyond your control is not yours to carry."
+    footerJournal: "Reflection Journal"
   }
 };
 
 const quotes = [
-  { quote: "Kita menderita lebih sering dalam imajinasi daripada dalam kenyataan.", author: "Seneca" },
-  { quote: "Kamu memiliki kendali atas pikiranmu - bukan kejadian luar. Pahami ini, dan kamu akan menemukan kekuatan.", author: "Marcus Aurelius" },
-  { quote: "Bukan apa yang terjadi padamu yang penting, tapi bagaimana caramu menanggapinya.", author: "Epictetus" },
-  { quote: "Ketika kamu menerima apa adanya, seluruh dunia menjadi milikmu.", author: "Lao Tzu" },
-  { quote: "Kedamaian adalah hasil dari melatih pikiranmu untuk memproses hidup sebagaimana adanya, bukan sebagaimana kamu inginkan.", author: "Stoic Wisdom" }
+  {
+    idQuote: "Kita menderita lebih sering dalam imajinasi daripada dalam kenyataan.",
+    enQuote: "We suffer more often in imagination than in reality.",
+    author: "Seneca"
+  },
+  {
+    idQuote: "Kamu memiliki kendali atas pikiranmu - bukan kejadian luar. Pahami ini, dan kamu akan menemukan kekuatan.",
+    enQuote: "You have power over your mind - not outside events. Realize this, and you will find strength.",
+    author: "Marcus Aurelius"
+  },
+  {
+    idQuote: "Bukan apa yang terjadi padamu yang penting, tapi bagaimana caramu menanggapinya.",
+    enQuote: "It's not what happens to you, but how you react to it that matters.",
+    author: "Epictetus"
+  },
+  {
+    idQuote: "Ketika kamu menerima apa adanya, seluruh dunia menjadi milikmu.",
+    enQuote: "When you accept things as they are, the whole world belongs to you.",
+    author: "Lao Tzu"
+  },
+  {
+    idQuote: "Kedamaian adalah hasil dari melatih pikiranmu untuk memproses hidup sebagaimana adanya, bukan sebagaimana kamu inginkan.",
+    enQuote: "Peace is the result of training your mind to process life as it is, not as you wish it were.",
+    author: "Stoic Wisdom"
+  }
+];
+
+// --- 5 Admin Preset Flowcharts Transcribed from Images ---
+const adminFlowcharts = [
+  {
+    id: "admin-stoic-default",
+    title_id: "Terra Stoic Problem Solver",
+    title_en: "Terra Stoic Problem Solver",
+    category: "stoic",
+    author: "Terra Admin",
+    isAdmin: true,
+    likes: 342,
+    plays: 1280,
+    desc_id: "Diagram Stoikisme klasik untuk memisahkan hal dalam kendali & melepaskan kecemasan.",
+    desc_en: "Classic Stoic decision flowchart to separate control & release anxiety.",
+    startNode: "step1",
+    nodes: {
+      step1: {
+        tag_id: "Refleksi Pertama", tag_en: "First Reflection",
+        q_id: "Punya Masalah dalam Hidup?", q_en: "Do you have a problem in life?",
+        sub_id: "Jawab dengan jujur. Semua berawal dari keberanian mengakui kondisi pikiran kita.",
+        sub_en: "Answer honestly. Everything starts with acknowledging our current state of mind.",
+        options: [
+          { text_id: "YA", text_en: "YES", next: "step2", btnStyle: "btn-primary" },
+          { text_id: "TIDAK", text_en: "NO", next: "res_noproblem", btnStyle: "btn-secondary" }
+        ]
+      },
+      step2: {
+        tag_id: "Lingkaran Kendali", tag_en: "Circle of Control",
+        q_id: "Bisa melakukan sesuatu?", q_en: "Can you do something about it?",
+        sub_id: "Apakah solusi berada dalam jangkauan tindakanmu hari ini, atau di luar kendalimu?",
+        sub_en: "Is the solution within reach of your actions today, or outside your control?",
+        options: [
+          { text_id: "YA, BISA", text_en: "YES, I CAN", next: "res_canact", btnStyle: "btn-primary" },
+          { text_id: "TIDAK BISA", text_en: "NO, I CAN'T", next: "res_cannotact", btnStyle: "btn-primary" }
+        ]
+      },
+      res_noproblem: {
+        isResult: true,
+        title_id: "Lalu Kenapa Khawatir?", title_en: "Then Why Worry?",
+        msg_id: "\"Hati yang tidak terdistraksi oleh keinginan palsu adalah benteng ketenangan terkuat.\"",
+        msg_en: "\"A mind undistracted by false desires is a fortress of inner peace.\"",
+        adv_id: "Nikmati setiap detik ketenangan saat ini. Bersyukurlah atas pikiran yang damai.",
+        adv_en: "Savor every second of this quiet moment. Be grateful for a peaceful mind."
+      },
+      res_canact: {
+        isResult: true,
+        title_id: "Lalu Kenapa Khawatir?", title_en: "Then Why Worry?",
+        msg_id: "\"Bukan hal yang terjadi yang mencemaskan kita, melainkan persepsi kita tentang hal itu. Fokuslah pada aksimu.\"",
+        msg_en: "\"It's not what happens to you, but how you react to it that matters. Focus on your actions.\"",
+        adv_id: "Ambil tindakan kecil pertama sekarang. Kejelasan lahir dari aksi nyata, bukan overthinking.",
+        adv_en: "Take your first small step now. Clarity is born from action, not overthinking."
+      },
+      res_cannotact: {
+        isResult: true,
+        title_id: "Lalu Kenapa Khawatir?", title_en: "Then Why Worry?",
+        msg_id: "\"Berakar dalam ketenangan. Lepaskan apa yang tidak bisa dikendalikan, dan percayalah pada prosesnya.\"",
+        msg_en: "\"Rooted in calm. Release what cannot be controlled, and trust the process.\"",
+        adv_id: "Lepaskan ikatan ekspektasi. Apa yang di luar kendalimu bukanlah bebanmu untuk dipikul.",
+        adv_en: "Let go of the weight of expectation. What is beyond your control is not yours to carry."
+      }
+    }
+  },
+  {
+    id: "admin-flow-lesson",
+    title_id: "Pelajaran Singkat Flowchart (Meta Meme)",
+    title_en: "A Brief Lesson in Flow Charts",
+    category: "humor",
+    author: "Evan Diaz / Pajamaforest",
+    isAdmin: true,
+    likes: 512,
+    plays: 2190,
+    desc_id: "Flowchart meta klasik yang menguji apakah kamu benar-benar paham cara membaca kotak & panah!",
+    desc_en: "Classic meta flowchart testing whether you actually understand how boxes & arrows work!",
+    startNode: "step1",
+    nodes: {
+      step1: {
+        tag_id: "Start!", tag_en: "Start!",
+        q_id: "Ini Adalah Sebuah Flowchart", q_en: "This is a Flow Chart",
+        sub_id: "Mari kita tes pemahaman dasar diagram alur.", sub_en: "Let's test basic flowchart comprehension.",
+        options: [
+          { text_id: "ok", text_en: "ok", next: "step2_so", btnStyle: "btn-primary" },
+          { text_id: "a what?", text_en: "a what?", next: "step2_awhat", btnStyle: "btn-secondary" }
+        ]
+      },
+      step2_so: {
+        tag_id: "Cek Pemahaman", tag_en: "Check Understanding",
+        q_id: "Jadi kamu paham kan?", q_en: "So you get it?",
+        options: [
+          { text_id: "yep", text_en: "yep", next: "res_thatsit", btnStyle: "btn-primary" },
+          { text_id: "oh, ok", text_en: "oh, ok", next: "step2_so", btnStyle: "btn-secondary" }
+        ]
+      },
+      step2_awhat: {
+        tag_id: "Penjelasan", tag_en: "Explanation",
+        q_id: "Sebuah Flowchart!", q_en: "A Flow Chart",
+        options: [
+          { text_id: "...a what?", text_en: "...a what?", next: "step3_howd", btnStyle: "btn-primary" },
+          { text_id: "oh, ok", text_en: "oh, ok", next: "step2_so", btnStyle: "btn-secondary" }
+        ]
+      },
+      step3_howd: {
+        tag_id: "Pertanyaan Serius", tag_en: "Serious Question",
+        q_id: "Bagaimana bisa kamu sampai sejauh ini?!", q_en: "How'd you get this far, anyway?",
+        options: [
+          { text_id: "saya bisa baca ini...", text_en: "i can read these...", next: "res_thatsit", btnStyle: "btn-primary" },
+          { text_id: "tidak tahu", text_en: "no idea", next: "step4_boxes", btnStyle: "btn-primary" },
+          { text_id: "tentu saja", text_en: "obviously", next: "step4_dumb", btnStyle: "btn-secondary" },
+          { text_id: "entahlah", text_en: "i dunno", next: "step4_wait", btnStyle: "btn-secondary" }
+        ]
+      },
+      step4_boxes: {
+        tag_id: "Langkah Dasar", tag_en: "Basic Step",
+        q_id: "Ok, lihat kotak-kotak itu?", q_en: "Ok, see the boxes?",
+        options: [
+          { text_id: "ya", text_en: "yes", next: "step5_arrows", btnStyle: "btn-primary" },
+          { text_id: "tidak", text_en: "no", next: "step4_wait", btnStyle: "btn-secondary" }
+        ]
+      },
+      step5_arrows: {
+        tag_id: "Langkah Kedua", tag_en: "Second Step",
+        q_id: "Dan lihat panah-panahnya?", q_en: "And see the arrows?",
+        options: [
+          { text_id: "ya", text_en: "yes", next: "step4_dumb", btnStyle: "btn-primary" },
+          { text_id: "tidak", text_en: "no", next: "step4_wait", btnStyle: "btn-secondary" }
+        ]
+      },
+      step4_dumb: {
+        tag_id: "Uji IQ", tag_en: "IQ Check",
+        q_id: "Kamu bodoh ya?", q_en: "Are you dumb?",
+        options: [
+          { text_id: "tentu saja", text_en: "obviously", next: "res_thatsit", btnStyle: "btn-primary" },
+          { text_id: "tidak", text_en: "no", next: "step4_wait", btnStyle: "btn-secondary" }
+        ]
+      },
+      step4_wait: {
+        tag_id: "Kebingungan", tag_en: "Confusion",
+        q_id: "Tunggu, apa?!", q_en: "Wait, what?",
+        options: [
+          { text_id: "ya!", text_en: "yes!", next: "res_thatsit", btnStyle: "btn-primary" },
+          { text_id: "tidak", text_en: "no", next: "step4_wait", btnStyle: "btn-secondary" }
+        ]
+      },
+      res_thatsit: {
+        isResult: true,
+        title_id: "NAH, ITULAH FLOWCHART!", title_en: "THAT'S A FLOW CHART!",
+        msg_id: "\"Selamat! Kamu berhasil menavigasi labirin kotak dan panah meta ini.\"",
+        msg_en: "\"Congratulations! You successfully navigated this meta maze of boxes and arrows.\"",
+        adv_id: "Sekarang kamu sudah resmi menjadi ahli membaca diagram alur.",
+        adv_en: "You are now officially a certified flowchart master reader."
+      }
+    }
+  },
+  {
+    id: "admin-flow-commonsense",
+    title_id: "Akal Sehat: Caraku Mengatasi Masalah",
+    title_en: "Common Sense: A Flowchart",
+    category: "humor",
+    author: "Crookedglasses",
+    isAdmin: true,
+    likes: 489,
+    plays: 1850,
+    desc_id: "Perbandingan kocak antara orang normal vs kebiasaan overthinking dan panik berlebihan.",
+    desc_en: "Hilarious comparison between normal people vs overthinking & over-reacting.",
+    startNode: "step1",
+    nodes: {
+      step1: {
+        tag_id: "Orientasi Diri", tag_en: "Self Orientation",
+        q_id: "Kamu menemukan masalah. Bagaimana responmu?", q_en: "You found a problem. How do you respond?",
+        options: [
+          { text_id: "Orang Pada Umumnya", text_en: "Most People", next: "step_most", btnStyle: "btn-primary" },
+          { text_id: "Saya (Si Tukang Overthink)", text_en: "I, on the other hand...", next: "step_me1", btnStyle: "btn-secondary" }
+        ]
+      },
+      step_most: {
+        tag_id: "Orang Normal", tag_en: "Most People",
+        q_id: "Cari cara paling mudah & langsung untuk menyelesaikannya.", q_en: "Figure out easiest way to solve it.",
+        options: [
+          { text_id: "Selesai!", text_en: "Done!", next: "res_solved", btnStyle: "btn-primary" }
+        ]
+      },
+      step_me1: {
+        tag_id: "Fase 1", tag_en: "Phase 1",
+        q_id: "Memikirkan masalah ini secara berlebihan sampai kocak!", q_en: "Hilariously over-think it!",
+        options: [
+          { text_id: "Lanjut ke Panik", text_en: "Proceed to Freak Out", next: "step_me2", btnStyle: "btn-primary" }
+        ]
+      },
+      step_me2: {
+        tag_id: "Fase 2", tag_en: "Phase 2",
+        q_id: "Panik dan heboh betapa sulitnya masalah ini!", q_en: "Freak out about how difficult it is!",
+        options: [
+          { text_id: "Lanjut ke Obsesi", text_en: "Proceed to Obsess", next: "step_me3", btnStyle: "btn-primary" }
+        ]
+      },
+      step_me3: {
+        tag_id: "Fase 3", tag_en: "Phase 3",
+        q_id: "Terobsesi dan memikirkannya nonstop selama berhari-hari!", q_en: "Obsess about it for days!",
+        options: [
+          { text_id: "Menangis", text_en: "Cry", next: "step_me4", btnStyle: "btn-secondary" }
+        ]
+      },
+      step_me4: {
+        tag_id: "Fase 4", tag_en: "Phase 4",
+        q_id: "Menangis di pojokan...", q_en: "Cry in the corner...",
+        options: [
+          { text_id: "Akhirnya Dapat Ilham", text_en: "Finally get an epiphany", next: "step_me5", btnStyle: "btn-primary" }
+        ]
+      },
+      step_me5: {
+        tag_id: "Fase 5", tag_en: "Phase 5",
+        q_id: "Akhirnya (secara acak) memikirkan solusi yang sangat sederhana!", q_en: "Finally (randomly) think of a simpler solution!",
+        options: [
+          { text_id: "Selesaikan!", text_en: "Solve it!", next: "res_solved", btnStyle: "btn-primary" }
+        ]
+      },
+      res_solved: {
+        isResult: true,
+        title_id: "MASALAH TERSELESAIKAN!", title_en: "PROBLEM SOLVED!",
+        msg_id: "\"Kenapa harus sederhana kalau bisa dibuat rumit dulu dan menangis?\"",
+        msg_en: "\"Why keep it simple when you can over-think and cry first?\"",
+        adv_id: "Setidaknya masalahmu selesai juga pada akhirnya. Rehat sejenak!",
+        adv_en: "At least the problem is solved in the end. Take a rest!"
+      }
+    }
+  },
+  {
+    id: "admin-flow-awkward",
+    title_id: "Panduan Menghadapi Canggung Sosial",
+    title_en: "Awkward Social Situation Flowchart",
+    category: "social",
+    author: "Terra Admin",
+    isAdmin: true,
+    likes: 290,
+    plays: 1140,
+    desc_id: "Solusi cepat saat menghadiri pesta / kumpul-kumpul yang bikin canggung.",
+    desc_en: "Quick survival decision tree when attending awkward social gatherings.",
+    startNode: "step1",
+    nodes: {
+      step1: {
+        tag_id: "Kondisi Acara", tag_en: "Event State",
+        q_id: "Apakah suasananya Canggung / Awkward?", q_en: "Is it Awkward?",
+        options: [
+          { text_id: "Tidak", text_en: "No", next: "res_stay", btnStyle: "btn-primary" },
+          { text_id: "Ya", text_en: "Yes", next: "step2_food", btnStyle: "btn-secondary" }
+        ]
+      },
+      step2_food: {
+        tag_id: "Penyelamat", tag_en: "Savior Check",
+        q_id: "Apakah ada Makanan Gratis / Free Food?", q_en: "Is there Free Food?",
+        options: [
+          { text_id: "Ya!", text_en: "Yes!", next: "res_stay", btnStyle: "btn-primary" },
+          { text_id: "Tidak", text_en: "No", next: "res_leave", btnStyle: "btn-secondary" }
+        ]
+      },
+      res_stay: {
+        isResult: true,
+        title_id: "TETAP TINGGAL (STAY)", title_en: "STAY AT THE PARTY",
+        msg_id: "\"Selama ada makanan gratis atau suasana santai, nikmati momenmu.\"",
+        msg_en: "\"As long as there is free food or smooth vibes, enjoy your stay.\"",
+        adv_id: "Ambil piring makananmu dan nikmati acaranya dengan tenang.",
+        adv_en: "Grab your plate of food and quietly enjoy the event."
+      },
+      res_leave: {
+        isResult: true,
+        title_id: "SEGERA PULANG (LEAVE)", title_en: "LEAVE IMMEDIATELY",
+        msg_id: "\"Canggung dan tidak ada makanan gratis? Waktunya pulang ke rumah!\"",
+        msg_en: "\"Awkward and no free food? It's time to head back home!\"",
+        adv_id: "Pamit dengan sopan atau langsung buat alasan taktis.",
+        adv_en: "Politely excuse yourself or make a tactical exit."
+      }
+    }
+  },
+  {
+    id: "admin-flow-needchart",
+    title_id: "Apakah Kamu Butuh Flowchart?",
+    title_en: "How to decide if you need a... flowchart",
+    category: "work",
+    author: "Evan Diaz",
+    isAdmin: true,
+    likes: 410,
+    plays: 1600,
+    desc_id: "Diagram logika mutlak: Apapun situasi pekerjaanmu, jawabannya pasti Flowchart!",
+    desc_en: "Absolute decision logic: Whatever your situation, the answer is always Flowchart!",
+    startNode: "step1",
+    nodes: {
+      step1: {
+        tag_id: "Pertanyaan 1", tag_en: "Question 1",
+        q_id: "Apakah ini tugas yang sederhana?", q_en: "Is it a simple task?",
+        options: [
+          { text_id: "YA", text_en: "YES", next: "step_cinch", btnStyle: "btn-primary" },
+          { text_id: "TIDAK", text_en: "NO", next: "step_goodthing", btnStyle: "btn-secondary" }
+        ]
+      },
+      step_cinch: {
+        tag_id: "Mantap", tag_en: "Excellent",
+        q_id: "Mantap! Pembuatan flowchart ini pasti sangat gampang!", q_en: "Excellent, this flowchart should be a cinch.",
+        options: [
+          { text_id: "Buka Flowchart", text_en: "Open Flowchart", next: "res_flowchart", btnStyle: "btn-primary" }
+        ]
+      },
+      step_goodthing: {
+        tag_id: "Untunglah", tag_en: "Good Thing",
+        q_id: "Untunglah kamu baru saja akan membuat flowchart!", q_en: "Good thing you were just about to make a flowchart.",
+        options: [
+          { text_id: "Buka Flowchart", text_en: "Open Flowchart", next: "res_flowchart", btnStyle: "btn-primary" }
+        ]
+      },
+      res_flowchart: {
+        isResult: true,
+        title_id: "FLOWCHART!", title_en: "FLOWCHART!",
+        msg_id: "\"Semua jalan di alam semesta ini mengarah pada pembuatan Flowchart.\"",
+        msg_en: "\"All roads in the universe lead to making a Flowchart.\"",
+        adv_id: "Buat flowchart barumu sekarang menggunakan fitur Custom Builder Terra!",
+        adv_en: "Create your new flowchart now using Terra Custom Builder!"
+      }
+    }
+  },
+  {
+    id: "admin-flow-problemsheet",
+    title_id: "Flowsheet Problem Solving (Teknik Klasik)",
+    title_en: "Problem Solving Flowsheet (Engineering Classic)",
+    category: "work",
+    author: "Classic Engineering Meme",
+    isAdmin: true,
+    likes: 670,
+    plays: 3100,
+    desc_id: "Humor teknikal legendaris: Apakah barangnya berfungsi? Kamu yang ngotak-atik?",
+    desc_en: "Legendary engineering meme: Does it work? Did you touch it?",
+    startNode: "step1",
+    nodes: {
+      step1: {
+        tag_id: "Cek Utama", tag_en: "Main Check",
+        q_id: "APAKAH BARANG TERSEBUT BERJALAN DENGAN BAIK?", q_en: "DOES THE DAMN THING WORK?",
+        options: [
+          { text_id: "YA", text_en: "YES", next: "res_dontfuck", btnStyle: "btn-primary" },
+          { text_id: "TIDAK", text_en: "NO", next: "step2_didyou", btnStyle: "btn-secondary" }
+        ]
+      },
+      step2_didyou: {
+        tag_id: "Cek Pelaku", tag_en: "Culprit Check",
+        q_id: "APAKAH KAMU YANG MENGOTAK-ATIKNYA?", q_en: "DID YOU FUCK WITH IT?",
+        options: [
+          { text_id: "YA", text_en: "YES", next: "step3_dumb", btnStyle: "btn-primary" },
+          { text_id: "TIDAK", text_en: "NO", next: "step3_hell", btnStyle: "btn-secondary" }
+        ]
+      },
+      step3_dumb: {
+        tag_id: "Konsekuensi", tag_en: "Consequence",
+        q_id: "DASAR KONYOL! Apakah ada orang lain yang tahu?", q_en: "YOU DUMB SHIT! Does anyone know?",
+        options: [
+          { text_id: "TIDAK", text_en: "NO", next: "res_hide", btnStyle: "btn-primary" },
+          { text_id: "YA", text_en: "YES", next: "step4_blame", btnStyle: "btn-secondary" }
+        ]
+      },
+      step3_hell: {
+        tag_id: "Cek Risiko", tag_en: "Risk Check",
+        q_id: "Apakah kamu bakal kena marah besar?", q_en: "Will you catch hell?",
+        options: [
+          { text_id: "TIDAK", text_en: "NO", next: "res_trash", btnStyle: "btn-primary" },
+          { text_id: "YA", text_en: "YES", next: "step4_blame", btnStyle: "btn-secondary" }
+        ]
+      },
+      step4_blame: {
+        tag_id: "Penyelamatan", tag_en: "Salvation",
+        q_id: "KASIHAN SEKALI KAMU! Bisakah kamu menyalahkan orang lain?", q_en: "YOU POOR BASTARD! Can you blame someone else?",
+        options: [
+          { text_id: "YA!", text_en: "YES!", next: "res_noproblem", btnStyle: "btn-primary" },
+          { text_id: "TIDAK", text_en: "NO", next: "step4_blame", btnStyle: "btn-secondary" }
+        ]
+      },
+      res_dontfuck: {
+        isResult: true,
+        title_id: "JANGAN DIOTAK-ATIK!", title_en: "DON'T FUCK WITH IT!",
+        msg_id: "\"TIDAK ADA MASALAH. Biarkan seperti apa adanya.\"",
+        msg_en: "\"NO PROBLEM. Leave it as it is.\"",
+        adv_id: "Aturan emas: Jika berjalan baik, jangan coba-coba mengotak-atiknya.",
+        adv_en: "Golden rule: If it works, don't mess with it."
+      },
+      res_hide: {
+        isResult: true,
+        title_id: "SEMBUNYIKAN BARANGNYA!", title_en: "HIDE IT!",
+        msg_id: "\"TIDAK ADA MASALAH. Kalau tidak ada yang tahu, masalah tidak ada.\"",
+        msg_en: "\"NO PROBLEM. If nobody knows, it didn't happen.\"",
+        adv_id: "Sembunyikan rapat-rapat dan pura-pura tidak tahu.",
+        adv_en: "Hide it quietly and act innocent."
+      },
+      res_trash: {
+        isResult: true,
+        title_id: "BUANG / HAPUS SAJA!", title_en: "SHIT-CAN IT!",
+        msg_id: "\"TIDAK ADA MASALAH. Masukkan ke tempat sampah.\"",
+        msg_en: "\"NO PROBLEM. Throw it in the trash.\"",
+        adv_id: "Buang ke tempat sampah dan move on.",
+        adv_en: "Throw it away and move on."
+      },
+      res_noproblem: {
+        isResult: true,
+        title_id: "TIDAK ADA MASALAH! (NO PROBLEM)", title_en: "NO PROBLEM!",
+        msg_id: "\"Selamat! Beban masalah telah berhasil dialihkan.\"",
+        msg_en: "\"Congratulations! The blame has been successfully shifted.\"",
+        adv_id: "Kamu selamat hari ini.",
+        adv_en: "You survived today."
+      }
+    }
+  }
 ];
 
 class SeamlessProblemSolverApp {
   constructor() {
-    this.currentStep = 1;
-    this.currentDecision = null;
     this.currentLang = localStorage.getItem('terra_lang') || 'id';
     this.currentTheme = localStorage.getItem('terra_theme') || 'light';
+    this.activeSection = 'player'; // 'player' or 'community'
+
+    // Flowchart Execution State
+    this.activeFlowchart = adminFlowcharts[0];
+    this.currentNodeId = 'step1';
+    this.nodeHistory = [];
+
+    // Audio & Breathing
     this.audioCtx = null;
     this.ambientNodes = null;
     this.isAmbientPlaying = false;
-    
-    // Breathing Timer State
     this.isBreathingActive = false;
-    this.breathingTimerId = null;
-    this.breathCycleState = 'idle'; // 'inhale', 'hold', 'exhale'
-    
-    // Journal Entries
-    this.journalEntries = JSON.parse(localStorage.getItem('terra_journal') || '[]');
 
+    // Journal & Community Data
+    this.journalEntries = JSON.parse(localStorage.getItem('terra_journal') || '[]');
+    this.customFlowcharts = JSON.parse(localStorage.getItem('terra_custom_flows') || '[]');
     this.quoteIndex = 0;
+
+    // Ads & Monetization Stats
+    this.adsStats = JSON.parse(localStorage.getItem('terra_ads_stats') || '{"impressions": 14, "clicks": 2, "earnings": 0.45, "pubId": "", "cornerAd": true}');
+
+    // Builder Node State
+    this.builderNodes = [
+      { id: 'step1', q_id: 'Pertanyaan Pertama?', q_en: 'First Question?', tag: 'Start', opt1_text: 'Ya', opt1_target: 'res1', opt2_text: 'Tidak', opt2_target: 'res2' },
+      { id: 'res1', isResult: true, title: 'Hasil Positif!', msg: 'Kamu memilih Ya.', adv: 'Lanjutkan langkahmu.' },
+      { id: 'res2', isResult: true, title: 'Hasil Negatif!', msg: 'Kamu memilih Tidak.', adv: 'Rehat sejenak.' }
+    ];
 
     this.init();
   }
@@ -142,6 +651,9 @@ class SeamlessProblemSolverApp {
     this.applyTheme(this.currentTheme);
     this.applyLanguage(this.currentLang);
     this.renderJournalList();
+    this.renderCommunityGrid();
+    this.renderFlowchartPlayer();
+    this.renderAdsStats();
     this.setupEventListeners();
   }
 
@@ -165,17 +677,17 @@ class SeamlessProblemSolverApp {
       this.toggleAmbientSound();
     });
 
-    // Breathing Modal Toggles
+    // Breathing Modal Toggle
     document.getElementById('btn-breathing-modal').addEventListener('click', () => {
       this.openBreathingModal();
     });
 
-    // Journal Drawer Toggles
+    // Journal Drawer Toggle
     document.getElementById('btn-journal-toggle').addEventListener('click', () => {
       this.toggleJournalDrawer();
     });
 
-    // Mouse Move Blob parallax effect
+    // Parallax mouse move effect
     document.addEventListener('mousemove', (e) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 30;
       const y = (e.clientY / window.innerHeight - 0.5) * 30;
@@ -188,74 +700,641 @@ class SeamlessProblemSolverApp {
     });
   }
 
-  // --- Step Navigation & Decision Logic ---
-  goToStep(stepNumber, decision = null) {
-    if (decision) {
-      this.currentDecision = decision;
-    }
+  // --- Navigation & Section Toggle ---
+  showSection(sectionName, flowId = null) {
+    this.activeSection = sectionName;
+    const secPlayer = document.getElementById('section-player');
+    const secCommunity = document.getElementById('section-community');
+    
+    const tabHome = document.getElementById('nav-btn-home');
+    const tabComm = document.getElementById('nav-btn-community');
 
-    const currentCard = document.getElementById(`step-${this.currentStep}`);
-    const nextCard = document.getElementById(`step-${stepNumber}`);
+    if (sectionName === 'player') {
+      secPlayer.classList.remove('hidden');
+      secCommunity.classList.add('hidden');
 
-    if (currentCard) {
-      currentCard.classList.remove('active-card');
-      currentCard.classList.add('hidden-card');
-    }
+      tabHome.classList.add('active-tab');
+      tabHome.classList.remove('text-on-surface-variant');
+      tabComm.classList.remove('active-tab');
+      tabComm.classList.add('text-on-surface-variant');
 
-    setTimeout(() => {
-      if (nextCard) {
-        if (stepNumber === 3) {
-          this.updateResultContent();
-        }
-        nextCard.classList.remove('hidden-card');
-        nextCard.classList.add('active-card');
-        this.currentStep = stepNumber;
-        this.updateIndicators(stepNumber);
+      if (flowId) {
+        this.loadFlowchart(flowId);
       }
-    }, 200);
+    } else {
+      secPlayer.classList.add('hidden');
+      secCommunity.classList.remove('hidden');
+
+      tabComm.classList.add('active-tab');
+      tabComm.classList.remove('text-on-surface-variant');
+      tabHome.classList.remove('active-tab');
+      tabHome.classList.add('text-on-surface-variant');
+
+      this.renderCommunityGrid();
+    }
   }
 
-  resetProcess() {
-    this.currentDecision = null;
-    this.goToStep(1);
+  // --- Universal Flowchart Engine Player ---
+  loadFlowchart(flowId) {
+    let flow = adminFlowcharts.find(f => f.id === flowId);
+    if (!flow) {
+      flow = this.customFlowcharts.find(f => f.id === flowId);
+    }
+    if (!flow) {
+      flow = adminFlowcharts[0];
+    }
+
+    this.activeFlowchart = flow;
+    this.currentNodeId = flow.startNode || Object.keys(flow.nodes)[0];
+    this.nodeHistory = [];
+
+    // Increment play count
+    flow.plays = (flow.plays || 0) + 1;
+    this.saveCustomFlowcharts();
+
+    this.renderFlowchartPlayer();
   }
 
-  updateIndicators(step) {
-    for (let i = 1; i <= 3; i++) {
-      const dot = document.getElementById(`dot-${i}`);
-      if (dot) {
-        if (i === step) {
-          dot.classList.add('active-dot');
-        } else {
-          dot.classList.remove('active-dot');
-        }
+  renderFlowchartPlayer() {
+    const flow = this.activeFlowchart;
+    const isEn = this.currentLang === 'en';
+
+    // Update Header Meta
+    const titleEl = document.getElementById('player-title');
+    const authorEl = document.getElementById('player-author');
+    const badgeEl = document.getElementById('player-badge');
+    const btnBackComm = document.getElementById('btn-back-community');
+
+    titleEl.textContent = isEn ? (flow.title_en || flow.title_id) : flow.title_id;
+    authorEl.textContent = `by ${flow.author || 'Anonymous'}`;
+
+    if (flow.isAdmin) {
+      badgeEl.textContent = 'ADMIN OFFICIAL';
+      badgeEl.className = 'px-2 py-0.5 rounded-md bg-primary text-on-primary font-bold uppercase tracking-wider text-[10px]';
+    } else {
+      badgeEl.textContent = 'COMMUNITY';
+      badgeEl.className = 'px-2 py-0.5 rounded-md bg-tertiary text-on-primary font-bold uppercase tracking-wider text-[10px]';
+    }
+
+    if (flow.id !== 'admin-stoic-default') {
+      btnBackComm.classList.remove('hidden');
+    } else {
+      btnBackComm.classList.add('hidden');
+    }
+
+    // Render Active Node Card
+    const canvas = document.getElementById('player-canvas');
+    const node = flow.nodes[this.currentNodeId] || flow.nodes[Object.keys(flow.nodes)[0]];
+
+    if (!node) return;
+
+    if (node.isResult) {
+      // Resolution Card
+      const resTitle = isEn ? (node.title_en || node.title_id) : node.title_id;
+      const resMsg = isEn ? (node.msg_en || node.msg_id) : node.msg_id;
+      const resAdv = isEn ? (node.adv_en || node.adv_id) : node.adv_id;
+      const dict = translations[this.currentLang];
+
+      canvas.innerHTML = `
+        <div class="flow-card active-card flex flex-col items-center">
+          <div class="w-20 h-20 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-6 animate-pulse shadow-terra-glow">
+            <span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">spa</span>
+          </div>
+
+          <h2 class="font-headline text-4xl sm:text-5xl font-black text-primary mb-6 leading-tight text-center">
+            ${resTitle}
+          </h2>
+
+          <div class="terra-card p-6 sm:p-8 rounded-2xl max-w-xl w-full mb-8 text-center border border-primary/10">
+            <p class="text-on-surface text-lg sm:text-xl font-headline font-semibold mb-4 leading-relaxed italic">
+              ${resMsg}
+            </p>
+            <div class="h-0.5 w-16 bg-primary/30 mx-auto mb-4"></div>
+            <p class="text-on-surface-variant text-sm font-body leading-relaxed">
+              ${resAdv}
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-4 justify-center">
+            <button class="btn-terra flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-on-primary font-bold shadow-terra-soft hover:scale-105 active:scale-95" onclick="app.restartActiveFlow()">
+              <span class="material-symbols-outlined">restart_alt</span>
+              <span>${dict.btnRestartFlow}</span>
+            </button>
+
+            <button class="btn-terra flex items-center gap-2 px-6 py-3 rounded-xl bg-surface-container text-primary font-bold border border-primary/20 hover:bg-primary/10 active:scale-95" onclick="app.openJournalWithContext()">
+              <span class="material-symbols-outlined">edit_note</span>
+              <span>${dict.btnWriteJournal}</span>
+            </button>
+
+            <button class="btn-terra flex items-center gap-2 px-5 py-3 rounded-xl bg-surface-container text-on-surface-variant font-semibold hover:text-primary active:scale-95" onclick="app.shareFlowResult()">
+              <span class="material-symbols-outlined text-lg">share</span>
+              <span>${dict.btnShareFlow}</span>
+            </button>
+          </div>
+        </div>
+      `;
+    } else {
+      // Question Node Card
+      const qTag = isEn ? (node.tag_en || node.tag_id || 'Step') : (node.tag_id || 'Langkah');
+      const qText = isEn ? (node.q_en || node.q_id) : node.q_id;
+      const qSub = isEn ? (node.sub_en || node.sub_id || '') : (node.sub_id || '');
+      const dict = translations[this.currentLang];
+
+      const optionsHTML = (node.options || []).map(opt => {
+        const optText = isEn ? (opt.text_en || opt.text_id) : opt.text_id;
+        const btnStyle = opt.btnStyle === 'btn-secondary' ? 'btn-secondary border-2 border-primary/20 bg-surface-container text-primary' : 'btn-primary text-on-primary';
+        return `
+          <button class="btn-terra ${btnStyle} flex-1 py-4 px-6 rounded-xl font-bold text-base sm:text-lg shadow-terra-soft hover:shadow-terra-deep hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2" onclick="app.navigateToNode('${opt.next}')">
+            <span>${optText}</span>
+            <span class="material-symbols-outlined text-xl">arrow_forward</span>
+          </button>
+        `;
+      }).join('');
+
+      const backBtnHTML = this.nodeHistory.length > 0 ? `
+        <button class="mt-8 text-on-surface-variant/60 hover:text-primary flex items-center gap-1.5 transition-colors font-semibold text-sm" onclick="app.goBackNode()">
+          <span class="material-symbols-outlined text-sm">arrow_back</span>
+          <span>${dict.btnBackNode}</span>
+        </button>
+      ` : '';
+
+      canvas.innerHTML = `
+        <div class="flow-card active-card flex flex-col items-center">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wider uppercase mb-6 shadow-sm">
+            <span class="material-symbols-outlined text-sm">psychology</span>
+            <span>${qTag}</span>
+          </div>
+
+          <h2 class="font-headline text-3xl sm:text-4xl lg:text-5xl font-bold text-on-surface mb-6 leading-[1.18] tracking-tight text-center">
+            ${qText}
+          </h2>
+
+          ${qSub ? `<p class="text-on-surface-variant/80 text-base sm:text-lg max-w-lg mb-8 font-body leading-relaxed text-center">${qSub}</p>` : ''}
+
+          <div class="flex flex-col sm:flex-row flex-wrap gap-4 w-full justify-center max-w-md mt-2">
+            ${optionsHTML}
+          </div>
+
+          ${backBtnHTML}
+        </div>
+      `;
+    }
+  }
+
+  navigateToNode(targetNodeId) {
+    this.nodeHistory.push(this.currentNodeId);
+    this.currentNodeId = targetNodeId;
+    this.renderFlowchartPlayer();
+  }
+
+  goBackNode() {
+    if (this.nodeHistory.length > 0) {
+      this.currentNodeId = this.nodeHistory.pop();
+      this.renderFlowchartPlayer();
+    }
+  }
+
+  restartActiveFlow() {
+    this.currentNodeId = this.activeFlowchart.startNode || Object.keys(this.activeFlowchart.nodes)[0];
+    this.nodeHistory = [];
+    this.renderFlowchartPlayer();
+  }
+
+  // --- Community Hub & Gallery ---
+  renderCommunityGrid() {
+    const grid = document.getElementById('community-grid');
+    if (!grid) return;
+
+    const isEn = this.currentLang === 'en';
+    const dict = translations[this.currentLang];
+
+    const allFlows = [...adminFlowcharts, ...this.customFlowcharts];
+
+    grid.innerHTML = allFlows.map(flow => {
+      const title = isEn ? (flow.title_en || flow.title_id) : flow.title_id;
+      const desc = isEn ? (flow.desc_en || flow.desc_id || 'Flowchart interaktif.') : (flow.desc_id || 'Flowchart interaktif.');
+      const badge = flow.isAdmin ? `<span class="px-2.5 py-1 rounded-full bg-primary/10 text-primary font-bold text-[10px] uppercase tracking-wider flex items-center gap-1"><span class="material-symbols-outlined text-xs">verified</span> OFFICIAL ADMIN</span>` : `<span class="px-2.5 py-1 rounded-full bg-tertiary/10 text-tertiary font-bold text-[10px] uppercase tracking-wider">COMMUNITY</span>`;
+
+      return `
+        <div class="terra-card p-6 rounded-2xl border border-outline-variant/15 hover:border-primary/30 flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              ${badge}
+              <span class="text-xs font-semibold text-on-surface-variant/60 flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">play_circle</span> ${flow.plays || 0}
+              </span>
+            </div>
+            <h3 class="font-headline text-xl font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">${title}</h3>
+            <p class="text-xs text-on-surface-variant/80 font-body leading-relaxed mb-6 line-clamp-2">${desc}</p>
+          </div>
+
+          <div class="pt-4 border-t border-outline-variant/15 flex items-center justify-between">
+            <span class="text-xs text-on-surface-variant font-semibold">by ${flow.author || 'User'}</span>
+            <div class="flex gap-2">
+              <button class="p-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-red-500 transition-colors text-xs flex items-center gap-1" onclick="app.likeFlowchart('${flow.id}')">
+                <span class="material-symbols-outlined text-base">favorite</span> ${flow.likes || 0}
+              </button>
+              <button class="btn-terra btn-primary px-4 py-2 rounded-xl font-bold text-xs shadow-sm flex items-center gap-1" onclick="app.launchCommunityFlow('${flow.id}')">
+                <span class="material-symbols-outlined text-sm">play_arrow</span>
+                <span>${dict.btnPlayFlow}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  launchCommunityFlow(flowId) {
+    // Interstitial ad trigger for community flows
+    this.triggerAdInterstitial(() => {
+      this.showSection('player', flowId);
+    });
+  }
+
+  likeFlowchart(flowId) {
+    let flow = adminFlowcharts.find(f => f.id === flowId);
+    if (!flow) {
+      flow = this.customFlowcharts.find(f => f.id === flowId);
+    }
+    if (flow) {
+      flow.likes = (flow.likes || 0) + 1;
+      this.saveCustomFlowcharts();
+      this.renderCommunityGrid();
+    }
+  }
+
+  setCommunityCategory(cat) {
+    document.querySelectorAll('.cat-filter-btn').forEach(btn => {
+      if (btn.getAttribute('data-cat') === cat) {
+        btn.classList.add('active-cat');
+        btn.classList.remove('bg-surface-container', 'text-on-surface-variant');
+      } else {
+        btn.classList.remove('active-cat');
+        btn.classList.add('bg-surface-container', 'text-on-surface-variant');
       }
-    }
+    });
 
-    const line1 = document.getElementById('line-1');
-    const line2 = document.getElementById('line-2');
-    if (line1) line1.style.backgroundColor = step >= 2 ? 'var(--color-primary)' : 'rgba(116, 121, 110, 0.3)';
-    if (line2) line2.style.backgroundColor = step >= 3 ? 'var(--color-primary)' : 'rgba(116, 121, 110, 0.3)';
+    const grid = document.getElementById('community-grid');
+    const allFlows = [...adminFlowcharts, ...this.customFlowcharts];
+    const isEn = this.currentLang === 'en';
+    const dict = translations[this.currentLang];
+
+    const filtered = cat === 'all' ? allFlows : cat === 'admin' ? allFlows.filter(f => f.isAdmin) : allFlows.filter(f => f.category === cat);
+
+    grid.innerHTML = filtered.map(flow => {
+      const title = isEn ? (flow.title_en || flow.title_id) : flow.title_id;
+      const desc = isEn ? (flow.desc_en || flow.desc_id || 'Flowchart interaktif.') : (flow.desc_id || 'Flowchart interaktif.');
+      const badge = flow.isAdmin ? `<span class="px-2.5 py-1 rounded-full bg-primary/10 text-primary font-bold text-[10px] uppercase tracking-wider flex items-center gap-1"><span class="material-symbols-outlined text-xs">verified</span> OFFICIAL ADMIN</span>` : `<span class="px-2.5 py-1 rounded-full bg-tertiary/10 text-tertiary font-bold text-[10px] uppercase tracking-wider">COMMUNITY</span>`;
+
+      return `
+        <div class="terra-card p-6 rounded-2xl border border-outline-variant/15 hover:border-primary/30 flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              ${badge}
+              <span class="text-xs font-semibold text-on-surface-variant/60 flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">play_circle</span> ${flow.plays || 0}
+              </span>
+            </div>
+            <h3 class="font-headline text-xl font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">${title}</h3>
+            <p class="text-xs text-on-surface-variant/80 font-body leading-relaxed mb-6 line-clamp-2">${desc}</p>
+          </div>
+
+          <div class="pt-4 border-t border-outline-variant/15 flex items-center justify-between">
+            <span class="text-xs text-on-surface-variant font-semibold">by ${flow.author || 'User'}</span>
+            <div class="flex gap-2">
+              <button class="p-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-red-500 transition-colors text-xs flex items-center gap-1" onclick="app.likeFlowchart('${flow.id}')">
+                <span class="material-symbols-outlined text-base">favorite</span> ${flow.likes || 0}
+              </button>
+              <button class="btn-terra btn-primary px-4 py-2 rounded-xl font-bold text-xs shadow-sm flex items-center gap-1" onclick="app.launchCommunityFlow('${flow.id}')">
+                <span class="material-symbols-outlined text-sm">play_arrow</span>
+                <span>${dict.btnPlayFlow}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
   }
 
-  updateResultContent() {
-    const heading = document.getElementById('result-heading');
-    const message = document.getElementById('result-message');
-    const advice = document.getElementById('result-advice');
-    const langDict = translations[this.currentLang];
-
-    heading.textContent = langDict.step3Title;
-
-    if (this.currentDecision === 'no_problem') {
-      message.textContent = langDict.resNoProblemMsg;
-      advice.textContent = langDict.resNoProblemAdv;
-    } else if (this.currentDecision === 'can_act') {
-      message.textContent = langDict.resCanActMsg;
-      advice.textContent = langDict.resCanActAdv;
-    } else { // cannot_act or default
-      message.textContent = langDict.resCannotActMsg;
-      advice.textContent = langDict.resCannotActAdv;
+  filterCommunityFlows() {
+    const q = document.getElementById('community-search').value.toLowerCase().trim();
+    if (!q) {
+      this.renderCommunityGrid();
+      return;
     }
+    const grid = document.getElementById('community-grid');
+    const allFlows = [...adminFlowcharts, ...this.customFlowcharts];
+    const isEn = this.currentLang === 'en';
+    const dict = translations[this.currentLang];
+
+    const filtered = allFlows.filter(f => (f.title_id || '').toLowerCase().includes(q) || (f.title_en || '').toLowerCase().includes(q) || (f.author || '').toLowerCase().includes(q));
+
+    grid.innerHTML = filtered.map(flow => {
+      const title = isEn ? (flow.title_en || flow.title_id) : flow.title_id;
+      const desc = isEn ? (flow.desc_en || flow.desc_id || 'Flowchart interaktif.') : (flow.desc_id || 'Flowchart interaktif.');
+      const badge = flow.isAdmin ? `<span class="px-2.5 py-1 rounded-full bg-primary/10 text-primary font-bold text-[10px] uppercase tracking-wider flex items-center gap-1"><span class="material-symbols-outlined text-xs">verified</span> OFFICIAL ADMIN</span>` : `<span class="px-2.5 py-1 rounded-full bg-tertiary/10 text-tertiary font-bold text-[10px] uppercase tracking-wider">COMMUNITY</span>`;
+
+      return `
+        <div class="terra-card p-6 rounded-2xl border border-outline-variant/15 hover:border-primary/30 flex flex-col justify-between group transition-all duration-300">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              ${badge}
+            </div>
+            <h3 class="font-headline text-xl font-bold text-on-surface mb-2">${title}</h3>
+            <p class="text-xs text-on-surface-variant/80 font-body leading-relaxed mb-6 line-clamp-2">${desc}</p>
+          </div>
+          <div class="pt-4 border-t border-outline-variant/15 flex items-center justify-between">
+            <span class="text-xs text-on-surface-variant font-semibold">by ${flow.author || 'User'}</span>
+            <button class="btn-terra btn-primary px-4 py-2 rounded-xl font-bold text-xs shadow-sm flex items-center gap-1" onclick="app.launchCommunityFlow('${flow.id}')">
+              <span class="material-symbols-outlined text-sm">play_arrow</span>
+              <span>${dict.btnPlayFlow}</span>
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  saveCustomFlowcharts() {
+    localStorage.setItem('terra_custom_flows', JSON.stringify(this.customFlowcharts));
+  }
+
+  // --- Custom Flowchart Builder Modal & Logic ---
+  openBuilderModal() {
+    const modal = document.getElementById('modal-builder');
+    const card = document.getElementById('modal-builder-card');
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    card.classList.remove('scale-95');
+    card.classList.add('scale-100');
+    this.renderBuilderNodes();
+  }
+
+  closeBuilderModal() {
+    const modal = document.getElementById('modal-builder');
+    const card = document.getElementById('modal-builder-card');
+    modal.classList.add('opacity-0', 'pointer-events-none');
+    card.classList.remove('scale-100');
+    card.classList.add('scale-95');
+  }
+
+  renderBuilderNodes() {
+    const list = document.getElementById('builder-nodes-list');
+    list.innerHTML = this.builderNodes.map((n, idx) => `
+      <div class="p-4 rounded-2xl bg-surface-container border border-primary/10 relative space-y-3">
+        <div class="flex justify-between items-center">
+          <span class="text-xs font-bold uppercase text-primary font-mono">Langkah #${idx + 1} (${n.isResult ? 'Hasil Akhir' : 'Pertanyaan'})</span>
+          ${idx > 0 ? `<button class="text-red-500 hover:text-red-700 text-xs font-bold" onclick="app.removeBuilderNode(${idx})">Hapus</button>` : ''}
+        </div>
+        
+        ${n.isResult ? `
+          <input type="text" value="${this.escapeHtml(n.title || '')}" oninput="app.builderNodes[${idx}].title = this.value" class="w-full p-2 rounded-lg bg-surface border border-outline-variant/20 text-xs font-bold text-on-surface" placeholder="Judul Kesimpulan/Hasil (misal: Selesai!)" />
+          <textarea oninput="app.builderNodes[${idx}].msg = this.value" class="w-full p-2 rounded-lg bg-surface border border-outline-variant/20 text-xs text-on-surface resize-none" rows="2" placeholder="Pesan / Kutipan Hasil">${this.escapeHtml(n.msg || '')}</textarea>
+        ` : `
+          <input type="text" value="${this.escapeHtml(n.q_id || '')}" oninput="app.builderNodes[${idx}].q_id = this.value; app.builderNodes[${idx}].q_en = this.value" class="w-full p-2 rounded-lg bg-surface border border-outline-variant/20 text-xs font-bold text-on-surface" placeholder="Pertanyaan / Pertimbangan" />
+          <div class="grid grid-cols-2 gap-2">
+            <input type="text" value="${this.escapeHtml(n.opt1_text || '')}" oninput="app.builderNodes[${idx}].opt1_text = this.value" class="p-2 rounded-lg bg-surface border border-outline-variant/20 text-xs text-on-surface" placeholder="Opsi A (misal: YA)" />
+            <input type="text" value="${this.escapeHtml(n.opt2_text || '')}" oninput="app.builderNodes[${idx}].opt2_text = this.value" class="p-2 rounded-lg bg-surface border border-outline-variant/20 text-xs text-on-surface" placeholder="Opsi B (misal: TIDAK)" />
+          </div>
+        `}
+      </div>
+    `).join('');
+  }
+
+  addBuilderNode() {
+    const isResult = this.builderNodes.length >= 2 && this.builderNodes.length % 2 === 0;
+    if (isResult) {
+      this.builderNodes.push({
+        id: 'res_' + Date.now(),
+        isResult: true,
+        title: 'Hasil Baru',
+        msg: 'Pesan kesimpulan flowchart kamu.',
+        adv: 'Saran tindakan nyata.'
+      });
+    } else {
+      this.builderNodes.push({
+        id: 'node_' + Date.now(),
+        q_id: 'Pertanyaan Lanjutan?',
+        q_en: 'Follow-up Question?',
+        opt1_text: 'Ya',
+        opt1_target: 'res1',
+        opt2_text: 'Tidak',
+        opt2_target: 'res2'
+      });
+    }
+    this.renderBuilderNodes();
+  }
+
+  removeBuilderNode(idx) {
+    if (this.builderNodes.length > 1) {
+      this.builderNodes.splice(idx, 1);
+      this.renderBuilderNodes();
+    }
+  }
+
+  saveAndPublishFlowchart() {
+    const title = document.getElementById('builder-title').value.trim();
+    const author = document.getElementById('builder-author').value.trim() || 'Community Member';
+    const category = document.getElementById('builder-category').value;
+    const desc = document.getElementById('builder-desc').value.trim();
+
+    if (!title) {
+      alert(this.currentLang === 'id' ? 'Mohon isi judul flowchart!' : 'Please enter a flowchart title!');
+      return;
+    }
+
+    const flowId = 'custom_' + Date.now();
+
+    // Construct valid node tree
+    const nodesObj = {};
+    this.builderNodes.forEach((n, idx) => {
+      if (n.isResult) {
+        nodesObj[n.id || `res_${idx}`] = {
+          isResult: true,
+          title_id: n.title || 'Kesimpulan',
+          title_en: n.title || 'Conclusion',
+          msg_id: n.msg || 'Flowchart selesai.',
+          msg_en: n.msg || 'Flowchart complete.',
+          adv_id: n.adv || 'Nikmati harimu.',
+          adv_en: n.adv || 'Enjoy your day.'
+        };
+      } else {
+        const next1 = this.builderNodes[idx + 1] ? this.builderNodes[idx + 1].id || `res_${idx + 1}` : `res_${idx}`;
+        const next2 = this.builderNodes[idx + 2] ? this.builderNodes[idx + 2].id || `res_${idx + 2}` : `res_${idx}`;
+
+        nodesObj[n.id || `step_${idx}`] = {
+          tag_id: `Langkah #${idx + 1}`,
+          tag_en: `Step #${idx + 1}`,
+          q_id: n.q_id || 'Pertanyaan?',
+          q_en: n.q_en || 'Question?',
+          options: [
+            { text_id: n.opt1_text || 'YA', text_en: n.opt1_text || 'YES', next: next1, btnStyle: 'btn-primary' },
+            { text_id: n.opt2_text || 'TIDAK', text_en: n.opt2_text || 'NO', next: next2, btnStyle: 'btn-secondary' }
+          ]
+        };
+      }
+    });
+
+    const newFlow = {
+      id: flowId,
+      title_id: title,
+      title_en: title,
+      category: category,
+      author: author,
+      isAdmin: false,
+      likes: 1,
+      plays: 0,
+      desc_id: desc || 'Custom Flowchart dibuat oleh pengguna Terra.',
+      desc_en: desc || 'Custom Flowchart created by Terra user.',
+      startNode: Object.keys(nodesObj)[0],
+      nodes: nodesObj
+    };
+
+    this.customFlowcharts.unshift(newFlow);
+    this.saveCustomFlowcharts();
+    this.closeBuilderModal();
+    this.showSection('community');
+  }
+
+  previewCustomFlowchart() {
+    this.saveAndPublishFlowchart();
+  }
+
+  exportBuilderJSON() {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.builderNodes, null, 2));
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", `terra_flowchart_${Date.now()}.json`);
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+  }
+
+  importBuilderJSON(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      try {
+        const parsed = JSON.parse(evt.target.result);
+        if (Array.isArray(parsed)) {
+          this.builderNodes = parsed;
+          this.renderBuilderNodes();
+        }
+      } catch(err) {
+        alert('File JSON tidak valid.');
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  // --- Ads & Monetization Manager ---
+  triggerAdInterstitial(onComplete) {
+    // Increment Ad Impressions
+    this.adsStats.impressions = (this.adsStats.impressions || 0) + 1;
+    this.adsStats.earnings = parseFloat(((this.adsStats.impressions * 0.02) + (this.adsStats.clicks * 0.15)).toFixed(2));
+    localStorage.setItem('terra_ads_stats', JSON.stringify(this.adsStats));
+    this.renderAdsStats();
+
+    const modal = document.getElementById('modal-ad-interstitial');
+    const card = document.getElementById('modal-ad-card');
+    const btnSkip = document.getElementById('btn-skip-ad');
+    const timerText = document.getElementById('ad-countdown-text');
+    const dict = translations[this.currentLang];
+
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    card.classList.remove('scale-95');
+    card.classList.add('scale-100');
+    btnSkip.disabled = true;
+
+    let countdown = 3;
+    timerText.textContent = `Lanjut otomatis dalam ${countdown}s...`;
+    btnSkip.textContent = `${dict.btnSkipAd} (${countdown}s)`;
+
+    const interval = setInterval(() => {
+      countdown--;
+      if (countdown > 0) {
+        timerText.textContent = `Lanjut otomatis dalam ${countdown}s...`;
+        btnSkip.textContent = `${dict.btnSkipAd} (${countdown}s)`;
+      } else {
+        clearInterval(interval);
+        btnSkip.disabled = false;
+        btnSkip.textContent = dict.btnSkipAd;
+        timerText.textContent = 'Siap dilanjutkan!';
+        this.pendingAdCallback = onComplete;
+      }
+    }, 1000);
+  }
+
+  closeAdInterstitial(executeCallback = true) {
+    const modal = document.getElementById('modal-ad-interstitial');
+    const card = document.getElementById('modal-ad-card');
+    modal.classList.add('opacity-0', 'pointer-events-none');
+    card.classList.remove('scale-100');
+    card.classList.add('scale-95');
+
+    if (executeCallback && this.pendingAdCallback) {
+      this.pendingAdCallback();
+      this.pendingAdCallback = null;
+    }
+  }
+
+  recordAdClick(type) {
+    this.adsStats.clicks = (this.adsStats.clicks || 0) + 1;
+    this.adsStats.earnings = parseFloat(((this.adsStats.impressions * 0.02) + (this.adsStats.clicks * 0.15)).toFixed(2));
+    localStorage.setItem('terra_ads_stats', JSON.stringify(this.adsStats));
+    this.renderAdsStats();
+    alert('Terima kasih telah mengunjungi sponsor Terra! ✨');
+  }
+
+  openAdsManagerModal() {
+    const modal = document.getElementById('modal-ads-manager');
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    this.renderAdsStats();
+  }
+
+  closeAdsManagerModal() {
+    const modal = document.getElementById('modal-ads-manager');
+    modal.classList.add('opacity-0', 'pointer-events-none');
+  }
+
+  renderAdsStats() {
+    const statImp = document.getElementById('stat-impressions');
+    const statClick = document.getElementById('stat-clicks');
+    const statEarn = document.getElementById('stat-earnings');
+    const inputPub = document.getElementById('input-adsense-pub');
+    const chkCorner = document.getElementById('chk-corner-ad');
+
+    if (statImp) statImp.textContent = this.adsStats.impressions || 0;
+    if (statClick) statClick.textContent = this.adsStats.clicks || 0;
+    if (statEarn) statEarn.textContent = `$${(this.adsStats.earnings || 0).toFixed(2)}`;
+    if (inputPub) inputPub.value = this.adsStats.pubId || '';
+    if (chkCorner) chkCorner.checked = this.adsStats.cornerAd !== false;
+
+    this.toggleCornerAdVisibility(this.adsStats.cornerAd !== false);
+  }
+
+  toggleCornerAdVisibility(visible) {
+    const banner = document.getElementById('corner-ad-banner');
+    if (!banner) return;
+    if (visible) {
+      banner.classList.remove('hidden', 'translate-y-20', 'opacity-0');
+    } else {
+      banner.classList.add('translate-y-20', 'opacity-0');
+      setTimeout(() => banner.classList.add('hidden'), 300);
+    }
+  }
+
+  saveAdsSettings() {
+    const pubId = document.getElementById('input-adsense-pub').value.trim();
+    const cornerAd = document.getElementById('chk-corner-ad').checked;
+
+    this.adsStats.pubId = pubId;
+    this.adsStats.cornerAd = cornerAd;
+    localStorage.setItem('terra_ads_stats', JSON.stringify(this.adsStats));
+
+    this.closeAdsManagerModal();
+    alert('Pengaturan iklan berhasil disimpan!');
   }
 
   // --- Web Audio Synthesizer (Ambient Soundscape) ---
@@ -277,7 +1356,6 @@ class SeamlessProblemSolverApp {
         this.audioCtx.resume();
       }
 
-      // Create Pink Noise (Rain/Wind effect)
       const bufferSize = 2 * this.audioCtx.sampleRate;
       const noiseBuffer = this.audioCtx.createBuffer(1, bufferSize, this.audioCtx.sampleRate);
       const output = noiseBuffer.getChannelData(0);
@@ -300,7 +1378,6 @@ class SeamlessProblemSolverApp {
       noiseSource.buffer = noiseBuffer;
       noiseSource.loop = true;
 
-      // Low Pass Filter for soothing rain sound
       const filter = this.audioCtx.createBiquadFilter();
       filter.type = 'lowpass';
       filter.frequency.setValueAtTime(450, this.audioCtx.currentTime);
@@ -311,11 +1388,10 @@ class SeamlessProblemSolverApp {
       noiseSource.connect(filter);
       filter.connect(gainNode);
 
-      // Add a soft binaural 432Hz calming tone
       const osc = this.audioCtx.createOscillator();
       const oscGain = this.audioCtx.createGain();
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(144, this.audioCtx.currentTime); // Soft harmonic of 432Hz
+      osc.frequency.setValueAtTime(144, this.audioCtx.currentTime);
       oscGain.gain.setValueAtTime(0.03, this.audioCtx.currentTime);
 
       osc.connect(oscGain);
@@ -413,7 +1489,6 @@ class SeamlessProblemSolverApp {
     const stateText = document.getElementById('breath-state-text');
     const timerText = document.getElementById('breath-timer');
 
-    // Inhale 4s
     stateText.textContent = this.currentLang === 'id' ? 'Tarik Napas' : 'Inhale';
     circle.className = 'w-24 h-24 rounded-full text-primary flex items-center justify-center transition-all duration-1000 shadow-terra-glow inhale';
     let count = 4;
@@ -426,7 +1501,6 @@ class SeamlessProblemSolverApp {
       } else {
         clearInterval(inhaleInterval);
         
-        // Hold 7s
         stateText.textContent = this.currentLang === 'id' ? 'Tahan' : 'Hold';
         circle.className = 'w-24 h-24 rounded-full text-tertiary flex items-center justify-center transition-all duration-1000 shadow-terra-glow hold';
         let holdCount = 7;
@@ -439,7 +1513,6 @@ class SeamlessProblemSolverApp {
           } else {
             clearInterval(holdInterval);
 
-            // Exhale 8s
             stateText.textContent = this.currentLang === 'id' ? 'Hembuskan' : 'Exhale';
             circle.className = 'w-24 h-24 rounded-full text-primary flex items-center justify-center transition-all duration-1000 shadow-terra-glow exhale';
             let exhaleCount = 8;
@@ -479,13 +1552,8 @@ class SeamlessProblemSolverApp {
     const problemInput = document.getElementById('journal-input-problem');
     const actionInput = document.getElementById('journal-input-action');
 
-    if (this.currentDecision === 'can_act') {
-      problemInput.placeholder = "Tuliskan masalah yang bisa kamu selesaikan...";
-      actionInput.value = "Tindakan kecil pertama yang akan saya ambil hari ini adalah: ";
-    } else if (this.currentDecision === 'cannot_act') {
-      problemInput.placeholder = "Tuliskan situasi di luar kendalimu...";
-      actionInput.value = "Saya menerima kondisi ini dan memilih merelakan: ";
-    }
+    problemInput.placeholder = this.currentLang === 'id' ? 'Tuliskan beban atau pikiranmu...' : 'Write what is on your mind...';
+    actionInput.value = this.currentLang === 'id' ? 'Tindakan/Penerimaan saya: ' : 'My action/acceptance: ';
   }
 
   saveJournalEntry() {
@@ -525,6 +1593,8 @@ class SeamlessProblemSolverApp {
     const countEl = document.getElementById('journal-count');
     const badgeEl = document.getElementById('journal-badge');
 
+    if (!listEl || !countEl || !badgeEl) return;
+
     countEl.textContent = `${this.journalEntries.length} ${this.currentLang === 'id' ? 'Catatan' : 'Entries'}`;
     
     if (this.journalEntries.length > 0) {
@@ -559,7 +1629,7 @@ class SeamlessProblemSolverApp {
   }
 
   escapeHtml(str) {
-    return str.replace(/[&<>"']/g, function(m) {
+    return (str || '').replace(/[&<>"']/g, function(m) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
     });
   }
@@ -568,23 +1638,25 @@ class SeamlessProblemSolverApp {
   nextQuote() {
     this.quoteIndex = (this.quoteIndex + 1) % quotes.length;
     const q = quotes[this.quoteIndex];
-    document.getElementById('wisdom-quote').textContent = `"${q.quote}"`;
+    const isEn = this.currentLang === 'en';
+    document.getElementById('wisdom-quote').textContent = `"${isEn ? q.enQuote : q.idQuote}"`;
     document.getElementById('wisdom-author').textContent = `— ${q.author}`;
   }
 
-  // --- Share Result ---
-  shareResult() {
-    const text = `🌿 Terra — Seamless Problem Solver\n"Punya masalah? Bisa melakukan sesuatu? Lalu kenapa khawatir?"\nBerakar dalam ketenangan, lepaskan apa yang di luar kendalimu.`;
+  shareFlowResult() {
+    const isEn = this.currentLang === 'en';
+    const flowTitle = isEn ? (this.activeFlowchart.title_en || this.activeFlowchart.title_id) : this.activeFlowchart.title_id;
+    const text = `🌿 Terra — Interactive Flowcharts\n"${flowTitle}"\nMainkan & selesaikan masalahmu secara gratis tanpa biaya!`;
     
     if (navigator.share) {
       navigator.share({
-        title: 'Terra Problem Solver',
+        title: 'Terra Flowchart',
         text: text,
         url: window.location.href
       }).catch(() => {});
     } else {
       navigator.clipboard.writeText(text).then(() => {
-        alert(this.currentLang === 'id' ? 'Pesan ketenangan berhasil disalin ke clipboard!' : 'Serenity message copied to clipboard!');
+        alert(isEn ? 'Flowchart link copied to clipboard!' : 'Link flowchart berhasil disalin ke clipboard!');
       });
     }
   }
@@ -613,10 +1685,19 @@ class SeamlessProblemSolverApp {
       }
     });
 
-    if (this.currentStep === 3) {
-      this.updateResultContent();
-    }
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+      const key = el.getAttribute('data-i18n-ph');
+      if (dict[key]) {
+        el.placeholder = dict[key];
+      }
+    });
 
+    // Update Quote
+    const q = quotes[this.quoteIndex];
+    document.getElementById('wisdom-quote').textContent = `"${lang === 'en' ? q.enQuote : q.idQuote}"`;
+
+    this.renderFlowchartPlayer();
+    this.renderCommunityGrid();
     this.renderJournalList();
   }
 }

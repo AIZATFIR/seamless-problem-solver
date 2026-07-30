@@ -61,6 +61,27 @@ h1, h2, h3, h4 {
   backdrop-filter: blur(12px);
 }
 
+/* Navigation Tabs */
+.nav-tab-btn.active-tab {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(74, 124, 89, 0.3);
+}
+
+.dark .nav-tab-btn.active-tab {
+  color: #122115;
+}
+
+/* Category Filter Buttons */
+.cat-filter-btn.active-cat {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.dark .cat-filter-btn.active-cat {
+  color: #122115;
+}
+
 /* Step Indicators */
 .step-dot {
   width: 12px;

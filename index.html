@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="id" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terra — Seamless Problem Solver | Rooted in Calm</title>
+  <meta name="description" content="Kendalikan pikiran, temukan ketenangan, dan selesaikan masalah hidup dengan filosofi Stoik interaktif." />
+  
+  <!-- Fonts: Literata (Serif) & Nunito Sans (Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet" />
+  
+  <!-- Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#4a7c59",
+            "primary-container": "#78a886",
+            "primary-light": "#8ecf9e",
+            secondary: "#6b6358",
+            "secondary-container": "#f0e8db",
+            tertiary: "#705c30",
+            "tertiary-container": "#c4a66a",
+            background: "#faf6f0",
+            surface: "#fcfaf7",
+            "surface-container": "#f0ece4",
+            "surface-container-high": "#eae6de",
+            "on-background": "#2e3230",
+            "on-surface": "#2e3230",
+            "on-surface-variant": "#4a4e4a",
+            "on-primary": "#ffffff"
+          },
+          fontFamily: {
+            headline: ["Literata", "serif"],
+            body: ["Nunito Sans", "sans-serif"]
+          },
+          boxShadow: {
+            'terra-soft': '0 4px 25px rgba(46, 50, 48, 0.07)',
+            'terra-deep': '0 12px 35px rgba(46, 50, 48, 0.12)',
+            'terra-glow': '0 0 40px rgba(74, 124, 89, 0.2)'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col antialiased selection:bg-primary/20 selection:text-primary">
+
+  <!-- Background Atmosphere Blobs -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div id="bg-blob-1" class="absolute -top-32 -left-32 w-[550px] h-[550px] bg-primary/10 rounded-full blur-[110px] transition-transform duration-1000"></div>
+    <div id="bg-blob-2" class="absolute -bottom-32 -right-32 w-[550px] h-[550px] bg-tertiary/10 rounded-full blur-[110px] transition-transform duration-1000"></div>
+    <div id="bg-blob-3" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-secondary-container/30 rounded-full blur-[130px]"></div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-primary/10 transition-colors duration-300">
+    <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" id="brand-logo" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center group-hover:scale-105 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300 shadow-terra-soft">
+          <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">spa</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-headline font-bold text-2xl tracking-tight text-primary leading-none">Terra</span>
+          <span class="text-[10px] font-semibold tracking-widest uppercase text-on-surface-variant/70">Problem Solver</span>
+        </div>
+      </a>
+
+      <!-- Quick Controls -->
+      <div class="flex items-center gap-3">
+        <!-- Sound Ambient Generator -->
+        <button id="btn-ambient" class="nav-control-btn flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-all text-sm font-semibold" title="Suara Alam / Ambient Sound">
+          <span class="material-symbols-outlined text-lg" id="icon-sound">volume_off</span>
+          <span class="hidden sm:inline" id="txt-ambient">Suara Alam</span>
+        </button>
+
+        <!-- Breathing Exercise Modal Toggle -->
+        <button id="btn-breathing-modal" class="nav-control-btn flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-all text-sm font-semibold" title="Latihan Napas 4-7-8">
+          <span class="material-symbols-outlined text-lg">air</span>
+          <span class="hidden sm:inline" data-i18n="navBreathing">Napas Calm</span>
+        </button>
+
+        <!-- Journal Drawer Toggle -->
+        <button id="btn-journal-toggle" class="nav-control-btn flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-all text-sm font-semibold relative" title="Jurnal Ketenangan">
+          <span class="material-symbols-outlined text-lg">edit_note</span>
+          <span class="hidden sm:inline" data-i18n="navJournal">Jurnal</span>
+          <span id="journal-badge" class="hidden absolute -top-1 -right-1 w-2.5 h-2.5 bg-tertiary rounded-full"></span>
+        </button>
+
+        <!-- Language Switcher -->
+        <button id="btn-lang" class="nav-control-btn flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary transition-all text-sm font-bold uppercase tracking-wider" title="Ganti Bahasa">
+          <span class="material-symbols-outlined text-base">translate</span>
+          <span id="txt-lang">ID</span>
+        </button>
+
+        <!-- Dark/Light Theme Toggle -->
+        <button id="btn-theme" class="nav-control-btn p-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary transition-all" title="Ganti Tema">
+          <span class="material-symbols-outlined text-lg" id="icon-theme">dark_mode</span>
+        </button>
+      </div>
+
+    </nav>
+  </header>
+
+  <!-- Main Hero Canvas -->
+  <main class="flex-grow flex flex-col justify-center items-center px-4 py-12 relative z-10">
+    <div class="max-w-3xl w-full text-center">
+      
+      <!-- Progress Bar & Indicator -->
+      <div class="mb-8 flex items-center justify-center gap-2" id="flow-indicator-bar">
+        <div class="step-dot active-dot" id="dot-1"></div>
+        <div class="w-8 h-0.5 bg-outline-variant/30 rounded-full transition-colors duration-500" id="line-1"></div>
+        <div class="step-dot" id="dot-2"></div>
+        <div class="w-8 h-0.5 bg-outline-variant/30 rounded-full transition-colors duration-500" id="line-2"></div>
+        <div class="step-dot" id="dot-3"></div>
+      </div>
+
+      <!-- Card Canvas Container -->
+      <div class="relative min-h-[380px] flex items-center justify-center">
+        
+        <!-- STEP 1: Initial Question -->
+        <div id="step-1" class="flow-card active-card flex flex-col items-center">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wider uppercase mb-6 shadow-sm">
+            <span class="material-symbols-outlined text-sm">psychology</span>
+            <span data-i18n="step1Tag">Refleksi Pertama</span>
+          </div>
+
+          <h1 class="font-headline text-4xl sm:text-5xl lg:text-6xl font-bold text-on-surface mb-8 leading-[1.15] tracking-tight">
+            <span data-i18n="step1Title">Punya Masalah dalam Hidup?</span>
+          </h1>
+
+          <p class="text-on-surface-variant/80 text-base sm:text-lg max-w-lg mb-10 font-body leading-relaxed" data-i18n="step1Sub">
+            Jawab dengan jujur. Semua berawal dari keberanian mengakui kondisi pikiran kita saat ini.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-5 w-full justify-center max-w-md">
+            <button class="btn-terra btn-primary flex-1 py-4 px-8 rounded-xl font-bold text-lg text-on-primary shadow-terra-soft hover:shadow-terra-deep hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2" onclick="app.goToStep(2)">
+              <span data-i18n="btnYes">YA</span>
+              <span class="material-symbols-outlined text-xl">arrow_forward</span>
+            </button>
+            <button class="btn-terra btn-secondary flex-1 py-4 px-8 rounded-xl font-bold text-lg text-primary border-2 border-primary/20 bg-surface-container shadow-terra-soft hover:shadow-terra-deep hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2" onclick="app.goToStep(3, 'no_problem')">
+              <span data-i18n="btnNo">TIDAK</span>
+              <span class="material-symbols-outlined text-xl">sentiment_satisfied_alt</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Control Check -->
+        <div id="step-2" class="flow-card hidden-card flex flex-col items-center">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-tertiary/10 text-tertiary text-xs font-bold tracking-wider uppercase mb-6 shadow-sm">
+            <span class="material-symbols-outlined text-sm">eco</span>
+            <span data-i18n="step2Tag">Lingkaran Kendali</span>
+          </div>
+
+          <h2 class="font-headline text-4xl sm:text-5xl lg:text-6xl font-bold text-on-surface mb-8 leading-[1.15] tracking-tight">
+            <span data-i18n="step2Title">Bisa melakukan sesuatu?</span>
+          </h2>
+
+          <p class="text-on-surface-variant/80 text-base sm:text-lg max-w-lg mb-10 font-body leading-relaxed" data-i18n="step2Sub">
+            Apakah solusi berada dalam jangkauan tindakanmu hari ini, atau masalah ini di luar kendalimu?
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-5 w-full justify-center max-w-md">
+            <button class="btn-terra btn-primary flex-1 py-4 px-8 rounded-xl font-bold text-lg text-on-primary shadow-terra-soft hover:shadow-terra-deep hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2" onclick="app.goToStep(3, 'can_act')">
+              <span data-i18n="btnYesAction">YA, BISA</span>
+              <span class="material-symbols-outlined text-xl">build</span>
+            </button>
+            <button class="btn-terra btn-primary flex-1 py-4 px-8 rounded-xl font-bold text-lg text-on-primary shadow-terra-soft hover:shadow-terra-deep hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2" onclick="app.goToStep(3, 'cannot_act')">
+              <span data-i18n="btnNoAction">TIDAK BISA</span>
+              <span class="material-symbols-outlined text-xl">nature_people</span>
+            </button>
+          </div>
+
+          <button class="mt-8 text-on-surface-variant/60 hover:text-primary flex items-center gap-1.5 transition-colors font-semibold text-sm" onclick="app.goToStep(1)">
+            <span class="material-symbols-outlined text-sm">arrow_back</span>
+            <span data-i18n="btnBack">Kembali</span>
+          </button>
+        </div>
+
+        <!-- STEP 3: Resolution & Enlightenment -->
+        <div id="step-3" class="flow-card hidden-card flex flex-col items-center">
+          <div class="w-20 h-20 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-6 animate-pulse shadow-terra-glow">
+            <span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">spa</span>
+          </div>
+
+          <h2 class="font-headline text-4xl sm:text-5xl lg:text-6xl font-black text-primary mb-6 leading-tight" id="result-heading" data-i18n="step3Title">
+            Lalu Kenapa Khawatir?
+          </h2>
+
+          <div class="terra-card p-6 sm:p-8 rounded-2xl max-w-xl w-full mb-8 text-center border border-primary/10">
+            <p class="text-on-surface text-lg sm:text-xl font-headline font-semibold mb-4 leading-relaxed italic" id="result-message">
+              "Berakar dalam ketenangan. Lepaskan apa yang tidak bisa dikendalikan, dan percayalah pada prosesnya."
+            </p>
+            <div class="h-0.5 w-16 bg-primary/30 mx-auto mb-4"></div>
+            <p class="text-on-surface-variant text-sm font-body leading-relaxed" id="result-advice">
+              Fokuskan energi pada tindakan nyata yang dapat kamu kendalikan hari ini. Sisanya adalah riak air yang akan tenang dengan sendirinya.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-4 justify-center">
+            <button class="btn-terra flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-on-primary font-bold shadow-terra-soft hover:scale-105 active:scale-95" onclick="app.resetProcess()">
+              <span class="material-symbols-outlined">restart_alt</span>
+              <span data-i18n="btnRestart">Mulai Lagi</span>
+            </button>
+
+            <button class="btn-terra flex items-center gap-2 px-6 py-3 rounded-xl bg-surface-container text-primary font-bold border border-primary/20 hover:bg-primary/10 active:scale-95" onclick="app.openJournalWithContext()">
+              <span class="material-symbols-outlined">edit_note</span>
+              <span data-i18n="btnWriteJournal">Tulis Catatan Refleksi</span>
+            </button>
+
+            <button class="btn-terra flex items-center gap-2 px-5 py-3 rounded-xl bg-surface-container text-on-surface-variant font-semibold hover:text-primary active:scale-95" onclick="app.shareResult()">
+              <span class="material-symbols-outlined text-lg">share</span>
+              <span data-i18n="btnShare">Bagikan Ketenangan</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Stoic & Zen Philosophy Cards Section -->
+  <section class="max-w-7xl mx-auto px-6 py-16 w-full relative z-10">
+    <div class="text-center mb-12">
+      <h2 class="font-headline text-3xl sm:text-4xl font-bold text-on-surface mb-3" data-i18n="sectionTitle">Tiga Tangan Ketenangan</h2>
+      <p class="text-on-surface-variant/80 text-base max-w-xl mx-auto font-body" data-i18n="sectionSubtitle">Prinsip dasar Stoikisme untuk menjaga pikiran tetap jernih di tengah badai kehidupan.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <!-- Card 1 -->
+      <div class="terra-card p-8 rounded-2xl flex flex-col items-center text-center group border border-outline-variant/15 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
+        <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-on-primary transition-all">
+          <span class="material-symbols-outlined text-3xl">psychology_alt</span>
+        </div>
+        <h3 class="font-headline text-2xl font-bold mb-3 text-on-surface" data-i18n="card1Title">Kesadaran</h3>
+        <p class="text-on-surface-variant font-body leading-relaxed text-sm" data-i18n="card1Desc">Mengenali dan memisahkan fakta obyektif dari persepsi emosional adalah langkah pertama menuju kedamaian.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="terra-card p-8 rounded-2xl flex flex-col items-center text-center group border border-outline-variant/15 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
+        <div class="w-14 h-14 bg-tertiary/10 rounded-2xl flex items-center justify-center text-tertiary mb-6 group-hover:scale-110 group-hover:bg-tertiary group-hover:text-on-primary transition-all">
+          <span class="material-symbols-outlined text-3xl">auto_fix_high</span>
+        </div>
+        <h3 class="font-headline text-2xl font-bold mb-3 text-on-surface" data-i18n="card2Title">Tindakan Jernih</h3>
+        <p class="text-on-surface-variant font-body leading-relaxed text-sm" data-i18n="card2Desc">Fokuskan seluruh perhatian dan usaha pada hal-hal yang berada langsung dalam pengaruh kendalimu.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="terra-card p-8 rounded-2xl flex flex-col items-center text-center group border border-outline-variant/15 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
+        <div class="w-14 h-14 bg-secondary-container rounded-2xl flex items-center justify-center text-secondary mb-6 group-hover:scale-110 group-hover:bg-secondary group-hover:text-on-primary transition-all">
+          <span class="material-symbols-outlined text-3xl">self_improvement</span>
+        </div>
+        <h3 class="font-headline text-2xl font-bold mb-3 text-on-surface" data-i18n="card3Title">Penerimaan Tulus</h3>
+        <p class="text-on-surface-variant font-body leading-relaxed text-sm" data-i18n="card3Desc">Kedamaian tak tergoyahkan ditemukan saat kita berdamai dengan hasil akhir yang di luar kendali.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Daily Wisdom Quote Banner -->
+  <section class="max-w-4xl mx-auto px-6 mb-16 w-full relative z-10">
+    <div class="terra-card p-8 rounded-3xl border border-primary/20 relative overflow-hidden bg-gradient-to-br from-surface to-surface-container">
+      <div class="absolute -right-10 -bottom-10 opacity-5 text-primary pointer-events-none">
+        <span class="material-symbols-outlined text-[180px]">format_quote</span>
+      </div>
+      <div class="relative z-10 text-center">
+        <span class="text-xs font-bold tracking-widest uppercase text-tertiary mb-3 inline-block" data-i18n="wisdomLabel">Kutipan Bijak Hari Ini</span>
+        <blockquote class="font-headline text-xl sm:text-2xl text-on-surface font-semibold italic mb-4 leading-relaxed" id="wisdom-quote">
+          "Kita menderita lebih sering dalam imajinasi daripada dalam kenyataan."
+        </blockquote>
+        <cite class="text-sm font-bold text-primary not-italic block" id="wisdom-author">— Seneca</cite>
+        <button class="mt-4 text-xs font-bold text-on-surface-variant/70 hover:text-primary transition-colors flex items-center gap-1 mx-auto" onclick="app.nextQuote()">
+          <span class="material-symbols-outlined text-sm">refresh</span>
+          <span data-i18n="btnNewQuote">Kutipan Lain</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4-7-8 Breathing Guide Drawer/Modal -->
+  <div id="modal-breathing" class="fixed inset-0 z-50 bg-on-background/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="terra-card p-8 rounded-3xl max-w-md w-full text-center relative border border-primary/20 shadow-terra-deep scale-95 transition-transform duration-300" id="modal-breathing-card">
+      
+      <button class="absolute top-4 right-4 p-2 text-on-surface-variant hover:text-primary transition-colors" onclick="app.closeBreathingModal()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <h3 class="font-headline text-2xl font-bold text-on-surface mb-2" data-i18n="breathingModalTitle">Napas Relaksasi 4-7-8</h3>
+      <p class="text-xs text-on-surface-variant mb-8" data-i18n="breathingModalSub">Tarik napas 4 detik, tahan 7 detik, hembuskan 8 detik.</p>
+
+      <!-- Breathing Animated Visual Sphere -->
+      <div class="relative w-48 h-48 mx-auto mb-8 flex items-center justify-center">
+        <div id="breath-ring-outer" class="absolute inset-0 rounded-full border-2 border-dashed border-primary/30"></div>
+        <div id="breath-circle" class="w-24 h-24 rounded-full bg-primary/20 text-primary flex items-center justify-center transition-all duration-1000 shadow-terra-glow">
+          <span class="font-headline font-bold text-lg" id="breath-state-text">Mulai</span>
+        </div>
+      </div>
+
+      <div class="text-3xl font-headline font-bold text-primary mb-6" id="breath-timer">0</div>
+
+      <div class="flex gap-4 justify-center">
+        <button id="btn-start-breath" class="btn-terra px-6 py-2.5 rounded-xl bg-primary text-on-primary font-bold shadow-terra-soft" onclick="app.toggleBreathing()">
+          <span id="txt-start-breath" data-i18n="btnStart">Mulai Napas</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reflection Journal Drawer -->
+  <aside id="drawer-journal" class="fixed top-0 right-0 bottom-0 w-full sm:w-[450px] bg-surface z-50 shadow-2xl border-l border-primary/10 flex flex-col translate-x-full transition-transform duration-300">
+    <div class="p-6 border-b border-primary/10 flex items-center justify-between bg-surface-container">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary">edit_note</span>
+        <h3 class="font-headline font-bold text-xl text-on-surface" data-i18n="journalTitle">Catatan Ketenangan</h3>
+      </div>
+      <button class="p-2 text-on-surface-variant hover:text-primary transition-colors" onclick="app.toggleJournalDrawer(false)">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+
+    <!-- Journal Form -->
+    <div class="p-6 flex-grow overflow-y-auto space-y-6">
+      <div>
+        <label for="journal-input-problem" class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2" data-i18n="labelProblem">Apa yang sedang membebani pikiranmu?</label>
+        <textarea id="journal-input-problem" rows="3" class="w-full p-3 rounded-xl bg-surface-container border border-outline-variant/30 text-on-surface font-body text-sm focus:outline-none focus:border-primary transition-all resize-none" placeholder="Tuliskan beban atau masalahmu di sini..."></textarea>
+      </div>
+
+      <div>
+        <label for="journal-input-action" class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2" data-i18n="labelAction">Langkah nyata / Sikap penerimaan:</label>
+        <input type="text" id="journal-input-action" class="w-full p-3 rounded-xl bg-surface-container border border-outline-variant/30 text-on-surface font-body text-sm focus:outline-none focus:border-primary transition-all" placeholder="Contoh: Saya fokus selesaikan tugas A, lepaskan kepastian B." />
+      </div>
+
+      <button class="btn-terra w-full py-3 rounded-xl bg-primary text-on-primary font-bold shadow-terra-soft flex items-center justify-center gap-2" onclick="app.saveJournalEntry()">
+        <span class="material-symbols-outlined text-lg">save</span>
+        <span data-i18n="btnSaveJournal">Simpan Catatan</span>
+      </button>
+
+      <hr class="border-outline-variant/20 my-4" />
+
+      <!-- Journal Entries List -->
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <h4 class="font-headline font-bold text-base text-on-surface" data-i18n="journalListTitle">Riwayat Refleksi</h4>
+          <span class="text-xs text-on-surface-variant font-mono" id="journal-count">0 Catatan</span>
+        </div>
+
+        <div id="journal-list" class="space-y-3">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Footer -->
+  <footer class="mt-auto py-10 bg-surface-container border-t border-primary/10 relative z-10">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-6">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">spa</span>
+        <span class="font-headline font-bold text-xl text-on-surface">Terra</span>
+        <span class="text-xs text-on-surface-variant/60 font-body ml-2">© 2026 Rooted in Calm</span>
+      </div>
+
+      <div class="flex gap-8 font-body text-xs font-bold tracking-wider text-on-surface-variant uppercase">
+        <a href="#" class="hover:text-primary transition-colors" data-i18n="footerPhilosophy" onclick="app.goToStep(1)">Filosofi</a>
+        <a href="#" class="hover:text-primary transition-colors" data-i18n="footerBreathing" onclick="app.openBreathingModal()">Latihan Napas</a>
+        <a href="#" class="hover:text-primary transition-colors" data-i18n="footerJournal" onclick="app.toggleJournalDrawer(true)">Jurnal Refleksi</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

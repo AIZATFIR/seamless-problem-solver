@@ -1,0 +1,175 @@
+/* Terra Organic Design System & Animations */
+
+:root {
+  --color-primary: #4a7c59;
+  --color-primary-container: #78a886;
+  --color-secondary: #6b6358;
+  --color-tertiary: #705c30;
+  --color-background: #faf6f0;
+  --color-surface: #fcfaf7;
+  --color-surface-container: #f0ece4;
+  --color-on-background: #2e3230;
+  --color-on-surface: #2e3230;
+  --color-on-surface-variant: #4a4e4a;
+  --shadow-soft: 0 4px 25px rgba(46, 50, 48, 0.07);
+  --shadow-deep: 0 12px 35px rgba(46, 50, 48, 0.12);
+}
+
+.dark {
+  --color-primary: #8ecf9e;
+  --color-primary-container: #2a6038;
+  --color-secondary: #d4ccbf;
+  --color-tertiary: #f8e0a8;
+  --color-background: #1a1e1c;
+  --color-surface: #222724;
+  --color-surface-container: #2c322e;
+  --color-on-background: #e4ece6;
+  --color-on-surface: #e4ece6;
+  --color-on-surface-variant: #b0b8b2;
+  --shadow-soft: 0 4px 25px rgba(0, 0, 0, 0.35);
+  --shadow-deep: 0 12px 35px rgba(0, 0, 0, 0.5);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  font-family: 'Nunito Sans', sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Literata', serif;
+}
+
+/* Material Symbols Styling */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Terra Card Glassmorphism */
+.terra-card {
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+  transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+}
+
+.dark .terra-card {
+  background-color: rgba(34, 39, 36, 0.85);
+  backdrop-filter: blur(12px);
+}
+
+/* Step Indicators */
+.step-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  background-color: rgba(116, 121, 110, 0.3);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.step-dot.active-dot {
+  width: 28px;
+  background-color: var(--color-primary);
+  box-shadow: 0 0 12px rgba(74, 124, 89, 0.4);
+}
+
+/* Flow Card Transitions */
+.flow-card {
+  width: 100%;
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.flow-card.hidden-card {
+  opacity: 0;
+  transform: translateY(24px) scale(0.96);
+  pointer-events: none;
+  position: absolute;
+  visibility: hidden;
+}
+
+.flow-card.active-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  position: relative;
+  visibility: visible;
+}
+
+/* Button Ripple & Interactive Effects */
+.btn-terra {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.btn-terra::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s ease-out, height 0.5s ease-out, opacity 0.5s ease-out;
+  opacity: 1;
+}
+
+.btn-terra:active::after {
+  width: 250%;
+  height: 250%;
+  opacity: 0;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.dark .btn-primary {
+  color: #122115;
+}
+
+/* Breathing Sphere Animations */
+#breath-circle.inhale {
+  transform: scale(1.6);
+  background-color: rgba(74, 124, 89, 0.4);
+  box-shadow: 0 0 50px rgba(74, 124, 89, 0.5);
+}
+
+#breath-circle.hold {
+  transform: scale(1.6);
+  background-color: rgba(112, 92, 48, 0.4);
+  box-shadow: 0 0 50px rgba(112, 92, 48, 0.5);
+}
+
+#breath-circle.exhale {
+  transform: scale(1);
+  background-color: rgba(74, 124, 89, 0.2);
+}
+
+/* Navigation Control Buttons */
+.nav-control-btn {
+  border: 1px solid rgba(116, 121, 110, 0.15);
+}
+
+.dark .nav-control-btn {
+  background-color: #2c322e;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-container);
+  border-radius: 9999px;
+}

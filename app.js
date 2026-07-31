@@ -20,6 +20,10 @@ const translations = {
     btnRestartFlow: "Mainkan Lagi",
     btnWriteJournal: "Tulis Catatan Refleksi",
     btnShareFlow: "Bagikan Flowchart",
+    btnFullscreen: "Layar Penuh",
+    btnExitFullscreen: "Keluar Layar Penuh",
+    boxActiveStatus: "Kotak Flowchart Interaktif",
+    boxClickHint: "Pilih opsi atau klik tombol Layar Penuh untuk fokus penuh",
 
     // Community
     adminBadgeLabel: "Flowchart Pilihan Admin (5 Unique Presets)",
@@ -107,6 +111,10 @@ const translations = {
     btnRestartFlow: "Play Again",
     btnWriteJournal: "Write Reflection Journal",
     btnShareFlow: "Share Flowchart",
+    btnFullscreen: "Fullscreen",
+    btnExitFullscreen: "Exit Fullscreen",
+    boxActiveStatus: "Interactive Flowchart Field",
+    boxClickHint: "Select option or click Fullscreen button for total focus",
 
     // Community
     adminBadgeLabel: "Admin Featured Flowcharts (5 Unique Presets)",
@@ -622,6 +630,7 @@ class SeamlessProblemSolverApp {
     this.activeFlowchart = adminFlowcharts[0];
     this.currentNodeId = 'step1';
     this.nodeHistory = [];
+    this.isFlowFullscreen = false;
 
     // Audio & Breathing
     this.audioCtx = null;
@@ -698,6 +707,44 @@ class SeamlessProblemSolverApp {
         blob2.style.transform = `translate(${-x}px, ${-y}px)`;
       }
     });
+
+    // Keyboard ESC key shortcut for exiting Fullscreen mode
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.isFlowFullscreen) {
+        this.toggleFullscreenFlowchart(false);
+      }
+    });
+  }
+
+  // Seamless Fullscreen Flowchart Toggle
+  toggleFullscreenFlowchart(forceState = null) {
+    const box = document.getElementById('player-canvas-box');
+    const icon = document.getElementById('box-fullscreen-icon');
+    const text = document.getElementById('box-fullscreen-text');
+    const status = document.getElementById('canvas-box-status');
+    const dict = translations[this.currentLang] || translations.id;
+
+    if (forceState !== null) {
+      this.isFlowFullscreen = forceState;
+    } else {
+      this.isFlowFullscreen = !this.isFlowFullscreen;
+    }
+
+    if (!box) return;
+
+    if (this.isFlowFullscreen) {
+      box.classList.add('fullscreen-flow-active');
+      document.body.classList.add('overflow-hidden');
+      if (icon) icon.textContent = 'fullscreen_exit';
+      if (text) text.textContent = dict.btnExitFullscreen || 'Keluar Layar Penuh';
+      if (status) status.textContent = 'SEAMLESS FULLSCREEN MODE';
+    } else {
+      box.classList.remove('fullscreen-flow-active');
+      document.body.classList.remove('overflow-hidden');
+      if (icon) icon.textContent = 'fullscreen';
+      if (text) text.textContent = dict.btnFullscreen || 'Layar Penuh';
+      if (status) status.textContent = dict.boxActiveStatus || 'Kotak Flowchart Interaktif';
+    }
   }
 
   // --- Navigation & Section Toggle ---
@@ -1666,9 +1713,11 @@ class SeamlessProblemSolverApp {
     const icon = document.getElementById('icon-theme');
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
       if (icon) icon.textContent = 'light_mode';
     } else {
       document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
       if (icon) icon.textContent = 'dark_mode';
     }
   }

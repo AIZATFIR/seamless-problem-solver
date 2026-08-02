@@ -3,9 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Terra — Interactive Flowchart & Problem Solver Engine</title>
-  <meta name="description" content="Platform flowchart interaktif, pemecah masalah kehidupan, komunitas Stoik & humor, serta custom flowchart builder gratis." />
+  <title>Terra Flow — Seamless Problem Solver | Interactive Decision Flow</title>
+  <meta name="description" content="Kendalikan pikiran, temukan ketenangan, dan buat keputusan jernih dengan diagram alur interaktif berbasis filosofi Stoik." />
   
+  <!-- Open Graph & Social Metadata (SEO) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://seamless-problem-solver.vercel.app/" />
+  <meta property="og:title" content="Terra Flow — Seamless Problem Solver" />
+  <meta property="og:description" content="Diagram alur interaktif berbasis filosofi Stoik untuk mengurai masalah dan menenangkan pikiran." />
+  <meta property="og:image" content="https://seamless-problem-solver.vercel.app/assets/zen_bg.jpg" />
+
+  <!-- Twitter Card Metadata -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Terra Flow — Seamless Problem Solver" />
+  <meta name="twitter:description" content="Diagram alur interaktif berbasis filosofi Stoik untuk mengurai masalah dan menenangkan pikiran." />
+  
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#4a7c59" />
+
   <!-- Fonts: Literata (Serif) & Nunito Sans (Sans) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -103,32 +118,32 @@
         </button>
 
         <!-- Sound Ambient Generator -->
-        <button id="btn-ambient" class="nav-control-btn flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-all text-sm font-semibold" title="Suara Alam / Ambient Sound">
+        <button id="btn-ambient" class="nav-control-btn flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-all text-sm font-semibold" title="Suara Alam / Ambient Sound" aria-label="Toggle Ambient Sound Generator">
           <span class="material-symbols-outlined text-lg" id="icon-sound">volume_off</span>
           <span class="hidden xl:inline" id="txt-ambient">Suara Alam</span>
         </button>
 
         <!-- Breathing Exercise Modal Toggle -->
-        <button id="btn-breathing-modal" class="nav-control-btn flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-all text-sm font-semibold" title="Latihan Napas 4-7-8">
+        <button id="btn-breathing-modal" class="nav-control-btn flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-all text-sm font-semibold" title="Latihan Napas 4-7-8" aria-label="Open 4-7-8 Breathing Relaxation Modal">
           <span class="material-symbols-outlined text-lg">air</span>
           <span class="hidden lg:inline" data-i18n="navBreathing">Napas Calm</span>
         </button>
 
         <!-- Journal Drawer Toggle -->
-        <button id="btn-journal-toggle" class="nav-control-btn flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-all text-sm font-semibold relative" title="Jurnal Ketenangan">
+        <button id="btn-journal-toggle" class="nav-control-btn flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-all text-sm font-semibold relative" title="Jurnal Ketenangan" aria-label="Open Reflection Journal Drawer">
           <span class="material-symbols-outlined text-lg">edit_note</span>
           <span class="hidden lg:inline" data-i18n="navJournal">Jurnal</span>
           <span id="journal-badge" class="hidden absolute -top-1 -right-1 w-2.5 h-2.5 bg-tertiary rounded-full"></span>
         </button>
 
         <!-- Language Switcher -->
-        <button id="btn-lang" class="nav-control-btn flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary transition-all text-xs font-bold uppercase tracking-wider" title="Ganti Bahasa">
+        <button id="btn-lang" class="nav-control-btn flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary transition-all text-xs font-bold uppercase tracking-wider" title="Ganti Bahasa" aria-label="Switch Language ID or EN">
           <span class="material-symbols-outlined text-base">translate</span>
           <span id="txt-lang">ID</span>
         </button>
 
         <!-- Dark/Light Theme Toggle -->
-        <button id="btn-theme" class="nav-control-btn p-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary transition-all" title="Ganti Tema">
+        <button id="btn-theme" class="nav-control-btn p-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary transition-all" title="Ganti Tema" aria-label="Toggle Dark or Light Theme">
           <span class="material-symbols-outlined text-lg" id="icon-theme">dark_mode</span>
         </button>
       </div>

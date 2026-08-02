@@ -729,6 +729,15 @@ class SeamlessProblemSolverApp {
     }
   }
 
+  // Handle card box click for fullscreen toggle
+  handleCardBoxClick(e) {
+    if (!e) return;
+    if (e.target.closest('button') || e.target.closest('a') || e.target.closest('input') || e.target.closest('textarea')) {
+      return;
+    }
+    this.toggleFullscreenFlowchart();
+  }
+
   // Seamless Fullscreen Flowchart Toggle
   toggleFullscreenFlowchart(forceState = null) {
     const box = document.getElementById('player-canvas-box');

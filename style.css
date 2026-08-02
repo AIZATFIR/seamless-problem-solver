@@ -197,6 +197,23 @@ h1, h2, h3, h4 {
   border-color: rgba(255, 255, 255, 0.08);
 }
 
+/* Flowchart Central Focal Card & Hover Expand */
+#player-canvas-box {
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.35s ease, background-color 0.35s ease;
+}
+
+#player-canvas-box:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 45px rgba(74, 124, 89, 0.22), var(--shadow-deep);
+  border-color: rgba(var(--color-primary), 0.5);
+}
+
+.dark #player-canvas-box:hover {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 40px rgba(142, 207, 158, 0.2);
+  border-color: rgba(var(--color-primary), 0.6);
+}
+
 /* Seamless Fullscreen Flowchart Field Container */
 #player-canvas-box.fullscreen-flow-active {
   position: fixed !important;
@@ -208,20 +225,27 @@ h1, h2, h3, h4 {
   max-height: 100vh !important;
   border-radius: 0 !important;
   border: none !important;
-  background-color: rgba(var(--color-background), 0.97) !important;
-  backdrop-filter: blur(24px) !important;
-  padding: 1.5rem 2rem 2.5rem 2rem !important;
+  background-color: rgba(var(--color-background), 0.98) !important;
+  backdrop-filter: blur(32px) !important;
+  padding: 2rem 3rem 3rem 3rem !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
   overflow-y: auto !important;
+  cursor: default !important;
+  transform: none !important;
   animation: fullscreenFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+#player-canvas-box.fullscreen-flow-active:hover {
+  transform: none !important;
+  box-shadow: none !important;
 }
 
 @keyframes fullscreenFadeIn {
   from {
     opacity: 0;
-    transform: scale(0.97);
+    transform: scale(0.96);
   }
   to {
     opacity: 1;

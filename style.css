@@ -214,27 +214,42 @@ h1, h2, h3, h4 {
   border-color: rgba(var(--color-primary), 0.6);
 }
 
-/* Seamless Fullscreen Flowchart Field Container */
+/* True Fullscreen Pure Zen mode - Solid background, no blur, no menu bar */
+body.is-fullscreen header,
+body.is-fullscreen #player-flow-meta,
+body.is-fullscreen #flow-indicator-bar,
+body.is-fullscreen #player-diagram-overview,
+body.is-fullscreen section,
+body.is-fullscreen footer {
+  display: none !important;
+}
+
 #player-canvas-box.fullscreen-flow-active {
   position: fixed !important;
   inset: 0 !important;
-  z-index: 100 !important;
+  z-index: 9999 !important;
   width: 100vw !important;
   height: 100vh !important;
   max-width: 100vw !important;
   max-height: 100vh !important;
   border-radius: 0 !important;
   border: none !important;
-  background-color: rgba(var(--color-background), 0.98) !important;
-  backdrop-filter: blur(32px) !important;
-  padding: 2rem 3rem 3rem 3rem !important;
+  background-color: rgb(var(--color-background)) !important;
+  backdrop-filter: none !important;
+  padding: 3rem 2rem !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
   overflow-y: auto !important;
   cursor: default !important;
   transform: none !important;
-  animation: fullscreenFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-shadow: none !important;
+  animation: fullscreenFadeIn 0.25s ease forwards;
+}
+
+.dark #player-canvas-box.fullscreen-flow-active {
+  background-color: #141816 !important;
+  backdrop-filter: none !important;
 }
 
 #player-canvas-box.fullscreen-flow-active:hover {
@@ -263,5 +278,21 @@ h1, h2, h3, h4 {
 ::-webkit-scrollbar-thumb {
   background: rgb(var(--color-primary-container));
   border-radius: 9999px;
+}
+
+/* ScrollFloat Component CSS (React Bits) */
+.scroll-float {
+  overflow: hidden;
+}
+
+.scroll-float-text {
+  display: inline-block;
+  font-weight: 900;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.char {
+  display: inline-block;
 }
 

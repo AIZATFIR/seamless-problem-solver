@@ -1,6 +1,4 @@
-/**
- * Terra 2.0 — Interactive Flowchart & Problem Solver Core Application
- */
+import { initScrollFloat } from './ScrollFloat.js';
 
 const translations = {
   id: {
@@ -664,6 +662,10 @@ class SeamlessProblemSolverApp {
     this.renderFlowchartPlayer();
     this.renderAdsStats();
     this.setupEventListeners();
+
+    setTimeout(() => {
+      initScrollFloat('.scroll-float-heading');
+    }, 100);
   }
 
   setupEventListeners() {
@@ -756,13 +758,13 @@ class SeamlessProblemSolverApp {
 
     if (this.isFlowFullscreen) {
       box.classList.add('fullscreen-flow-active');
-      document.body.classList.add('overflow-hidden');
+      document.body.classList.add('overflow-hidden', 'is-fullscreen');
       if (icon) icon.textContent = 'fullscreen_exit';
       if (text) text.textContent = dict.btnExitFullscreen || 'Keluar Layar Penuh';
-      if (status) status.textContent = 'SEAMLESS FULLSCREEN MODE';
+      if (status) status.textContent = 'FULLSCREEN ZEN MODE';
     } else {
       box.classList.remove('fullscreen-flow-active');
-      document.body.classList.remove('overflow-hidden');
+      document.body.classList.remove('overflow-hidden', 'is-fullscreen');
       if (icon) icon.textContent = 'fullscreen';
       if (text) text.textContent = dict.btnFullscreen || 'Layar Penuh';
       if (status) status.textContent = dict.boxActiveStatus || 'Kotak Flowchart Interaktif';

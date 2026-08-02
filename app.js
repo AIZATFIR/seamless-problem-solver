@@ -853,56 +853,6 @@ class SeamlessProblemSolverApp {
       btnBackComm.classList.add('hidden');
     }
 
-    // Render Diagram Overview Grid (Seamless Kolom Kotak)
-    const mapContainer = document.getElementById('player-diagram-overview');
-    if (mapContainer && flow.nodes) {
-      const nodeKeys = Object.keys(flow.nodes);
-      mapContainer.innerHTML = `
-        <div class="p-4 sm:p-5 rounded-3xl bg-surface-container/60 border border-primary/15 backdrop-blur-md text-left shadow-sm">
-          <div class="flex items-center justify-between mb-3 text-xs font-bold text-on-surface-variant">
-            <span class="flex items-center gap-1.5 text-primary uppercase tracking-wider">
-              <span class="material-symbols-outlined text-sm">schema</span>
-              <span>Visual Flowchart Map</span>
-            </span>
-            <span class="text-[11px] font-normal text-on-surface-variant/70">Klik kotak untuk Fullscreen Focus</span>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-            ${nodeKeys.map((key, idx) => {
-              const nd = flow.nodes[key];
-              const isActive = key === this.currentNodeId;
-              const title = nd.isResult 
-                ? (isEn ? (nd.title_en || nd.title_id) : nd.title_id)
-                : (isEn ? (nd.q_en || nd.q_id) : nd.q_id);
-              const tag = nd.isResult 
-                ? 'HASIL / SOLUSI'
-                : (isEn ? (nd.tag_en || nd.tag_id || `Langkah ${idx+1}`) : (nd.tag_id || `Langkah ${idx+1}`));
-
-              const borderStyle = isActive 
-                ? 'border-primary ring-2 ring-primary/40 bg-primary/10 shadow-terra-soft' 
-                : 'border-outline-variant/30 bg-surface/90 hover:border-primary/50 hover:bg-primary/5';
-
-              return `
-                <div class="terra-card p-3.5 rounded-2xl border ${borderStyle} cursor-pointer transition-all duration-200 flex flex-col justify-between group" onclick="app.selectNodeAndFullscreen('${key}')">
-                  <div>
-                    <div class="flex items-center justify-between gap-1 mb-2 text-[10px] font-bold uppercase tracking-wider">
-                      <span class="${isActive ? 'text-primary' : 'text-on-surface-variant/70'}">${tag}</span>
-                      ${isActive ? '<span class="px-1.5 py-0.5 rounded bg-primary text-on-primary text-[9px] font-bold">AKTIF</span>' : '<span class="material-symbols-outlined text-xs text-on-surface-variant/40 group-hover:text-primary transition-colors">fullscreen</span>'}
-                    </div>
-                    <h4 class="font-headline text-sm font-bold text-on-surface line-clamp-2 leading-snug group-hover:text-primary transition-colors">${title}</h4>
-                  </div>
-                  ${nd.options ? `
-                    <div class="mt-3 flex flex-wrap gap-1 border-t border-outline-variant/15 pt-2">
-                      ${nd.options.map(opt => `<span class="px-2 py-0.5 rounded-md bg-surface-container text-[10px] font-semibold text-on-surface-variant">${isEn ? (opt.text_en || opt.text_id) : opt.text_id}</span>`).join('')}
-                    </div>
-                  ` : ''}
-                </div>
-              `;
-            }).join('')}
-          </div>
-        </div>
-      `;
-    }
-
     // Render Active Node Card
     const canvas = document.getElementById('player-canvas');
     const node = flow.nodes[this.currentNodeId] || flow.nodes[Object.keys(flow.nodes)[0]];

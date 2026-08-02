@@ -155,8 +155,8 @@
   <div class="flex-grow flex flex-col relative z-10">
 
     <!-- SECTION 1: Dynamic Flowchart Player View -->
-    <main id="section-player" class="flex-grow flex flex-col justify-center items-center px-4 py-10 relative">
-      <div class="max-w-3xl w-full text-center">
+    <main id="section-player" class="flex-grow flex flex-col justify-center items-center px-4 py-8 sm:py-12 relative">
+      <div class="max-w-5xl w-full text-center">
         
         <!-- Active Flowchart Banner Header -->
         <div id="player-flow-meta" class="mb-6 inline-flex flex-wrap items-center justify-center gap-2 bg-surface-container/80 px-4 py-2 rounded-2xl border border-primary/15 shadow-sm text-xs">
@@ -170,7 +170,7 @@
         </div>
 
         <!-- Progress Indicator Dots -->
-        <div class="mb-6 flex items-center justify-center gap-2" id="flow-indicator-bar">
+        <div class="mb-8 flex items-center justify-center gap-2" id="flow-indicator-bar">
           <div class="step-dot active-dot" id="dot-1"></div>
           <div class="w-8 h-0.5 bg-outline-variant/30 rounded-full transition-colors duration-500" id="line-1"></div>
           <div class="step-dot" id="dot-2"></div>
@@ -178,13 +178,8 @@
           <div class="step-dot" id="dot-3"></div>
         </div>
 
-        <!-- Interactive Seamless Flowchart Map Grid (Kolom Kotak Seamless) -->
-        <div id="player-diagram-overview" class="mb-6 w-full">
-          <!-- Rendered dynamically by app.js -->
-        </div>
-
-        <!-- Interactive Field Box Container for Flowchart (Hover Expand & Click Fullscreen) -->
-        <div id="player-canvas-box" class="terra-card relative min-h-[420px] rounded-3xl p-6 sm:p-8 border border-primary/20 hover:border-primary/40 shadow-terra-deep transition-all duration-300 flex flex-col justify-between group" onclick="app.handleCardBoxClick(event)">
+        <!-- Main Hero Flowchart Box Container (Expanded Focal Point) -->
+        <div id="player-canvas-box" class="terra-card relative min-h-[520px] sm:min-h-[560px] rounded-[2.5rem] p-8 sm:p-12 md:p-16 border-2 border-primary/25 hover:border-primary/50 shadow-terra-glow transition-all duration-300 flex flex-col justify-between group" onclick="app.handleCardBoxClick(event)">
           
           <!-- Box Header Control Bar -->
           <div class="flex items-center justify-between border-b border-primary/10 pb-3 mb-4 shrink-0">

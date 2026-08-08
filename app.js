@@ -655,11 +655,53 @@ class SeamlessProblemSolverApp {
     // Ads & Monetization Stats
     this.adsStats = JSON.parse(localStorage.getItem('terra_ads_stats') || '{"impressions": 14, "clicks": 2, "earnings": 0.45, "pubId": "", "cornerAd": true}');
 
-    // Builder Node State
+    // Builder Node State (Multi-Branch Graph Structure)
     this.builderNodes = [
-      { id: 'step1', q_id: 'Pertanyaan Pertama?', q_en: 'First Question?', tag: 'Start', opt1_text: 'Ya', opt1_target: 'res1', opt2_text: 'Tidak', opt2_target: 'res2' },
-      { id: 'res1', isResult: true, title: 'Hasil Positif!', msg: 'Kamu memilih Ya.', adv: 'Lanjutkan langkahmu.' },
-      { id: 'res2', isResult: true, title: 'Hasil Negatif!', msg: 'Kamu memilih Tidak.', adv: 'Rehat sejenak.' }
+      {
+        id: 'node_start',
+        isResult: false,
+        q_id: 'Pilihan Karir Utama?',
+        q_en: 'Main Career Choice?',
+        sub_id: 'Pilih bidang yang sesuai dengan minat batinmu.',
+        sub_en: 'Choose the path matching your inner purpose.',
+        options: [
+          { text_id: 'Teknologi & Coding', text_en: 'Technology & Coding', targetId: 'res_tech', btnStyle: 'btn-primary' },
+          { text_id: 'Bisnis & Kreatif', text_en: 'Business & Creative', targetId: 'res_biz', btnStyle: 'btn-primary' },
+          { text_id: 'Perlu Pertimbangan', text_en: 'Need Reflection', targetId: 'node_reflect', btnStyle: 'btn-secondary' }
+        ]
+      },
+      {
+        id: 'node_reflect',
+        isResult: false,
+        q_id: 'Faktor Apa yang Paling Penting?',
+        q_en: 'Which Factor Matters Most?',
+        sub_id: 'Ketenangan batin atau tantangan baru?',
+        sub_en: 'Inner peace or new challenge?',
+        options: [
+          { text_id: 'Ketenangan Batin', text_en: 'Inner Peace', targetId: 'res_tech', btnStyle: 'btn-primary' },
+          { text_id: 'Tantangan Baru', text_en: 'New Challenge', targetId: 'res_biz', btnStyle: 'btn-primary' }
+        ]
+      },
+      {
+        id: 'res_tech',
+        isResult: true,
+        title_id: 'Jalur Teknologi & Inovasi',
+        title_en: 'Technology & Innovation Path',
+        msg_id: 'Fokus pada pembangunan karya nyata yang bermanfaat.',
+        msg_en: 'Focus on building meaningful software and solutions.',
+        adv_id: 'Mulai dengan 1 projek kecil hari ini.',
+        adv_en: 'Start with 1 small project today.'
+      },
+      {
+        id: 'res_biz',
+        isResult: true,
+        title_id: 'Jalur Bisnis & Kreatif',
+        title_en: 'Business & Creative Path',
+        msg_id: 'Asah kepemimpinan dan koneksi antar manusia.',
+        msg_en: 'Hone leadership and human connection.',
+        adv_id: 'Tuliskan ide bisnis pertama dalam 10 menit.',
+        adv_en: 'Draft your first business idea in 10 minutes.'
+      }
     ];
 
     this.init();
@@ -816,6 +858,49 @@ class SeamlessProblemSolverApp {
     }
   }
 
+  // --- Clean Fallback Getters for Dynamic & i18n Nodes ---
+  getNodeTitle(node) {
+    if (!node) return '';
+    const isEn = this.currentLang === 'en';
+    if (isEn) return node.title_en || node.title_id || node.title || node.name || 'Conclusion';
+    return node.title_id || node.title || node.title_en || node.name || 'Kesimpulan';
+  }
+
+  getNodeMessage(node) {
+    if (!node) return '';
+    const isEn = this.currentLang === 'en';
+    if (isEn) return node.msg_en || node.msg_id || node.msg || node.description || '';
+    return node.msg_id || node.msg || node.msg_en || node.description || '';
+  }
+
+  getNodeAdvice(node) {
+    if (!node) return '';
+    const isEn = this.currentLang === 'en';
+    if (isEn) return node.adv_en || node.adv_id || node.adv || '';
+    return node.adv_id || node.adv || node.adv_en || '';
+  }
+
+  getNodeQuestion(node) {
+    if (!node) return '';
+    const isEn = this.currentLang === 'en';
+    if (isEn) return node.q_en || node.q_id || node.q || node.question || node.title || '';
+    return node.q_id || node.q || node.q_en || node.question || node.title || '';
+  }
+
+  getNodeSubtitle(node) {
+    if (!node) return '';
+    const isEn = this.currentLang === 'en';
+    if (isEn) return node.sub_en || node.sub_id || node.sub || node.description || '';
+    return node.sub_id || node.sub || node.sub_en || node.description || '';
+  }
+
+  getOptionText(opt) {
+    if (!opt) return '';
+    const isEn = this.currentLang === 'en';
+    if (isEn) return opt.text_en || opt.text_id || opt.text || opt.label || 'Proceed';
+    return opt.text_id || opt.text || opt.text_en || opt.label || 'Lanjut';
+  }
+
   // --- Universal Flowchart Engine Player ---
   loadFlowchart(flowId) {
     let flow = adminFlowcharts.find(f => f.id === flowId);
@@ -872,9 +957,9 @@ class SeamlessProblemSolverApp {
 
     if (node.isResult) {
       // Resolution Card
-      const resTitle = isEn ? (node.title_en || node.title_id) : node.title_id;
-      const resMsg = isEn ? (node.msg_en || node.msg_id) : node.msg_id;
-      const resAdv = isEn ? (node.adv_en || node.adv_id) : node.adv_id;
+      const resTitle = this.getNodeTitle(node);
+      const resMsg = this.getNodeMessage(node);
+      const resAdv = this.getNodeAdvice(node);
       const dict = translations[this.currentLang];
 
       canvas.innerHTML = `
@@ -918,15 +1003,15 @@ class SeamlessProblemSolverApp {
     } else {
       // Question Node Card
       const qTag = isEn ? (node.tag_en || node.tag_id || 'Step') : (node.tag_id || 'Langkah');
-      const qText = isEn ? (node.q_en || node.q_id) : node.q_id;
-      const qSub = isEn ? (node.sub_en || node.sub_id || '') : (node.sub_id || '');
+      const qText = this.getNodeQuestion(node);
+      const qSub = this.getNodeSubtitle(node);
       const dict = translations[this.currentLang];
 
       const optionsHTML = (node.options || []).map(opt => {
-        const optText = isEn ? (opt.text_en || opt.text_id) : opt.text_id;
+        const optText = this.getOptionText(opt);
         const btnStyle = opt.btnStyle === 'btn-secondary' ? 'btn-secondary border-2 border-primary/20 bg-surface-container text-primary' : 'btn-primary text-on-primary';
         return `
-          <button class="btn-terra ${btnStyle} flex-1 py-4 px-6 rounded-xl font-bold text-base sm:text-lg shadow-terra-soft hover:shadow-terra-deep hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2" onclick="app.navigateToNode('${opt.next}')">
+          <button class="btn-terra ${btnStyle} flex-1 py-4 px-6 rounded-xl font-bold text-base sm:text-lg shadow-terra-soft hover:shadow-terra-deep hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2" onclick="app.navigateToNode('${opt.next || opt.targetId}')">
             <span>${optText}</span>
             <span class="material-symbols-outlined text-xl">arrow_forward</span>
           </button>
@@ -1210,46 +1295,248 @@ class SeamlessProblemSolverApp {
 
   renderBuilderNodes() {
     const list = document.getElementById('builder-nodes-list');
-    list.innerHTML = this.builderNodes.map((n, idx) => `
-      <div class="p-4 rounded-2xl bg-surface-container border border-primary/10 relative space-y-3">
-        <div class="flex justify-between items-center">
-          <span class="text-xs font-bold uppercase text-primary font-mono">Langkah #${idx + 1} (${n.isResult ? 'Hasil Akhir' : 'Pertanyaan'})</span>
-          ${idx > 0 ? `<button class="text-red-500 hover:text-red-700 text-xs font-bold" onclick="app.removeBuilderNode(${idx})">Hapus</button>` : ''}
+    if (!list) return;
+
+    const isEn = this.currentLang === 'en';
+
+    // 1. Build Graph Map Connection Summary Header
+    const graphLinksHTML = this.builderNodes.map((n, idx) => {
+      if (n.isResult) {
+        return `<span class="px-2 py-1 rounded bg-surface border border-outline-variant/20 text-[11px] font-mono text-tertiary">🏁 Node #${idx + 1} (${n.id}): [Kesimpulan/Hasil]</span>`;
+      }
+      const targets = (n.options || []).map(o => `${o.text_id || o.text || 'Opsi'} ➔ ${o.targetId || '?'}`).join(', ');
+      return `<span class="px-2 py-1 rounded bg-surface border border-primary/20 text-[11px] font-mono text-primary">❓ Node #${idx + 1} (${n.id}): [${targets || 'Tanpa Cabang'}]</span>`;
+    }).join(' ');
+
+    const mapHeaderHTML = `
+      <div class="p-3 mb-4 rounded-xl bg-surface-container/90 border border-primary/20 space-y-1">
+        <div class="flex items-center gap-1.5 text-xs font-bold text-primary">
+          <span class="material-symbols-outlined text-sm">hub</span>
+          <span>${isEn ? 'Visual Flowchart Graph Map' : 'Peta Koneksi Diagram (Visual Graph)'}</span>
         </div>
-        
-        ${n.isResult ? `
-          <input type="text" value="${this.escapeHtml(n.title || '')}" oninput="app.builderNodes[${idx}].title = this.value" class="w-full p-2 rounded-lg bg-surface border border-outline-variant/20 text-xs font-bold text-on-surface" placeholder="Judul Kesimpulan/Hasil (misal: Selesai!)" />
-          <textarea oninput="app.builderNodes[${idx}].msg = this.value" class="w-full p-2 rounded-lg bg-surface border border-outline-variant/20 text-xs text-on-surface resize-none" rows="2" placeholder="Pesan / Kutipan Hasil">${this.escapeHtml(n.msg || '')}</textarea>
-        ` : `
-          <input type="text" value="${this.escapeHtml(n.q_id || '')}" oninput="app.builderNodes[${idx}].q_id = this.value; app.builderNodes[${idx}].q_en = this.value" class="w-full p-2 rounded-lg bg-surface border border-outline-variant/20 text-xs font-bold text-on-surface" placeholder="Pertanyaan / Pertimbangan" />
-          <div class="grid grid-cols-2 gap-2">
-            <input type="text" value="${this.escapeHtml(n.opt1_text || '')}" oninput="app.builderNodes[${idx}].opt1_text = this.value" class="p-2 rounded-lg bg-surface border border-outline-variant/20 text-xs text-on-surface" placeholder="Opsi A (misal: YA)" />
-            <input type="text" value="${this.escapeHtml(n.opt2_text || '')}" oninput="app.builderNodes[${idx}].opt2_text = this.value" class="p-2 rounded-lg bg-surface border border-outline-variant/20 text-xs text-on-surface" placeholder="Opsi B (misal: TIDAK)" />
-          </div>
-        `}
+        <div class="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto pt-1">
+          ${graphLinksHTML}
+        </div>
       </div>
-    `).join('');
+    `;
+
+    // 2. Render Node Card Editors
+    const nodesListHTML = this.builderNodes.map((n, idx) => {
+      const isResult = !!n.isResult;
+
+      // Dropdown option generator for target node selection
+      const targetOptionsHTML = (currentSelectedId) => {
+        return this.builderNodes.map((targetNode, tIdx) => `
+          <option value="${targetNode.id}" ${targetNode.id === currentSelectedId ? 'selected' : ''}>
+            Node #${tIdx + 1}: ${targetNode.isResult ? '🏁 ' + (targetNode.title_id || targetNode.title || 'Hasil') : '❓ ' + (targetNode.q_id || targetNode.q || 'Pertanyaan')} (${targetNode.id})
+          </option>
+        `).join('');
+      };
+
+      if (isResult) {
+        // Result Node Card Form
+        return `
+          <div class="p-4 rounded-2xl bg-surface-container/80 border-2 border-tertiary/20 relative space-y-3 shadow-sm">
+            <div class="flex justify-between items-center border-b border-tertiary/10 pb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-tertiary"></span>
+                <span class="text-xs font-bold uppercase text-tertiary font-mono">Node #${idx + 1} (${n.id}) — Kesimpulan Akhir</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <button type="button" class="text-xs font-semibold px-2 py-0.5 rounded bg-surface border border-outline-variant/30 text-on-surface hover:text-primary" onclick="app.toggleBuilderNodeType(${idx})">
+                  ${isEn ? 'Switch to Question' : 'Ubah ke Pertanyaan'}
+                </button>
+                ${idx > 0 ? `<button type="button" class="text-red-500 hover:text-red-700 text-xs font-bold p-1" onclick="app.removeBuilderNode(${idx})" title="Hapus Node">✕</button>` : ''}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">${isEn ? 'Conclusion Title' : 'Judul Kesimpulan / Hasil Utama *'}</label>
+              <input type="text" value="${this.escapeHtml(n.title_id || n.title || '')}" oninput="app.builderNodes[${idx}].title_id = this.value; app.builderNodes[${idx}].title_en = this.value; app.renderBuilderNodesMapOnly()" class="w-full p-2.5 rounded-xl bg-surface border border-outline-variant/20 text-xs font-bold text-on-surface focus:outline-none focus:border-tertiary" placeholder="Contoh: Selesai! Keputusan Tuntas." />
+            </div>
+
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">${isEn ? 'Philosophy Message / Quote' : 'Pesan Filosofis / Penjelasan Hasil'}</label>
+              <textarea oninput="app.builderNodes[${idx}].msg_id = this.value; app.builderNodes[${idx}].msg_en = this.value" class="w-full p-2.5 rounded-xl bg-surface border border-outline-variant/20 text-xs text-on-surface resize-none focus:outline-none focus:border-tertiary" rows="2" placeholder="Contoh: Nikmati ketenangan dan fokus pada tindakan selanjutnya...">${this.escapeHtml(n.msg_id || n.msg || '')}</textarea>
+            </div>
+
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">${isEn ? 'Action Advice' : 'Saran Langkah Nyata Terakhir'}</label>
+              <input type="text" value="${this.escapeHtml(n.adv_id || n.adv || '')}" oninput="app.builderNodes[${idx}].adv_id = this.value; app.builderNodes[${idx}].adv_en = this.value" class="w-full p-2 rounded-xl bg-surface border border-outline-variant/20 text-xs text-on-surface focus:outline-none focus:border-tertiary" placeholder="Contoh: Mulai dengan aksi 5 menit pertama." />
+            </div>
+          </div>
+        `;
+      }
+
+      // Question / Branching Node Card Form
+      const optionsListHTML = (n.options || []).map((opt, optIdx) => `
+        <div class="p-2.5 rounded-xl bg-surface border border-outline-variant/30 space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[11px] font-bold text-primary font-mono">Cabang #${optIdx + 1}</span>
+            ${(n.options || []).length > 1 ? `<button type="button" class="text-red-500 hover:text-red-700 text-xs font-bold" onclick="app.removeBuilderNodeOption(${idx}, ${optIdx})">Hapus Opsi</button>` : ''}
+          </div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div>
+              <label class="block text-[9px] font-bold uppercase text-on-surface-variant mb-0.5">${isEn ? 'Option Label' : 'Teks Opsi (Tombol)'}</label>
+              <input type="text" value="${this.escapeHtml(opt.text_id || opt.text || '')}" oninput="app.builderNodes[${idx}].options[${optIdx}].text_id = this.value; app.builderNodes[${idx}].options[${optIdx}].text_en = this.value; app.renderBuilderNodesMapOnly()" class="w-full p-2 rounded-lg bg-surface-container border border-outline-variant/20 text-xs font-semibold text-on-surface focus:outline-none focus:border-primary" placeholder="Contoh: Ya / Lanjut" />
+            </div>
+
+            <div>
+              <label class="block text-[9px] font-bold uppercase text-on-surface-variant mb-0.5">${isEn ? 'Connect to Target Node' : 'Hubungkan ke Node Tujuan'}</label>
+              <select onchange="app.builderNodes[${idx}].options[${optIdx}].targetId = this.value; app.renderBuilderNodesMapOnly()" class="w-full p-2 rounded-lg bg-surface-container border border-outline-variant/20 text-xs text-on-surface focus:outline-none focus:border-primary">
+                ${targetOptionsHTML(opt.targetId)}
+              </select>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      return `
+        <div class="p-4 rounded-2xl bg-surface-container/80 border-2 border-primary/20 relative space-y-3 shadow-sm">
+          <div class="flex justify-between items-center border-b border-primary/10 pb-2">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-primary animate-pulse"></span>
+              <span class="text-xs font-bold uppercase text-primary font-mono">Node #${idx + 1} (${n.id}) — Pertanyaan / Cabang</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button type="button" class="text-xs font-semibold px-2 py-0.5 rounded bg-surface border border-outline-variant/30 text-on-surface hover:text-primary" onclick="app.toggleBuilderNodeType(${idx})">
+                ${isEn ? 'Switch to Result' : 'Ubah ke Hasil'}
+              </button>
+              ${idx > 0 ? `<button type="button" class="text-red-500 hover:text-red-700 text-xs font-bold p-1" onclick="app.removeBuilderNode(${idx})" title="Hapus Node">✕</button>` : ''}
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">${isEn ? 'Question / Pertimbangan' : 'Pertanyaan / Pertimbangan *'}</label>
+            <input type="text" value="${this.escapeHtml(n.q_id || n.q || '')}" oninput="app.builderNodes[${idx}].q_id = this.value; app.builderNodes[${idx}].q_en = this.value; app.renderBuilderNodesMapOnly()" class="w-full p-2.5 rounded-xl bg-surface border border-outline-variant/20 text-xs font-bold text-on-surface focus:outline-none focus:border-primary" placeholder="Contoh: Apakah ini berdampak besar bagi karirmu?" />
+          </div>
+
+          <div>
+            <label class="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">${isEn ? 'Subtitle / Hint' : 'Petunjuk / Subtitle (Opsional)'}</label>
+            <input type="text" value="${this.escapeHtml(n.sub_id || n.sub || '')}" oninput="app.builderNodes[${idx}].sub_id = this.value; app.builderNodes[${idx}].sub_en = this.value" class="w-full p-2 rounded-xl bg-surface border border-outline-variant/20 text-xs text-on-surface focus:outline-none focus:border-primary" placeholder="Contoh: Pertimbangkan faktor finansial & kesehatan batin." />
+          </div>
+
+          <!-- Dynamic Options / Branching Links -->
+          <div class="space-y-2 pt-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-on-surface flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm text-primary">alt_route</span>
+                <span>${isEn ? 'Branch Options' : 'Cabang Keputusan (Bisa Lebih dari 2 Opsi)'}</span>
+              </span>
+              <button type="button" class="px-2 py-1 rounded-lg bg-primary/10 text-primary text-[11px] font-bold hover:bg-primary/20 transition-all flex items-center gap-1" onclick="app.addBuilderNodeOption(${idx})">
+                <span class="material-symbols-outlined text-xs">add</span>
+                <span>${isEn ? 'Add Branch Option' : 'Tambah Opsi Cabang'}</span>
+              </button>
+            </div>
+
+            <div class="space-y-2">
+              ${optionsListHTML}
+            </div>
+          </div>
+
+        </div>
+      `;
+    }).join('');
+
+    list.innerHTML = mapHeaderHTML + nodesListHTML;
+  }
+
+  renderBuilderNodesMapOnly() {
+    const list = document.getElementById('builder-nodes-list');
+    if (!list) return;
+    const isEn = this.currentLang === 'en';
+    const graphLinksHTML = this.builderNodes.map((n, idx) => {
+      if (n.isResult) {
+        return `<span class="px-2 py-1 rounded bg-surface border border-outline-variant/20 text-[11px] font-mono text-tertiary">🏁 Node #${idx + 1} (${n.id}): [Kesimpulan/Hasil]</span>`;
+      }
+      const targets = (n.options || []).map(o => `${o.text_id || o.text || 'Opsi'} ➔ ${o.targetId || '?'}`).join(', ');
+      return `<span class="px-2 py-1 rounded bg-surface border border-primary/20 text-[11px] font-mono text-primary">❓ Node #${idx + 1} (${n.id}): [${targets || 'Tanpa Cabang'}]</span>`;
+    }).join(' ');
+
+    const mapHeaderHTML = `
+      <div class="p-3 mb-4 rounded-xl bg-surface-container/90 border border-primary/20 space-y-1">
+        <div class="flex items-center gap-1.5 text-xs font-bold text-primary">
+          <span class="material-symbols-outlined text-sm">hub</span>
+          <span>${isEn ? 'Visual Flowchart Graph Map' : 'Peta Koneksi Diagram (Visual Graph)'}</span>
+        </div>
+        <div class="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto pt-1">
+          ${graphLinksHTML}
+        </div>
+      </div>
+    `;
+
+    const existingMap = list.querySelector('.p-3.mb-4.rounded-xl');
+    if (existingMap) {
+      existingMap.outerHTML = mapHeaderHTML;
+    }
+  }
+
+  toggleBuilderNodeType(idx) {
+    if (this.builderNodes[idx]) {
+      this.builderNodes[idx].isResult = !this.builderNodes[idx].isResult;
+      if (!this.builderNodes[idx].isResult && !this.builderNodes[idx].options) {
+        const nextTarget = this.builderNodes[idx + 1] ? this.builderNodes[idx + 1].id : this.builderNodes[0].id;
+        this.builderNodes[idx].options = [
+          { text_id: 'Ya', text_en: 'Yes', targetId: nextTarget, btnStyle: 'btn-primary' },
+          { text_id: 'Tidak', text_en: 'No', targetId: nextTarget, btnStyle: 'btn-secondary' }
+        ];
+      }
+      this.renderBuilderNodes();
+    }
+  }
+
+  addBuilderNodeOption(nodeIdx) {
+    const node = this.builderNodes[nodeIdx];
+    if (node && !node.isResult) {
+      if (!node.options) node.options = [];
+      const defaultTarget = this.builderNodes[nodeIdx + 1] ? this.builderNodes[nodeIdx + 1].id : this.builderNodes[0].id;
+      node.options.push({
+        text_id: `Opsi #${node.options.length + 1}`,
+        text_en: `Option #${node.options.length + 1}`,
+        targetId: defaultTarget,
+        btnStyle: node.options.length % 2 === 0 ? 'btn-primary' : 'btn-secondary'
+      });
+      this.renderBuilderNodes();
+    }
+  }
+
+  removeBuilderNodeOption(nodeIdx, optIdx) {
+    const node = this.builderNodes[nodeIdx];
+    if (node && node.options && node.options.length > 1) {
+      node.options.splice(optIdx, 1);
+      this.renderBuilderNodes();
+    }
   }
 
   addBuilderNode() {
-    const isResult = this.builderNodes.length >= 2 && this.builderNodes.length % 2 === 0;
+    const newNodeId = 'node_' + Date.now().toString(36) + Math.random().toString(36).substr(2, 3);
+    const isResult = this.builderNodes.length >= 2 && this.builderNodes.length % 2 === 1;
+    
     if (isResult) {
       this.builderNodes.push({
-        id: 'res_' + Date.now(),
+        id: newNodeId,
         isResult: true,
-        title: 'Hasil Baru',
-        msg: 'Pesan kesimpulan flowchart kamu.',
-        adv: 'Saran tindakan nyata.'
+        title_id: 'Hasil Kesimpulan Baru',
+        title_en: 'New Conclusion Result',
+        msg_id: 'Pesan filosofis kesimpulan flowchart kamu.',
+        msg_en: 'Philosophical message of your flowchart conclusion.',
+        adv_id: 'Saran aksi nyata.',
+        adv_en: 'Action advice.'
       });
     } else {
+      const defaultTarget = this.builderNodes[0] ? this.builderNodes[0].id : newNodeId;
       this.builderNodes.push({
-        id: 'node_' + Date.now(),
-        q_id: 'Pertanyaan Lanjutan?',
-        q_en: 'Follow-up Question?',
-        opt1_text: 'Ya',
-        opt1_target: 'res1',
-        opt2_text: 'Tidak',
-        opt2_target: 'res2'
+        id: newNodeId,
+        isResult: false,
+        q_id: 'Pertanyaan / Cabang Baru?',
+        q_en: 'New Question / Branch?',
+        sub_id: 'Deskripsi singkat...',
+        sub_en: 'Short description...',
+        options: [
+          { text_id: 'Ya, Lanjut', text_en: 'Yes, Proceed', targetId: defaultTarget, btnStyle: 'btn-primary' },
+          { text_id: 'Tidak, Batal', text_en: 'No, Cancel', targetId: defaultTarget, btnStyle: 'btn-secondary' }
+        ]
       });
     }
     this.renderBuilderNodes();
@@ -1274,32 +1561,37 @@ class SeamlessProblemSolverApp {
     }
 
     const flowId = 'custom_' + Date.now();
-
-    // Construct valid node tree
     const nodesObj = {};
+
     this.builderNodes.forEach((n, idx) => {
+      const nodeId = n.id || `node_${idx}`;
       if (n.isResult) {
-        nodesObj[n.id || `res_${idx}`] = {
+        nodesObj[nodeId] = {
           isResult: true,
-          title_id: n.title || 'Kesimpulan',
-          title_en: n.title || 'Conclusion',
-          msg_id: n.msg || 'Flowchart selesai.',
-          msg_en: n.msg || 'Flowchart complete.',
-          adv_id: n.adv || 'Nikmati harimu.',
-          adv_en: n.adv || 'Enjoy your day.'
+          title_id: n.title_id || n.title || 'Kesimpulan',
+          title_en: n.title_en || n.title || 'Conclusion',
+          msg_id: n.msg_id || n.msg || 'Flowchart selesai.',
+          msg_en: n.msg_en || n.msg || 'Flowchart complete.',
+          adv_id: n.adv_id || n.adv || 'Nikmati harimu.',
+          adv_en: n.adv_en || n.adv || 'Enjoy your day.'
         };
       } else {
-        const next1 = this.builderNodes[idx + 1] ? this.builderNodes[idx + 1].id || `res_${idx + 1}` : `res_${idx}`;
-        const next2 = this.builderNodes[idx + 2] ? this.builderNodes[idx + 2].id || `res_${idx + 2}` : `res_${idx}`;
+        const formattedOptions = (n.options || []).map(opt => ({
+          text_id: opt.text_id || opt.text || 'Lanjut',
+          text_en: opt.text_en || opt.text || 'Proceed',
+          next: opt.targetId || (this.builderNodes[idx + 1] ? this.builderNodes[idx + 1].id : nodeId),
+          btnStyle: opt.btnStyle || 'btn-primary'
+        }));
 
-        nodesObj[n.id || `step_${idx}`] = {
+        nodesObj[nodeId] = {
           tag_id: `Langkah #${idx + 1}`,
           tag_en: `Step #${idx + 1}`,
-          q_id: n.q_id || 'Pertanyaan?',
-          q_en: n.q_en || 'Question?',
-          options: [
-            { text_id: n.opt1_text || 'YA', text_en: n.opt1_text || 'YES', next: next1, btnStyle: 'btn-primary' },
-            { text_id: n.opt2_text || 'TIDAK', text_en: n.opt2_text || 'NO', next: next2, btnStyle: 'btn-secondary' }
+          q_id: n.q_id || n.q || 'Pertanyaan?',
+          q_en: n.q_en || n.q || 'Question?',
+          sub_id: n.sub_id || n.sub || '',
+          sub_en: n.sub_en || n.sub || '',
+          options: formattedOptions.length > 0 ? formattedOptions : [
+            { text_id: 'Selesai', text_en: 'Finish', next: nodeId, btnStyle: 'btn-primary' }
           ]
         };
       }
@@ -1316,14 +1608,15 @@ class SeamlessProblemSolverApp {
       plays: 0,
       desc_id: desc || 'Custom Flowchart dibuat oleh pengguna Terra.',
       desc_en: desc || 'Custom Flowchart created by Terra user.',
-      startNode: Object.keys(nodesObj)[0],
+      startNode: Object.keys(nodesObj)[0] || 'node_1',
       nodes: nodesObj
     };
 
     this.customFlowcharts.unshift(newFlow);
     this.saveCustomFlowcharts();
     this.closeBuilderModal();
-    this.showSection('community');
+    this.showSection('player', flowId);
+    alert(this.currentLang === 'id' ? '✨ Flowchart berhasil disimpan & dimainkan!' : '✨ Flowchart successfully saved & played!');
   }
 
   previewCustomFlowchart() {

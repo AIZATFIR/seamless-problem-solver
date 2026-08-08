@@ -1,4 +1,8 @@
 import { initScrollFloat } from './ScrollFloat.js';
+import { TaskBreakdownEngine } from './src/TaskBreakdownEngine.js';
+import { AIFlowchartParser } from './src/AIFlowchartParser.js';
+import { AudioAmbientEngine } from './src/AudioAmbientEngine.js';
+import { FlowchartEngine } from './src/FlowchartEngine.js';
 
 const translations = {
   id: {
@@ -630,6 +634,13 @@ class SeamlessProblemSolverApp {
     this.nodeHistory = [];
     this.isFlowFullscreen = false;
 
+    // Domain Engines Initialization
+    this.taskEngine = new TaskBreakdownEngine();
+    this.aiParser = new AIFlowchartParser();
+    this.audioSynth = new AudioAmbientEngine();
+    this.flowEngine = new FlowchartEngine(this.activeFlowchart);
+    this.pendingAIImageBase64 = null;
+
     // Audio & Breathing
     this.audioCtx = null;
     this.ambientNodes = null;
@@ -929,6 +940,52 @@ class SeamlessProblemSolverApp {
         </button>
       ` : '';
 
+      // Build Subtask Point Breakdown (Google Tasks style)
+      const flowId = flow.id || 'default_flow';
+      const nodeId = this.currentNodeId;
+      const subtasks = this.taskEngine.getTasksForNode(flowId, nodeId);
+      const cogScore = this.taskEngine.getCognitiveLoadScore(flowId, nodeId);
+
+      const subtasksListHTML = subtasks.length === 0 ? `
+        <p class="text-xs text-on-surface-variant/70 italic text-center py-1">Belum ada poin langkah. Tambahkan 1-per-1 di bawah untuk memperjelas tindakan.</p>
+      ` : subtasks.map(t => `
+        <div class="flex items-center justify-between gap-2 p-2 rounded-xl bg-surface/80 border border-outline-variant/20 transition-all hover:border-primary/30">
+          <label class="flex items-center gap-2.5 cursor-pointer flex-grow text-xs font-semibold ${t.done ? 'line-through text-on-surface-variant/50' : 'text-on-surface'}">
+            <input type="checkbox" ${t.done ? 'checked' : ''} onchange="app.toggleSubtaskItem('${t.id}')" class="w-4 h-4 accent-primary rounded cursor-pointer" />
+            <span>${this.escapeHtml(t.text)}</span>
+          </label>
+          <button onclick="app.deleteSubtaskItem('${t.id}')" class="text-on-surface-variant/50 hover:text-red-500 p-1 text-xs" title="Hapus poin">
+            <span class="material-symbols-outlined text-sm">delete</span>
+          </button>
+        </div>
+      `).join('');
+
+      const subtaskSectionHTML = `
+        <div class="mt-8 w-full max-w-lg p-4 sm:p-5 rounded-2xl bg-surface-container/70 border border-primary/20 text-left shadow-sm">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-lg">fact_check</span>
+              <span class="font-headline font-bold text-xs sm:text-sm text-on-surface">Poin Langkah Nyata (+1 Subtask)</span>
+            </div>
+            <span class="text-[10px] font-bold text-primary px-2.5 py-0.5 rounded-full bg-primary/10 border border-primary/20">
+              ${cogScore.label}
+            </span>
+          </div>
+
+          <div class="space-y-2 mb-3">
+            ${subtasksListHTML}
+          </div>
+
+          <div class="flex items-center gap-2">
+            <input type="text" id="input-new-subtask" class="flex-grow p-2 sm:p-2.5 rounded-xl bg-surface border border-outline-variant/30 text-xs text-on-surface focus:outline-none focus:border-primary" placeholder="+ Tambah 1 poin langkah nyata..." onkeydown="if(event.key==='Enter') app.addSubtaskItem()" />
+            <button class="px-3 py-2 rounded-xl bg-primary text-on-primary font-bold text-xs flex items-center gap-1 hover:scale-105 active:scale-95 transition-all shadow-sm" onclick="app.addSubtaskItem()">
+              <span class="material-symbols-outlined text-sm">add</span>
+              <span>Tambah</span>
+            </button>
+          </div>
+        </div>
+      `;
+
       canvas.innerHTML = `
         <div class="flow-card active-card flex flex-col items-center">
           <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wider uppercase mb-6 shadow-sm">
@@ -945,6 +1002,8 @@ class SeamlessProblemSolverApp {
           <div class="flex flex-col sm:flex-row flex-wrap gap-4 w-full justify-center max-w-md mt-2">
             ${optionsHTML}
           </div>
+
+          ${subtaskSectionHTML}
 
           ${backBtnHTML}
         </div>
@@ -1657,6 +1716,114 @@ class SeamlessProblemSolverApp {
     this.journalEntries = this.journalEntries.filter(entry => entry.id !== id);
     localStorage.setItem('terra_journal', JSON.stringify(this.journalEntries));
     this.renderJournalList();
+  }
+
+  // --- Subtask Point Breakdown Engine (Google Tasks Style) ---
+  addSubtaskItem() {
+    const input = document.getElementById('input-new-subtask');
+    if (!input || !input.value.trim()) return;
+    const text = input.value.trim();
+    this.taskEngine.addTask(this.activeFlowchart.id, this.currentNodeId, text);
+    input.value = '';
+    this.renderFlowchartPlayer();
+  }
+
+  toggleSubtaskItem(taskId) {
+    this.taskEngine.toggleTask(this.activeFlowchart.id, this.currentNodeId, taskId);
+    this.renderFlowchartPlayer();
+  }
+
+  deleteSubtaskItem(taskId) {
+    this.taskEngine.deleteTask(this.activeFlowchart.id, this.currentNodeId, taskId);
+    this.renderFlowchartPlayer();
+  }
+
+  // --- Audio Ambient Sound Synth ---
+  toggleAmbientSound() {
+    const isPlaying = this.audioSynth.toggle();
+    const icon = document.getElementById('icon-sound');
+    const txt = document.getElementById('txt-ambient');
+    if (icon) icon.textContent = isPlaying ? 'volume_up' : 'volume_off';
+    if (txt) txt.textContent = isPlaying ? 'Suara Hening' : 'Suara Alam';
+  }
+
+  // --- AI Flowchart Generator & Vision Importer ---
+  openAIModal() {
+    const modal = document.getElementById('modal-ai-upload');
+    const card = document.getElementById('modal-ai-card');
+    if (modal && card) {
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-95');
+      card.classList.add('scale-100');
+    }
+  }
+
+  closeAIModal() {
+    const modal = document.getElementById('modal-ai-upload');
+    const card = document.getElementById('modal-ai-card');
+    if (modal && card) {
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-100');
+      card.classList.add('scale-95');
+    }
+  }
+
+  handleAIImageSelect(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        this.pendingAIImageBase64 = evt.target.result;
+        const fileLabel = document.getElementById('ai-file-label');
+        if (fileLabel) fileLabel.textContent = `📷 File: ${file.name}`;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  async processAIGeneration() {
+    const promptInput = document.getElementById('ai-prompt-input');
+    const apiKeyInput = document.getElementById('ai-api-key');
+    const btnGen = document.getElementById('btn-generate-ai');
+    const txtGen = document.getElementById('txt-generate-ai');
+
+    const promptText = promptInput ? promptInput.value.trim() : '';
+    const apiKey = apiKeyInput ? apiKeyInput.value.trim() : null;
+
+    if (!promptText && !this.pendingAIImageBase64) {
+      alert('Silakan upload gambar flowchart atau isi deskripsi masalah terlebih dahulu!');
+      return;
+    }
+
+    if (btnGen) btnGen.disabled = true;
+    if (txtGen) txtGen.textContent = 'Menganalisis & Menggenerasi...';
+
+    try {
+      this.aiParser.setApiKey(apiKey);
+      const generatedFlow = await this.aiParser.parseInput(promptText, this.pendingAIImageBase64);
+
+      if (generatedFlow && generatedFlow.nodes) {
+        this.activeFlowchart = generatedFlow;
+        this.currentNodeId = generatedFlow.startNodeId || Object.keys(generatedFlow.nodes)[0];
+        this.nodeHistory = [];
+        this.closeAIModal();
+        this.showSection('player');
+        this.renderFlowchartPlayer();
+
+        // Add to community grid list
+        this.customFlowcharts.unshift(generatedFlow);
+        this.renderCommunityGrid();
+
+        alert('✨ Flowchart AI berhasil digenerasi dan dimuat!');
+      }
+    } catch (err) {
+      console.error('AI Generation error:', err);
+      alert('Gagal menggenerasi flowchart AI. Menggunakan parsing offline...');
+    } finally {
+      if (btnGen) btnGen.disabled = false;
+      if (txtGen) txtGen.textContent = 'Generasi Flowchart AI';
+      this.pendingAIImageBase64 = null;
+    }
   }
 
   renderJournalList() {

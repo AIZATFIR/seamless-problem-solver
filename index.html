@@ -21,10 +21,10 @@
   <!-- Theme Color -->
   <meta name="theme-color" content="#4a7c59" />
 
-  <!-- Fonts: Literata (Serif) & Nunito Sans (Sans) -->
+  <!-- Fonts: Outfit, Inter, Literata & Nunito Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Literata:ital,wght@0,300;0,600;1,400&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
   
   <!-- Material Symbols -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
@@ -55,8 +55,8 @@
             "outline-variant": "rgb(var(--color-outline-variant) / <alpha-value>)"
           },
           fontFamily: {
-            headline: ["Literata", "serif"],
-            body: ["Nunito Sans", "sans-serif"]
+            headline: ["Outfit", "Literata", "sans-serif"],
+            body: ["Inter", "Nunito Sans", "sans-serif"]
           },
           boxShadow: {
             'terra-soft': 'var(--shadow-soft)',
@@ -105,7 +105,11 @@
         </button>
         <button id="nav-btn-builder" class="nav-tab-btn px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all text-on-surface-variant hover:text-primary" onclick="app.openBuilderModal()">
           <span class="material-symbols-outlined text-lg">add_box</span>
-          <span data-i18n="navCreate">Buat Flowchart</span>
+          <span data-i18n="navCreate">Buat Manual</span>
+        </button>
+        <button id="nav-btn-ai" class="nav-tab-btn px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all bg-primary/10 text-primary hover:bg-primary hover:text-on-primary" onclick="app.openAIModal()">
+          <span class="material-symbols-outlined text-lg">auto_awesome</span>
+          <span>AI Generator & Vision</span>
         </button>
       </div>
 
@@ -408,6 +412,65 @@
             <span data-i18n="btnPublishFlow">Simpan & Terbitkan</span>
           </button>
         </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL: AI Flowchart Generator & Image Vision Modal -->
+  <div id="modal-ai-upload" class="fixed inset-0 z-50 bg-on-background/50 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="terra-card p-6 sm:p-8 rounded-3xl max-w-xl w-full relative border border-primary/30 shadow-terra-glow scale-95 transition-transform duration-300" id="modal-ai-card">
+      
+      <button class="absolute top-4 right-4 p-2 text-on-surface-variant hover:text-primary transition-colors" onclick="app.closeAIModal()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-2xl font-bold">
+          <span class="material-symbols-outlined text-3xl">auto_awesome</span>
+        </div>
+        <div>
+          <h3 class="font-headline text-2xl font-bold text-on-surface">AI Flowchart & Vision Importer</h3>
+          <p class="text-xs text-on-surface-variant">Upload gambar flowchart / ketik prompt untuk buat diagram interaktif otomatis!</p>
+        </div>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <!-- Option 1: Image Dropzone -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2">1. Upload Gambar Flowchart (Vision OCR)</label>
+          <div id="ai-dropzone" class="border-2 border-dashed border-primary/30 hover:border-primary/60 rounded-2xl p-6 text-center cursor-pointer transition-all bg-surface-container/50 flex flex-col items-center justify-center gap-2" onclick="document.getElementById('ai-file-input').click()">
+            <span class="material-symbols-outlined text-3xl text-primary">add_photo_alternate</span>
+            <span class="text-xs font-bold text-on-surface" id="ai-file-label">Klik / Drag Gambar Flowchart (PNG / JPG)</span>
+            <span class="text-[10px] text-on-surface-variant/70">AI akan membaca struktur kotak & cabang keputusan dari gambar</span>
+            <input type="file" id="ai-file-input" class="hidden" accept="image/*" onchange="app.handleAIImageSelect(event)" />
+          </div>
+        </div>
+
+        <!-- Option 2: Text Prompt -->
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2">2. Atau Deskripsikan Masalah / Keputusan</label>
+          <textarea id="ai-prompt-input" rows="3" class="w-full p-3 rounded-xl bg-surface-container border border-outline-variant/30 text-on-surface font-body text-sm focus:outline-none focus:border-primary transition-all resize-none" placeholder="Contoh: Saya bingung antara resign kerja atau bertahan 6 bulan lagi..."></textarea>
+        </div>
+
+        <!-- Optional Gemini API Key -->
+        <div class="p-3 rounded-xl bg-surface-container/70 border border-outline-variant/20 flex items-center justify-between text-xs">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-base text-primary">key</span>
+            <span class="font-bold text-on-surface">Gemini API Key (Opsional)</span>
+          </div>
+          <input type="password" id="ai-api-key" class="px-2 py-1 rounded-lg bg-surface border border-outline-variant/30 text-xs w-36 text-on-surface" placeholder="AI Key (Default: Offline)" />
+        </div>
+      </div>
+
+      <div class="flex gap-3 justify-end">
+        <button class="btn-terra px-4 py-2.5 rounded-xl bg-surface-container text-on-surface-variant font-bold text-sm" onclick="app.closeAIModal()">
+          Batal
+        </button>
+        <button id="btn-generate-ai" class="btn-terra btn-primary px-6 py-2.5 rounded-xl font-bold text-sm shadow-terra-soft flex items-center gap-2" onclick="app.processAIGeneration()">
+          <span class="material-symbols-outlined text-lg">auto_awesome</span>
+          <span id="txt-generate-ai">Generasi Flowchart AI</span>
+        </button>
       </div>
 
     </div>

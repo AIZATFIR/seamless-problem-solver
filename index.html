@@ -186,21 +186,42 @@
         <div id="player-canvas-box" class="terra-card relative min-h-[520px] sm:min-h-[560px] rounded-[2.5rem] p-8 sm:p-12 md:p-16 border-2 border-primary/25 hover:border-primary/50 shadow-terra-glow transition-all duration-300 flex flex-col justify-between group" onclick="app.handleCardBoxClick(event)">
           
           <!-- Box Header Control Bar -->
-          <div class="flex items-center justify-between border-b border-primary/10 pb-3 mb-4 shrink-0">
+          <div class="flex items-center justify-between border-b border-primary/10 pb-3 mb-4 shrink-0 flex-wrap gap-2">
             <div class="flex items-center gap-2 text-xs font-bold text-on-surface-variant">
-              <span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
-              <span id="canvas-box-status" data-i18n="boxActiveStatus">Kotak Flowchart Interaktif</span>
+              <!-- Mode Tabs -->
+              <div class="flex items-center gap-1 bg-surface-container/90 p-1 rounded-xl border border-primary/15">
+                <button id="tab-mode-player" class="px-3 py-1 rounded-lg text-xs font-bold bg-primary text-on-primary shadow-sm flex items-center gap-1 transition-all" onclick="app.setPlayerViewMode('card')">
+                  <span class="material-symbols-outlined text-sm">style</span>
+                  <span data-i18n="viewCardMode">Kartu Interaktif</span>
+                </button>
+                <button id="tab-mode-graph" class="px-3 py-1 rounded-lg text-xs font-bold text-on-surface-variant hover:text-primary flex items-center gap-1 transition-all" onclick="app.setPlayerViewMode('graph')">
+                  <span class="material-symbols-outlined text-sm">hub</span>
+                  <span data-i18n="viewGraphMode">Peta Diagram Visual</span>
+                </button>
+              </div>
             </div>
             
-            <button id="box-btn-fullscreen" class="p-2 rounded-xl bg-primary/10 text-primary hover:bg-primary hover:text-on-primary transition-all flex items-center gap-1 text-xs font-bold shadow-sm" onclick="app.toggleFullscreenFlowchart()" title="Buka Layar Penuh (Fullscreen)">
-              <span class="material-symbols-outlined text-lg" id="box-fullscreen-icon">fullscreen</span>
-              <span class="hidden sm:inline" id="box-fullscreen-text" data-i18n="btnFullscreen">Layar Penuh</span>
-            </button>
+            <div class="flex items-center gap-2">
+              <button id="btn-export-mermaid" class="p-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary transition-all flex items-center gap-1 text-xs font-bold border border-primary/15" onclick="app.exportActiveFlowMermaid()" title="Ekspor Kode Mermaid">
+                <span class="material-symbols-outlined text-base">code</span>
+                <span class="hidden md:inline">Mermaid</span>
+              </button>
+
+              <button id="box-btn-fullscreen" class="p-2 rounded-xl bg-primary/10 text-primary hover:bg-primary hover:text-on-primary transition-all flex items-center gap-1 text-xs font-bold shadow-sm" onclick="app.toggleFullscreenFlowchart()" title="Buka Layar Penuh (Fullscreen)">
+                <span class="material-symbols-outlined text-lg" id="box-fullscreen-icon">fullscreen</span>
+                <span class="hidden sm:inline" id="box-fullscreen-text" data-i18n="btnFullscreen">Layar Penuh</span>
+              </button>
+            </div>
           </div>
 
           <!-- Dynamic Card Canvas Container -->
           <div class="relative min-h-[280px] flex items-center justify-center w-full my-auto" id="player-canvas">
             <!-- Flowchart Card rendered dynamically by app.js -->
+          </div>
+
+          <!-- Interactive Visual Graph Map Container -->
+          <div class="hidden relative min-h-[320px] w-full overflow-x-auto my-auto rounded-2xl bg-surface/50 border border-primary/15 p-2" id="player-graph-container">
+            <!-- Rendered by FlowchartGraphRenderer -->
           </div>
 
           <!-- Box Bottom Footer Hint -->
@@ -343,6 +364,21 @@
       <!-- Builder Scrollable Form -->
       <div class="flex-grow overflow-y-auto space-y-6 pr-2">
         
+        <!-- Template Preset Selector -->
+        <div class="p-3 rounded-2xl bg-surface-container/70 border border-primary/20 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div class="flex items-center gap-2 text-xs font-bold text-primary">
+            <span class="material-symbols-outlined text-lg">schema</span>
+            <span data-i18n="lblTemplatePreset">Gunakan Template Siap Pakai:</span>
+          </div>
+          <select id="builder-template-select" class="w-full sm:w-64 p-2 rounded-xl bg-surface border border-outline-variant/30 text-xs font-bold text-on-surface focus:outline-none focus:border-primary" onchange="app.loadBuilderTemplate(this.value)">
+            <option value="custom">-- Pilih Template Preset --</option>
+            <option value="5whys">🔍 5 Whys Root Cause Analysis</option>
+            <option value="stoic">🌿 Stoic Circle of Control</option>
+            <option value="eisenhower">⚡ Eisenhower Priority Matrix</option>
+            <option value="career">🚀 Career Path Decision Tree</option>
+          </select>
+        </div>
+
         <!-- Metadata Fields -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>

@@ -3,6 +3,7 @@ import { TaskBreakdownEngine } from './src/TaskBreakdownEngine.js';
 import { AIFlowchartParser } from './src/AIFlowchartParser.js';
 import { AudioAmbientEngine } from './src/AudioAmbientEngine.js';
 import { FlowchartEngine } from './src/FlowchartEngine.js';
+import { FlowchartGraphRenderer } from './src/FlowchartGraphRenderer.js';
 
 const translations = {
   id: {
@@ -639,6 +640,8 @@ class SeamlessProblemSolverApp {
     this.aiParser = new AIFlowchartParser();
     this.audioSynth = new AudioAmbientEngine();
     this.flowEngine = new FlowchartEngine(this.activeFlowchart);
+    this.graphRenderer = new FlowchartGraphRenderer();
+    this.playerViewMode = 'card'; // 'card' or 'graph'
     this.pendingAIImageBase64 = null;
 
     // Audio & Breathing
@@ -949,6 +952,34 @@ class SeamlessProblemSolverApp {
       btnBackComm.classList.add('hidden');
     }
 
+    // View Mode Switcher Check (Card vs Graph)
+    const canvasContainer = document.getElementById('player-canvas');
+    const graphContainer = document.getElementById('player-graph-container');
+    const tabCard = document.getElementById('tab-mode-player');
+    const tabGraph = document.getElementById('tab-mode-graph');
+
+    if (this.playerViewMode === 'graph') {
+      if (canvasContainer) canvasContainer.classList.add('hidden');
+      if (graphContainer) graphContainer.classList.remove('hidden');
+      if (tabGraph) {
+        tabGraph.className = 'px-3 py-1 rounded-lg text-xs font-bold bg-primary text-on-primary shadow-sm flex items-center gap-1 transition-all';
+      }
+      if (tabCard) {
+        tabCard.className = 'px-3 py-1 rounded-lg text-xs font-bold text-on-surface-variant hover:text-primary flex items-center gap-1 transition-all';
+      }
+      this.graphRenderer.renderGraph(flow, this.currentNodeId, graphContainer);
+      return;
+    } else {
+      if (canvasContainer) canvasContainer.classList.remove('hidden');
+      if (graphContainer) graphContainer.classList.add('hidden');
+      if (tabCard) {
+        tabCard.className = 'px-3 py-1 rounded-lg text-xs font-bold bg-primary text-on-primary shadow-sm flex items-center gap-1 transition-all';
+      }
+      if (tabGraph) {
+        tabGraph.className = 'px-3 py-1 rounded-lg text-xs font-bold text-on-surface-variant hover:text-primary flex items-center gap-1 transition-all';
+      }
+    }
+
     // Render Active Node Card
     const canvas = document.getElementById('player-canvas');
     const node = flow.nodes[this.currentNodeId] || flow.nodes[Object.keys(flow.nodes)[0]];
@@ -1113,6 +1144,55 @@ class SeamlessProblemSolverApp {
     this.currentNodeId = this.activeFlowchart.startNode || Object.keys(this.activeFlowchart.nodes)[0];
     this.nodeHistory = [];
     this.renderFlowchartPlayer();
+  }
+
+  // --- View Mode & Graph Map Helpers ---
+  setPlayerViewMode(mode) {
+    this.playerViewMode = mode;
+    this.renderFlowchartPlayer();
+  }
+
+  handleGraphNodeClick(nodeId) {
+    if (this.activeFlowchart && this.activeFlowchart.nodes[nodeId]) {
+      this.currentNodeId = nodeId;
+      this.setPlayerViewMode('card');
+    }
+  }
+
+  exportActiveFlowMermaid() {
+    const code = this.graphRenderer.exportToMermaid(this.activeFlowchart);
+    if (code) {
+      navigator.clipboard.writeText(code).then(() => {
+        alert(this.currentLang === 'id' ? '✨ Kode Diagram Mermaid berhasil disalin ke clipboard!' : '✨ Mermaid Diagram Code copied to clipboard!');
+      });
+    }
+  }
+
+  loadBuilderTemplate(templateKey) {
+    const templates = {
+      '5whys': [
+        { id: 'start', isResult: false, q_id: '1. Mengapa masalah ini terjadi?', q_en: '1. Why did this problem occur?', sub_id: 'Sebutkan penyebab pertama yang langsung terlihat.', sub_en: 'Identify the first immediate cause.', options: [{ text_id: 'Lanjut ke Why #2', text_en: 'Proceed to Why #2', targetId: 'why2', btnStyle: 'btn-primary' }] },
+        { id: 'why2', isResult: false, q_id: '2. Mengapa penyebab pertama itu terjadi?', q_en: '2. Why did that first cause happen?', sub_id: 'Gali 1 tingkat lebih dalam.', sub_en: 'Dig 1 level deeper.', options: [{ text_id: 'Lanjut ke Why #3', text_en: 'Proceed to Why #3', targetId: 'why3', btnStyle: 'btn-primary' }] },
+        { id: 'why3', isResult: false, q_id: '3. Mengapa alasan itu muncul?', q_en: '3. Why did that reason appear?', sub_id: 'Cari faktor proses / kebiasaan.', sub_en: 'Find process or habit factor.', options: [{ text_id: 'Lanjut ke Root Cause', text_en: 'Proceed to Root Cause', targetId: 'res_root', btnStyle: 'btn-primary' }] },
+        { id: 'res_root', isResult: true, title_id: 'Akar Masalah Utama Ditemukan', title_en: 'Root Cause Identified', msg_id: 'Fokus perbaiki sistem/kebiasaan mendasar ini.', msg_en: 'Focus on fixing this underlying system or habit.', adv_id: 'Buat 1 aturan baru untuk mencegah keberulangan.', adv_en: 'Create 1 new rule to prevent recurrence.' }
+      ],
+      'stoic': [
+        { id: 'start', isResult: false, q_id: 'Apakah situasi ini berada dalam kendalimu?', q_en: 'Is this situation within your control?', sub_id: 'Pikirkan: aksi kamu vs aksi orang lain / kondisi alam.', sub_en: 'Think: your action vs others action / external conditions.', options: [{ text_id: 'Ya, Langsung Bertindak', text_en: 'Yes, Take Action', targetId: 'res_act', btnStyle: 'btn-primary' }, { text_id: 'Tidak, Di luar Kendali', text_en: 'No, Outside Control', targetId: 'res_accept', btnStyle: 'btn-secondary' }] },
+        { id: 'res_act', isResult: true, title_id: 'Fokus pada Tindakan Nyata', title_en: 'Focus on Action', msg_id: 'Kejelasan lahir dari aksi, bukan khayalan.', msg_en: 'Clarity is born from action, not overthinking.', adv_id: 'Lakukan langkah 5 menit pertama.', adv_en: 'Take the first 5-minute action.' },
+        { id: 'res_accept', isResult: true, title_id: 'Amor Fati (Penerimaan Tulus)', title_en: 'Sincere Acceptance', msg_id: 'Lepaskan kecemasan pada hal di luar wewenangmu.', msg_en: 'Release anxiety over what is beyond your scope.', adv_id: 'Tarik napas 4-7-8 dan kembalikan kedamaian batin.', adv_en: 'Take 4-7-8 breath and restore inner peace.' }
+      ],
+      'eisenhower': [
+        { id: 'start', isResult: false, q_id: 'Apakah tugas ini Mendesak & Penting?', q_en: 'Is this task Urgent & Important?', sub_id: 'Evaluasi dampak tenggat waktu & tujuan utama.', sub_en: 'Evaluate deadline impact and core goals.', options: [{ text_id: 'Mendesak & Penting', text_en: 'Urgent & Important', targetId: 'res_do', btnStyle: 'btn-primary' }, { text_id: 'Penting tapi Tidak Mendesak', text_en: 'Important Not Urgent', targetId: 'res_schedule', btnStyle: 'btn-primary' }, { text_id: 'Mendesak tapi Tidak Penting', text_en: 'Urgent Not Important', targetId: 'res_delegate', btnStyle: 'btn-secondary' }] },
+        { id: 'res_do', isResult: true, title_id: 'DO IT NOW (Kerjakan Sekarang)', title_en: 'DO IT NOW', msg_id: 'Prioritas tertinggi. Kerjakan tanpa penundaan.', msg_en: 'Highest priority. Execute without delay.', adv_id: 'Selesaikan sebelum beralih ke tugas lain.', adv_en: 'Finish before switching tasks.' },
+        { id: 'res_schedule', isResult: true, title_id: 'SCHEDULE (Jadwalkan)', title_en: 'SCHEDULE IT', msg_id: 'Sangat menentukan masa depan. Beri blok waktu khusus.', msg_en: 'Crucial for future growth. Block dedicated time.', adv_id: 'Masukkan ke kalender hari ini.', adv_en: 'Put into calendar today.' },
+        { id: 'res_delegate', isResult: true, title_id: 'DELEGATE / ELIMINATE', title_en: 'DELEGATE / ELIMINATE', msg_id: 'Gunakan bantuan tools / orang lain.', msg_en: 'Use tool automation or delegate.', adv_id: 'Otomatiskan atau batasi durasi 5 menit.', adv_en: 'Automate or cap at 5 minutes.' }
+      ]
+    };
+
+    if (templates[templateKey]) {
+      this.builderNodes = JSON.parse(JSON.stringify(templates[templateKey]));
+      this.renderBuilderNodes();
+    }
   }
 
   // --- Community Hub & Gallery ---

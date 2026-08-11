@@ -409,8 +409,46 @@
 
         <hr class="border-outline-variant/20" />
 
-        <!-- Nodes Step Builder -->
-        <div>
+        <!-- Builder Mode Switcher Tabs -->
+        <div class="flex items-center gap-2 bg-surface-container p-1 rounded-2xl border border-primary/20">
+          <button id="tab-builder-form" type="button" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold bg-primary text-on-primary shadow-sm flex items-center justify-center gap-1.5 transition-all" onclick="app.setBuilderMode('form')">
+            <span class="material-symbols-outlined text-base">schema</span>
+            <span>Detail Form Editor</span>
+          </button>
+          <button id="tab-builder-script" type="button" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold text-on-surface-variant hover:text-primary flex items-center justify-center gap-1.5 transition-all" onclick="app.setBuilderMode('script')">
+            <span class="material-symbols-outlined text-base">auto_fix_high</span>
+            <span>⚡ Quick Text/Arrow Auto-Detect</span>
+          </button>
+        </div>
+
+        <!-- Mode 2 Container: Quick Text / Arrow Notation Editor -->
+        <div id="builder-script-container" class="hidden space-y-3 p-4 rounded-2xl bg-surface-container/70 border border-primary/20">
+          <div class="flex justify-between items-center">
+            <label class="block text-xs font-bold uppercase tracking-wider text-primary flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm">terminal</span>
+              <span>Tulis Teks Singkat / Panah `->` (Otomatis Buat Button)</span>
+            </label>
+            <button type="button" class="text-xs font-bold text-primary hover:underline flex items-center gap-1" onclick="app.insertQuickScriptSample()">
+              <span class="material-symbols-outlined text-xs">lightbulb</span>
+              <span>Isi Contoh Teks</span>
+            </button>
+          </div>
+
+          <textarea id="builder-script-input" rows="7" class="w-full p-3 rounded-xl bg-surface border border-outline-variant/30 text-on-surface font-mono text-xs focus:outline-none focus:border-primary transition-all resize-y" placeholder="Contoh format panah singkat:
+Pertanyaan A -> (Ya) -> Pertanyaan B -> (Bisa) -> Hasil Selesai
+             -> (Tidak) -> Hasil Batal"></textarea>
+
+          <div class="flex justify-between items-center text-[11px] text-on-surface-variant">
+            <span>Sistem akan otomatis mendeteksi panah `->`, membuat node, dan membuat tombol keputusan!</span>
+            <button type="button" class="px-4 py-2 rounded-xl bg-primary text-on-primary font-bold text-xs flex items-center gap-1 hover:scale-105 transition-all shadow-sm" onclick="app.parseQuickScriptToBuilder()">
+              <span class="material-symbols-outlined text-sm">bolt</span>
+              <span>Generate Flowchart & Button</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mode 1 Container: Nodes Step Builder Form -->
+        <div id="builder-form-container">
           <div class="flex items-center justify-between mb-4">
             <h4 class="font-headline font-bold text-base text-on-surface" data-i18n="builderStepsTitle">Langkah & Pertanyaan Flowchart</h4>
             <button type="button" class="px-3 py-1.5 rounded-xl bg-primary/10 text-primary text-xs font-bold hover:bg-primary/20 transition-all flex items-center gap-1" onclick="app.addBuilderNode()">

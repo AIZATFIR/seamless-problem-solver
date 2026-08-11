@@ -4,6 +4,7 @@ import { AIFlowchartParser } from './src/AIFlowchartParser.js';
 import { AudioAmbientEngine } from './src/AudioAmbientEngine.js';
 import { FlowchartEngine } from './src/FlowchartEngine.js';
 import { FlowchartGraphRenderer } from './src/FlowchartGraphRenderer.js';
+import { QuickScriptFlowParser } from './src/QuickScriptFlowParser.js';
 
 const translations = {
   id: {
@@ -641,7 +642,9 @@ class SeamlessProblemSolverApp {
     this.audioSynth = new AudioAmbientEngine();
     this.flowEngine = new FlowchartEngine(this.activeFlowchart);
     this.graphRenderer = new FlowchartGraphRenderer();
+    this.scriptParser = new QuickScriptFlowParser();
     this.playerViewMode = 'card'; // 'card' or 'graph'
+    this.builderMode = 'form';    // 'form' or 'script'
     this.pendingAIImageBase64 = null;
 
     // Audio & Breathing
@@ -1192,6 +1195,100 @@ class SeamlessProblemSolverApp {
     if (templates[templateKey]) {
       this.builderNodes = JSON.parse(JSON.stringify(templates[templateKey]));
       this.renderBuilderNodes();
+    }
+  }
+
+  // --- Quick Text/Script Auto-Flowchart Helper Methods ---
+  setBuilderMode(mode) {
+    this.builderMode = mode;
+    const formCont = document.getElementById('builder-form-container');
+    const scriptCont = document.getElementById('builder-script-container');
+    const tabForm = document.getElementById('tab-builder-form');
+    const tabScript = document.getElementById('tab-builder-script');
+
+    if (mode === 'script') {
+      if (formCont) formCont.classList.add('hidden');
+      if (scriptCont) scriptCont.classList.remove('hidden');
+      if (tabScript) tabScript.className = 'flex-1 py-2 px-3 rounded-xl text-xs font-bold bg-primary text-on-primary shadow-sm flex items-center justify-center gap-1.5 transition-all';
+      if (tabForm) tabForm.className = 'flex-1 py-2 px-3 rounded-xl text-xs font-bold text-on-surface-variant hover:text-primary flex items-center justify-center gap-1.5 transition-all';
+    } else {
+      if (formCont) formCont.classList.remove('hidden');
+      if (scriptCont) scriptCont.classList.add('hidden');
+      if (tabForm) tabForm.className = 'flex-1 py-2 px-3 rounded-xl text-xs font-bold bg-primary text-on-primary shadow-sm flex items-center justify-center gap-1.5 transition-all';
+      if (tabScript) tabScript.className = 'flex-1 py-2 px-3 rounded-xl text-xs font-bold text-on-surface-variant hover:text-primary flex items-center justify-center gap-1.5 transition-all';
+    }
+  }
+
+  insertQuickScriptSample() {
+    const textarea = document.getElementById('builder-script-input');
+    if (textarea) {
+      textarea.value = `# Keputusan Beli Kopi Mahal
+node_start: Apakah saldo cukup untuk beli kopi 50rb?
+  - Saldo Cukup -> node_check
+  - Saldo Pas-pasan -> res_hemat
+
+node_check: Apakah ini lapar mata atau butuh fokus?
+  - Butuh Fokus Kerjaan -> res_beli
+  - Lapar Mata Saja -> res_hemat
+
+res_beli: [HASIL] Beli Kopi & Selesaikan Tugas
+  Pesan: Nikmati kopimu sambil menyelesaikan tugas utama!
+  Saran: Fokus 1 jam tanpa distraksi HP.
+
+res_hemat: [HASIL] Hemat & Seduh Kopi Rumah
+  Pesan: Keputusan keuangan yang sangat bijak!
+  Saran: Tabung 50rb untuk tujuan jangka panjang.`;
+    }
+  }
+
+  parseQuickScriptToBuilder() {
+    const textarea = document.getElementById('builder-script-input');
+    const titleInput = document.getElementById('builder-title');
+
+    const scriptText = textarea ? textarea.value.trim() : '';
+    if (!scriptText) {
+      alert(this.currentLang === 'id' ? 'Silakan isi teks script / panah `->` terlebih dahulu!' : 'Please enter script text / arrow notation first!');
+      return;
+    }
+
+    const defaultTitle = (titleInput && titleInput.value.trim()) || 'Custom Flowchart Script';
+    const parsedFlow = this.scriptParser.parseScript(scriptText, defaultTitle);
+
+    if (parsedFlow && parsedFlow.nodes) {
+      if (titleInput && parsedFlow.title_id) {
+        titleInput.value = parsedFlow.title_id;
+      }
+
+      // Convert parsed nodes into builderNodes format
+      const newBuilderNodes = [];
+      Object.keys(parsedFlow.nodes).forEach(id => {
+        const n = parsedFlow.nodes[id];
+        newBuilderNodes.push({
+          id: n.id,
+          isResult: !!n.isResult,
+          title_id: n.title_id || n.title || 'Hasil',
+          title_en: n.title_en || n.title || 'Result',
+          q_id: n.q_id || n.q || 'Pertanyaan?',
+          q_en: n.q_en || n.q || 'Question?',
+          sub_id: n.sub_id || '',
+          sub_en: n.sub_en || '',
+          msg_id: n.msg_id || '',
+          msg_en: n.msg_en || '',
+          adv_id: n.adv_id || '',
+          adv_en: n.adv_en || '',
+          options: (n.options || []).map(opt => ({
+            text_id: opt.text_id || opt.text || 'Opsi',
+            text_en: opt.text_en || opt.text || 'Option',
+            targetId: opt.next || opt.targetId,
+            btnStyle: opt.btnStyle || 'btn-primary'
+          }))
+        });
+      });
+
+      this.builderNodes = newBuilderNodes;
+      this.setBuilderMode('form');
+      this.renderBuilderNodes();
+      alert(this.currentLang === 'id' ? '✨ Script berhasil diparse! Semua node & tombol keputusan otomatis dibuat!' : '✨ Script successfully parsed! All nodes & decision buttons created!');
     }
   }
 

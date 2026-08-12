@@ -282,6 +282,381 @@ const adminFlowcharts = [
     }
   },
   {
+    id: "comm-ex-chat",
+    title_id: "Harus Balas Chat Mantan Jam 2 Pagi?",
+    title_en: "Should You Reply to Your Ex at 2 AM?",
+    category: "humor",
+    author: "Warga Netizen",
+    isAdmin: true,
+    likes: 890,
+    plays: 3420,
+    desc_id: "Diagram penyelamat harga diri dari kebodohan emosional jam 2 pagi.",
+    desc_en: "Self-respect savior flowchart from 2 AM emotional overthinking.",
+    startNode: "q1",
+    nodes: {
+      q1: {
+        tag_id: "Jam 2 Pagi Check", tag_en: "2 AM Check",
+        q_id: "Mantan nge-P atau nge-chat 'kamu belum tidur?' jam 2 pagi?",
+        q_en: "Did your ex text 'you awake?' at 2 AM?",
+        options: [
+          { text_id: "YA, BARU AJA CHAT", text_en: "YES, JUST TEXTED", next: "q2", btnStyle: "btn-primary" },
+          { text_id: "GAK, CUMA KANGEN aja", text_en: "NO, JUST MISS THEM", next: "res_sleep", btnStyle: "btn-secondary" }
+        ]
+      },
+      q2: {
+        tag_id: "Cek Kesadaran", tag_en: "Sobriety Check",
+        q_id: "Kamu lagi kesepian atau belum tidur karena main HP?",
+        q_en: "Are you just lonely or doomscrolling?",
+        options: [
+          { text_id: "KESEPIAN BANGET", text_en: "SUPER LONELY", next: "q3", btnStyle: "btn-primary" },
+          { text_id: "MAIN HP DOANG", text_en: "DOOMSCROLLING", next: "res_sleep", btnStyle: "btn-secondary" }
+        ]
+      },
+      q3: {
+        tag_id: "Memori Masa Lalu", tag_en: "Past Memory Check",
+        q_id: "Ingat gak kenapa dulu kalian putus?",
+        q_en: "Remember why you broke up in the first place?",
+        options: [
+          { text_id: "INGAT BANGET (DISAKITI)", text_en: "REMEMBER (GOT HURT)", next: "res_nobalas", btnStyle: "btn-primary" },
+          { text_id: "LUPA / LUPA DIRI", text_en: "FORGOT", next: "res_nobalas", btnStyle: "btn-secondary" }
+        ]
+      },
+      res_sleep: {
+        isResult: true,
+        title_id: "TIDUR SEKARANG! MINUM AIR PUTIH",
+        title_en: "GO TO SLEEP! DRINK WATER",
+        msg_id: "\"Rasa kangen jam 2 pagi itu cuma hormon melatonin yang kurang. Besok pagi juga hilang.\"",
+        msg_en: "\"2 AM longing is just lack of sleep. Tomorrow morning it vanishes.\"",
+        adv_id: "Matikan paket data, kunci HP, dan tidur. Harga dirimu mahal!",
+        adv_en: "Turn off Wi-Fi, lock your phone, and sleep. Protect your dignity!"
+      },
+      res_nobalas: {
+        isResult: true,
+        title_id: "DILARANG BALAS! ARCHIVE CHAT-NYA",
+        title_en: "DO NOT REPLY! ARCHIVE THE CHAT",
+        msg_id: "\"Jangan masuk ke lubang yang sama dua kali kecuali kamu sengaja ingin jatuh.\"",
+        msg_en: "\"Don't enter the same hole twice unless you want to fall on purpose.\"",
+        adv_id: "Balas besok jam 10 pagi kalau kamu memang masih waras. Sekarang TIDUR!",
+        adv_en: "Reply tomorrow at 10 AM if you're still sane. Right now SLEEP!"
+      }
+    }
+  },
+  {
+    id: "comm-resign",
+    title_id: "Apakah Saya Harus Resign Hari Ini?",
+    title_en: "Should I Resign Today?",
+    category: "work",
+    author: "Karyawan Buruh Ketik",
+    isAdmin: true,
+    likes: 1240,
+    plays: 4890,
+    desc_id: "Panduan emosional karyawan kantoran saat ditumpuk deadline 5 orang.",
+    desc_en: "Emotional survival guide for corporate employees facing 5-people deadlines.",
+    startNode: "q1",
+    nodes: {
+      q1: {
+        tag_id: "Cek Tabungan", tag_en: "Savings Check",
+        q_id: "Apakah saldo tabunganmu cukup untuk makan 6 bulan tanpa kerja?",
+        q_en: "Do you have 6 months emergency savings without a job?",
+        options: [
+          { text_id: "ADA / CUKUP", text_en: "YES, ENOUGH", next: "q2", btnStyle: "btn-primary" },
+          { text_id: "SALDO RP 50 RIBU", text_en: "SAVINGS $5 ONLY", next: "res_kerja", btnStyle: "btn-secondary" }
+        ]
+      },
+      q2: {
+        tag_id: "Cek Job Offer", tag_en: "Job Offer Check",
+        q_id: "Apakah sudah dapat tawaran kerja (Offer Letter) dari perusahaan lain?",
+        q_en: "Do you already have a signed Offer Letter from another company?",
+        options: [
+          { text_id: "SUDAH TANDA TANGAN", text_en: "SIGNED OFFER", next: "res_resign", btnStyle: "btn-primary" },
+          { text_id: "BELUM, BARU ANGAN-ANGAN", text_en: "NOT YET, JUST WISH", next: "res_sabar", btnStyle: "btn-secondary" }
+        ]
+      },
+      res_kerja: {
+        isResult: true,
+        title_id: "SENYUM DULU & KERJAKAN DEADLINE",
+        title_en: "SMILE & BACK TO DEADLINE",
+        msg_id: "\"Cicilan dan perut yang lapar tidak peduli pada emosi mendadakmu saat revisi ke-10.\"",
+        msg_en: "\"Bills and hunger do not care about your emotional reaction to the 10th revision.\"",
+        adv_id: "Tarik napas, kerjakan pelan-pelan, dan mulai sebar CV malam nanti.",
+        adv_en: "Take a deep breath, do it step by step, and start sending CVs tonight."
+      },
+      res_sabar: {
+        isResult: true,
+        title_id: "TUNGGU DULU, SEBAR CV DULU!",
+        title_en: "HOLD ON, SEND CVS FIRST!",
+        msg_id: "\"Resign tanpa persiapan adalah jalan pintas menuju kecemasan keuangan baru.\"",
+        msg_en: "\"Resigning without a backup plan is a shortcut to new financial anxiety.\"",
+        adv_id: "Lamarlah pekerjaan baru diam-diam dulu, baru ajukan 1-month notice!",
+        adv_en: "Apply quietly for new jobs first, then submit your 1-month notice!"
+      },
+      res_resign: {
+        isResult: true,
+        title_id: "KIRIM SURAT RESIGN SEKARANG!",
+        title_en: "SUBMIT RESIGNATION LETTER NOW!",
+        msg_id: "\"Selamat atas keberanianmu melangkah ke babak baru kehidupan!\"",
+        msg_en: "\"Congratulations on your courage to step into a new life chapter!\"",
+        adv_id: "Ketik surat 1-month notice dengan sopan & jaga hubungan baik profesional.",
+        adv_en: "Write polite 1-month notice letter & maintain good professional networks."
+      }
+    }
+  },
+  {
+    id: "comm-boba",
+    title_id: "Beli Kopi Boba/Coffee Shop 50rb Tiap Hari?",
+    title_en: "Buy $5 Coffee/Boba Every Single Day?",
+    category: "humor",
+    author: "Pakar Finansial Kopi",
+    isAdmin: true,
+    likes: 670,
+    plays: 2890,
+    desc_id: "Kalkulator emosional pengeluaran kopi kekinian vs impian punya rumah.",
+    desc_en: "Emotional calculator comparing daily fancy coffee vs house savings.",
+    startNode: "q1",
+    nodes: {
+      q1: {
+        tag_id: "Cek Tujuan", tag_en: "Goal Check",
+        q_id: "Apakah kamu memang butuh kafein untuk tidak tertidur saat meeting?",
+        q_en: "Do you genuinely need caffeine not to fall asleep in meetings?",
+        options: [
+          { text_id: "BUTUH KAFEIN NYATA", text_en: "NEED CAFFEINE", next: "q2", btnStyle: "btn-primary" },
+          { text_id: "CUMA INGIN PEGANG GELASNYA", text_en: "JUST FOR THE AESTHETIC", next: "res_seduh", btnStyle: "btn-secondary" }
+        ]
+      },
+      q2: {
+        tag_id: "Cek Dompet", tag_en: "Wallet Check",
+        q_id: "Apakah anggaran ngopi bulananmu melebihi bayar kontrakan/kos?",
+        q_en: "Does your monthly coffee budget exceed your rent?",
+        options: [
+          { text_id: "YA, BOROS BANGET", text_en: "YES, TOO EXPENSIVE", next: "res_seduh", btnStyle: "btn-primary" },
+          { text_id: "ENGGAK, MASIH AMAN", text_en: "NO, STILL SAFE", next: "res_beli", btnStyle: "btn-secondary" }
+        ]
+      },
+      res_seduh: {
+        isResult: true,
+        title_id: "SEDUH KOPI SACHET / RUMAHAN!",
+        title_en: "BREW INSTANT COFFEE AT HOME!",
+        msg_id: "\"Rp 50.000 x 30 hari = Rp 1.500.000 sebulan hanya untuk air gula berkafein.\"",
+        msg_en: "\"$5 x 30 days = $150 a month just for fancy caffeinated sugar water.\"",
+        adv_id: "Beli tumbler keren dan buat kopi racikan sendiri. Hemat jutaan setahun!",
+        adv_en: "Buy a cool tumbler and brew your own coffee. Save hundreds a year!"
+      },
+      res_beli: {
+        isResult: true,
+        title_id: "NIKMATI KOPIMU TANPA RASA BERSALAH",
+        title_en: "ENJOY YOUR COFFEE GUILT-FREE",
+        msg_id: "\"Jika finansialmu sehat, kebahagiaan kecil 50rb untuk mood kerja adalah investasi valid.\"",
+        msg_en: "\"If your finances are healthy, a small daily joy boosting work mood is valid.\"",
+        adv_id: "Pesan tanpa gula berlebih dan selesaikan tugas utamamu hari ini!",
+        adv_en: "Order low sugar and crush your daily goals!"
+      }
+    }
+  },
+  {
+    id: "comm-fridge",
+    title_id: "Buka Kulkas Lagi (Padahal 5 Menit Lalu Cek)?",
+    title_en: "Check Refrigerator Again (Checked 5 Mins Ago)?",
+    category: "humor",
+    author: "Tim Begadang Malam",
+    isAdmin: true,
+    likes: 940,
+    plays: 3810,
+    desc_id: "Fenomena ajaib membuka pintu kulkas berharap ada makanan ajaib yang mendadak muncul.",
+    desc_en: "The magical phenomenon of reopening the fridge hoping new food spawned.",
+    startNode: "q1",
+    nodes: {
+      q1: {
+        tag_id: "Kulkas Radar", tag_en: "Fridge Radar",
+        q_id: "Apakah kamu baru saja buka kulkas 5 menit yang lalu dan kosong?",
+        q_en: "Did you just open the fridge 5 minutes ago and it was empty?",
+        options: [
+          { text_id: "YA, TADI KOSONG", text_en: "YES, WAS EMPTY", next: "q2", btnStyle: "btn-primary" },
+          { text_id: "INSPEKSI PERTAMA", text_en: "FIRST INSPECTION", next: "res_makan", btnStyle: "btn-secondary" }
+        ]
+      },
+      q2: {
+        tag_id: "Harapan Ajaib", tag_en: "Miracle Expectation",
+        q_id: "Apakah kamu berharap peri kulkas mendadak menaruh pizza hangat di sana?",
+        q_en: "Are you expecting a fridge fairy to magically place fresh pizza inside?",
+        options: [
+          { text_id: "HOOH, SIAPA TAHU ADA", text_en: "MAYBE THERE IS", next: "res_tutup", btnStyle: "btn-primary" },
+          { text_id: "TIDAK, CUMA BOSAN", text_en: "NO, JUST BORED", next: "res_tutup", btnStyle: "btn-secondary" }
+        ]
+      },
+      res_makan: {
+        isResult: true,
+        title_id: "AMBIL MAKANAN SECUKUPNYA",
+        title_en: "TAKE A MODERATE SNACK",
+        msg_id: "\"Selamat! Kamu menemukan makanan di inspeksi pertama.\"",
+        msg_en: "\"Congrats! You found food on your first inspection.\"",
+        adv_id: "Makan perlahan dan jangan lupa minum air putih.",
+        adv_en: "Eat slowly and don't forget to drink water."
+      },
+      res_tutup: {
+        isResult: true,
+        title_id: "TUTUP KULKAS & MINUM AIR!",
+        title_en: "CLOSE FRIDGE & DRINK WATER!",
+        msg_id: "\"Standar makanan di kulkas tidak akan berubah dalam 5 menit kecuali kamu belanja.\"",
+        msg_en: "\"Fridge inventory will not magically upgrade in 5 minutes unless you shop.\"",
+        adv_id: "Tutup kulkas, minum 1 gelas air dingin, dan kembali beraktivitas!",
+        adv_en: "Close the fridge, drink 1 glass of cold water, and go back to your work!"
+      }
+    }
+  },
+  {
+    id: "comm-hunger",
+    title_id: "Lapar Beneran vs Lapar Emosional/Bosan?",
+    title_en: "Real Hunger vs Emotional/Boredom Hunger?",
+    category: "stoic",
+    author: "Nutrisi Mindful",
+    isAdmin: true,
+    likes: 780,
+    plays: 3120,
+    desc_id: "Tes stoik 60 detik membedakan lapar perut fisik vs lapar emosional stres.",
+    desc_en: "60-second Stoic test separating physical stomach hunger from emotional stress.",
+    startNode: "q1",
+    nodes: {
+      q1: {
+        tag_id: "Tes Apel", tag_en: "Apple Test",
+        q_id: "Apakah kamu bersedia makan 1 buah apel / makanan polos sekarang?",
+        q_en: "Would you willingly eat a plain apple right now?",
+        options: [
+          { text_id: "MAU BANGET (LAPAR)", text_en: "YES, WILLING (HUNGRY)", next: "res_real", btnStyle: "btn-primary" },
+          { text_id: "GAK, CUMA MAU CHIPS/PIZZA", text_en: "NO, ONLY CHIPS/PIZZA", next: "q2", btnStyle: "btn-secondary" }
+        ]
+      },
+      q2: {
+        tag_id: "Cek Emosi", tag_en: "Emotion Check",
+        q_id: "Apakah kamu sedang stres, cemas, atau bosan dengan pekerjaanmu?",
+        q_en: "Are you stressed, anxious, or bored with your work?",
+        options: [
+          { text_id: "YA, STRES/BOSAN", text_en: "YES, STRESSED/BORED", next: "res_emo", btnStyle: "btn-primary" },
+          { text_id: "ENGGAK, SANTAI", text_en: "NO, CHILL", next: "res_real", btnStyle: "btn-secondary" }
+        ]
+      },
+      res_real: {
+        isResult: true,
+        title_id: "LAPAR FISIK REALS - MAKANLAH!",
+        title_en: "REAL PHYSICAL HUNGER - EAT!",
+        msg_id: "\"Tubuhmu membutuhkan bahan bakar nutrisi nyata. Berikan makanan bergizi.\"",
+        msg_en: "\"Your body needs real nutritional fuel. Nourish it properly.\"",
+        adv_id: "Nikmati makanan bernutrisi seimbang dengan penuh kesadaran (mindful eating).",
+        adv_en: "Enjoy balanced nutrition with full mindfulness."
+      },
+      res_emo: {
+        isResult: true,
+        title_id: "LAPAR EMOSIONAL - JANGAN MAKAN!",
+        title_en: "EMOTIONAL HUNGER - DO NOT EAT!",
+        msg_id: "\"Kamu bukan lapar perut, tapi sedang mencari dopamin instan dari rasa stres/bosan.\"",
+        msg_en: "\"You aren't stomach hungry; you're seeking instant dopamine for stress/boredom.\"",
+        adv_id: "Jalan kaki 5 menit, tarik napas 4-7-8, atau minum 1 gelas air hangat.",
+        adv_en: "Take a 5-minute walk, 4-7-8 breathing, or drink a warm glass of water."
+      }
+    }
+  },
+  {
+    id: "comm-olshop",
+    title_id: "Beli Barang Diskon Olshop Yang Gak Butuh?",
+    title_en: "Buy Unneeded Online Sale Items?",
+    category: "humor",
+    author: "Korban Checkout 11.11",
+    isAdmin: true,
+    likes: 1120,
+    plays: 4210,
+    desc_id: "Penyelamat dompet saat ada diskon besar tapi barangnya tidak terpakai.",
+    desc_en: "Wallet saver when huge sales tempt you with useless items.",
+    startNode: "q1",
+    nodes: {
+      q1: {
+        tag_id: "Cek Kebutuhan", tag_en: "Need Check",
+        q_id: "Apakah barang ini ada di daftar kebutuhanmu SEBELUM diskon muncul?",
+        q_en: "Was this item on your need list BEFORE the sale started?",
+        options: [
+          { text_id: "SUDAH DICARI DARI DULU", text_en: "SEARCHED LONG AGO", next: "q2", btnStyle: "btn-primary" },
+          { text_id: "BARU LIHAT KARENA DISKON", text_en: "JUST SAW SALE BANNER", next: "res_hapus", btnStyle: "btn-secondary" }
+        ]
+      },
+      q2: {
+        tag_id: "Tes 48 Jam", tag_en: "48-Hour Rule",
+        q_id: "Bisakah kamu menunggu 48 jam di keranjang sebelum checkout?",
+        q_en: "Can you wait 48 hours in cart before checkout?",
+        options: [
+          { text_id: "BISA TUNGGU 48 JAM", text_en: "CAN WAIT 48 HOURS", next: "res_beli", btnStyle: "btn-primary" },
+          { text_id: "MAU CHECKOUT SEKARANG", text_en: "CHECKOUT NOW", next: "res_hapus", btnStyle: "btn-secondary" }
+        ]
+      },
+      res_hapus: {
+        isResult: true,
+        title_id: "HAPUS DARI KERANJANG SEKARANG!",
+        title_en: "REMOVE FROM CART NOW!",
+        msg_id: "\"Kamu tidak menghemat 50%, kamu menghamburkan 100% uangmu untuk barang tak berguna.\"",
+        msg_en: "\"You aren't saving 50%; you're wasting 100% of your money on useless stuff.\"",
+        adv_id: "Tutup aplikasi olshop. Tabung uang itu untuk dana darurat!",
+        adv_en: "Close the shopping app. Put that money into emergency savings!"
+      },
+      res_beli: {
+        isResult: true,
+        title_id: "CHECKOUT DENGAN BIJAK",
+        title_en: "CHECKOUT WISELY",
+        msg_id: "\"Ini adalah pembelian terencana yang memang kamu butuhkan dan sudah dievaluasi.\"",
+        msg_en: "\"This is a planned purchase that you truly need and evaluated.\"",
+        adv_id: "Gunakan voucher diskon & nikmati barang barumu!",
+        adv_en: "Apply discount vouchers & enjoy your new item!"
+      }
+    }
+  },
+  {
+    id: "comm-doomscroll",
+    title_id: "Tidur Cepat vs Doomscrolling TikTok 3 Jam?",
+    title_en: "Sleep Early vs Doomscrolling 3 Hours?",
+    category: "humor",
+    author: "Generasi HP Malam",
+    isAdmin: true,
+    likes: 1530,
+    plays: 5920,
+    desc_id: "Diagram dilema malam hari antara istirahat cukup atau scroll video pendek tanpa henti.",
+    desc_en: "Nightly dilemma flowchart between proper rest vs endless short video scrolling.",
+    startNode: "q1",
+    nodes: {
+      q1: {
+        tag_id: "Cek Alarm", tag_en: "Alarm Check",
+        q_id: "Besok harus bangun pagi untuk kerja/kuliah jam 6 pagi?",
+        q_en: "Do you have to wake up early at 6 AM tomorrow for work/school?",
+        options: [
+          { text_id: "HARUS BANGUN PAGI", text_en: "MUST WAKE UP EARLY", next: "q2", btnStyle: "btn-primary" },
+          { text_id: "BESOK LIBUR", text_en: "TOMORROW IS OFF", next: "res_scroll", btnStyle: "btn-secondary" }
+        ]
+      },
+      q2: {
+        tag_id: "Mata Lelah", tag_en: "Tired Eyes",
+        q_id: "Apakah matamu sudah perih dan kamu menguap berkali-kali?",
+        q_en: "Are your eyes stinging and are you yawning repeatedly?",
+        options: [
+          { text_id: "MATA SUDAH PERIH", text_en: "EYES ARE STINGING", next: "res_tidur", btnStyle: "btn-primary" },
+          { text_id: "MASIH PENASARAN REELS", text_en: "STILL WANT REELS", next: "res_tidur", btnStyle: "btn-secondary" }
+        ]
+      },
+      res_tidur: {
+        isResult: true,
+        title_id: "TARUH HP DI MEJA & TIDUR!",
+        title_en: "PUT PHONE DOWN & SLEEP!",
+        msg_id: "\"Algoritma TikTok dibuat untuk mencuri tidurmu. Tubuhmu butuh pemulihan 7-8 jam.\"",
+        msg_en: "\"TikTok algorithms are built to steal your sleep. Your body needs 7-8h recovery.\"",
+        adv_id: "Aktifkan Mode Jangan Ganggu (DND), taruh HP di luar jangkauan kasur, dan merem!",
+        adv_en: "Turn on Do Not Disturb (DND), place phone out of bed reach, and sleep!"
+      },
+      res_scroll: {
+        isResult: true,
+        title_id: "BATASI 15 MENIT LALU ISTIRAHAT",
+        title_en: "CAP AT 15 MINS THEN REST",
+        msg_id: "\"Meskipun besok libur, pola tidur yang hancur akan merusak kesehatan batinmu.\"",
+        msg_en: "\"Even if tomorrow is off, ruined sleep cycles damage your mental health.\"",
+        adv_id: "Pasang timer 15 menit. Saat timer berbunyi, langsung matikan HP!",
+        adv_en: "Set 15-min timer. When it rings, immediately lock your phone!"
+      }
+    }
+  },
+  {
     id: "admin-flow-lesson",
     title_id: "Pelajaran Singkat Flowchart (Meta Meme)",
     title_en: "A Brief Lesson in Flow Charts",
@@ -1696,36 +2071,48 @@ res_hemat: [HASIL] Hemat & Seduh Kopi Rumah
     }
   }
 
-  addBuilderNode() {
+  addBuilderNode(isResultNode = false) {
     const newNodeId = 'node_' + Date.now().toString(36) + Math.random().toString(36).substr(2, 3);
-    const isResult = this.builderNodes.length >= 2 && this.builderNodes.length % 2 === 1;
-    
-    if (isResult) {
-      this.builderNodes.push({
-        id: newNodeId,
-        isResult: true,
-        title_id: 'Hasil Kesimpulan Baru',
-        title_en: 'New Conclusion Result',
-        msg_id: 'Pesan filosofis kesimpulan flowchart kamu.',
-        msg_en: 'Philosophical message of your flowchart conclusion.',
-        adv_id: 'Saran aksi nyata.',
-        adv_en: 'Action advice.'
-      });
-    } else {
-      const defaultTarget = this.builderNodes[0] ? this.builderNodes[0].id : newNodeId;
-      this.builderNodes.push({
-        id: newNodeId,
-        isResult: false,
-        q_id: 'Pertanyaan / Cabang Baru?',
-        q_en: 'New Question / Branch?',
-        sub_id: 'Deskripsi singkat...',
-        sub_en: 'Short description...',
-        options: [
-          { text_id: 'Ya, Lanjut', text_en: 'Yes, Proceed', targetId: defaultTarget, btnStyle: 'btn-primary' },
-          { text_id: 'Tidak, Batal', text_en: 'No, Cancel', targetId: defaultTarget, btnStyle: 'btn-secondary' }
-        ]
+    const lastNode = this.builderNodes[this.builderNodes.length - 1];
+
+    const newNode = isResultNode ? {
+      id: newNodeId,
+      isResult: true,
+      title_id: 'Hasil Kesimpulan Baru',
+      title_en: 'New Conclusion Result',
+      msg_id: 'Pesan filosofis kesimpulan flowchart kamu.',
+      msg_en: 'Philosophical message of your flowchart conclusion.',
+      adv_id: 'Saran aksi nyata.',
+      adv_en: 'Action advice.',
+      x: lastNode ? (lastNode.x || 40) + 310 : 40,
+      y: lastNode ? (lastNode.y || 80) : 80
+    } : {
+      id: newNodeId,
+      isResult: false,
+      q_id: 'Pertanyaan / Cabang Baru?',
+      q_en: 'New Question / Branch?',
+      sub_id: 'Deskripsi singkat...',
+      sub_en: 'Short description...',
+      x: lastNode ? (lastNode.x || 40) + 310 : 40,
+      y: lastNode ? (lastNode.y || 80) : 80,
+      options: [
+        { text_id: 'Ya, Lanjut', text_en: 'Yes, Proceed', targetId: newNodeId, btnStyle: 'btn-primary' },
+        { text_id: 'Tidak, Batal', text_en: 'No, Cancel', targetId: newNodeId, btnStyle: 'btn-secondary' }
+      ]
+    };
+
+    // Auto-link previous question node to this new node!
+    if (lastNode && !lastNode.isResult) {
+      if (!lastNode.options) lastNode.options = [];
+      lastNode.options.push({
+        text_id: `Lanjut ke #${newNodeId.substr(-4)}`,
+        text_en: `Proceed to #${newNodeId.substr(-4)}`,
+        targetId: newNodeId,
+        btnStyle: 'btn-primary'
       });
     }
+
+    this.builderNodes.push(newNode);
     this.renderBuilderNodes();
   }
 

@@ -410,15 +410,34 @@
         <hr class="border-outline-variant/20" />
 
         <!-- Builder Mode Switcher Tabs -->
-        <div class="flex items-center gap-2 bg-surface-container p-1 rounded-2xl border border-primary/20">
-          <button id="tab-builder-form" type="button" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold bg-primary text-on-primary shadow-sm flex items-center justify-center gap-1.5 transition-all" onclick="app.setBuilderMode('form')">
+        <div class="flex items-center gap-2 bg-surface-container p-1.5 rounded-2xl border border-primary/20 flex-wrap sm:flex-nowrap">
+          <button id="tab-builder-canvas" type="button" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold bg-primary text-on-primary shadow-sm flex items-center justify-center gap-1.5 transition-all" onclick="app.setBuilderMode('canvas')">
+            <span class="material-symbols-outlined text-base">drag_pan</span>
+            <span>🎨 Board Drag & Drop Visual</span>
+          </button>
+          <button id="tab-builder-form" type="button" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold text-on-surface-variant hover:text-primary flex items-center justify-center gap-1.5 transition-all" onclick="app.setBuilderMode('form')">
             <span class="material-symbols-outlined text-base">schema</span>
-            <span>Detail Form Editor</span>
+            <span>Form Editor</span>
           </button>
           <button id="tab-builder-script" type="button" class="flex-1 py-2 px-3 rounded-xl text-xs font-bold text-on-surface-variant hover:text-primary flex items-center justify-center gap-1.5 transition-all" onclick="app.setBuilderMode('script')">
             <span class="material-symbols-outlined text-base">auto_fix_high</span>
-            <span>⚡ Quick Text/Arrow Auto-Detect</span>
+            <span>⚡ Teks Script Panah</span>
           </button>
+        </div>
+
+        <!-- Mode 1 Container: Interactive Drag-and-Drop Studio Canvas -->
+        <div id="builder-canvas-container" class="space-y-3">
+          <div class="flex justify-between items-center text-xs font-bold text-emerald-400">
+            <span class="flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm">touch_app</span>
+              <span>Geser Kotak Diagram, Ketik Teks Langsung, Hubungkan Panah!</span>
+            </span>
+            <span class="text-slate-400 font-normal">Tarik node atau klik (+) untuk buat cabang</span>
+          </div>
+
+          <div id="wysiwyg-canvas-mount" class="w-full">
+            <!-- Rendered dynamically by InteractiveCanvasEditor -->
+          </div>
         </div>
 
         <!-- Mode 2 Container: Quick Text / Arrow Notation Editor -->

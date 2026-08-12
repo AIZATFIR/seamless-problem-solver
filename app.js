@@ -5,6 +5,7 @@ import { AudioAmbientEngine } from './src/AudioAmbientEngine.js';
 import { FlowchartEngine } from './src/FlowchartEngine.js';
 import { FlowchartGraphRenderer } from './src/FlowchartGraphRenderer.js';
 import { QuickScriptFlowParser } from './src/QuickScriptFlowParser.js';
+import { InteractiveCanvasEditor } from './src/InteractiveCanvasEditor.js';
 
 const translations = {
   id: {
@@ -643,8 +644,13 @@ class SeamlessProblemSolverApp {
     this.flowEngine = new FlowchartEngine(this.activeFlowchart);
     this.graphRenderer = new FlowchartGraphRenderer();
     this.scriptParser = new QuickScriptFlowParser();
-    this.playerViewMode = 'card'; // 'card' or 'graph'
-    this.builderMode = 'form';    // 'form' or 'script'
+    this.canvasEditor = new InteractiveCanvasEditor({
+      onChange: (nodes) => {
+        this.builderNodes = nodes;
+      }
+    });
+    this.playerViewMode = 'card';   // 'card' or 'graph'
+    this.builderMode = 'canvas';    // 'canvas', 'form', or 'script'
     this.pendingAIImageBase64 = null;
 
     // Audio & Breathing
@@ -1459,6 +1465,7 @@ res_hemat: [HASIL] Hemat & Seduh Kopi Rumah
     modal.classList.remove('opacity-0', 'pointer-events-none');
     card.classList.remove('scale-95');
     card.classList.add('scale-100');
+    this.setBuilderMode(this.builderMode || 'canvas');
     this.renderBuilderNodes();
   }
 
@@ -1471,6 +1478,11 @@ res_hemat: [HASIL] Hemat & Seduh Kopi Rumah
   }
 
   renderBuilderNodes() {
+    // If in canvas mode, sync to canvas editor
+    if (this.builderMode === 'canvas') {
+      this.renderCanvasStudio();
+    }
+
     const list = document.getElementById('builder-nodes-list');
     if (!list) return;
 

@@ -176,8 +176,8 @@ export class InteractiveCanvasEditor {
 
     // Event Listeners for Dragging & Input Changes
     card.addEventListener('mousedown', (e) => {
-      // Don't drag if clicking input, textarea, select, button
-      if (['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON', 'SPAN', 'LABEL'].includes(e.target.tagName)) return;
+      // Don't drag if clicking input, textarea, select, button, label, etc.
+      if (e.target.closest('input, textarea, select, button, label, option')) return;
       this.draggingNode = node;
       const rect = card.getBoundingClientRect();
       this.dragOffset = {
@@ -228,7 +228,6 @@ export class InteractiveCanvasEditor {
     if (!svgGroup || !this.container) return;
 
     let svgHTML = '';
-    const containerRect = this.container.getBoundingClientRect();
 
     this.nodes.forEach(node => {
       if (node.isResult || !node.options) return;
@@ -240,7 +239,8 @@ export class InteractiveCanvasEditor {
       const sourceY = (node.y || 40) + 80;  // Center height
 
       node.options.forEach(opt => {
-        const targetNode = this.nodes.find(n => n.id === opt.targetId);
+        const targetId = opt.targetId || opt.next;
+        const targetNode = this.nodes.find(n => n.id === targetId);
         if (!targetNode) return;
 
         const targetX = targetNode.x || 40; // Left edge

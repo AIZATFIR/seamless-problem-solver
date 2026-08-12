@@ -841,32 +841,30 @@ class SeamlessProblemSolverApp {
     this.activeSection = sectionName;
     const secPlayer = document.getElementById('section-player');
     const secCommunity = document.getElementById('section-community');
-    
+    const secStudio = document.getElementById('sec-studio');
+
     const tabHome = document.getElementById('nav-btn-home');
     const tabComm = document.getElementById('nav-btn-community');
+    const tabStudio = document.getElementById('nav-btn-builder');
+
+    const activeTabClass = 'nav-tab-btn active-tab px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all text-primary';
+    const inactiveTabClass = 'nav-tab-btn px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all text-on-surface-variant hover:text-primary';
+
+    if (secPlayer) secPlayer.classList.toggle('hidden', sectionName !== 'player');
+    if (secCommunity) secCommunity.classList.toggle('hidden', sectionName !== 'community');
+    if (secStudio) secStudio.classList.toggle('hidden', sectionName !== 'studio');
+
+    if (tabHome) tabHome.className = sectionName === 'player' ? activeTabClass : inactiveTabClass;
+    if (tabComm) tabComm.className = sectionName === 'community' ? activeTabClass : inactiveTabClass;
+    if (tabStudio) tabStudio.className = sectionName === 'studio' ? activeTabClass : inactiveTabClass;
 
     if (sectionName === 'player') {
-      secPlayer.classList.remove('hidden');
-      secCommunity.classList.add('hidden');
-
-      tabHome.classList.add('active-tab');
-      tabHome.classList.remove('text-on-surface-variant');
-      tabComm.classList.remove('active-tab');
-      tabComm.classList.add('text-on-surface-variant');
-
-      if (flowId) {
-        this.loadFlowchart(flowId);
-      }
-    } else {
-      secPlayer.classList.add('hidden');
-      secCommunity.classList.remove('hidden');
-
-      tabComm.classList.add('active-tab');
-      tabComm.classList.remove('text-on-surface-variant');
-      tabHome.classList.remove('active-tab');
-      tabHome.classList.add('text-on-surface-variant');
-
+      if (flowId) this.loadFlowchart(flowId);
+    } else if (sectionName === 'community') {
       this.renderCommunityGrid();
+    } else if (sectionName === 'studio') {
+      this.setBuilderMode(this.builderMode || 'canvas');
+      this.renderBuilderNodes();
     }
   }
 

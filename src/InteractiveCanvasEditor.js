@@ -1,6 +1,6 @@
 /**
  * InteractiveCanvasEditor.js - Visual Drag & Drop WYSIWYG Flowchart Board
- * Allows users to drag nodes, edit text inline, spawn connected nodes with (+), and connect options ("ini kmn ini kesitu").
+ * Miro/Figma-style visual diagram studio with floating toolbar, drag-and-drop cards, auto-layout tree, and live SVG arrows.
  */
 
 export class InteractiveCanvasEditor {
@@ -30,7 +30,30 @@ export class InteractiveCanvasEditor {
     this._ensurePositions();
 
     this.container.innerHTML = '';
-    this.container.className = 'relative w-full h-[520px] bg-slate-950/90 rounded-2xl border-2 border-emerald-500/30 overflow-hidden select-none shadow-2xl';
+    this.container.className = 'relative w-full min-h-[580px] bg-slate-950/95 rounded-3xl border-2 border-emerald-500/30 overflow-hidden select-none shadow-2xl flex flex-col';
+
+    // 1. Floating Diagram Studio Toolbar (Miro / Figma style)
+    const toolbar = document.createElement('div');
+    toolbar.className = 'absolute top-4 left-4 z-30 flex flex-wrap items-center gap-2 p-2 rounded-2xl bg-slate-900/90 border border-emerald-500/30 backdrop-blur-md shadow-xl';
+    toolbar.innerHTML = `
+      <button type="button" data-toolbar="add-question" class="px-3 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500 text-emerald-300 hover:text-slate-950 font-bold text-xs flex items-center gap-1.5 transition-all shadow-sm">
+        <span class="material-symbols-outlined text-sm">help</span>
+        <span>+ Node Pertanyaan</span>
+      </button>
+
+      <button type="button" data-toolbar="add-result" class="px-3 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500 text-amber-300 hover:text-slate-950 font-bold text-xs flex items-center gap-1.5 transition-all shadow-sm">
+        <span class="material-symbols-outlined text-sm">flag</span>
+        <span>+ Node Hasil</span>
+      </button>
+
+      <div class="h-4 w-px bg-white/20 mx-0.5"></div>
+
+      <button type="button" data-toolbar="auto-arrange" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs flex items-center gap-1.5 transition-all shadow-sm border border-white/10" title="Rapikan Tata Letak Diagram Otomatis">
+        <span class="material-symbols-outlined text-sm text-emerald-400">auto_fix_high</span>
+        <span>⚡ Rapikan Diagram</span>
+      </button>
+    `;
+    this.container.appendChild(toolbar);
 
     // SVG Connections Overlay Layer
     const svgOverlay = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -42,8 +65,8 @@ export class InteractiveCanvasEditor {
         <marker id="editorArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#10b981" />
         </marker>
-        <pattern id="editorGrid" width="24" height="24" patternUnits="userSpaceOnUse">
-          <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1" />
+        <pattern id="editorGrid" width="28" height="28" patternUnits="userSpaceOnUse">
+          <path d="M 28 0 L 0 0 0 28" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1" />
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill="url(#editorGrid)" />
@@ -53,7 +76,7 @@ export class InteractiveCanvasEditor {
 
     // Nodes Container Layer
     const nodesLayer = document.createElement('div');
-    nodesLayer.className = 'absolute inset-0 z-20 pointer-events-auto';
+    nodesLayer.className = 'absolute inset-0 z-20 pointer-events-auto overflow-auto';
     nodesLayer.id = 'canvas-nodes-layer';
     this.container.appendChild(nodesLayer);
 
@@ -65,6 +88,9 @@ export class InteractiveCanvasEditor {
 
     // Render SVG Arrows
     this._updateSVGConnections();
+
+    // Attach Toolbar Listener
+    toolbar.addEventListener('click', (e) => this._handleToolbarClick(e));
 
     // Global Listeners for Smooth Dragging
     window.removeEventListener('mousemove', this._onMouseMove);
@@ -81,8 +107,8 @@ export class InteractiveCanvasEditor {
         ? 'bg-amber-950/80 border-amber-500/50 text-amber-100 shadow-amber-950/50'
         : 'bg-slate-900/90 border-emerald-500/40 text-slate-100 shadow-emerald-950/50'
     } cursor-grab active:cursor-grabbing backdrop-blur-md`;
-    card.style.left = `${node.x || 40 + idx * 290}px`;
-    card.style.top = `${node.y || 40 + (idx % 3) * 140}px`;
+    card.style.left = `${node.x || 40 + idx * 300}px`;
+    card.style.top = `${node.y || 70 + (idx % 3) * 150}px`;
 
     // Card Header Controls
     const isResult = !!node.isResult;
@@ -248,14 +274,109 @@ export class InteractiveCanvasEditor {
 
         const dx = Math.max(40, (targetX - sourceX) / 2);
         const pathD = `M ${sourceX} ${sourceY} C ${sourceX + dx} ${sourceY}, ${targetX - dx} ${targetY}, ${targetX} ${targetY}`;
+        const label = opt.text_id || opt.text || 'Opsi';
 
         svgHTML += `
           <path d="${pathD}" fill="none" stroke="#10b981" stroke-width="2" marker-end="url(#editorArrow)" />
+          <text x="${(sourceX + targetX) / 2}" y="${(sourceY + targetY) / 2 - 6}" fill="#34d399" font-size="10" font-family="Inter, sans-serif" font-weight="700" text-anchor="middle" class="pointer-events-none">
+            ${this._escapeHtml(label.substr(0, 16))}
+          </text>
         `;
       });
     });
 
     svgGroup.innerHTML = svgHTML;
+  }
+
+  _handleToolbarClick(e) {
+    const btn = e.target.closest('[data-toolbar]');
+    if (!btn) return;
+
+    const action = btn.dataset.toolbar;
+
+    if (action === 'add-question') {
+      const newId = 'node_' + Date.now().toString(36);
+      this.nodes.push({
+        id: newId,
+        isResult: false,
+        q_id: 'Pertanyaan Baru?',
+        q_en: 'New Question?',
+        x: 80 + (this.nodes.length % 3) * 310,
+        y: 80 + Math.floor(this.nodes.length / 3) * 180,
+        options: []
+      });
+      this.render();
+      if (this.onChange) this.onChange(this.nodes);
+    } else if (action === 'add-result') {
+      const newId = 'res_' + Date.now().toString(36);
+      this.nodes.push({
+        id: newId,
+        isResult: true,
+        title_id: 'Hasil Kesimpulan Baru',
+        title_en: 'New Conclusion Result',
+        msg_id: 'Pesan akhir flowchart.',
+        msg_en: 'Final message.',
+        x: 80 + (this.nodes.length % 3) * 310,
+        y: 80 + Math.floor(this.nodes.length / 3) * 180
+      });
+      this.render();
+      if (this.onChange) this.onChange(this.nodes);
+    } else if (action === 'auto-arrange') {
+      this.autoArrangeTreeLayout();
+      this.render();
+      if (this.onChange) this.onChange(this.nodes);
+    }
+  }
+
+  autoArrangeTreeLayout() {
+    const startNode = this.nodes[0];
+    if (!startNode) return;
+
+    const levels = {};
+    const queue = [{ id: startNode.id, level: 0 }];
+    const visited = new Set();
+
+    while (queue.length > 0) {
+      const { id, level } = queue.shift();
+      if (visited.has(id)) continue;
+      visited.add(id);
+
+      levels[id] = level;
+      const n = this.nodes.find(item => item.id === id);
+      if (n && n.options) {
+        n.options.forEach(opt => {
+          const childId = opt.targetId || opt.next;
+          if (childId && !visited.has(childId)) {
+            queue.push({ id: childId, level: level + 1 });
+          }
+        });
+      }
+    }
+
+    // Assign unvisited nodes level 0
+    this.nodes.forEach(n => {
+      if (levels[n.id] === undefined) levels[n.id] = 0;
+    });
+
+    // Group nodes by level and compute x, y
+    const levelGroups = {};
+    this.nodes.forEach(n => {
+      const lvl = levels[n.id];
+      if (!levelGroups[lvl]) levelGroups[lvl] = [];
+      levelGroups[lvl].push(n);
+    });
+
+    Object.keys(levelGroups).forEach(lvlStr => {
+      const lvl = parseInt(lvlStr);
+      const group = levelGroups[lvl];
+      const startX = 40 + lvl * 310;
+      const startY = 80;
+
+      group.forEach((n, idx) => {
+        n.x = startX;
+        n.y = startY + idx * 220;
+      });
+    });
   }
 
   _handleFieldChange(e, node) {
@@ -272,6 +393,7 @@ export class InteractiveCanvasEditor {
       if (node.options && node.options[optIdx]) {
         node.options[optIdx].text_id = e.target.value;
         node.options[optIdx].text_en = e.target.value;
+        this._updateSVGConnections();
       }
     } else if (field === 'option-target') {
       const optIdx = parseInt(e.target.dataset.optidx);
@@ -349,7 +471,7 @@ export class InteractiveCanvasEditor {
   _ensurePositions() {
     this.nodes.forEach((n, idx) => {
       if (n.x === undefined) n.x = 40 + (idx % 3) * 310;
-      if (n.y === undefined) n.y = 40 + Math.floor(idx / 3) * 220;
+      if (n.y === undefined) n.y = 80 + Math.floor(idx / 3) * 220;
     });
   }
 

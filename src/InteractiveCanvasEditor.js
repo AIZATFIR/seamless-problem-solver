@@ -52,6 +52,12 @@ export class InteractiveCanvasEditor {
         <span class="material-symbols-outlined text-sm text-emerald-400">auto_fix_high</span>
         <span>⚡ Rapikan Diagram</span>
       </button>
+
+      <div class="h-4 w-px bg-white/20 mx-0.5"></div>
+
+      <button type="button" data-toolbar="zoom-reset" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs flex items-center gap-1 transition-all border border-white/10" title="Reset Pandangan Diagram">
+        <span class="material-symbols-outlined text-sm">fit_screen</span>
+      </button>
     `;
     this.container.appendChild(toolbar);
 
@@ -321,7 +327,7 @@ export class InteractiveCanvasEditor {
       });
       this.render();
       if (this.onChange) this.onChange(this.nodes);
-    } else if (action === 'auto-arrange') {
+    } else if (action === 'auto-arrange' || action === 'zoom-reset') {
       this.autoArrangeTreeLayout();
       this.render();
       if (this.onChange) this.onChange(this.nodes);

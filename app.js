@@ -1324,12 +1324,21 @@ class SeamlessProblemSolverApp {
     if (tabComm) tabComm.className = sectionName === 'community' ? activeTabClass : inactiveTabClass;
     if (tabCreate) tabCreate.className = (sectionName === 'create' || sectionName === 'studio') ? activeTabClass : inactiveTabClass;
 
-    if (sectionName === 'player') {
-      if (flowId) this.loadFlowchart(flowId);
-    } else if (sectionName === 'community') {
-      this.renderCommunityGrid();
-    } else if (sectionName === 'create' || sectionName === 'studio') {
+    if (sectionName === 'create' || sectionName === 'studio') {
+      document.body.classList.add('fullscreen-create-active');
+      const secStudio = document.getElementById('sec-studio');
+      if (secStudio) secStudio.classList.add('fullscreen-studio-active');
       this.renderCreatorCanvas();
+    } else {
+      document.body.classList.remove('fullscreen-create-active');
+      const secStudio = document.getElementById('sec-studio');
+      if (secStudio) secStudio.classList.remove('fullscreen-studio-active');
+
+      if (sectionName === 'player') {
+        if (flowId) this.loadFlowchart(flowId);
+      } else if (sectionName === 'community') {
+        this.renderCommunityGrid();
+      }
     }
   }
 

@@ -6,6 +6,7 @@ import { FlowchartEngine } from './src/FlowchartEngine.js';
 import { FlowchartGraphRenderer } from './src/FlowchartGraphRenderer.js';
 import { QuickScriptFlowParser } from './src/QuickScriptFlowParser.js';
 import { InteractiveCanvasEditor } from './src/InteractiveCanvasEditor.js';
+import { MermaidTransmitterParser } from './src/MermaidTransmitterParser.js';
 
 const translations = {
   id: {
@@ -1019,6 +1020,7 @@ class SeamlessProblemSolverApp {
     this.flowEngine = new FlowchartEngine(this.activeFlowchart);
     this.graphRenderer = new FlowchartGraphRenderer();
     this.scriptParser = new QuickScriptFlowParser();
+    this.transmitterParser = new MermaidTransmitterParser();
     this.canvasEditor = new InteractiveCanvasEditor({
       onChange: (nodes) => {
         this.builderNodes = nodes;
@@ -2127,70 +2129,95 @@ res_hemat: [HASIL] Hemat & Seduh Kopi Rumah
     const title = document.getElementById('builder-title').value.trim();
     const author = document.getElementById('builder-author').value.trim() || 'Community Member';
     const category = document.getElementById('builder-category').value;
-    const desc = document.getElementById('builder-desc').value.trim();
 
     if (!title) {
-      alert(this.currentLang === 'id' ? 'Mohon isi judul flowchart!' : 'Please enter a flowchart title!');
+      alert('Harap isi Judul Flowchart terlebih dahulu!');
       return;
     }
 
-    const flowId = 'custom_' + Date.now();
+    // Convert builderNodes back to object map
     const nodesObj = {};
+    let startNodeId = this.builderNodes[0] ? this.builderNodes[0].id : 'step1';
 
-    this.builderNodes.forEach((n, idx) => {
-      const nodeId = n.id || `node_${idx}`;
-      if (n.isResult) {
-        nodesObj[nodeId] = {
-          isResult: true,
-          title_id: n.title_id || n.title || 'Kesimpulan',
-          title_en: n.title_en || n.title || 'Conclusion',
-          msg_id: n.msg_id || n.msg || 'Flowchart selesai.',
-          msg_en: n.msg_en || n.msg || 'Flowchart complete.',
-          adv_id: n.adv_id || n.adv || 'Nikmati harimu.',
-          adv_en: n.adv_en || n.adv || 'Enjoy your day.'
-        };
-      } else {
-        const formattedOptions = (n.options || []).map(opt => ({
-          text_id: opt.text_id || opt.text || 'Lanjut',
-          text_en: opt.text_en || opt.text || 'Proceed',
-          next: opt.targetId || (this.builderNodes[idx + 1] ? this.builderNodes[idx + 1].id : nodeId),
-          btnStyle: opt.btnStyle || 'btn-primary'
-        }));
-
-        nodesObj[nodeId] = {
-          tag_id: `Langkah #${idx + 1}`,
-          tag_en: `Step #${idx + 1}`,
-          q_id: n.q_id || n.q || 'Pertanyaan?',
-          q_en: n.q_en || n.q || 'Question?',
-          sub_id: n.sub_id || n.sub || '',
-          sub_en: n.sub_en || n.sub || '',
-          options: formattedOptions.length > 0 ? formattedOptions : [
-            { text_id: 'Selesai', text_en: 'Finish', next: nodeId, btnStyle: 'btn-primary' }
-          ]
-        };
-      }
+    this.builderNodes.forEach(n => {
+      nodesObj[n.id] = {
+        ...n,
+        options: (n.options || []).map(opt => ({
+          ...opt,
+          next: opt.targetId || opt.next
+        }))
+      };
     });
 
     const newFlow = {
-      id: flowId,
+      id: 'custom_' + Date.now().toString(36),
       title_id: title,
       title_en: title,
-      category: category,
       author: author,
+      category: category,
       isAdmin: false,
       likes: 1,
-      plays: 0,
-      desc_id: desc || 'Custom Flowchart dibuat oleh pengguna Terra.',
-      desc_en: desc || 'Custom Flowchart created by Terra user.',
-      startNode: Object.keys(nodesObj)[0] || 'node_1',
+      plays: 1,
+      desc_id: `Flowchart dibuat oleh ${author}.`,
+      desc_en: `Flowchart created by ${author}.`,
+      startNode: startNodeId,
       nodes: nodesObj
     };
 
     this.customFlowcharts.unshift(newFlow);
     this.saveCustomFlowcharts();
-    this.closeBuilderModal();
-    this.showSection('player', flowId);
-    alert(this.currentLang === 'id' ? '✨ Flowchart berhasil disimpan & dimainkan!' : '✨ Flowchart successfully saved & played!');
+    this.renderCommunityGrid();
+    this.launchCommunityFlow(newFlow.id);
+    alert('🎉 Flowchart baru berhasil disimpan dan diterbitkan!');
+  }
+
+  // --- AI Transmitter Protocol Integration ---
+  openTransmitterModal() {
+    const modal = document.getElementById('modal-transmitter');
+    const card = document.getElementById('modal-transmitter-card');
+    if (modal && card) {
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-95');
+      card.classList.add('scale-100');
+    }
+  }
+
+  closeTransmitterModal() {
+    const modal = document.getElementById('modal-transmitter');
+    const card = document.getElementById('modal-transmitter-card');
+    if (modal && card) {
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-100');
+      card.classList.add('scale-95');
+    }
+  }
+
+  copyAITransmitterPrompt() {
+    const title = document.getElementById('builder-title').value.trim() || 'Masalah Saya';
+    const promptText = this.transmitterParser.getAISystemPromptTemplate(title);
+    navigator.clipboard.writeText(promptText).then(() => {
+      alert('📋 Prompt AI Protocol berhasil disalin! Tinggal paste ke ChatGPT / Gemini / Claude.');
+    }).catch(err => {
+      prompt('Salin teks Prompt AI ini:', promptText);
+    });
+  }
+
+  parseAndApplyTransmitterScript() {
+    const scriptInput = document.getElementById('transmitter-input').value.trim();
+    if (!scriptInput) {
+      alert('Harap masukkan kode Mermaid / Transmitter Script terlebih dahulu!');
+      return;
+    }
+
+    const title = document.getElementById('builder-title').value.trim() || 'Transmitter Flowchart';
+    const flowObj = this.transmitterParser.parseMermaidScript(scriptInput, title);
+
+    if (flowObj && flowObj.nodes) {
+      this.builderNodes = Object.values(flowObj.nodes);
+      this.renderBuilderNodes();
+      this.closeTransmitterModal();
+      alert('⚡ Flowchart berhasil diterjemahkan dari kode Mermaid / Transmitter Protocol!');
+    }
   }
 
   previewCustomFlowchart() {

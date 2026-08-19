@@ -406,18 +406,24 @@
         </div>
 
         <!-- Studio Mode Switcher Tabs -->
-        <div class="flex items-center gap-2 bg-surface-container p-1.5 rounded-2xl border border-primary/20">
+        <div class="flex flex-wrap items-center gap-2 bg-surface-container p-1.5 rounded-2xl border border-primary/20">
           <button id="tab-builder-canvas" type="button" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold bg-primary text-on-primary shadow-sm flex items-center justify-center gap-2 transition-all" onclick="app.setBuilderMode('canvas')">
             <span class="material-symbols-outlined text-lg">drag_pan</span>
             <span>🎨 Studio Visual Board (Drag, Tulis & Panah)</span>
           </button>
-          <button id="tab-builder-form" type="button" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold text-on-surface-variant hover:text-primary flex items-center justify-center gap-2 transition-all" onclick="app.setBuilderMode('form')">
-            <span class="material-symbols-outlined text-lg">schema</span>
-            <span>Form Node Tree</span>
+
+          <button type="button" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-amber-500/20 text-amber-300 hover:bg-amber-500 hover:text-slate-950 flex items-center justify-center gap-1.5 transition-all shadow-sm border border-amber-500/30" onclick="app.openTransmitterModal()" title="Transkrip kode Mermaid / Universal Transmitter Protocol dari AI">
+            <span class="material-symbols-outlined text-base">cell_tower</span>
+            <span>📡 AI Transmitter Protocol</span>
           </button>
-          <button id="tab-builder-script" type="button" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold text-on-surface-variant hover:text-primary flex items-center justify-center gap-2 transition-all" onclick="app.setBuilderMode('script')">
+
+          <button id="tab-builder-form" type="button" class="py-2.5 px-4 rounded-xl text-xs font-bold text-on-surface-variant hover:text-primary flex items-center justify-center gap-2 transition-all" onclick="app.setBuilderMode('form')">
+            <span class="material-symbols-outlined text-lg">schema</span>
+            <span>Form Tree</span>
+          </button>
+          <button id="tab-builder-script" type="button" class="py-2.5 px-4 rounded-xl text-xs font-bold text-on-surface-variant hover:text-primary flex items-center justify-center gap-2 transition-all" onclick="app.setBuilderMode('script')">
             <span class="material-symbols-outlined text-lg">auto_fix_high</span>
-            <span>⚡ Script Panah `->`</span>
+            <span>Script `->`</span>
           </button>
         </div>
 
@@ -733,6 +739,63 @@ Pertanyaan A -> (Ya) -> Pertanyaan B -> (Bisa) -> Hasil Selesai
       </div>
     </div>
   </footer>
+
+  <!-- MODAL: Universal Flowchart Transmitter Protocol -->
+  <div id="modal-transmitter" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+    <div id="modal-transmitter-card" class="terra-card w-full max-w-2xl bg-slate-900 border-2 border-amber-500/40 rounded-3xl p-6 sm:p-8 text-slate-100 shadow-2xl space-y-6 transform scale-95 transition-all duration-300">
+      
+      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-2xl text-amber-400">cell_tower</span>
+          <div>
+            <h3 class="font-headline font-bold text-xl text-amber-300">Universal Flowchart Transmitter Protocol</h3>
+            <p class="text-xs text-slate-400">Copas prompt AI di bawah ke ChatGPT/Gemini/Claude, lalu tempel kode hasilnya ke sini!</p>
+          </div>
+        </div>
+        <button type="button" class="text-slate-400 hover:text-white p-2 rounded-xl hover:bg-white/10" onclick="app.closeTransmitterModal()">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <!-- Transmitter Action Controls -->
+      <div class="space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2 p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30">
+          <div class="text-xs font-semibold text-amber-200">
+            <span>💡 Minta AI (ChatGPT/Gemini) buatkan Mermaid Protocol:</span>
+          </div>
+          <button type="button" class="px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 transition-all shadow-md" onclick="app.copyAITransmitterPrompt()">
+            <span class="material-symbols-outlined text-sm">content_copy</span>
+            <span>📋 Salin Prompt AI Template</span>
+          </button>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-300 mb-1.5">Paste Kode Mermaid / Universal Transmitter Script Di Sini *</label>
+          <textarea id="transmitter-input" rows="8" class="w-full p-4 rounded-2xl bg-black/60 border border-amber-500/30 text-xs font-mono text-emerald-300 focus:outline-none focus:border-amber-400 shadow-inner" placeholder='graph TD
+step1["❓ Punya Masalah dalam Hidup?"]
+step1 -->|"YA"| step2
+step1 -->|"TIDAK"| res_noproblem
+step2["❓ Bisa melakukan sesuatu?"]
+step2 -->|"YA, BISA"| res_canact
+step2 -->|"TIDAK BISA"| res_cannotact
+res_noproblem["🏁 Lalu Kenapa Khawatir?"]
+res_canact["🏁 Lalu Kenapa Khawatir?"]
+res_cannotact["🏁 Lalu Kenapa Khawatir?"]'></textarea>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end gap-3 border-t border-white/10 pt-4">
+        <button type="button" class="px-4 py-2.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white" onclick="app.closeTransmitterModal()">
+          Batal
+        </button>
+        <button type="button" class="px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs flex items-center gap-2 shadow-lg hover:scale-105 transition-all" onclick="app.parseAndApplyTransmitterScript()">
+          <span class="material-symbols-outlined text-base">bolt</span>
+          <span>⚡ Terjemahkan ke Flowchart Interaktif</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
 
   <script type="module" src="./app.js"></script>
 </body>

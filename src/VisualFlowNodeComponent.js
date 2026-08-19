@@ -83,46 +83,53 @@ export class VisualFlowNodeComponent {
 
     // 1. Top Header Mode Switcher Bar (Matches Blueprint wireframe tabs: [ List Node Diagram ] [ Visual Flow Diagram ])
     const topBar = document.createElement('div');
-    topBar.className = 'relative z-30 flex flex-wrap items-center justify-between gap-3 p-4 bg-surface-container/90 backdrop-blur-md border-b border-primary/15';
+    const isFullscreen = document.body.classList.contains('fullscreen-create-active') || document.getElementById('sec-studio')?.classList.contains('fullscreen-studio-active');
+
+    topBar.className = 'relative z-30 flex flex-wrap items-center justify-between gap-3 p-4 bg-surface-container/95 backdrop-blur-xl border-b border-primary/20 shadow-sm';
     topBar.innerHTML = `
       <!-- View Mode Toggle Tabs -->
-      <div class="inline-flex items-center gap-1 p-1 bg-surface rounded-2xl border border-primary/20 shadow-sm">
-        <button type="button" data-view-btn="list" class="px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all ${this.viewMode === 'list' ? 'bg-primary text-on-primary shadow-sm' : 'text-on-surface-variant hover:text-primary'}">
+      <div class="inline-flex items-center gap-1 p-1 bg-surface rounded-2xl border border-primary/20 shadow-sm ${isFullscreen ? 'hidden' : ''}">
+        <button type="button" data-view-btn="list" class="px-4 py-2 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition-all ${this.viewMode === 'list' ? 'bg-primary text-on-primary shadow-sm' : 'text-on-surface-variant hover:text-primary'}">
           <span class="material-symbols-outlined text-base">format_list_bulleted</span>
           <span>List Node Diagram</span>
         </button>
-        <button type="button" data-view-btn="visual" class="px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all ${this.viewMode === 'visual' ? 'bg-primary text-on-primary shadow-sm' : 'text-on-surface-variant hover:text-primary'}">
+        <button type="button" data-view-btn="visual" class="px-4 py-2 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition-all ${this.viewMode === 'visual' ? 'bg-primary text-on-primary shadow-sm' : 'text-on-surface-variant hover:text-primary'}">
           <span class="material-symbols-outlined text-base">hub</span>
           <span>Visual Flow Diagram</span>
         </button>
       </div>
 
-      <!-- Quick Canvas Actions Toolbar -->
-      <div class="flex items-center gap-2 flex-wrap">
-        <button type="button" data-canvas-action="add-question" class="px-3 py-1.5 rounded-xl bg-primary/10 hover:bg-primary text-primary hover:text-on-primary text-xs font-bold flex items-center gap-1 transition-all border border-primary/20" title="Tambah Node Pertanyaan">
-          <span class="material-symbols-outlined text-sm">help</span>
+      <!-- Quick Canvas Actions Toolbar (Enlarged Buttons for Easy Clicking) -->
+      <div class="flex items-center gap-3 flex-wrap">
+        <button type="button" data-canvas-action="add-question" class="py-2.5 px-4 rounded-xl bg-primary text-on-primary hover:bg-primary/90 text-xs sm:text-sm font-extrabold flex items-center gap-1.5 transition-all shadow-md hover:scale-105" title="Tambah Node Pertanyaan">
+          <span class="material-symbols-outlined text-base">help</span>
           <span>+ Node Pertanyaan</span>
         </button>
 
-        <button type="button" data-canvas-action="add-result" class="px-3 py-1.5 rounded-xl bg-tertiary/10 hover:bg-tertiary text-tertiary hover:text-on-primary text-xs font-bold flex items-center gap-1 transition-all border border-tertiary/20" title="Tambah Node Hasil">
-          <span class="material-symbols-outlined text-sm">flag</span>
+        <button type="button" data-canvas-action="add-result" class="py-2.5 px-4 rounded-xl bg-tertiary text-on-primary hover:bg-tertiary/90 text-xs sm:text-sm font-extrabold flex items-center gap-1.5 transition-all shadow-md hover:scale-105" title="Tambah Node Hasil">
+          <span class="material-symbols-outlined text-base">flag</span>
           <span>+ Node Hasil</span>
         </button>
 
-        <div class="h-4 w-px bg-outline-variant/30 mx-1"></div>
+        <button type="button" class="py-2.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs sm:text-sm font-extrabold flex items-center gap-1.5 transition-all shadow-md hover:scale-105" onclick="app.saveAndPublishFlowchart()" title="Simpan & Publikasikan Flowchart">
+          <span class="material-symbols-outlined text-base">save</span>
+          <span>Simpan Flowchart</span>
+        </button>
 
-        <button type="button" data-canvas-action="auto-layout" class="px-3 py-1.5 rounded-xl bg-surface hover:bg-surface-container text-on-surface-variant hover:text-primary text-xs font-bold flex items-center gap-1 transition-all border border-outline-variant/30" title="Susun Tata Letak Otomatis">
+        <div class="h-5 w-px bg-outline-variant/30 mx-1 ${isFullscreen ? 'hidden' : ''}"></div>
+
+        <button type="button" data-canvas-action="auto-layout" class="py-2 px-3 rounded-xl bg-surface hover:bg-surface-container text-on-surface-variant hover:text-primary text-xs font-bold items-center gap-1 transition-all border border-outline-variant/30 ${isFullscreen ? 'hidden' : 'flex'}" title="Susun Tata Letak Otomatis">
           <span class="material-symbols-outlined text-sm text-primary">auto_fix_high</span>
           <span class="hidden sm:inline">Rapikan Alur</span>
         </button>
 
-        <button type="button" data-canvas-action="reset-zoom" class="p-1.5 rounded-xl bg-surface hover:bg-surface-container text-on-surface-variant hover:text-primary text-xs font-bold transition-all border border-outline-variant/30" title="Pusatkan Diagram">
+        <button type="button" data-canvas-action="reset-zoom" class="p-2 rounded-xl bg-surface hover:bg-surface-container text-on-surface-variant hover:text-primary text-xs font-bold transition-all border border-outline-variant/30 ${isFullscreen ? 'hidden' : 'block'}" title="Pusatkan Diagram">
           <span class="material-symbols-outlined text-base">filter_center_focus</span>
         </button>
 
-        <button type="button" data-canvas-action="toggle-fullscreen" class="px-3 py-1.5 rounded-xl bg-primary/15 hover:bg-primary text-primary hover:text-on-primary text-xs font-bold flex items-center gap-1 transition-all border border-primary/30 shadow-sm" title="Layar Penuh Canvas Flowchart">
-          <span class="material-symbols-outlined text-base">fullscreen</span>
-          <span class="hidden sm:inline">Layar Penuh</span>
+        <button type="button" data-canvas-action="toggle-fullscreen" class="py-2.5 px-4 rounded-xl bg-surface-container hover:bg-primary/20 text-primary font-extrabold text-xs sm:text-sm flex items-center gap-1.5 transition-all border border-primary/30 shadow-sm" title="Layar Penuh Canvas Flowchart">
+          <span class="material-symbols-outlined text-base">${isFullscreen ? 'fullscreen_exit' : 'fullscreen'}</span>
+          <span>${isFullscreen ? 'Keluar Fullscreen' : 'Layar Penuh'}</span>
         </button>
       </div>
     `;
@@ -561,16 +568,15 @@ export class VisualFlowNodeComponent {
       if (!sourceEl) return;
 
       const cardWidth = 320;
-      const cardHeight = sourceEl.offsetHeight || 220;
+      const cardHeight = 200; // Fixed stable card height prevents arrow jump on hover
 
       source.options.forEach(opt => {
         const targetId = opt.targetId || opt.next;
         const targetNode = this.nodes.find(n => n.id === targetId);
         if (!targetNode) return;
 
-        const targetEl = document.getElementById(`flow-node-${targetId}`);
         const targetWidth = 320;
-        const targetHeight = targetEl ? targetEl.offsetHeight : 220;
+        const targetHeight = 200;
 
         // Calculate specific anchor points from source handle direction to closest target anchor
         const sourceDir = opt.direction || this._inferDirection(source, targetNode);
@@ -914,16 +920,10 @@ export class VisualFlowNodeComponent {
         this.render();
         if (this.onChange) this.onChange(this.nodes);
       } else if (action === 'toggle-fullscreen') {
-        const secCreate = document.getElementById('section-create');
-        if (secCreate) {
-          secCreate.classList.toggle('fullscreen-create-active');
-        } else if (this.container) {
-          if (!document.fullscreenElement) {
-            this.container.requestFullscreen?.().catch(() => {});
-          } else {
-            document.exitFullscreen?.().catch(() => {});
-          }
-        }
+        document.body.classList.toggle('fullscreen-create-active');
+        const secStudio = document.getElementById('sec-studio');
+        if (secStudio) secStudio.classList.toggle('fullscreen-studio-active');
+        this.render();
       }
     }
   }

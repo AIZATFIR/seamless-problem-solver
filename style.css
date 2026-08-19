@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,600&display=swap');
+
 /* Terra Organic Design System & Animations */
 
 :root {
@@ -516,6 +518,42 @@ body.is-fullscreen footer {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 0 25px rgba(74, 124, 89, 0.18);
   border-color: rgba(var(--color-primary), 0.5);
 }
+
+/* Philosophical Quote Styling - Deep, Elegant, Wide Letter Spacing */
+.philosophical-quote {
+  font-family: 'Playfair Display', 'Cinzel', Georgia, serif !important;
+  letter-spacing: 0.08em;
+  line-height: 1.65;
+  font-style: italic;
+}
+
+/* Fullscreen Studio Create Mode - Pure Less is More UI */
+.fullscreen-create-active header,
+.fullscreen-create-active footer,
+.fullscreen-create-active #section-daily-wisdom,
+.fullscreen-create-active .studio-header-meta {
+  display: none !important;
+}
+
+.fullscreen-create-active .visual-flow-canvas-wrapper {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9999 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+/* Big Action Buttons - Touch Target Accessibility */
+.btn-terra-lg {
+  padding: 0.75rem 1.25rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 800 !important;
+  border-radius: 1rem !important;
+}
+
 
 
 

@@ -20,14 +20,122 @@ export class VisualFlowNodeComponent {
     this.viewMode = options.viewMode || 'visual'; // 'visual' or 'list'
     this.animFrameId = null;
 
-    // Figma Canvas Zoom & Pan State
+    // Figma Canvas Zoom & Pan & Tool State
     this.zoomLevel = 1.0;
     this.panOffset = { x: 0, y: 0 };
     this.isPanningCanvas = false;
     this.panStart = { x: 0, y: 0 };
+    this.activeTool = 'select'; // 'select' (V), 'hand' (H), 'frame' (F)
+    this.spacePressed = false;
+    this.previousTool = 'select';
 
     this._onMouseMove = this._onMouseMove.bind(this);
     this._onMouseUp = this._onMouseUp.bind(this);
+    this._onKeyDown = this._onKeyDown.bind(this);
+    this._onKeyUp = this._onKeyUp.bind(this);
+
+    this._initKeybindings();
+  }
+
+  setToolMode(tool) {
+    this.activeTool = tool;
+    if (typeof document !== 'undefined') {
+      const viewport = document.getElementById('visual-canvas-viewport');
+      if (viewport) {
+        if (tool === 'hand') {
+          viewport.style.cursor = 'grab';
+        } else {
+          viewport.style.cursor = 'crosshair';
+        }
+      }
+      this._updateToolbarToolHighlight();
+    }
+  }
+
+  _initKeybindings() {
+    if (typeof window === 'undefined') return;
+    window.removeEventListener('keydown', this._onKeyDown);
+    window.removeEventListener('keyup', this._onKeyUp);
+    window.addEventListener('keydown', this._onKeyDown);
+    window.addEventListener('keyup', this._onKeyUp);
+  }
+
+  _onKeyDown(e) {
+    if (typeof document !== 'undefined' && ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) return;
+
+    const key = e.key ? e.key.toLowerCase() : '';
+
+    if (key === 'v') {
+      this.setToolMode('select');
+    } else if (key === 'h') {
+      this.setToolMode('hand');
+    } else if (key === 'f') {
+      this.setToolMode('select');
+      this._spawnQuestionNode();
+    } else if (e.code === 'Space' && !this.spacePressed) {
+      this.spacePressed = true;
+      this.previousTool = this.activeTool;
+      this.setToolMode('hand');
+    } else if ((e.ctrlKey || e.metaKey) && (key === '+' || key === '=')) {
+      e.preventDefault();
+      this.zoomLevel = Math.min(2.5, this.zoomLevel + 0.15);
+      this._applyCanvasTransform();
+    } else if ((e.ctrlKey || e.metaKey) && key === '-') {
+      e.preventDefault();
+      this.zoomLevel = Math.max(0.3, this.zoomLevel - 0.15);
+      this._applyCanvasTransform();
+    } else if ((e.ctrlKey || e.metaKey) && key === '0') {
+      e.preventDefault();
+      this.zoomLevel = 1.0;
+      this.panOffset = { x: 0, y: 0 };
+      this._applyCanvasTransform();
+    } else if (key === 'escape') {
+      this.setToolMode('select');
+    }
+  }
+
+  _onKeyUp(e) {
+    if (e.code === 'Space' && this.spacePressed) {
+      this.spacePressed = false;
+      this.setToolMode(this.previousTool || 'select');
+    }
+  }
+
+  _updateToolbarToolHighlight() {
+    if (typeof document === 'undefined') return;
+    const btnSelect = document.getElementById('figma-tool-select');
+    const btnHand = document.getElementById('figma-tool-hand');
+
+    if (btnSelect) {
+      if (this.activeTool === 'select') {
+        btnSelect.className = 'p-2.5 rounded-xl bg-primary/20 text-primary transition-all font-bold';
+      } else {
+        btnSelect.className = 'p-2.5 rounded-xl hover:bg-primary/10 text-on-surface hover:text-primary transition-all';
+      }
+    }
+    if (btnHand) {
+      if (this.activeTool === 'hand') {
+        btnHand.className = 'p-2.5 rounded-xl bg-primary/20 text-primary transition-all font-bold';
+      } else {
+        btnHand.className = 'p-2.5 rounded-xl hover:bg-primary/10 text-on-surface hover:text-primary transition-all';
+      }
+    }
+  }
+
+  _spawnQuestionNode() {
+    const newId = 'node_' + Date.now().toString(36);
+    this.nodes.push({
+      id: newId,
+      isResult: false,
+      tag_id: `Langkah #${this.nodes.length + 1}`,
+      q_id: 'Pertanyaan Baru?',
+      sub_id: 'Pilihan keputusan...',
+      x: 80 + (this.nodes.length % 3) * 340,
+      y: 90 + Math.floor(this.nodes.length / 3) * 230,
+      options: []
+    });
+    this.render();
+    if (this.onChange) this.onChange(this.nodes);
   }
 
   setNodes(nodes) {
@@ -200,10 +308,10 @@ export class VisualFlowNodeComponent {
     const figmaRightToolbar = document.createElement('div');
     figmaRightToolbar.className = 'absolute right-6 top-1/2 -translate-y-1/2 z-30 flex flex-col items-center gap-2 p-2 rounded-2xl figma-floating-panel shadow-terra-deep';
     figmaRightToolbar.innerHTML = `
-      <button type="button" class="p-2.5 rounded-xl hover:bg-primary/10 text-on-surface hover:text-primary transition-all" title="Selection Tool (V)">
+      <button type="button" id="figma-tool-select" data-tool="select" class="p-2.5 rounded-xl ${this.activeTool === 'select' ? 'bg-primary/20 text-primary font-bold' : 'hover:bg-primary/10 text-on-surface hover:text-primary'} transition-all" title="Selection Tool (V)">
         <span class="material-symbols-outlined text-lg">near_me</span>
       </button>
-      <button type="button" class="p-2.5 rounded-xl hover:bg-primary/10 text-on-surface hover:text-primary transition-all" title="Frame Tool (F)">
+      <button type="button" id="figma-tool-frame" data-tool="frame" class="p-2.5 rounded-xl hover:bg-primary/10 text-on-surface hover:text-primary transition-all" title="Tambah Node Frame (F)">
         <span class="material-symbols-outlined text-lg">crop_free</span>
       </button>
 
@@ -211,7 +319,7 @@ export class VisualFlowNodeComponent {
         <span class="material-symbols-outlined text-lg">edit</span>
       </button>
 
-      <button type="button" class="p-2.5 rounded-xl hover:bg-primary/10 text-on-surface hover:text-primary transition-all" title="Hand Pan Tool (H)">
+      <button type="button" id="figma-tool-hand" data-tool="hand" class="p-2.5 rounded-xl ${this.activeTool === 'hand' ? 'bg-primary/20 text-primary font-bold' : 'hover:bg-primary/10 text-on-surface hover:text-primary'} transition-all" title="Hand Pan Tool (H)">
         <span class="material-symbols-outlined text-lg">pan_tool</span>
       </button>
 
@@ -226,6 +334,19 @@ export class VisualFlowNodeComponent {
       </button>
     `;
     canvasViewport.appendChild(figmaRightToolbar);
+
+    figmaRightToolbar.addEventListener('click', (e) => {
+      const toolBtn = e.target.closest('[data-tool]');
+      if (toolBtn) {
+        const tool = toolBtn.dataset.tool;
+        if (tool === 'frame') {
+          this.setToolMode('select');
+          this._spawnQuestionNode();
+        } else {
+          this.setToolMode(tool);
+        }
+      }
+    });
 
     // --- Figma Bottom Floating Prompt Input Bar (Matches Figma Screenshot) ---
     const figmaBottomPromptBar = document.createElement('div');

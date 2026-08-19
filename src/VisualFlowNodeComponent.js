@@ -98,7 +98,7 @@ export class VisualFlowNodeComponent {
       </div>
 
       <!-- Quick Canvas Actions Toolbar -->
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 flex-wrap">
         <button type="button" data-canvas-action="add-question" class="px-3 py-1.5 rounded-xl bg-primary/10 hover:bg-primary text-primary hover:text-on-primary text-xs font-bold flex items-center gap-1 transition-all border border-primary/20" title="Tambah Node Pertanyaan">
           <span class="material-symbols-outlined text-sm">help</span>
           <span>+ Node Pertanyaan</span>
@@ -119,6 +119,11 @@ export class VisualFlowNodeComponent {
         <button type="button" data-canvas-action="reset-zoom" class="p-1.5 rounded-xl bg-surface hover:bg-surface-container text-on-surface-variant hover:text-primary text-xs font-bold transition-all border border-outline-variant/30" title="Pusatkan Diagram">
           <span class="material-symbols-outlined text-base">filter_center_focus</span>
         </button>
+
+        <button type="button" data-canvas-action="toggle-fullscreen" class="px-3 py-1.5 rounded-xl bg-primary/15 hover:bg-primary text-primary hover:text-on-primary text-xs font-bold flex items-center gap-1 transition-all border border-primary/30 shadow-sm" title="Layar Penuh Canvas Flowchart">
+          <span class="material-symbols-outlined text-base">fullscreen</span>
+          <span class="hidden sm:inline">Layar Penuh</span>
+        </button>
       </div>
     `;
     this.container.appendChild(topBar);
@@ -135,13 +140,17 @@ export class VisualFlowNodeComponent {
     // Attach Topbar Listener
     topBar.addEventListener('click', (e) => this._handleTopBarClick(e));
 
-    // Global Listeners for Dragging and Dismissing Popovers
+    // Global Listeners for Dragging and Dismissing Popovers (Mouse & Touch)
     window.removeEventListener('mousemove', this._onMouseMove);
     window.removeEventListener('mouseup', this._onMouseUp);
+    window.removeEventListener('touchmove', this._onMouseMove);
+    window.removeEventListener('touchend', this._onMouseUp);
     document.removeEventListener('click', this._onGlobalClick);
 
-    window.addEventListener('mousemove', this._onMouseMove);
+    window.addEventListener('mousemove', this._onMouseMove, { passive: false });
     window.addEventListener('mouseup', this._onMouseUp);
+    window.addEventListener('touchmove', this._onMouseMove, { passive: false });
+    window.addEventListener('touchend', this._onMouseUp);
     document.addEventListener('click', this._onGlobalClick);
   }
 
@@ -310,17 +319,28 @@ export class VisualFlowNodeComponent {
       </div>
     `;
 
-    // Drag Listener
-    card.addEventListener('mousedown', (e) => {
-      if (e.target.closest('input, textarea, select, button, .wing-handle, .direction-popover')) return;
+    // Drag Listener (Mouse & Touch)
+    const onStartDrag = (clientX, clientY, target) => {
+      if (target.closest('input, textarea, select, button, .wing-handle, .direction-popover')) return;
       this.draggingNode = node;
-      const rect = card.getBoundingClientRect();
+      const viewport = document.getElementById('visual-canvas-viewport') || this.container;
+      const viewportRect = viewport.getBoundingClientRect();
       this.dragOffset = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
+        x: clientX - viewportRect.left - (node.x || 60),
+        y: clientY - viewportRect.top - (node.y || 80)
       };
       card.classList.add('z-30');
+    };
+
+    card.addEventListener('mousedown', (e) => {
+      onStartDrag(e.clientX, e.clientY, e.target);
     });
+
+    card.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches[0]) {
+        onStartDrag(e.touches[0].clientX, e.touches[0].clientY, e.target);
+      }
+    }, { passive: true });
 
     // Delegated Change / Input Events
     card.addEventListener('change', (e) => this._handleNodeFieldChange(e, node));
@@ -743,12 +763,18 @@ export class VisualFlowNodeComponent {
   _onMouseMove(e) {
     if (!this.draggingNode || !this.container) return;
 
-    const containerRect = this.container.getBoundingClientRect();
-    let x = e.clientX - containerRect.left - this.dragOffset.x;
-    let y = e.clientY - containerRect.top - this.dragOffset.y;
+    const viewport = document.getElementById('visual-canvas-viewport') || this.container;
+    const viewportRect = viewport.getBoundingClientRect();
 
-    x = Math.max(10, Math.min(containerRect.width - 330, x));
-    y = Math.max(10, Math.min(containerRect.height - 240, y));
+    const clientX = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+    const clientY = e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
+
+    let x = clientX - viewportRect.left - this.dragOffset.x;
+    let y = clientY - viewportRect.top - this.dragOffset.y;
+
+    // Freely movable anywhere across the infinite canvas
+    x = Math.max(10, x);
+    y = Math.max(10, y);
 
     this.draggingNode.x = x;
     this.draggingNode.y = y;
@@ -806,7 +832,7 @@ export class VisualFlowNodeComponent {
       return;
     }
 
-    // 2. Check Action Buttons inside card
+    // 2. Check Action Buttons
     const actionBtn = e.target.closest('[data-node-action]');
     if (actionBtn) {
       e.stopPropagation();
@@ -818,14 +844,14 @@ export class VisualFlowNodeComponent {
         if (this.onChange) this.onChange(this.nodes);
       } else if (action === 'delete-node') {
         if (this.nodes.length <= 1) {
-          alert('Minimal harus ada 1 node!');
+          alert('Minimal 1 node harus ada!');
           return;
         }
         this.nodes = this.nodes.filter(n => n.id !== node.id);
         this.render();
         if (this.onChange) this.onChange(this.nodes);
       } else if (action === 'remove-option') {
-        const optIdx = parseInt(actionBtn.dataset.optIdx);
+        const optIdx = parseInt(actionBtn.dataset.optIdx, 10);
         if (node.options && node.options[optIdx]) {
           node.options.splice(optIdx, 1);
           this.render();
@@ -835,7 +861,10 @@ export class VisualFlowNodeComponent {
       return;
     }
 
-    // Select node callback
+    // 3. Highlight Selected Node Card
+    document.querySelectorAll('.visual-node-card').forEach(c => c.classList.remove('active-node', 'active-wings'));
+    cardEl.classList.add('active-node', 'active-wings');
+
     if (this.onNodeSelect) {
       this.onNodeSelect(node);
     }
@@ -884,6 +913,17 @@ export class VisualFlowNodeComponent {
         this.autoArrangeLayout();
         this.render();
         if (this.onChange) this.onChange(this.nodes);
+      } else if (action === 'toggle-fullscreen') {
+        const secCreate = document.getElementById('section-create');
+        if (secCreate) {
+          secCreate.classList.toggle('fullscreen-create-active');
+        } else if (this.container) {
+          if (!document.fullscreenElement) {
+            this.container.requestFullscreen?.().catch(() => {});
+          } else {
+            document.exitFullscreen?.().catch(() => {});
+          }
+        }
       }
     }
   }

@@ -109,33 +109,8 @@
         </button>
       </div>
 
-      <!-- Quick Controls -->
-      <div class="flex items-center gap-2 sm:gap-3">
-        <!-- Ads Manager Quick Button (Hidden from public UI) -->
-        <button id="btn-ads-manager" class="hidden nav-control-btn items-center gap-1.5 px-3 py-2 rounded-xl bg-tertiary/10 text-tertiary hover:bg-tertiary/20 transition-all text-xs sm:text-sm font-bold" title="Monetization & Ads Manager" onclick="app.openAdsManagerModal()">
-          <span class="material-symbols-outlined text-base">monetization_on</span>
-          <span class="hidden md:inline" data-i18n="navAds">Ads Setup</span>
-        </button>
-
-        <!-- Sound Ambient Generator -->
-        <button id="btn-ambient" class="nav-control-btn flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-all text-sm font-semibold" title="Suara Alam / Ambient Sound" aria-label="Toggle Ambient Sound Generator">
-          <span class="material-symbols-outlined text-lg" id="icon-sound">volume_off</span>
-          <span class="hidden xl:inline" id="txt-ambient">Suara Alam</span>
-        </button>
-
-        <!-- Breathing Exercise Modal Toggle -->
-        <button id="btn-breathing-modal" class="nav-control-btn flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-all text-sm font-semibold" title="Latihan Napas 4-7-8" aria-label="Open 4-7-8 Breathing Relaxation Modal">
-          <span class="material-symbols-outlined text-lg">air</span>
-          <span class="hidden lg:inline" data-i18n="navBreathing">Napas Calm</span>
-        </button>
-
-        <!-- Journal Drawer Toggle -->
-        <button id="btn-journal-toggle" class="nav-control-btn flex items-center gap-2 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-all text-sm font-semibold relative" title="Jurnal Ketenangan" aria-label="Open Reflection Journal Drawer">
-          <span class="material-symbols-outlined text-lg">edit_note</span>
-          <span class="hidden lg:inline" data-i18n="navJournal">Jurnal</span>
-          <span id="journal-badge" class="hidden absolute -top-1 -right-1 w-2.5 h-2.5 bg-tertiary rounded-full"></span>
-        </button>
-
+      <!-- Quick Switches (Language & Theme) -->
+      <div class="flex items-center gap-2">
         <!-- Language Switcher -->
         <button id="btn-lang" class="nav-control-btn flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary transition-all text-xs font-bold uppercase tracking-wider" title="Ganti Bahasa" aria-label="Switch Language ID or EN">
           <span class="material-symbols-outlined text-base">translate</span>
@@ -279,157 +254,210 @@
 
     </section>
 
-    <!-- Stoic & Zen Philosophy Cards Section -->
+    <!-- SECTION: Three Pillars of Calm (Interactive Guided Cards) -->
     <section class="max-w-7xl mx-auto px-6 py-16 w-full relative z-10 border-t border-primary/10">
       <div class="text-center mb-12">
-        <h2 class="scroll-float-heading font-headline text-3xl sm:text-4xl font-bold text-on-surface mb-3" data-i18n="sectionTitle">Tiga Pilar Ketenangan</h2>
-        <p class="text-on-surface-variant/80 text-base max-w-xl mx-auto font-body" data-i18n="sectionSubtitle">Prinsip dasar Stoikisme untuk menjaga pikiran tetap jernih di tengah badai kehidupan.</p>
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-3">
+          <span class="material-symbols-outlined text-sm">spa</span>
+          <span>Prinsip Ketenangan Batin</span>
+        </div>
+        <h2 class="scroll-float-heading font-headline text-3xl sm:text-4xl font-extrabold text-on-surface mb-3" data-i18n="sectionTitle">Tiga Pilar Ketenangan</h2>
+        <p class="text-on-surface-variant/80 text-sm sm:text-base max-w-xl mx-auto font-body" data-i18n="sectionSubtitle">Prinsip filosofi klasik untuk mengurai kebingungan, menjaga ketenangan, dan bertindak jernih.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
-        <!-- Card 1 -->
-        <div class="terra-card p-8 rounded-2xl flex flex-col items-center text-center group border border-outline-variant/15 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
-          <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-on-primary transition-all">
-            <span class="material-symbols-outlined text-3xl">psychology_alt</span>
+        <!-- Interactive Pillar 1: Kesadaran Murni (Dichotomy of Control) -->
+        <div class="terra-card pillar-interactive-card p-8 rounded-3xl flex flex-col justify-between border border-primary/20 bg-surface/90 backdrop-blur-md space-y-6 group">
+          <div>
+            <div class="w-14 h-14 bg-primary/15 rounded-2xl flex items-center justify-center text-primary mb-5 group-hover:scale-110 group-hover:bg-primary group-hover:text-on-primary transition-all shadow-sm">
+              <span class="material-symbols-outlined text-3xl">psychology_alt</span>
+            </div>
+            <span class="text-[10px] font-mono font-bold tracking-widest uppercase text-primary bg-primary/10 px-2.5 py-1 rounded-full inline-block mb-3">PILAR 1 • KESADARAN</span>
+            <h3 class="font-headline text-2xl font-bold mb-2 text-on-surface" data-i18n="card1Title">Kesadaran Murni</h3>
+            <p class="text-on-surface-variant font-body leading-relaxed text-sm" data-i18n="card1Desc">Mengenali dan memisahkan fakta obyektif dari persepsi emosional dan asumsi yang berlebihan.</p>
           </div>
-          <h3 class="font-headline text-2xl font-bold mb-3 text-on-surface" data-i18n="card1Title">Kesadaran</h3>
-          <p class="text-on-surface-variant font-body leading-relaxed text-sm" data-i18n="card1Desc">Mengenali dan memisahkan fakta obyektif dari persepsi emosional adalah langkah pertama menuju kedamaian.</p>
+          
+          <div class="p-4 rounded-2xl bg-surface-container/80 border border-primary/15 space-y-2">
+            <span class="text-[11px] font-bold text-primary flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm">filter_alt</span>
+              <span>Latihan Dikotomi Kendali:</span>
+            </span>
+            <p class="text-xs text-on-surface italic" id="pilar-control-text">"Pendapat orang lain tentang dirimu..."</p>
+            <div class="flex gap-2 pt-1">
+              <button class="flex-1 py-1.5 px-2 rounded-xl bg-surface border border-outline-variant/30 hover:border-primary text-[10px] font-bold text-on-surface transition-all" onclick="app.checkPillarControl(1)">Di Luar Kendali</button>
+              <button class="flex-1 py-1.5 px-2 rounded-xl bg-surface border border-outline-variant/30 hover:border-primary text-[10px] font-bold text-on-surface transition-all" onclick="app.checkPillarControl(2)">Dalam Kendali</button>
+            </div>
+            <div id="pilar-control-feedback" class="text-[10px] font-bold text-emerald-500 hidden pt-1"></div>
+          </div>
         </div>
 
-        <!-- Card 2 -->
-        <div class="terra-card p-8 rounded-2xl flex flex-col items-center text-center group border border-outline-variant/15 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
-          <div class="w-14 h-14 bg-tertiary/10 rounded-2xl flex items-center justify-center text-tertiary mb-6 group-hover:scale-110 group-hover:bg-tertiary group-hover:text-on-primary transition-all">
-            <span class="material-symbols-outlined text-3xl">auto_fix_high</span>
+        <!-- Interactive Pillar 2: Tindakan Jernih (5-Minute Clarity Action) -->
+        <div class="terra-card pillar-interactive-card p-8 rounded-3xl flex flex-col justify-between border border-tertiary/20 bg-surface/90 backdrop-blur-md space-y-6 group">
+          <div>
+            <div class="w-14 h-14 bg-tertiary/15 rounded-2xl flex items-center justify-center text-tertiary mb-5 group-hover:scale-110 group-hover:bg-tertiary group-hover:text-on-primary transition-all shadow-sm">
+              <span class="material-symbols-outlined text-3xl">auto_fix_high</span>
+            </div>
+            <span class="text-[10px] font-mono font-bold tracking-widest uppercase text-tertiary bg-tertiary/10 px-2.5 py-1 rounded-full inline-block mb-3">PILAR 2 • AKSI NYATA</span>
+            <h3 class="font-headline text-2xl font-bold mb-2 text-on-surface" data-i18n="card2Title">Tindakan Jernih</h3>
+            <p class="text-on-surface-variant font-body leading-relaxed text-sm" data-i18n="card2Desc">Fokuskan seluruh perhatian dan energi pada 1 langkah pertama yang berada langsung dalam pengaruh kendalimu.</p>
           </div>
-          <h3 class="font-headline text-2xl font-bold mb-3 text-on-surface" data-i18n="card2Title">Tindakan Jernih</h3>
-          <p class="text-on-surface-variant font-body leading-relaxed text-sm" data-i18n="card2Desc">Fokuskan seluruh perhatian dan usaha pada hal-hal yang berada langsung dalam pengaruh kendalimu.</p>
+
+          <div class="p-4 rounded-2xl bg-surface-container/80 border border-tertiary/15 space-y-2">
+            <span class="text-[11px] font-bold text-tertiary flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm">timer</span>
+              <span>Aturan Aksi 5 Menit:</span>
+            </span>
+            <p class="text-xs text-on-surface leading-relaxed">Jangan menunggu motivasi sempurna. Lakukan langkah paling kecil selama 5 menit sekarang.</p>
+            <button class="w-full py-2 px-3 rounded-xl bg-tertiary text-on-primary font-bold text-xs shadow-sm hover:scale-[1.02] flex items-center justify-center gap-1.5 transition-all" onclick="app.startFiveMinuteFocus()">
+              <span class="material-symbols-outlined text-sm">play_circle</span>
+              <span id="txt-five-min-btn">Mulai Fokus 5 Menit</span>
+            </button>
+          </div>
         </div>
 
-        <!-- Card 3 -->
-        <div class="terra-card p-8 rounded-2xl flex flex-col items-center text-center group border border-outline-variant/15 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
-          <div class="w-14 h-14 bg-secondary-container rounded-2xl flex items-center justify-center text-secondary mb-6 group-hover:scale-110 group-hover:bg-secondary group-hover:text-on-primary transition-all">
-            <span class="material-symbols-outlined text-3xl">self_improvement</span>
+        <!-- Interactive Pillar 3: Penerimaan Tulus (Amor Fati & Surrender) -->
+        <div class="terra-card pillar-interactive-card p-8 rounded-3xl flex flex-col justify-between border border-secondary/20 bg-surface/90 backdrop-blur-md space-y-6 group">
+          <div>
+            <div class="w-14 h-14 bg-secondary-container rounded-2xl flex items-center justify-center text-secondary mb-5 group-hover:scale-110 group-hover:bg-secondary group-hover:text-on-primary transition-all shadow-sm">
+              <span class="material-symbols-outlined text-3xl">self_improvement</span>
+            </div>
+            <span class="text-[10px] font-mono font-bold tracking-widest uppercase text-secondary bg-secondary-container/50 px-2.5 py-1 rounded-full inline-block mb-3">PILAR 3 • AMOR FATI</span>
+            <h3 class="font-headline text-2xl font-bold mb-2 text-on-surface" data-i18n="card3Title">Penerimaan Tulus</h3>
+            <p class="text-on-surface-variant font-body leading-relaxed text-sm" data-i18n="card3Desc">Kedamaian tak tergoyahkan lahir saat kita menyambut hasil akhir dengan ikhlas dan tanpa perlawanan batin.</p>
           </div>
-          <h3 class="font-headline text-2xl font-bold mb-3 text-on-surface" data-i18n="card3Title">Penerimaan Tulus</h3>
-          <p class="text-on-surface-variant font-body leading-relaxed text-sm" data-i18n="card3Desc">Kedamaian tak tergoyahkan ditemukan saat kita berdamai dengan hasil akhir yang di luar kendali.</p>
+
+          <div class="p-4 rounded-2xl bg-surface-container/80 border border-secondary/15 space-y-2">
+            <span class="text-[11px] font-bold text-secondary flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm">spa</span>
+              <span>Lepaskan Ketegangan Batin:</span>
+            </span>
+            <p class="text-xs text-on-surface italic">"Tarik napas dalam, hembuskan perlahan, dan lepaskan beban yang bukan milikmu."</p>
+            <button class="w-full py-2 px-3 rounded-xl bg-surface-container border border-secondary/30 text-secondary hover:bg-secondary/10 font-bold text-xs shadow-sm flex items-center justify-center gap-1.5 transition-all" onclick="app.openBreathingModal()">
+              <span class="material-symbols-outlined text-sm">air</span>
+              <span>Latihan Relaksasi Napas</span>
+            </button>
+          </div>
         </div>
 
       </div>
     </section>
 
-    <!-- Daily Wisdom Quote Banner -->
-    <section class="max-w-4xl mx-auto px-6 mb-16 w-full relative z-10">
-      <div class="terra-card p-8 rounded-3xl border border-primary/20 relative overflow-hidden bg-gradient-to-br from-surface to-surface-container">
-        <div class="absolute -right-10 -bottom-10 opacity-5 text-primary pointer-events-none">
-          <span class="material-symbols-outlined text-[180px]">format_quote</span>
+    <!-- SECTION: Expanded & Prominent Multi-Philosopher Daily Wisdom -->
+    <section id="section-daily-wisdom" class="max-w-5xl mx-auto px-6 mb-24 w-full relative z-10">
+      <div class="terra-card wisdom-hero-card p-8 sm:p-12 md:p-14 rounded-[2.5rem] border-2 border-primary/20 relative overflow-hidden shadow-terra-deep space-y-6">
+        
+        <div class="absolute -right-6 -bottom-6 opacity-10 text-primary pointer-events-none">
+          <span class="material-symbols-outlined text-[220px]">format_quote</span>
         </div>
-        <div class="relative z-10 text-center">
-          <span class="text-xs font-bold tracking-widest uppercase text-tertiary mb-3 inline-block" data-i18n="wisdomLabel">Kutipan Bijak Hari Ini</span>
-          <blockquote class="font-headline text-xl sm:text-2xl text-on-surface font-semibold italic mb-4 leading-relaxed" id="wisdom-quote">
-            "Kita menderita lebih sering dalam imajinasi daripada dalam kenyataan."
-          </blockquote>
-          <cite class="text-sm font-bold text-primary not-italic block" id="wisdom-author">— Seneca</cite>
-          <button class="mt-4 text-xs font-bold text-on-surface-variant/70 hover:text-primary transition-colors flex items-center gap-1 mx-auto" onclick="app.nextQuote()">
-            <span class="material-symbols-outlined text-sm">refresh</span>
-            <span data-i18n="btnNewQuote">Kutipan Lain</span>
-          </button>
+
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-primary/10 pb-4">
+          <div class="flex items-center gap-2.5">
+            <div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xl font-bold shadow-sm" id="wisdom-avatar-icon">
+              ☸️
+            </div>
+            <div>
+              <span class="text-[10px] font-mono tracking-widest uppercase text-tertiary font-bold" data-i18n="wisdomLabel">KUTIPAN KEBIJAKSANAAN SEJATI</span>
+              <div class="inline-block ml-2 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-primary/15 text-primary" id="wisdom-school-badge">
+                Buddhisme (Dharma)
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button type="button" class="p-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary transition-all text-xs font-bold" title="Salin Kutipan" onclick="app.copyWisdomQuote()">
+              <span class="material-symbols-outlined text-base">content_copy</span>
+            </button>
+            <button type="button" class="px-4 py-2 rounded-xl bg-primary text-on-primary font-bold text-xs shadow-terra-soft hover:scale-105 flex items-center gap-1.5 transition-all" onclick="app.nextQuote()">
+              <span class="material-symbols-outlined text-base">refresh</span>
+              <span data-i18n="btnNewQuote">Kutipan Lain</span>
+            </button>
+          </div>
         </div>
+
+        <!-- Big Hero Quote Text -->
+        <blockquote class="font-headline text-2xl sm:text-3xl md:text-4xl text-on-surface font-extrabold leading-snug tracking-tight transition-all duration-300" id="wisdom-quote">
+          "Pikiran adalah segalanya. Apa yang kamu pikirkan, itulah yang kamu wujudkan. Kedamaian sejati datang dari dalam diri, bukan dari luar."
+        </blockquote>
+
+        <!-- Quote Author & Meaningful Context Hint -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-4 border-t border-primary/10">
+          <div>
+            <cite class="font-headline text-lg font-black text-primary not-italic block tracking-wide" id="wisdom-author">— Siddhartha Gautama (Buddha)</cite>
+            <p class="text-xs sm:text-sm text-on-surface-variant/80 font-body mt-1 max-w-xl italic" id="wisdom-hint">
+              Amati pikiranmu tanpa menghakimi. Lepaskan keterikatan pada apa yang tak dapat kamu kendalikan.
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button class="px-4 py-2 rounded-xl bg-surface-container text-primary text-xs font-bold hover:bg-primary/10 transition-all flex items-center gap-1 border border-primary/20" onclick="app.openJournalWithContext()">
+              <span class="material-symbols-outlined text-sm">edit_note</span>
+              <span>Tulis Refleksi Ini</span>
+            </button>
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <!-- SECTION 3: Dedicated Flowchart Creator Workspace (Using the New 4-Wing Interactive Visual Engine) -->
-    <section id="section-create" class="hidden flex-grow max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full space-y-6">
+    <!-- SECTION 3: Dedicated Full-Page Flowchart Creator Workspace (Expansive Seamless Studio) -->
+    <section id="section-create" class="hidden flex-grow w-full max-w-full px-2 sm:px-6 py-4 space-y-4">
       
-      <!-- Create Flowchart Header & Quick Actions -->
-      <div class="terra-card p-6 sm:p-8 rounded-3xl border-2 border-primary/25 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-terra-deep">
-        <div class="space-y-1">
-          <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary">
-            <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">schema</span>
-            <span>Interactive Flowchart Creator</span>
-          </div>
-          <h2 class="font-headline text-2xl sm:text-3xl font-extrabold text-on-surface">Buat Flowchart Interaktif</h2>
-          <p class="text-xs sm:text-sm text-on-surface-variant max-w-xl">Rancang diagram alur keputusan dengan UI 4-Sayap arah (Top, Right, Bottom, Left), tarik node sesukamu, dan hubungkan cabang keputusan secara visual.</p>
-        </div>
-
-        <div class="flex items-center gap-3 w-full md:w-auto">
-          <button type="button" class="btn-terra border border-primary/20 bg-surface-container text-on-surface-variant hover:text-primary font-bold px-4 py-2.5 rounded-2xl text-xs flex items-center justify-center gap-1.5" onclick="app.showSection('player')">
-            <span class="material-symbols-outlined text-sm">arrow_back</span>
-            <span>Kembali ke Main Flow</span>
-          </button>
-
-          <button type="button" class="btn-terra btn-primary px-6 py-2.5 rounded-2xl font-bold text-xs shadow-terra-soft hover:scale-105 flex items-center justify-center gap-2" onclick="app.saveAndPublishFlowchart()">
-            <span class="material-symbols-outlined text-base">publish</span>
-            <span>Simpan & Mainkan Flowchart</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Flowchart Metadata Fields Row -->
-      <div class="terra-card p-6 rounded-3xl border border-primary/20 space-y-6 shadow-terra-soft">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 bg-surface-container/70 p-4 rounded-2xl border border-primary/15">
-          <div>
-            <label class="block text-[11px] font-bold uppercase text-primary mb-1">Judul Flowchart *</label>
-            <input type="text" id="builder-title" class="w-full p-2.5 rounded-xl bg-surface border border-outline-variant/30 text-on-surface text-xs font-bold focus:outline-none focus:border-primary" placeholder="Contoh: Mau Beli Kopi Mahal?" />
+      <!-- Create Flowchart Header & Quick Actions Bar -->
+      <div class="terra-card p-4 sm:p-6 rounded-3xl border border-primary/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-sm bg-surface-container/70 backdrop-blur-md">
+        <div class="flex flex-wrap items-center gap-4">
+          <div class="space-y-0.5">
+            <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary">
+              <span class="material-symbols-outlined text-base">schema</span>
+              <span>Studio Flowchart Full Page</span>
+            </div>
+            <h2 class="font-headline text-xl sm:text-2xl font-extrabold text-on-surface">Papan Pembuat Diagram Flowchart</h2>
           </div>
 
-          <div>
-            <label class="block text-[11px] font-bold uppercase text-on-surface-variant mb-1">Nama Pembuat / Author</label>
-            <input type="text" id="builder-author" class="w-full p-2.5 rounded-xl bg-surface border border-outline-variant/30 text-on-surface text-xs focus:outline-none focus:border-primary" placeholder="Nama Kamu" />
-          </div>
-
-          <div>
-            <label class="block text-[11px] font-bold uppercase text-on-surface-variant mb-1">Kategori</label>
-            <select id="builder-category" class="w-full p-2.5 rounded-xl bg-surface border border-outline-variant/30 text-on-surface text-xs font-bold focus:outline-none focus:border-primary">
-              <option value="work">Kerja & Logika</option>
+          <!-- Metadata Quick Inputs -->
+          <div class="flex flex-wrap items-center gap-2">
+            <input type="text" id="builder-title" class="p-2 rounded-xl bg-surface border border-outline-variant/30 text-on-surface text-xs font-bold w-44 sm:w-56 focus:outline-none focus:border-primary" placeholder="Judul Flowchart..." value="Mau Beli Kopi Mahal?" />
+            
+            <input type="text" id="builder-author" class="p-2 rounded-xl bg-surface border border-outline-variant/30 text-on-surface text-xs w-32 focus:outline-none focus:border-primary" placeholder="Nama Author" value="Kamu" />
+            
+            <select id="builder-category" class="p-2 rounded-xl bg-surface border border-outline-variant/30 text-on-surface text-xs font-bold focus:outline-none focus:border-primary">
               <option value="stoic">Stoik & Hidup</option>
+              <option value="work">Kerja & Logika</option>
               <option value="humor">Humor & Meme</option>
               <option value="social">Sosial & Relasi</option>
             </select>
-          </div>
 
-          <div>
-            <label class="block text-[11px] font-bold uppercase text-primary mb-1">Template Preset</label>
-            <select id="builder-template-select" class="w-full p-2.5 rounded-xl bg-surface border border-primary/30 text-xs font-bold text-primary focus:outline-none focus:border-primary" onchange="app.loadBuilderTemplate(this.value)">
-              <option value="custom">-- Kosong (Kustom) --</option>
-              <option value="5whys">🔍 5 Whys Root Cause Analysis</option>
+            <select id="builder-template-select" class="p-2 rounded-xl bg-surface border border-primary/30 text-xs font-bold text-primary focus:outline-none focus:border-primary" onchange="app.loadBuilderTemplate(this.value)">
+              <option value="custom">-- Template Preset --</option>
+              <option value="5whys">🔍 5 Whys Root Cause</option>
               <option value="stoic">🌿 Stoic Circle of Control</option>
-              <option value="eisenhower">⚡ Eisenhower Priority Matrix</option>
+              <option value="eisenhower">⚡ Eisenhower Matrix</option>
             </select>
           </div>
         </div>
 
-        <!-- Mount Target for 4-Wing Visual Flowchart & List Node Canvas Component -->
-        <div id="flowchart-creator-canvas-mount" class="w-full min-h-[620px]">
-          <!-- Rendered dynamically by VisualFlowNodeComponent -->
+        <div class="flex items-center gap-2 shrink-0">
+          <button type="button" class="px-3 py-2 rounded-xl bg-surface-container hover:bg-surface text-on-surface-variant hover:text-primary text-xs font-bold flex items-center gap-1 border border-outline-variant/30" onclick="app.exportBuilderJSON()" title="Ekspor JSON">
+            <span class="material-symbols-outlined text-sm">download</span>
+            <span class="hidden sm:inline">Ekspor</span>
+          </button>
+
+          <label class="px-3 py-2 rounded-xl bg-surface-container hover:bg-surface text-on-surface-variant hover:text-primary text-xs font-bold flex items-center gap-1 border border-outline-variant/30 cursor-pointer" title="Impor JSON">
+            <span class="material-symbols-outlined text-sm">upload</span>
+            <span class="hidden sm:inline">Impor</span>
+            <input type="file" id="input-import-json" class="hidden" accept=".json" onchange="app.importBuilderJSON(event)" />
+          </label>
+
+          <button type="button" class="btn-terra btn-primary px-5 py-2 rounded-2xl font-bold text-xs shadow-terra-soft flex items-center gap-1.5 hover:scale-105" onclick="app.saveAndPublishFlowchart()">
+            <span class="material-symbols-outlined text-base">publish</span>
+            <span>Simpan & Mainkan</span>
+          </button>
         </div>
+      </div>
 
-        <!-- Action Tools Footer -->
-        <div class="pt-4 border-t border-primary/10 flex flex-wrap items-center justify-between gap-3">
-          <div class="flex items-center gap-2">
-            <button type="button" class="px-3 py-2 rounded-xl bg-surface-container hover:bg-surface text-on-surface-variant hover:text-primary text-xs font-bold flex items-center gap-1.5 border border-outline-variant/30" onclick="app.exportBuilderJSON()">
-              <span class="material-symbols-outlined text-sm">download</span>
-              <span>Ekspor JSON</span>
-            </button>
-
-            <label class="px-3 py-2 rounded-xl bg-surface-container hover:bg-surface text-on-surface-variant hover:text-primary text-xs font-bold flex items-center gap-1.5 border border-outline-variant/30 cursor-pointer">
-              <span class="material-symbols-outlined text-sm">upload</span>
-              <span>Impor JSON</span>
-              <input type="file" id="input-import-json" class="hidden" accept=".json" onchange="app.importBuilderJSON(event)" />
-            </label>
-          </div>
-
-          <div class="flex items-center gap-3">
-            <button type="button" class="btn-terra px-5 py-2.5 rounded-xl bg-surface-container text-primary font-bold text-xs border border-primary/25 hover:bg-primary/10" onclick="app.previewCustomFlowchart()">
-              <span class="material-symbols-outlined text-sm">play_arrow</span>
-              <span>Uji Flowchart</span>
-            </button>
-            <button type="button" class="btn-terra btn-primary px-6 py-2.5 rounded-xl font-bold text-xs shadow-terra-soft" onclick="app.saveAndPublishFlowchart()">
-              <span class="material-symbols-outlined text-base">publish</span>
-              <span>Simpan & Terbitkan</span>
-            </button>
-          </div>
-        </div>
+      <!-- Mount Target for 4-Wing Visual Flowchart & List Node Canvas Component (Full Height) -->
+      <div id="flowchart-creator-canvas-mount" class="w-full min-h-[680px] flex-grow">
+        <!-- Rendered dynamically by VisualFlowNodeComponent -->
       </div>
 
     </section>
@@ -690,6 +718,41 @@ res_cannotact["🏁 Lalu Kenapa Khawatir?"]'></textarea>
 
     </div>
   </div>
+
+  <!-- Floating Bottom Wellness & Ergonomic Dock -->
+  <aside id="floating-dock" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-40 bg-surface/85 backdrop-blur-xl border border-primary/25 shadow-terra-glow rounded-2xl px-3 py-2 flex items-center gap-1.5 sm:gap-2.5 transition-all duration-300 floating-bottom-dock">
+    <!-- Sound Ambient Generator -->
+    <button id="btn-ambient" class="dock-pill-btn flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface-container/70 text-on-surface-variant hover:text-primary text-xs font-bold" title="Suara Alam / Ambient Sound (Shortcut: S)">
+      <span class="material-symbols-outlined text-base" id="icon-sound">volume_off</span>
+      <span class="hidden sm:inline" id="txt-ambient">Suara Alam</span>
+    </button>
+
+    <!-- Breathing Exercise Modal Toggle -->
+    <button id="btn-breathing-modal" class="dock-pill-btn flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface-container/70 text-on-surface-variant hover:text-primary text-xs font-bold" title="Latihan Napas 4-7-8 (Shortcut: B)" onclick="app.openBreathingModal()">
+      <span class="material-symbols-outlined text-base">air</span>
+      <span class="hidden sm:inline" data-i18n="navBreathing">Napas Calm</span>
+    </button>
+
+    <!-- Journal Drawer Toggle -->
+    <button id="btn-journal-toggle" class="dock-pill-btn flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface-container/70 text-on-surface-variant hover:text-primary text-xs font-bold relative" title="Jurnal Refleksi Ketenangan (Shortcut: J)" onclick="app.toggleJournalDrawer(true)">
+      <span class="material-symbols-outlined text-base">edit_note</span>
+      <span class="hidden sm:inline" data-i18n="navJournal">Jurnal</span>
+      <span id="journal-badge" class="hidden absolute -top-1 -right-1 w-2.5 h-2.5 bg-tertiary rounded-full animate-ping"></span>
+    </button>
+
+    <div class="h-4 w-px bg-outline-variant/30"></div>
+
+    <!-- Quick Wisdom Jump -->
+    <button id="btn-wisdom-jump" class="dock-pill-btn flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface-container/70 text-on-surface-variant hover:text-primary text-xs font-bold" title="Kutipan Kebijaksanaan Sejati" onclick="app.scrollToWisdom()">
+      <span class="material-symbols-outlined text-base text-tertiary">auto_stories</span>
+      <span class="hidden md:inline">Wisdom</span>
+    </button>
+
+    <!-- Global Fullscreen Toggle -->
+    <button id="btn-global-fullscreen" class="dock-pill-btn p-1.5 rounded-xl bg-primary/10 text-primary hover:bg-primary hover:text-on-primary text-xs font-bold transition-all" title="Layar Penuh Web (Shortcut: F)" onclick="app.toggleGlobalFullscreen()">
+      <span class="material-symbols-outlined text-base" id="icon-global-fullscreen">fullscreen</span>
+    </button>
+  </aside>
 
   <script type="module" src="./app.js"></script>
 </body>

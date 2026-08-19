@@ -195,29 +195,94 @@ const translations = {
 
 const quotes = [
   {
-    idQuote: "Kita menderita lebih sering dalam imajinasi daripada dalam kenyataan.",
-    enQuote: "We suffer more often in imagination than in reality.",
-    author: "Seneca"
+    idQuote: "Pikiran adalah segalanya. Apa yang kamu pikirkan, itulah yang kamu wujudkan. Kedamaian sejati datang dari dalam diri, bukan dari luar.",
+    enQuote: "The mind is everything. What you think you become. Peace comes from within. Do not seek it without.",
+    author: "Siddhartha Gautama (Buddha)",
+    school_id: "Buddhisme (Dharma)",
+    school_en: "Buddhism (Dharma)",
+    avatarIcon: "☸️",
+    hint_id: "Amati pikiranmu tanpa menghakimi. Lepaskan keterikatan pada apa yang tak dapat kamu kendalikan.",
+    hint_en: "Observe your mind without judgment. Release attachment to what you cannot control."
   },
   {
-    idQuote: "Kamu memiliki kendali atas pikiranmu - bukan kejadian luar. Pahami ini, dan kamu akan menemukan kekuatan.",
+    idQuote: "Sebagaimana di atas, begitu pula di bawah; sebagaimana di dalam, begitu pula di luar. Pikiran adalah alam semesta; alam semesta adalah mental.",
+    enQuote: "As above, so below; as within, so without. The Universe is Mental; Mind is the underlying reality.",
+    author: "Hermes Trismegistus",
+    school_id: "Hermetisisme (Kybalion)",
+    school_en: "Hermeticism (The Kybalion)",
+    avatarIcon: "✨",
+    hint_id: "Kondisi dunia luarmu mencerminkan frekuensi batinmu. Ubah pikiranmu untuk mengubah realitasmu.",
+    hint_en: "Your outer world mirrors your inner frequency. Change your mind to harmonize your reality."
+  },
+  {
+    idQuote: "Kamu memiliki kuasa penuh atas pikiranmu, bukan atas peristiwa di luar. Sadarilah kebenaran ini, dan kamu akan menemukan kekuatan sejati.",
     enQuote: "You have power over your mind - not outside events. Realize this, and you will find strength.",
-    author: "Marcus Aurelius"
+    author: "Marcus Aurelius",
+    school_id: "Stoikisme Romawi",
+    school_en: "Roman Stoicism",
+    avatarIcon: "🏛️",
+    hint_id: "Tolak godaan untuk mengeluh. Fokuskan seluruh energimu pada kebajikan dan tindakan dalam kendalimu.",
+    hint_en: "Reject the impulse to complain. Channel all energy into virtuous actions within your control."
   },
   {
-    idQuote: "Bukan apa yang terjadi padamu yang penting, tapi bagaimana caramu menanggapinya.",
+    idQuote: "Siapa yang melihat ke luar, bermimpi; siapa yang melihat ke dalam batinnya, terbangun. Jadikan yang tak sadar menjadi sadar.",
+    enQuote: "Who looks outside, dreams; who looks inside, awakes. Until you make the unconscious conscious, it will direct your life.",
+    author: "Carl Gustav Jung",
+    school_id: "Psikologi Analitis",
+    school_en: "Analytical Psychology",
+    avatarIcon: "🧠",
+    hint_id: "Rangkul emosi dan bayang-bayang batinmu (shadow). Integrasikan kesadaran untuk mencapai keutuhan diri.",
+    hint_en: "Embrace your shadow and raw emotions. Integrate them consciously to achieve inner wholeness."
+  },
+  {
+    idQuote: "Kesederhanaan adalah puncak kecanggihan tertinggi. Belajar dan memahami kebenaran tidak akan pernah melelahkan pikiran.",
+    enQuote: "Simplicity is the ultimate sophistication. Learning never exhausts the mind.",
+    author: "Leonardo da Vinci",
+    school_id: "Renaisans Polymath",
+    school_en: "Renaissance Polymath",
+    avatarIcon: "🎨",
+    hint_id: "Uraikan persoalan rumit menjadi bagian-bagian paling sederhana dengan rasa ingin tahu yang jernih.",
+    hint_en: "Deconstruct complex problems into simple first-principles with curious, lucid clarity."
+  },
+  {
+    idQuote: "Kekuatan sejati lahir dari keheningan batin yang sempurna. Seluruh kehidupan adalah proses evolusi kesadaran menuju pencerahan.",
+    enQuote: "True power is born of complete inner silence. All life is secretly yoga evolving toward higher consciousness.",
+    author: "Sri Aurobindo",
+    school_id: "Yoga Integral",
+    school_en: "Integral Yoga",
+    avatarIcon: "🧘",
+    hint_id: "Bawa keheningan batin ke dalam setiap aktivitas harianmu tanpa terburu-buru oleh kecemasan waktu.",
+    hint_en: "Infuse peaceful inner stillness into daily action without letting anxiety rush your spirit."
+  },
+  {
+    idQuote: "Luka yang kamu rasakan adalah tempat di mana cahaya kebijaksanaan memasukimu. Jangan merasa kecil, seluruh semesta ada di dalam dirimu.",
+    enQuote: "The wound is the place where the Light enters you. You are not a drop in the ocean; you are the entire ocean in a drop.",
+    author: "Jalaluddin Rumi",
+    school_id: "Sufisme & Cinta Ilahi",
+    school_en: "Sufism & Divine Love",
+    avatarIcon: "🕊️",
+    hint_id: "Jadikan setiap luka dan kegagalan sebagai pintu gerbang menuju cinta, kerendahan hati, dan ketulusan.",
+    hint_en: "Allow setbacks to become open gateways for love, humble awareness, and sincere surrender."
+  },
+  {
+    idQuote: "Kita menderita jauh lebih sering dalam imajinasi dan ketakutan kita daripada dalam kenyataan sesungguhnya.",
+    enQuote: "We suffer more often in imagination than in reality.",
+    author: "Seneca",
+    school_id: "Stoikisme Klasik",
+    school_en: "Classical Stoicism",
+    avatarIcon: "🌿",
+    hint_id: "Pisahkan antara kekhawatiran hipotetis di masa depan dengan fakta nyata yang sedang terjadi saat ini.",
+    hint_en: "Separate hypothetical future fears from the concrete facts of your present moment."
+  },
+  {
+    idQuote: "Bukan apa yang terjadi padamu yang menentukan kebahagiaanmu, melainkan bagaimana caramu memaknai dan meresponnya.",
     enQuote: "It's not what happens to you, but how you react to it that matters.",
-    author: "Epictetus"
-  },
-  {
-    idQuote: "Ketika kamu menerima apa adanya, seluruh dunia menjadi milikmu.",
-    enQuote: "When you accept things as they are, the whole world belongs to you.",
-    author: "Lao Tzu"
-  },
-  {
-    idQuote: "Kedamaian adalah hasil dari melatih pikiranmu untuk memproses hidup sebagaimana adanya, bukan sebagaimana kamu inginkan.",
-    enQuote: "Peace is the result of training your mind to process life as it is, not as you wish it were.",
-    author: "Stoic Wisdom"
+    author: "Epictetus",
+    school_id: "Stoikisme Praktis",
+    school_en: "Practical Stoicism",
+    avatarIcon: "⚖️",
+    hint_id: "Kuasai responmu, maka tidak ada orang lain atau kondisi luar yang dapat menyakitimu.",
+    hint_en: "Master your reaction, and no external circumstance can ever harm your peace."
   }
 ];
 
@@ -1152,11 +1217,35 @@ class SeamlessProblemSolverApp {
       }
     });
 
-    // Keyboard ESC key shortcut for exiting Fullscreen mode & Ctrl+Alt+A for secret Ads Setup
+    // Keyboard shortcuts: ESC, S (Sound), B (Breathing), J (Journal), F (Fullscreen), and Ctrl+Alt+A (Ads Setup)
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && this.isFlowFullscreen) {
-        this.toggleFullscreenFlowchart(false);
+      const isInput = e.target.closest('input, textarea, select, [contenteditable="true"]');
+
+      if (e.key === 'Escape') {
+        if (this.isFlowFullscreen) this.toggleFullscreenFlowchart(false);
+        const secCreate = document.getElementById('section-create');
+        if (secCreate && secCreate.classList.contains('fullscreen-create-active')) {
+          secCreate.classList.remove('fullscreen-create-active');
+        }
       }
+
+      if (!isInput && !e.ctrlKey && !e.altKey && !e.metaKey) {
+        if (e.key === 'b' || e.key === 'B') {
+          e.preventDefault();
+          this.openBreathingModal();
+        } else if (e.key === 'j' || e.key === 'J') {
+          e.preventDefault();
+          this.toggleJournalDrawer(true);
+        } else if (e.key === 's' || e.key === 'S') {
+          e.preventDefault();
+          const ambientBtn = document.getElementById('btn-ambient');
+          if (ambientBtn) ambientBtn.click();
+        } else if (e.key === 'f' || e.key === 'F') {
+          e.preventDefault();
+          this.toggleGlobalFullscreen();
+        }
+      }
+
       if (e.ctrlKey && e.altKey && (e.key === 'a' || e.key === 'A')) {
         e.preventDefault();
         this.openAdsManagerModal();
@@ -2881,13 +2970,114 @@ res_hemat: [HASIL] Hemat & Seduh Kopi Rumah
     });
   }
 
-  // --- Quote Generator ---
+  // --- Enhanced Multi-Tradition Daily Wisdom Generator ---
+  renderDailyQuote() {
+    const q = quotes[this.quoteIndex] || quotes[0];
+    const isEn = this.currentLang === 'en';
+
+    const quoteEl = document.getElementById('wisdom-quote');
+    const authorEl = document.getElementById('wisdom-author');
+    const schoolEl = document.getElementById('wisdom-school-badge');
+    const avatarEl = document.getElementById('wisdom-avatar-icon');
+    const hintEl = document.getElementById('wisdom-hint');
+
+    if (quoteEl) quoteEl.textContent = `"${isEn ? q.enQuote : q.idQuote}"`;
+    if (authorEl) authorEl.textContent = `— ${q.author}`;
+    if (schoolEl) schoolEl.textContent = isEn ? (q.school_en || q.school_id) : (q.school_id || 'Filsafat');
+    if (avatarEl) avatarEl.textContent = q.avatarIcon || '☸️';
+    if (hintEl) hintEl.textContent = isEn ? (q.hint_en || q.hint_id) : (q.hint_id || '');
+  }
+
   nextQuote() {
     this.quoteIndex = (this.quoteIndex + 1) % quotes.length;
-    const q = quotes[this.quoteIndex];
+    this.renderDailyQuote();
+  }
+
+  copyWisdomQuote() {
+    const q = quotes[this.quoteIndex] || quotes[0];
     const isEn = this.currentLang === 'en';
-    document.getElementById('wisdom-quote').textContent = `"${isEn ? q.enQuote : q.idQuote}"`;
-    document.getElementById('wisdom-author').textContent = `— ${q.author}`;
+    const text = `"${isEn ? q.enQuote : q.idQuote}" — ${q.author} (${isEn ? q.school_en : q.school_id})\n\n🌿 Terra Flow: https://seamless-problem-solver.vercel.app/`;
+    navigator.clipboard.writeText(text).then(() => {
+      alert(isEn ? '✨ Wisdom quote copied to clipboard!' : '✨ Kutipan kebijaksanaan berhasil disalin ke clipboard!');
+    });
+  }
+
+  scrollToWisdom() {
+    const el = document.getElementById('section-daily-wisdom');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  // --- Interactive 3 Pillars of Calm ---
+  checkPillarControl(choice) {
+    const scenarios = [
+      { text: '"Pendapat orang lain tentang dirimu..."', correct: 1, explanation: 'Benar! Reaksi & perkataan orang lain 100% di luar kendalimu.' },
+      { text: '"Usaha dan fokus belajarmu hari ini..."', correct: 2, explanation: 'Tepat! Tingkat disiplin & usahamu 100% dalam kendalimu.' },
+      { text: '"Kondisi macet atau cuaca hujan..."', correct: 1, explanation: 'Benar! Cuaca & lalu lintas adalah faktor alam di luar kendalimu.' },
+      { text: '"Responmu saat dikritik rekan kerja..."', correct: 2, explanation: 'Luar biasa! Cara kita merespon kritik selalu dalam kuasa kendali kita.' }
+    ];
+
+    this.pillarScenarioIndex = ((this.pillarScenarioIndex || 0) + 1) % scenarios.length;
+    const current = scenarios[this.pillarScenarioIndex];
+
+    const fb = document.getElementById('pilar-control-feedback');
+    const txt = document.getElementById('pilar-control-text');
+
+    if (fb) {
+      fb.classList.remove('hidden');
+      if (choice === current.correct) {
+        fb.className = 'text-[11px] font-bold text-emerald-500 pt-1 block animate-bounce';
+        fb.textContent = `✨ ${current.explanation}`;
+      } else {
+        fb.className = 'text-[11px] font-bold text-amber-500 pt-1 block';
+        fb.textContent = `💡 Refleksi: ${current.explanation}`;
+      }
+    }
+
+    setTimeout(() => {
+      if (txt) txt.textContent = current.text;
+    }, 2500);
+  }
+
+  startFiveMinuteFocus() {
+    const btn = document.getElementById('txt-five-min-btn');
+    if (!btn) return;
+
+    if (this.fiveMinTimer) {
+      clearInterval(this.fiveMinTimer);
+      this.fiveMinTimer = null;
+      btn.textContent = 'Mulai Fokus 5 Menit';
+      return;
+    }
+
+    let timeLeft = 300; // 5 mins
+    this.fiveMinTimer = setInterval(() => {
+      timeLeft--;
+      const m = Math.floor(timeLeft / 60);
+      const s = (timeLeft % 60).toString().padStart(2, '0');
+      btn.textContent = `⏱️ Sisa Waktu: ${m}:${s}`;
+
+      if (timeLeft <= 0) {
+        clearInterval(this.fiveMinTimer);
+        this.fiveMinTimer = null;
+        btn.textContent = '🎉 5 Menit Selesai! Pertahankan!';
+        alert('🎉 Luar biasa! Kamu berhasil fokus penuh 5 menit.');
+      }
+    }, 1000);
+  }
+
+  // --- Global Fullscreen Toggle ---
+  toggleGlobalFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen?.().catch(() => {});
+      const icon = document.getElementById('icon-global-fullscreen');
+      if (icon) icon.textContent = 'fullscreen_exit';
+    } else {
+      document.exitFullscreen?.().catch(() => {});
+      const icon = document.getElementById('icon-global-fullscreen');
+      if (icon) icon.textContent = 'fullscreen';
+    }
   }
 
   shareFlowResult() {
@@ -2942,8 +3132,7 @@ res_hemat: [HASIL] Hemat & Seduh Kopi Rumah
     });
 
     // Update Quote
-    const q = quotes[this.quoteIndex];
-    document.getElementById('wisdom-quote').textContent = `"${lang === 'en' ? q.enQuote : q.idQuote}"`;
+    this.renderDailyQuote();
 
     this.renderFlowchartPlayer();
     this.renderCommunityGrid();

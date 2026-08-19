@@ -198,30 +198,30 @@ export class VisualFlowNodeComponent {
 
     // --- Figma Right Tool Bar (Matches Figma Screenshot) ---
     const figmaRightToolbar = document.createElement('div');
-    figmaRightToolbar.className = 'absolute right-6 top-1/2 -translate-y-1/2 z-30 flex flex-col items-center gap-2 p-2 rounded-2xl figma-floating-panel shadow-2xl';
+    figmaRightToolbar.className = 'absolute right-6 top-1/2 -translate-y-1/2 z-30 flex flex-col items-center gap-2 p-2 rounded-2xl figma-floating-panel shadow-terra-deep';
     figmaRightToolbar.innerHTML = `
-      <button type="button" class="p-2.5 rounded-xl hover:bg-white/10 text-white/90 hover:text-emerald-400 transition-all" title="Selection Tool (V)">
+      <button type="button" class="p-2.5 rounded-xl hover:bg-primary/10 text-on-surface hover:text-primary transition-all" title="Selection Tool (V)">
         <span class="material-symbols-outlined text-lg">near_me</span>
       </button>
-      <button type="button" class="p-2.5 rounded-xl hover:bg-white/10 text-white/90 hover:text-emerald-400 transition-all" title="Frame Tool (F)">
+      <button type="button" class="p-2.5 rounded-xl hover:bg-primary/10 text-on-surface hover:text-primary transition-all" title="Frame Tool (F)">
         <span class="material-symbols-outlined text-lg">crop_free</span>
       </button>
 
-      <button type="button" class="p-2.5 rounded-xl hover:bg-white/10 text-white/90 hover:text-emerald-400 transition-all" title="Pencil / Draw (P)">
+      <button type="button" class="p-2.5 rounded-xl hover:bg-primary/10 text-on-surface hover:text-primary transition-all" title="Pencil / Draw (P)">
         <span class="material-symbols-outlined text-lg">edit</span>
       </button>
 
-      <button type="button" class="p-2.5 rounded-xl hover:bg-white/10 text-white/90 hover:text-emerald-400 transition-all" title="Hand Pan Tool (H)">
+      <button type="button" class="p-2.5 rounded-xl hover:bg-primary/10 text-on-surface hover:text-primary transition-all" title="Hand Pan Tool (H)">
         <span class="material-symbols-outlined text-lg">pan_tool</span>
       </button>
 
-      <div class="w-4 h-px bg-white/15 my-0.5"></div>
+      <div class="w-4 h-px bg-primary/15 my-0.5"></div>
 
-      <button type="button" class="p-2.5 rounded-xl hover:bg-white/10 text-white/90 hover:text-emerald-400 transition-all" title="Color Palette">
+      <button type="button" class="p-2.5 rounded-xl hover:bg-primary/10 text-on-surface hover:text-primary transition-all" title="Color Palette">
         <span class="material-symbols-outlined text-lg">palette</span>
       </button>
 
-      <button type="button" class="p-2.5 rounded-xl hover:bg-white/10 text-white/90 hover:text-emerald-400 transition-all" title="Favorites">
+      <button type="button" class="p-2.5 rounded-xl hover:bg-primary/10 text-on-surface hover:text-primary transition-all" title="Favorites">
         <span class="material-symbols-outlined text-lg">star</span>
       </button>
     `;
@@ -229,20 +229,20 @@ export class VisualFlowNodeComponent {
 
     // --- Figma Bottom Floating Prompt Input Bar (Matches Figma Screenshot) ---
     const figmaBottomPromptBar = document.createElement('div');
-    figmaBottomPromptBar.className = 'absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3 px-4 py-3 rounded-2xl figma-floating-panel shadow-2xl max-w-xl w-full mx-auto border border-white/15';
+    figmaBottomPromptBar.className = 'absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3 px-4 py-3 rounded-2xl figma-floating-panel shadow-terra-deep max-w-xl w-full mx-auto border border-primary/20';
     figmaBottomPromptBar.innerHTML = `
-      <button type="button" class="p-1 text-white/60 hover:text-white transition-colors" title="Tambah Lampiran">
+      <button type="button" class="p-1 text-on-surface-variant hover:text-primary transition-colors" title="Tambah Lampiran">
         <span class="material-symbols-outlined text-lg">add</span>
       </button>
-      <button type="button" class="p-1 text-white/60 hover:text-white transition-colors" title="Prompt Command">
+      <button type="button" class="p-1 text-on-surface-variant hover:text-primary transition-colors" title="Prompt Command">
         <span class="material-symbols-outlined text-lg">code</span>
       </button>
 
-      <input type="text" placeholder="Apa yang ingin Anda ubah atau buat?" class="flex-grow bg-transparent text-sm text-white placeholder-white/40 focus:outline-none font-medium" />
+      <input type="text" placeholder="Apa yang ingin Anda ubah atau buat?" class="flex-grow bg-transparent text-sm text-on-surface placeholder-on-surface-variant/40 focus:outline-none font-medium" />
 
-      <span class="px-2 py-0.5 rounded-md bg-white/10 text-white/70 text-[10px] font-mono">3 Flash</span>
+      <span class="px-2 py-0.5 rounded-md bg-primary/10 text-primary text-[10px] font-mono font-bold">3 Flash</span>
 
-      <button type="button" class="p-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold transition-all shadow-md flex items-center justify-center">
+      <button type="button" class="p-2 rounded-xl bg-primary hover:bg-primary/90 text-on-primary font-bold transition-all shadow-md flex items-center justify-center">
         <span class="material-symbols-outlined text-base">auto_awesome</span>
       </button>
     `;
@@ -250,28 +250,28 @@ export class VisualFlowNodeComponent {
 
     // --- Figma Bottom Left Zoom Control Bar ---
     const figmaZoomToolbar = document.createElement('div');
-    figmaZoomToolbar.className = 'absolute bottom-6 left-6 z-30 flex items-center gap-2 p-2 rounded-2xl figma-floating-panel shadow-2xl';
+    figmaZoomToolbar.className = 'absolute bottom-6 left-6 z-30 flex items-center gap-2 p-2 rounded-2xl figma-floating-panel shadow-terra-deep';
     figmaZoomToolbar.innerHTML = `
-      <button type="button" data-figma-action="zoom-out" class="p-2 rounded-xl hover:bg-white/10 text-white transition-all font-bold text-xs" title="Zoom Out (-)">
+      <button type="button" data-figma-action="zoom-out" class="p-2 rounded-xl hover:bg-primary/10 text-on-surface hover:text-primary transition-all font-bold text-xs" title="Zoom Out (-)">
         <span class="material-symbols-outlined text-base">remove</span>
       </button>
 
-      <span id="figma-zoom-label" class="px-2.5 py-1 rounded-xl bg-white/10 text-xs font-mono font-extrabold text-emerald-400 border border-white/10 cursor-pointer" title="Klik untuk Reset Zoom (100%)" data-figma-action="zoom-reset">
+      <span id="figma-zoom-label" class="px-2.5 py-1 rounded-xl bg-primary/15 text-xs font-mono font-extrabold text-primary border border-primary/20 cursor-pointer" title="Klik untuk Reset Zoom (100%)" data-figma-action="zoom-reset">
         ${Math.round(this.zoomLevel * 100)}%
       </span>
 
-      <button type="button" data-figma-action="zoom-in" class="p-2 rounded-xl hover:bg-white/10 text-white transition-all font-bold text-xs" title="Zoom In (+)">
+      <button type="button" data-figma-action="zoom-in" class="p-2 rounded-xl hover:bg-primary/10 text-on-surface hover:text-primary transition-all font-bold text-xs" title="Zoom In (+)">
         <span class="material-symbols-outlined text-base">add</span>
       </button>
 
-      <div class="h-4 w-px bg-white/15 mx-1"></div>
+      <div class="h-4 w-px bg-primary/15 mx-1"></div>
 
-      <button type="button" data-figma-action="export-json" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-all font-extrabold text-xs flex items-center gap-1 border border-white/15" title="Ekspor JSON Flowchart">
+      <button type="button" data-figma-action="export-json" class="px-3 py-1.5 rounded-xl bg-surface hover:bg-primary/10 text-on-surface hover:text-primary transition-all font-extrabold text-xs flex items-center gap-1 border border-primary/20" title="Ekspor JSON Flowchart">
         <span class="material-symbols-outlined text-sm">download</span>
         <span class="hidden sm:inline">JSON</span>
       </button>
 
-      <button type="button" data-figma-action="export-png" class="px-3 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-extrabold text-xs flex items-center gap-1 border border-emerald-500/30" title="Ekspor Gambar Diagram">
+      <button type="button" data-figma-action="export-png" class="px-3 py-1.5 rounded-xl bg-primary text-on-primary hover:bg-primary/90 font-extrabold text-xs flex items-center gap-1 shadow-sm" title="Ekspor Gambar Diagram">
         <span class="material-symbols-outlined text-sm">image</span>
         <span class="hidden sm:inline">Gambar PNG</span>
       </button>

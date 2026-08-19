@@ -1063,6 +1063,426 @@ const adminFlowcharts = [
         adv_en: "You survived today."
       }
     }
+  },
+  {
+    id: "funny-5sec-rule",
+    title_id: "Aturan 5 Detik: Makanan Jatuh Ke Lantai Boleh Dimakan?",
+    title_en: "5-Second Rule: Can You Eat Food Off The Floor?",
+    category: "humor",
+    author: "Tim Kuliner Nekat",
+    isAdmin: true,
+    likes: 1840,
+    plays: 6720,
+    desc_id: "Panduan ilmiah (kocak) mengecek apakah makanan yang jatuh ke lantai masih layak makan.",
+    desc_en: "Scientific (hilarious) guide to check if fallen floor food is still edible.",
+    startNode: "q1",
+    nodes: {
+      q1: {
+        tag_id: "Timer Lantai", tag_en: "Floor Timer",
+        q_id: "Apakah makanan jatuh ke lantai kurang dari 5 detik?",
+        q_en: "Did the food stay on the floor for less than 5 seconds?",
+        options: [
+          { text_id: "YA, KURANG DARI 5 DETIK", text_en: "YES, UNDER 5 SECONDS", next: "q2", btnStyle: "btn-primary" },
+          { text_id: "TIDAK, SUDAH 5 MENIT", text_en: "NO, ALREADY 5 MINS", next: "res_buang", btnStyle: "btn-secondary" }
+        ]
+      },
+      q2: {
+        tag_id: "Inspeksi Lantai", tag_en: "Floor Inspection",
+        q_id: "Apakah lantainya kelihatan bersih atau ada debu tebal / rambut misterius?",
+        q_en: "Does the floor look clean or is there mysterious hair / dust?",
+        options: [
+          { text_id: "KINCLONG BERSIH", text_en: "SPARKLING CLEAN", next: "q3", btnStyle: "btn-primary" },
+          { text_id: "ADA DEBU / RAMBUT", text_en: "DUSTY / HAIRY", next: "res_buang", btnStyle: "btn-secondary" }
+        ]
+      },
+      q3: {
+        tag_id: "Tekstur Makanan", tag_en: "Food Texture",
+        q_id: "Apakah makanannya basah & lengket (seperti es krim) atau kering (seperti biskuit)?",
+        q_en: "Is the food wet & sticky (like ice cream) or dry (like a biscuit)?",
+        options: [
+          { text_id: "KERING (BISKUIT / KERUPUK)", text_en: "DRY (BISCUIT / CHIPS)", next: "res_makan", btnStyle: "btn-primary" },
+          { text_id: "BASAH LENGKET", text_en: "WET / STICKY", next: "res_buang", btnStyle: "btn-secondary" }
+        ]
+      },
+      res_makan: {
+        isResult: true,
+        title_id: "TIUP DIKIT & MAKAN! (ATURAN 5 DETIK BERLAKU)",
+        title_en: "BLOW IT OFF & EAT! (5-SECOND RULE APPLIES)",
+        msg_id: "\"Kuman butuh minimal 5.1 detik untuk jalan menuju makananmu. Sistem imunmu butuh latihan!\"",
+        msg_en: "\"Germs need 5.1 seconds minimum to walk onto your food. Your immune system needs exercise!\"",
+        adv_id: "Tiup debunya tipis-tipis, kunyah dengan nikmat, dan jangan bilang siapa-siapa.",
+        adv_en: "Blow off minor dust, chew happily, and don't tell anyone."
+      },
+      res_buang: {
+        isResult: true,
+        title_id: "BUANG KE TEMPAT SAMPAH SEGERA!",
+        title_en: "THROW IT IN THE TRASH IMMEDIATELY!",
+        msg_id: "\"Bakteri lantai sudah menggelar pesta disko di atas makananmu. Hemat biaya dokter!\"",
+        msg_en: "\"Floor bacteria are currently holding a disco party on your food. Save doctor fees!\"",
+        adv_id: "Ikhlaskan makanan itu dan ambil camilan baru dari lemari.",
+        adv_en: "Let it go and grab a fresh snack from the pantry."
+      }
+    }
+  },
+  {
+    id: "funny-engineering-wd40",
+    title_id: "Diagram Insinyur: WD-40 vs Lakban (Duct Tape)",
+    title_en: "The Engineering Flowchart: WD-40 vs Duct Tape",
+    category: "humor",
+    author: "Persatuan Insinyur Meme",
+    isAdmin: true,
+    likes: 2450,
+    plays: 8900,
+    desc_id: "Aturan emas perbaikan barang mekanis di seluruh dunia: WD-40 jika macet, Lakban jika goyang!",
+    desc_en: "Global golden rule for fixing mechanics: WD-40 if stuck, Duct Tape if loose!",
+    startNode: "q1",
+    nodes: {
+      q1: {
+        tag_id: "Cek Pergerakan", tag_en: "Movement Check",
+        q_id: "Apakah barang ini bergerak saat ini?",
+        q_en: "Does it move right now?",
+        options: [
+          { text_id: "YA, BERGERAK", text_en: "YES, IT MOVES", next: "q2_should_move", btnStyle: "btn-primary" },
+          { text_id: "TIDAK, DIAM MACET", text_en: "NO, IT'S STUCK", next: "q2_should_stuck", btnStyle: "btn-secondary" }
+        ]
+      },
+      q2_should_move: {
+        tag_id: "Cek Keharusan", tag_en: "Expectation Check",
+        q_id: "Apakah seharusnya barang ini BERGERAK?",
+        q_en: "SHOULD it move?",
+        options: [
+          { text_id: "YA, HARUS BERGERAK", text_en: "YES, IT SHOULD", next: "res_beres", btnStyle: "btn-primary" },
+          { text_id: "TIDAK, HARUSNYA DIAM!", text_en: "NO, IT SHOULD NOT!", next: "res_duct", btnStyle: "btn-secondary" }
+        ]
+      },
+      q2_should_stuck: {
+        tag_id: "Cek Keharusan", tag_en: "Expectation Check",
+        q_id: "Apakah seharusnya barang ini BERGERAK?",
+        q_en: "SHOULD it move?",
+        options: [
+          { text_id: "YA, HARUSNYA GERAK!", text_en: "YES, IT SHOULD!", next: "res_wd40", btnStyle: "btn-primary" },
+          { text_id: "TIDAK, HARUSNYA DIAM", text_en: "NO, IT SHOULD NOT", next: "res_beres", btnStyle: "btn-secondary" }
+        ]
+      },
+      res_wd40: {
+        isResult: true,
+        title_id: "SEPROT WD-40 SEGERA!",
+        title_en: "SPRAY WD-40 IMMEDIATELY!",
+        msg_id: "\"Cairan ajaib pelumas dunia akan membuat semua barang macet jadi mulus kembali!\"",
+        msg_en: "\"The world's magic lubricant will make any stuck mechanism smooth again!\"",
+        adv_id: "Semprotkan secukupnya pada engsel/baut dan putar perlahan.",
+        adv_en: "Spray generously on hinges/bolts and turn slowly."
+      },
+      res_duct: {
+        isResult: true,
+        title_id: "TEMPEL LAKBAN / DUCT TAPE!",
+        title_en: "WRAP DUCT TAPE ALL OVER IT!",
+        msg_id: "\"Jika barang goyang padahal harusnya diam, balut dengan lakban hitam super tebal!\"",
+        msg_en: "\"If it moves when it shouldn't, wrap it in heavy-duty duct tape!\"",
+        adv_id: "Gunakan minimal 3 gulungan lakban sampai barangnya terkunci total.",
+        adv_en: "Use at least 3 layers of duct tape until it stops moving."
+      },
+      res_beres: {
+        isResult: true,
+        title_id: "JANGAN DISENTUH! (SISTEM SUDAH BERES)",
+        title_en: "DO NOT TOUCH! (PROBLEM SOLVED)",
+        msg_id: "\"Segala sesuatu berjalan sesuai hukum fisika. Simpan alatmu dan nikmati kopimu.\"",
+        msg_en: "\"Everything operates according to physical laws. Put tools away and drink coffee.\"",
+        adv_id: "Tinggalkan tempat kerja dengan senyuman kemenangan insinyur.",
+        adv_en: "Walk away with an engineer's victorious smile."
+      }
+    }
+  },
+  {
+    id: "funny-midnight-shopping",
+    title_id: "Panduan Membeli Barang Diskon Olshop Jam 12 Malam",
+    title_en: "Midnight Sale Shopping Decision Guide",
+    category: "humor",
+    author: "Tim Korban Flash Sale",
+    isAdmin: true,
+    likes: 1390,
+    plays: 5410,
+    desc_id: "Penyelamat dompet & saldo m-banking dari godaan flash sale promo 12.12 jam 12 malam.",
+    desc_en: "Savings savior stopping midnight impulse flash-sale purchases.",
+    startNode: "q1",
+    nodes: {
+      q1: {
+        tag_id: "Cek Niat", tag_en: "Intention Check",
+        q_id: "Apakah kamu memang butuh barang ini atau cuma terhipnotis kata 'DISKON 70%'?",
+        q_en: "Do you genuinely need this or are you brainwashed by '70% OFF'?",
+        options: [
+          { text_id: "MEMANG BUTUH DARI DULU", text_en: "NEEDED IT WAY BEFORE", next: "q2", btnStyle: "btn-primary" },
+          { text_id: "TERHIPNOTIS DISKON", text_en: "BRAINWASHED BY SALE", next: "res_tidur", btnStyle: "btn-secondary" }
+        ]
+      },
+      q2: {
+        tag_id: "Tes 2 Minggu", tag_en: "2-Week Rule",
+        q_id: "Apakah kamu bakal ingat pernah beli barang ini 2 minggu dari sekarang?",
+        q_en: "Will you even remember buying this 2 weeks from now?",
+        options: [
+          { text_id: "INGAT & DIPAKAI TIAP HARI", text_en: "REMEMBER & USE DAILY", next: "res_checkout", btnStyle: "btn-primary" },
+          { text_id: "JADI PAJANGAN GUDANG", text_en: "WILL STORE IN CLOSET", next: "res_tidur", btnStyle: "btn-secondary" }
+        ]
+      },
+      res_checkout: {
+        isResult: true,
+        title_id: "CHECKOUT SEKARANG (INVESTASI MOOD)",
+        title_en: "CHECKOUT NOW (MOOD INVESTMENT)",
+        msg_id: "\"Ini adalah pembelian terencana yang membawa manfaat dan kebahagiaan nyata!\"",
+        msg_en: "\"This is a planned purchase that brings real value and genuine joy!\"",
+        adv_id: "Pakai voucher gratis ongkir dan selesaikan pembayaran.",
+        adv_en: "Apply free shipping vouchers and finish payment."
+      },
+      res_tidur: {
+        isResult: true,
+        title_id: "MASUKIN KERANJANG DULU & TIDUR!",
+        title_en: "ADD TO CART & GO TO BED!",
+        msg_id: "\"Diskon 70% bukan hemat 70%, melainkan buang 30% uangmu untuk hal tak berguna.\"",
+        msg_en: "\"70% off isn't saving 70%, it's throwing away 30% of your cash on junk.\"",
+        adv_id: "Kunci HP-mu sekarang. Kalau besok jam 10 pagi masih kebayang, baru pertimbangkan.",
+        adv_en: "Lock your phone now. If you still want it tomorrow at 10 AM, reconsider."
+      }
+    }
+  },
+  {
+    id: "funny-code-error",
+    title_id: "Kenapa Script / Codingan Saya Error?",
+    title_en: "Why Is My Code/Script Erroring?",
+    category: "humor",
+    author: "Programmer Stres 404",
+    isAdmin: true,
+    likes: 2980,
+    plays: 9450,
+    desc_id: "Troubleshooting kocak saat kodingan kena bug misterius yang bikin garuk-garuk kepala.",
+    desc_en: "Hilarious troubleshooting guide for mysterious developer bugs.",
+    startNode: "q1",
+    nodes: {
+      q1: {
+        tag_id: "Cek Dasar", tag_en: "Basic Check",
+        q_id: "Apakah kamu sudah coba restart dev-server / browser / VS Code?",
+        q_en: "Have you tried restarting the dev server / browser / IDE?",
+        options: [
+          { text_id: "SUDAH, TETAP ERROR", text_en: "YES, STILL ERRORING", next: "q2", btnStyle: "btn-primary" },
+          { text_id: "BELUM, MAU COBA RESTART", text_en: "NO, LET ME RESTART", next: "res_restart", btnStyle: "btn-secondary" }
+        ]
+      },
+      q2: {
+        tag_id: "Cek Typo", tag_en: "Typo Check",
+        q_id: "Apakah ada titik koma (;), typo nama variabel, atau kapital yang salah?",
+        q_en: "Is there a missing semicolon (;), typo, or case-sensitivity issue?",
+        options: [
+          { text_id: "SUDAH CEK TELITI", text_en: "CHECKED CAREFULLY", next: "q3", btnStyle: "btn-primary" },
+          { text_id: "EH IYA ADA TYPO!", text_en: "OH WAIT, A TYPO!", next: "res_typo", btnStyle: "btn-secondary" }
+        ]
+      },
+      q3: {
+        tag_id: "Cek Riwayat", tag_en: "History Check",
+        q_id: "Apakah kode ini bekerja 10 menit yang lalu tanpa kamu ubah apapun?",
+        q_en: "Did this code work 10 minutes ago without changing anything?",
+        options: [
+          { text_id: "YA! TADI BISA!", text_en: "YES! WORKED EARLIER!", next: "res_cache", btnStyle: "btn-primary" },
+          { text_id: "BARU BIKIN DARI NOL", text_en: "NEW CODE FROM SCRATCH", next: "res_stack", btnStyle: "btn-secondary" }
+        ]
+      },
+      res_restart: {
+        isResult: true,
+        title_id: "RESTART DULU BROWSER / TERMINAL!",
+        title_en: "RESTART BROWSER / TERMINAL FIRST!",
+        msg_id: "\"90% bug misterius hilang begitu memori diringankan dan dev-server di-reboot.\"",
+        msg_en: "\"90% of mysterious bugs vanish once memory is cleared and dev server reboots.\"",
+        adv_id: "Matikan terminal dengan Ctrl+C, jalankan npm run dev ulang.",
+        adv_en: "Kill terminal with Ctrl+C, run npm run dev again."
+      },
+      res_typo: {
+        isResult: true,
+        title_id: "PERBAIKI TYPO & JALANKAN LAGI!",
+        title_en: "FIX THE TYPO & RERUN!",
+        msg_id: "\"Satu huruf kapital meleset adalah musuh terbesar programmer sepanjang sejarah.\"",
+        msg_en: "\"One misplaced capital letter is a developer's worst nightmare in history.\"",
+        adv_id: "Perbaiki nama variabelnya dan simpan file (Ctrl+S).",
+        adv_en: "Fix variable name and save file (Ctrl+S)."
+      },
+      res_cache: {
+        isResult: true,
+        title_id: "CLEAR CACHE BROWSER & HAPUS NODE_MODULES!",
+        title_en: "CLEAR BROWSER CACHE & REINSTALL DEPENDENCIES!",
+        msg_id: "\"Ghaibnya web dev: Cache browser menahan script lama saat kamu sibuk ngedit.\"",
+        msg_en: "\"Web dev magic: Browser cache holds old scripts while you edit.\"",
+        adv_id: "Tekan Ctrl+Shift+R di browser untuk Hard Reload!",
+        adv_en: "Press Ctrl+Shift+R in browser for Hard Reload!"
+      },
+      res_stack: {
+        isResult: true,
+        title_id: "MINUM KOPI & BACA STACKOVERFLOW / LOG ERROR",
+        title_en: "DRINK COFFEE & READ ERROR LOGS / STACKOVERFLOW",
+        msg_id: "\"Log error dibuat untuk dibaca, bukan untuk ditakuti. Garis merah menyimpannya.\"",
+        msg_en: "\"Error logs exist to be read, not feared. The red line holds the truth.\"",
+        adv_id: "Copy baris pertama error message dan paste di Google / StackOverflow.",
+        adv_en: "Copy the first line of the error message and search Google / StackOverflow."
+      }
+    }
+  },
+  {
+    id: "funny-jobdesk-survival",
+    title_id: "Apakah Ini Tanggung Jawab / Jobdesk Saya?",
+    title_en: "Is This My Job Description / Responsibility?",
+    category: "work",
+    author: "Tim Buruh Kantoran",
+    isAdmin: true,
+    likes: 2120,
+    plays: 7890,
+    desc_id: "Panduan taktis menghadapi limparan tugas mendadak di luar jobdesk dari atasan.",
+    desc_en: "Tactical guide handling sudden extra work outside your job description.",
+    startNode: "q1",
+    nodes: {
+      q1: {
+        tag_id: "Cek Kontrak", tag_en: "Contract Check",
+        q_id: "Apakah tugas ini tertulis jelas di kontrak kerja / KPI awalmu?",
+        q_en: "Is this task explicitly stated in your employment contract / KPI?",
+        options: [
+          { text_id: "ADA DI KONTRAK", text_en: "STATED IN CONTRACT", next: "res_kerjakan", btnStyle: "btn-primary" },
+          { text_id: "GAK ADA SAMA SEKALI", text_en: "NOT IN CONTRACT AT ALL", next: "q2", btnStyle: "btn-secondary" }
+        ]
+      },
+      q2: {
+        tag_id: "Cek Bonus", tag_en: "Bonus Check",
+        q_id: "Apakah ada insentif, lemburan, atau penilaian promosi untuk tugas ini?",
+        q_en: "Is there overtime pay, incentive, or promotion points for this task?",
+        options: [
+          { text_id: "ADA BONUS / LEMBUR", text_en: "YES, OVERTIME / BONUS", next: "res_kerjakan", btnStyle: "btn-primary" },
+          { text_id: "TIDAK ADA (ZONK)", text_en: "NO BONUS AT ALL", next: "res_tolak", btnStyle: "btn-secondary" }
+        ]
+      },
+      res_kerjakan: {
+        isResult: true,
+        title_id: "KERJAKAN DENGAN SENYUM (TAMBAH PORTOFOLIO)",
+        title_en: "DO IT WITH A SMILE (BUILD PORTFOLIO)",
+        msg_id: "\"Kerjakan dengan rapi, catat sebagai pencapaian KPI, dan gunakan untuk negosiasi gaji!\"",
+        msg_en: "\"Execute neatly, document as KPI achievement, and use it for raise negotiations!\"",
+        adv_id: "Selesaikan tepat waktu dan minta feedback positif dari atasan.",
+        adv_en: "Complete on time and solicit positive feedback from leadership."
+      },
+      res_tolak: {
+        isResult: true,
+        title_id: "TOLAK SECARA HALUS & DELEGASIKAN",
+        title_en: "POLITELY DECLINE & DELEGATE",
+        msg_id: "\"Maaf pak/bu, fokus utama saya saat ini sedang menyelesaikan project A agar deadline tercapai.\"",
+        msg_en: "\"Apologies, my main focus right now is completing project A to hit target deadlines.\"",
+        adv_id: "Tolak dengan sopan sambil menyuguhkan prioritas tugas utamamu saat ini.",
+        adv_en: "Decline politely while presenting your current high-priority workloads."
+      }
+    }
+  },
+  {
+    id: "funny-procrastination",
+    title_id: "Haruskah Saya Belajar / Kerja Sekarang?",
+    title_en: "Should I Study / Work Right Now?",
+    category: "humor",
+    author: "Master Prokrastinasi",
+    isAdmin: true,
+    likes: 3100,
+    plays: 10200,
+    desc_id: "Diagram dilema abadi antara kerja sekarang vs tunggu deadline kepepet 2 jam lagi.",
+    desc_en: "Eternal dilemma between working now vs waiting for 2-hour deadline panic.",
+    startNode: "q1",
+    nodes: {
+      q1: {
+        tag_id: "Cek Deadline", tag_en: "Deadline Check",
+        q_id: "Apakah deadline tugasmu kurang dari 2 jam lagi?",
+        q_en: "Is the deadline less than 2 hours away?",
+        options: [
+          { text_id: "SUDAH KANTONG DARURAT (KEPEPET)", text_en: "CRITICAL PANIC (KEPEPET)", next: "res_sekarang", btnStyle: "btn-primary" },
+          { text_id: "MASIH BESOK / MINGGU DEPAN", text_en: "STILL TOMORROW / NEXT WEEK", next: "q2", btnStyle: "btn-secondary" }
+        ]
+      },
+      q2: {
+        tag_id: "Cek Adrenalin", tag_en: "Adrenaline Check",
+        q_id: "Apakah fokus otakmu baru bisa aktif 100% saat disengat kepanikan?",
+        q_en: "Does your brain only function at 100% efficiency under intense panic?",
+        options: [
+          { text_id: "HOOH! SAYA BUTUH PANIK", text_en: "YES! NEED PANIC MODE", next: "res_nanti", btnStyle: "btn-primary" },
+          { text_id: "MAU KERJA SANTAI SEKARANG", text_en: "WANT PEACEFUL WORK NOW", next: "res_sekarang", btnStyle: "btn-secondary" }
+        ]
+      },
+      res_sekarang: {
+        isResult: true,
+        title_id: "BUKA LAPTOP SEKARANG & KETIK CEPAT!",
+        title_en: "OPEN LAPTOP NOW & TYPE SPEEDILY!",
+        msg_id: "\"Adrenalin mode aktif! Kecepatan mengetikmu meningkat 300% demi bertahan hidup!\"",
+        msg_en: "\"Adrenaline mode activated! Typing speed increased by 300% for survival!\"",
+        adv_id: "Tutup tab media sosial, pakai headphone, dan fokus penuh 45 menit!",
+        adv_en: "Close social media tabs, put headphones on, and sprint for 45 minutes!"
+      },
+      res_nanti: {
+        isResult: true,
+        title_id: "SCROLL REELS 15 MENIT LAGI (LALU KERJA!)",
+        title_en: "SCROLL REELS 15 MINS MORE (THEN WORK!)",
+        msg_id: "\"Satu-satunya hal yang lebih cepat dari cahaya adalah kecepatan mahasiswa mengerjakan tugas kepepet.\"",
+        msg_en: "\"The only thing faster than light is a student doing a assignment 1 hour before deadline.\"",
+        adv_id: "Pasang alarm reminder agar kepanikanmu terpicu di jam yang tepat.",
+        adv_en: "Set a hard alarm so your panic kicks in right on schedule."
+      }
+    }
+  },
+  {
+    id: "funny-lunch-terserah",
+    title_id: "Menu Makan Siang Hari Ini: Bebas / Terserah",
+    title_en: "Lunch Menu Decision: Anything / Whatever",
+    category: "humor",
+    author: "Tim Kebingungan Kuliner",
+    isAdmin: true,
+    likes: 1950,
+    plays: 6810,
+    desc_id: "Solusi pamungkas saat ditanya 'mau makan dimana?' dan jawabannya selalu 'terserah'.",
+    desc_en: "Ultimate solution when asked 'where to eat?' and the answer is 'whatever'.",
+    startNode: "q1",
+    nodes: {
+      q1: {
+        tag_id: "Cek Selera", tag_en: "Taste Check",
+        q_id: "Saat ditanya 'mau makan apa?', kamu jawab 'terserah'?",
+        q_en: "When asked 'what to eat?', do you answer 'whatever'?",
+        options: [
+          { text_id: "IYA, TERSERAH KAMU AJA", text_en: "YES, WHATEVER YOU WANT", next: "q2", btnStyle: "btn-primary" },
+          { text_id: "SUDAH PUNYA NAMA MAKANAN", text_en: "ALREADY HAVE SPECIFIC FOOD", next: "res_spesifik", btnStyle: "btn-secondary" }
+        ]
+      },
+      q2: {
+        tag_id: "Cek Rasa", tag_en: "Flavor Check",
+        q_id: "Pengen yang berkuah & pedas atau yang digoreng krispi?",
+        q_en: "Craving warm soup & spicy or crispy fried food?",
+        options: [
+          { text_id: "PEDAS / BERKUAH", text_en: "SPICY / SOUP", next: "res_geprek", btnStyle: "btn-primary" },
+          { text_id: "GORENG / NASI PADANG", text_en: "FRIED / NASI PADANG", next: "res_padang", btnStyle: "btn-secondary" }
+        ]
+      },
+      res_spesifik: {
+        isResult: true,
+        title_id: "LANGSUNG PESAN MAKANAN PILIHANMU!",
+        title_en: "ORDER YOUR CHOSEN FOOD RIGHT NOW!",
+        msg_id: "\"Selamat! Kamu adalah 1% manusia yang tahu persis apa yang kamu inginkan hari ini.\"",
+        msg_en: "\"Congrats! You are the 1% of humans who know exactly what they want today.\"",
+        adv_id: "Buka aplikasi pesan antar atau jalan ke warung langganan.",
+        adv_en: "Open food delivery app or walk to your favorite stall."
+      },
+      res_geprek: {
+        isResult: true,
+        title_id: "PESAN AYAM GEPREK SAMBAL BAWANG / MIE SEBLAK!",
+        title_en: "ORDER CRISPY GEPREK CHICKEN / SPICY NOODLES!",
+        msg_id: "\"Pedas gurih adalah jawaban tercepat menghilangkan stres makan siang!\"",
+        msg_en: "\"Savory spice is the fastest solution to clear lunchtime stress!\"",
+        adv_id: "Pesan level pedas sedang dan nikmati dengan es teh manis dingin.",
+        adv_en: "Order medium spice and pair with cold sweet iced tea."
+      },
+      res_padang: {
+        isResult: true,
+        title_id: "MAKAN NASI PADANG LAUK RENDAANG / CINCANG!",
+        title_en: "EAT NASI PADANG WITH RENDANG / CHICKEN!",
+        msg_id: "\"Nasi Padang tidak pernah salah. Kelezatan kuah gulai menyatukan semua pendapat!\"",
+        msg_en: "\"Nasi Padang is never wrong. Rich curry sauce unites all arguments!\"",
+        adv_id: "Bungkus nasi Padang pakai daun pisang biar porsinya makin mantap.",
+        adv_en: "Take away wrapped in banana leaf for double portion happiness."
+      }
+    }
   }
 ];
 

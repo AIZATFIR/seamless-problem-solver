@@ -1218,30 +1218,50 @@ class SeamlessProblemSolverApp {
     this.activeSection = sectionName;
     const secPlayer = document.getElementById('section-player');
     const secCommunity = document.getElementById('section-community');
-    const secStudio = document.getElementById('sec-studio');
+    const secCreate = document.getElementById('section-create');
 
     const tabHome = document.getElementById('nav-btn-home');
     const tabComm = document.getElementById('nav-btn-community');
-    const tabStudio = document.getElementById('nav-btn-builder');
+    const tabCreate = document.getElementById('nav-btn-create');
 
     const activeTabClass = 'nav-tab-btn active-tab px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all text-primary';
     const inactiveTabClass = 'nav-tab-btn px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all text-on-surface-variant hover:text-primary';
 
     if (secPlayer) secPlayer.classList.toggle('hidden', sectionName !== 'player');
     if (secCommunity) secCommunity.classList.toggle('hidden', sectionName !== 'community');
-    if (secStudio) secStudio.classList.toggle('hidden', sectionName !== 'studio');
+    if (secCreate) secCreate.classList.toggle('hidden', sectionName !== 'create' && sectionName !== 'studio');
 
     if (tabHome) tabHome.className = sectionName === 'player' ? activeTabClass : inactiveTabClass;
     if (tabComm) tabComm.className = sectionName === 'community' ? activeTabClass : inactiveTabClass;
-    if (tabStudio) tabStudio.className = sectionName === 'studio' ? activeTabClass : inactiveTabClass;
+    if (tabCreate) tabCreate.className = (sectionName === 'create' || sectionName === 'studio') ? activeTabClass : inactiveTabClass;
 
     if (sectionName === 'player') {
       if (flowId) this.loadFlowchart(flowId);
     } else if (sectionName === 'community') {
       this.renderCommunityGrid();
-    } else if (sectionName === 'studio') {
-      this.setBuilderMode(this.builderMode || 'canvas');
-      this.renderBuilderNodes();
+    } else if (sectionName === 'create' || sectionName === 'studio') {
+      this.renderCreatorCanvas();
+    }
+  }
+
+  renderCreatorCanvas() {
+    const mountEl = document.getElementById('flowchart-creator-canvas-mount') || document.getElementById('wysiwyg-canvas-mount');
+    if (!mountEl) return;
+
+    if (!this.canvasEditor) {
+      this.canvasEditor = new InteractiveCanvasEditor({
+        container: mountEl,
+        nodes: this.builderNodes,
+        onChange: (nodes) => {
+          this.builderNodes = nodes;
+        },
+        onBranchSelected: (sourceId, direction, targetId) => {
+          console.log(`Branch selected: ${sourceId} -> ${direction} -> ${targetId}`);
+        }
+      });
+    } else {
+      this.canvasEditor.container = mountEl;
+      this.canvasEditor.setNodes(this.builderNodes);
     }
   }
 
@@ -1575,7 +1595,7 @@ class SeamlessProblemSolverApp {
 
     if (templates[templateKey]) {
       this.builderNodes = JSON.parse(JSON.stringify(templates[templateKey]));
-      this.renderBuilderNodes();
+      this.renderCreatorCanvas();
     }
   }
 
@@ -1835,21 +1855,11 @@ res_hemat: [HASIL] Hemat & Seduh Kopi Rumah
 
   // --- Custom Flowchart Builder Modal & Logic ---
   openBuilderModal() {
-    const modal = document.getElementById('modal-builder');
-    const card = document.getElementById('modal-builder-card');
-    modal.classList.remove('opacity-0', 'pointer-events-none');
-    card.classList.remove('scale-95');
-    card.classList.add('scale-100');
-    this.setBuilderMode(this.builderMode || 'canvas');
-    this.renderBuilderNodes();
+    this.showSection('create');
   }
 
   closeBuilderModal() {
-    const modal = document.getElementById('modal-builder');
-    const card = document.getElementById('modal-builder-card');
-    modal.classList.add('opacity-0', 'pointer-events-none');
-    card.classList.remove('scale-100');
-    card.classList.add('scale-95');
+    this.showSection('player');
   }
 
   renderCanvasStudio() {
@@ -2191,6 +2201,90 @@ res_hemat: [HASIL] Hemat & Seduh Kopi Rumah
     this.launchCommunityFlow(newFlow.id);
     alert('🎉 Flowchart baru berhasil disimpan dan diterbitkan!');
   }
+
+  exportBuilderJSON() {
+    const title = document.getElementById('builder-title')?.value.trim() || 'My_Flowchart';
+    const author = document.getElementById('builder-author')?.value.trim() || 'Community Member';
+    const category = document.getElementById('builder-category')?.value || 'custom';
+
+    const data = {
+      title,
+      author,
+      category,
+      nodes: this.builderNodes
+    };
+
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${title.toLowerCase().replace(/\s+/g, '_')}_flowchart.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  importBuilderJSON(event) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const json = JSON.parse(e.target.result);
+        if (json.nodes && Array.isArray(json.nodes)) {
+          this.builderNodes = json.nodes;
+          if (json.title && document.getElementById('builder-title')) document.getElementById('builder-title').value = json.title;
+          if (json.author && document.getElementById('builder-author')) document.getElementById('builder-author').value = json.author;
+          if (json.category && document.getElementById('builder-category')) document.getElementById('builder-category').value = json.category;
+          this.renderCreatorCanvas();
+          alert('✨ Berhasil mengimpor diagram flowchart!');
+        } else {
+          alert('Format file JSON tidak sesuai.');
+        }
+      } catch (err) {
+        alert('Gagal membaca file JSON: ' + err.message);
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  previewCustomFlowchart() {
+    const title = document.getElementById('builder-title')?.value.trim() || 'Flowchart Preview';
+    const author = document.getElementById('builder-author')?.value.trim() || 'You';
+    const category = document.getElementById('builder-category')?.value || 'custom';
+
+    const nodesObj = {};
+    const startNodeId = this.builderNodes[0] ? this.builderNodes[0].id : 'step1';
+
+    this.builderNodes.forEach(n => {
+      nodesObj[n.id] = {
+        ...n,
+        options: (n.options || []).map(opt => ({
+          ...opt,
+          next: opt.targetId || opt.next
+        }))
+      };
+    });
+
+    const previewFlow = {
+      id: 'preview_' + Date.now().toString(36),
+      title_id: title,
+      title_en: title,
+      author: author,
+      category: category,
+      isAdmin: false,
+      likes: 0,
+      plays: 0,
+      desc_id: `Preview flowchart: ${title}`,
+      desc_en: `Preview flowchart: ${title}`,
+      startNode: startNodeId,
+      nodes: nodesObj
+    };
+
+    this.customFlowcharts.unshift(previewFlow);
+    this.launchCommunityFlow(previewFlow.id);
+  }
+
 
   // --- AI Transmitter Protocol Integration ---
   openTransmitterModal() {

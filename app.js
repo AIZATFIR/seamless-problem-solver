@@ -1852,6 +1852,27 @@ res_hemat: [HASIL] Hemat & Seduh Kopi Rumah
     card.classList.add('scale-95');
   }
 
+  renderCanvasStudio() {
+    const mountEl = document.getElementById('wysiwyg-canvas-mount');
+    if (!mountEl) return;
+
+    if (!this.canvasEditor) {
+      this.canvasEditor = new InteractiveCanvasEditor({
+        container: mountEl,
+        nodes: this.builderNodes,
+        onChange: (nodes) => {
+          this.builderNodes = nodes;
+        },
+        onBranchSelected: (sourceId, direction, targetId) => {
+          console.log(`Branch selected: ${sourceId} -> ${direction} -> ${targetId}`);
+        }
+      });
+    } else {
+      this.canvasEditor.container = mountEl;
+      this.canvasEditor.setNodes(this.builderNodes);
+    }
+  }
+
   renderBuilderNodes() {
     // If in canvas mode, sync to canvas editor
     if (this.builderMode === 'canvas') {

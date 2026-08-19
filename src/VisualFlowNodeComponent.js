@@ -153,15 +153,22 @@ export class VisualFlowNodeComponent {
     window.addEventListener('touchend', this._onMouseUp);
   }
 
-  // --- Figma/Miro Visual Canvas View with Pinch & Wheel Zooming ---
+  // --- Figma/Miro Visual Canvas View with Unified Canvas Stage ---
   _renderVisualCanvasView() {
     const canvasViewport = document.createElement('div');
-    canvasViewport.className = 'relative flex-grow w-full min-h-[540px] overflow-hidden visual-grid-pattern bg-background cursor-crosshair';
+    canvasViewport.className = 'relative flex-grow w-full min-h-[540px] overflow-hidden figma-canvas-bg cursor-crosshair select-none';
     canvasViewport.id = 'visual-canvas-viewport';
 
-    // SVG Layer for Arrow Connections
+    // Single Unified Canvas Stage (Transforms SVG & Node Cards together seamlessly)
+    const stage = document.createElement('div');
+    stage.id = 'canvas-stage';
+    stage.className = 'absolute inset-0 min-w-[3000px] min-h-[3000px] origin-top-left transition-transform duration-75';
+    stage.style.transform = `translate(${this.panOffset.x}px, ${this.panOffset.y}px) scale(${this.zoomLevel})`;
+    canvasViewport.appendChild(stage);
+
+    // SVG Overlay Layer (Inside Stage)
     const svgOverlay = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svgOverlay.setAttribute('class', 'absolute inset-0 w-full h-full pointer-events-none z-10');
+    svgOverlay.setAttribute('class', 'absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible');
     svgOverlay.setAttribute('id', 'visual-flow-svg');
     
     svgOverlay.innerHTML = `
@@ -175,13 +182,13 @@ export class VisualFlowNodeComponent {
       </defs>
       <g id="svg-flow-edges"></g>
     `;
-    canvasViewport.appendChild(svgOverlay);
+    stage.appendChild(svgOverlay);
 
-    // Nodes Container Layer
+    // Nodes Container Layer (Inside Stage)
     const nodesLayer = document.createElement('div');
-    nodesLayer.className = 'absolute inset-0 z-20 pointer-events-auto overflow-visible min-w-[2500px] min-h-[2500px] origin-top-left transition-transform duration-75';
+    nodesLayer.className = 'absolute inset-0 z-20 pointer-events-auto';
     nodesLayer.id = 'visual-flow-nodes-layer';
-    canvasViewport.appendChild(nodesLayer);
+    stage.appendChild(nodesLayer);
 
     // Render Nodes
     this.nodes.forEach((node, idx) => {
@@ -189,45 +196,104 @@ export class VisualFlowNodeComponent {
       nodesLayer.appendChild(nodeEl);
     });
 
-    // 3. Floating Figma Canvas Toolbar (Zoom %, Zoom +/-/Reset, PNG/JSON Export)
-    const figmaToolbar = document.createElement('div');
-    figmaToolbar.className = 'absolute bottom-6 left-6 z-30 flex items-center gap-2 p-2 rounded-2xl bg-surface-container/95 border border-primary/20 backdrop-blur-xl shadow-terra-deep';
-    figmaToolbar.innerHTML = `
-      <button type="button" data-figma-action="zoom-out" class="p-2 rounded-xl hover:bg-surface text-on-surface hover:text-primary transition-all font-bold text-xs" title="Zoom Out (-)">
+    // --- Figma Right Tool Bar (Matches Figma Screenshot) ---
+    const figmaRightToolbar = document.createElement('div');
+    figmaRightToolbar.className = 'absolute right-6 top-1/2 -translate-y-1/2 z-30 flex flex-col items-center gap-2 p-2 rounded-2xl figma-floating-panel shadow-2xl';
+    figmaRightToolbar.innerHTML = `
+      <button type="button" class="p-2.5 rounded-xl hover:bg-white/10 text-white/90 hover:text-emerald-400 transition-all" title="Selection Tool (V)">
+        <span class="material-symbols-outlined text-lg">near_me</span>
+      </button>
+      <button type="button" class="p-2.5 rounded-xl hover:bg-white/10 text-white/90 hover:text-emerald-400 transition-all" title="Frame Tool (F)">
+        <span class="material-symbols-outlined text-lg">crop_free</span>
+      </button>
+
+      <button type="button" class="p-2.5 rounded-xl hover:bg-white/10 text-white/90 hover:text-emerald-400 transition-all" title="Pencil / Draw (P)">
+        <span class="material-symbols-outlined text-lg">edit</span>
+      </button>
+
+      <button type="button" class="p-2.5 rounded-xl hover:bg-white/10 text-white/90 hover:text-emerald-400 transition-all" title="Hand Pan Tool (H)">
+        <span class="material-symbols-outlined text-lg">pan_tool</span>
+      </button>
+
+      <div class="w-4 h-px bg-white/15 my-0.5"></div>
+
+      <button type="button" class="p-2.5 rounded-xl hover:bg-white/10 text-white/90 hover:text-emerald-400 transition-all" title="Color Palette">
+        <span class="material-symbols-outlined text-lg">palette</span>
+      </button>
+
+      <button type="button" class="p-2.5 rounded-xl hover:bg-white/10 text-white/90 hover:text-emerald-400 transition-all" title="Favorites">
+        <span class="material-symbols-outlined text-lg">star</span>
+      </button>
+    `;
+    canvasViewport.appendChild(figmaRightToolbar);
+
+    // --- Figma Bottom Floating Prompt Input Bar (Matches Figma Screenshot) ---
+    const figmaBottomPromptBar = document.createElement('div');
+    figmaBottomPromptBar.className = 'absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3 px-4 py-3 rounded-2xl figma-floating-panel shadow-2xl max-w-xl w-full mx-auto border border-white/15';
+    figmaBottomPromptBar.innerHTML = `
+      <button type="button" class="p-1 text-white/60 hover:text-white transition-colors" title="Tambah Lampiran">
+        <span class="material-symbols-outlined text-lg">add</span>
+      </button>
+      <button type="button" class="p-1 text-white/60 hover:text-white transition-colors" title="Prompt Command">
+        <span class="material-symbols-outlined text-lg">code</span>
+      </button>
+
+      <input type="text" placeholder="Apa yang ingin Anda ubah atau buat?" class="flex-grow bg-transparent text-sm text-white placeholder-white/40 focus:outline-none font-medium" />
+
+      <span class="px-2 py-0.5 rounded-md bg-white/10 text-white/70 text-[10px] font-mono">3 Flash</span>
+
+      <button type="button" class="p-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold transition-all shadow-md flex items-center justify-center">
+        <span class="material-symbols-outlined text-base">auto_awesome</span>
+      </button>
+    `;
+    canvasViewport.appendChild(figmaBottomPromptBar);
+
+    // --- Figma Bottom Left Zoom Control Bar ---
+    const figmaZoomToolbar = document.createElement('div');
+    figmaZoomToolbar.className = 'absolute bottom-6 left-6 z-30 flex items-center gap-2 p-2 rounded-2xl figma-floating-panel shadow-2xl';
+    figmaZoomToolbar.innerHTML = `
+      <button type="button" data-figma-action="zoom-out" class="p-2 rounded-xl hover:bg-white/10 text-white transition-all font-bold text-xs" title="Zoom Out (-)">
         <span class="material-symbols-outlined text-base">remove</span>
       </button>
 
-      <span id="figma-zoom-label" class="px-2.5 py-1 rounded-xl bg-surface text-xs font-mono font-extrabold text-primary border border-primary/20 cursor-pointer" title="Klik untuk Reset Zoom (100%)" data-figma-action="zoom-reset">
+      <span id="figma-zoom-label" class="px-2.5 py-1 rounded-xl bg-white/10 text-xs font-mono font-extrabold text-emerald-400 border border-white/10 cursor-pointer" title="Klik untuk Reset Zoom (100%)" data-figma-action="zoom-reset">
         ${Math.round(this.zoomLevel * 100)}%
       </span>
 
-      <button type="button" data-figma-action="zoom-in" class="p-2 rounded-xl hover:bg-surface text-on-surface hover:text-primary transition-all font-bold text-xs" title="Zoom In (+)">
+      <button type="button" data-figma-action="zoom-in" class="p-2 rounded-xl hover:bg-white/10 text-white transition-all font-bold text-xs" title="Zoom In (+)">
         <span class="material-symbols-outlined text-base">add</span>
       </button>
 
-      <div class="h-4 w-px bg-outline-variant/30 mx-1"></div>
+      <div class="h-4 w-px bg-white/15 mx-1"></div>
 
-      <button type="button" data-figma-action="export-json" class="px-3 py-1.5 rounded-xl bg-surface hover:bg-primary/10 text-on-surface hover:text-primary transition-all font-extrabold text-xs flex items-center gap-1 border border-outline-variant/30" title="Ekspor JSON Flowchart">
+      <button type="button" data-figma-action="export-json" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-all font-extrabold text-xs flex items-center gap-1 border border-white/15" title="Ekspor JSON Flowchart">
         <span class="material-symbols-outlined text-sm">download</span>
         <span class="hidden sm:inline">JSON</span>
       </button>
 
-      <button type="button" data-figma-action="export-png" class="px-3 py-1.5 rounded-xl bg-primary/15 hover:bg-primary text-primary hover:text-on-primary transition-all font-extrabold text-xs flex items-center gap-1 border border-primary/30" title="Ekspor Gambar Diagram">
+      <button type="button" data-figma-action="export-png" class="px-3 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-extrabold text-xs flex items-center gap-1 border border-emerald-500/30" title="Ekspor Gambar Diagram">
         <span class="material-symbols-outlined text-sm">image</span>
         <span class="hidden sm:inline">Gambar PNG</span>
       </button>
     `;
-    canvasViewport.appendChild(figmaToolbar);
+    canvasViewport.appendChild(figmaZoomToolbar);
 
-    figmaToolbar.addEventListener('click', (e) => this._handleFigmaToolbarClick(e));
+    figmaZoomToolbar.addEventListener('click', (e) => this._handleFigmaToolbarClick(e));
 
-    // Mouse Wheel Zooming (Pinch / Scroll)
+    // Wheel Zooming & Canvas Pan
     canvasViewport.addEventListener('wheel', (e) => {
       e.preventDefault();
-      if (e.deltaY < 0) {
-        this.zoomLevel = Math.min(2.2, this.zoomLevel + 0.08);
+      if (e.ctrlKey || e.metaKey) {
+        // Zooming
+        if (e.deltaY < 0) {
+          this.zoomLevel = Math.min(2.5, this.zoomLevel + 0.1);
+        } else {
+          this.zoomLevel = Math.max(0.3, this.zoomLevel - 0.1);
+        }
       } else {
-        this.zoomLevel = Math.max(0.4, this.zoomLevel - 0.08);
+        // Panning Canvas
+        this.panOffset.x -= e.deltaX;
+        this.panOffset.y -= e.deltaY;
       }
       this._applyCanvasTransform();
     }, { passive: false });
@@ -252,11 +318,11 @@ export class VisualFlowNodeComponent {
         );
         if (touchStartDist > 0) {
           const factor = currentDist / touchStartDist;
-          if (factor > 1.05) {
-            this.zoomLevel = Math.min(2.2, this.zoomLevel + 0.05);
+          if (factor > 1.03) {
+            this.zoomLevel = Math.min(2.5, this.zoomLevel + 0.05);
             touchStartDist = currentDist;
-          } else if (factor < 0.95) {
-            this.zoomLevel = Math.max(0.4, this.zoomLevel - 0.05);
+          } else if (factor < 0.97) {
+            this.zoomLevel = Math.max(0.3, this.zoomLevel - 0.05);
             touchStartDist = currentDist;
           }
           this._applyCanvasTransform();
@@ -271,15 +337,11 @@ export class VisualFlowNodeComponent {
   }
 
   _applyCanvasTransform() {
-    const nodesLayer = document.getElementById('visual-flow-nodes-layer');
-    const svgOverlay = document.getElementById('visual-flow-svg');
+    const stage = document.getElementById('canvas-stage');
     const label = document.getElementById('figma-zoom-label');
 
-    if (nodesLayer) {
-      nodesLayer.style.transform = `translate(${this.panOffset.x}px, ${this.panOffset.y}px) scale(${this.zoomLevel})`;
-    }
-    if (svgOverlay) {
-      svgOverlay.style.transform = `translate(${this.panOffset.x}px, ${this.panOffset.y}px) scale(${this.zoomLevel})`;
+    if (stage) {
+      stage.style.transform = `translate(${this.panOffset.x}px, ${this.panOffset.y}px) scale(${this.zoomLevel})`;
     }
     if (label) {
       label.textContent = `${Math.round(this.zoomLevel * 100)}%`;

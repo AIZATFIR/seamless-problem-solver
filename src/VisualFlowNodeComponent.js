@@ -387,6 +387,11 @@ export class VisualFlowNodeComponent {
 
       <div class="h-4 w-px bg-primary/15 mx-1"></div>
 
+      <button type="button" data-figma-action="auto-layout" class="px-3 py-1.5 rounded-xl bg-primary/15 hover:bg-primary text-primary hover:text-on-primary transition-all font-extrabold text-xs flex items-center gap-1 border border-primary/30" title="Rapikan Tata Letak Otomatis (Biar Ga Dempetan)">
+        <span class="material-symbols-outlined text-sm">auto_fix_high</span>
+        <span class="hidden sm:inline">Rapikan Alur</span>
+      </button>
+
       <button type="button" data-figma-action="export-json" class="px-3 py-1.5 rounded-xl bg-surface hover:bg-primary/10 text-on-surface hover:text-primary transition-all font-extrabold text-xs flex items-center gap-1 border border-primary/20" title="Ekspor JSON Flowchart">
         <span class="material-symbols-outlined text-sm">download</span>
         <span class="hidden sm:inline">JSON</span>
@@ -400,6 +405,33 @@ export class VisualFlowNodeComponent {
     canvasViewport.appendChild(figmaZoomToolbar);
 
     figmaZoomToolbar.addEventListener('click', (e) => this._handleFigmaToolbarClick(e));
+
+    // Mouse Down Listener for Canvas Pan Mode (Hand Tool or Spacebar or Middle Click)
+    canvasViewport.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.visual-node-card, input, textarea, select, button, .wing-handle')) return;
+      if (this.activeTool === 'hand' || this.spacePressed || e.button === 1 || e.button === 0) {
+        this.isPanningCanvas = true;
+        this.panStart = {
+          x: e.clientX - this.panOffset.x,
+          y: e.clientY - this.panOffset.y
+        };
+        canvasViewport.style.cursor = 'grabbing';
+      }
+    });
+
+    canvasViewport.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches.length === 1) {
+        const target = e.target;
+        if (target.closest('.visual-node-card, input, textarea, select, button, .wing-handle')) return;
+        if (this.activeTool === 'hand' || this.spacePressed) {
+          this.isPanningCanvas = true;
+          this.panStart = {
+            x: e.touches[0].clientX - this.panOffset.x,
+            y: e.touches[0].clientY - this.panOffset.y
+          };
+        }
+      }
+    }, { passive: true });
 
     // Wheel Zooming & Canvas Pan
     canvasViewport.addEventListener('wheel', (e) => {
@@ -477,15 +509,19 @@ export class VisualFlowNodeComponent {
     const action = btn.dataset.figmaAction;
 
     if (action === 'zoom-in') {
-      this.zoomLevel = Math.min(2.2, this.zoomLevel + 0.15);
+      this.zoomLevel = Math.min(2.5, this.zoomLevel + 0.15);
       this._applyCanvasTransform();
     } else if (action === 'zoom-out') {
-      this.zoomLevel = Math.max(0.4, this.zoomLevel - 0.15);
+      this.zoomLevel = Math.max(0.3, this.zoomLevel - 0.15);
       this._applyCanvasTransform();
     } else if (action === 'zoom-reset') {
       this.zoomLevel = 1.0;
       this.panOffset = { x: 0, y: 0 };
       this._applyCanvasTransform();
+    } else if (action === 'auto-layout') {
+      this.autoArrangeLayout();
+      this.render();
+      if (this.onChange) this.onChange(this.nodes);
     } else if (action === 'export-json') {
       this.exportJSON();
     } else if (action === 'export-png') {
@@ -741,15 +777,22 @@ export class VisualFlowNodeComponent {
     svgGroup.innerHTML = svgHTML;
   }
 
-  // --- Smooth Drag Motion ---
+  // --- Smooth Drag Motion & Canvas Pan ---
   _onMouseMove(e) {
+    const clientX = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+    const clientY = e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
+
+    if (this.isPanningCanvas) {
+      this.panOffset.x = clientX - this.panStart.x;
+      this.panOffset.y = clientY - this.panStart.y;
+      this._applyCanvasTransform();
+      return;
+    }
+
     if (!this.draggingNode) return;
 
     const viewport = document.getElementById('visual-canvas-viewport') || this.container;
     const viewportRect = viewport.getBoundingClientRect();
-
-    const clientX = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
-    const clientY = e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
 
     let x = (clientX - viewportRect.left) / this.zoomLevel - this.dragOffset.x;
     let y = (clientY - viewportRect.top) / this.zoomLevel - this.dragOffset.y;
@@ -775,6 +818,14 @@ export class VisualFlowNodeComponent {
   }
 
   _onMouseUp() {
+    if (this.isPanningCanvas) {
+      this.isPanningCanvas = false;
+      const viewport = document.getElementById('visual-canvas-viewport');
+      if (viewport) {
+        viewport.style.cursor = this.activeTool === 'hand' ? 'grab' : 'crosshair';
+      }
+    }
+
     if (this.draggingNode) {
       const cardEl = document.getElementById(`flow-node-${this.draggingNode.id}`);
       if (cardEl) cardEl.classList.remove('z-30');
@@ -955,9 +1006,61 @@ export class VisualFlowNodeComponent {
   }
 
   autoArrangeLayout() {
-    this.nodes.forEach((n, idx) => {
-      n.x = 60 + (idx % 4) * 340;
-      n.y = 80 + Math.floor(idx / 4) * 230;
+    if (!this.nodes || this.nodes.length === 0) return;
+
+    // Calculate in-degree to find tree root nodes
+    const inDegree = {};
+    this.nodes.forEach(n => { inDegree[n.id] = 0; });
+
+    this.nodes.forEach(source => {
+      (source.options || []).forEach(opt => {
+        const targetId = opt.targetId || opt.next;
+        if (inDegree[targetId] !== undefined) {
+          inDegree[targetId]++;
+        }
+      });
+    });
+
+    const roots = this.nodes.filter(n => inDegree[n.id] === 0);
+    if (roots.length === 0 && this.nodes[0]) roots.push(this.nodes[0]);
+
+    const nodeLevels = {};
+    const queue = roots.map(r => ({ id: r.id, level: 0 }));
+    const visited = new Set();
+
+    while (queue.length > 0) {
+      const { id, level } = queue.shift();
+      if (visited.has(id)) continue;
+      visited.add(id);
+
+      nodeLevels[id] = level;
+
+      const node = this.nodes.find(n => n.id === id);
+      if (node && node.options) {
+        node.options.forEach(opt => {
+          const targetId = opt.targetId || opt.next;
+          if (targetId && !visited.has(targetId)) {
+            queue.push({ id: targetId, level: level + 1 });
+          }
+        });
+      }
+    }
+
+    this.nodes.forEach(n => {
+      if (nodeLevels[n.id] === undefined) {
+        nodeLevels[n.id] = 0;
+      }
+    });
+
+    // Position calculation with generous 360px X and 250px Y margins ("ga dempetan")
+    const currentLevelY = {};
+    this.nodes.forEach(node => {
+      const level = nodeLevels[node.id] || 0;
+      const rank = currentLevelY[level] || 0;
+      currentLevelY[level] = rank + 1;
+
+      node.x = 80 + level * 360;
+      node.y = 80 + rank * 250;
     });
   }
 

@@ -918,10 +918,10 @@ export class VisualFlowNodeComponent {
     let newX = sourceNode.x || 60;
     let newY = sourceNode.y || 80;
 
-    if (direction === 'right') newX += 340;
-    else if (direction === 'left') newX = Math.max(20, newX - 340);
-    else if (direction === 'bottom') newY += 230;
-    else if (direction === 'top') newY = Math.max(40, newY - 230);
+    if (direction === 'right') newX += 440;
+    else if (direction === 'left') newX = Math.max(20, newX - 440);
+    else if (direction === 'bottom') newY += 520;
+    else if (direction === 'top') newY = Math.max(40, newY - 520);
 
     const newNode = {
       id: newId,
@@ -1008,7 +1008,7 @@ export class VisualFlowNodeComponent {
   autoArrangeLayout() {
     if (!this.nodes || this.nodes.length === 0) return;
 
-    // Calculate in-degree to find tree root nodes
+    // 1. Calculate in-degree for all nodes to identify root nodes
     const inDegree = {};
     this.nodes.forEach(n => { inDegree[n.id] = 0; });
 
@@ -1021,9 +1021,11 @@ export class VisualFlowNodeComponent {
       });
     });
 
-    const roots = this.nodes.filter(n => inDegree[n.id] === 0);
-    if (roots.length === 0 && this.nodes[0]) roots.push(this.nodes[0]);
+    // 2. Find root nodes (inDegree === 0)
+    let roots = this.nodes.filter(n => inDegree[n.id] === 0);
+    if (roots.length === 0 && this.nodes[0]) roots = [this.nodes[0]];
 
+    // 3. Assign BFS level depth
     const nodeLevels = {};
     const queue = roots.map(r => ({ id: r.id, level: 0 }));
     const visited = new Set();
@@ -1052,15 +1054,20 @@ export class VisualFlowNodeComponent {
       }
     });
 
-    // Position calculation with generous 360px X and 250px Y margins ("ga dempetan")
-    const currentLevelY = {};
-    this.nodes.forEach(node => {
-      const level = nodeLevels[node.id] || 0;
-      const rank = currentLevelY[level] || 0;
-      currentLevelY[level] = rank + 1;
+    // 4. Calculate generous non-overlapping spacing (Card W=320 H=420)
+    const X_SPACING = 440; // 120px clear horizontal gap for arrows
+    const Y_SPACING = 520; // 100px clear vertical gap between card rows
+    const START_X = 80;
+    const START_Y = 80;
 
-      node.x = 80 + level * 360;
-      node.y = 80 + rank * 250;
+    const levelRanks = {};
+    this.nodes.forEach(node => {
+      const lvl = nodeLevels[node.id] || 0;
+      const rank = levelRanks[lvl] || 0;
+      levelRanks[lvl] = rank + 1;
+
+      node.x = START_X + lvl * X_SPACING;
+      node.y = START_Y + rank * Y_SPACING;
     });
   }
 

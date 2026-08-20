@@ -348,9 +348,9 @@ export class VisualFlowNodeComponent {
       }
     });
 
-    // --- Figma Bottom Floating Prompt Input Bar (Matches Figma Screenshot) ---
+    // --- Figma Bottom Left Floating Prompt Input Bar (Positioned at Bottom-Left) ---
     const figmaBottomPromptBar = document.createElement('div');
-    figmaBottomPromptBar.className = 'absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3 px-4 py-3 rounded-2xl figma-floating-panel shadow-terra-deep max-w-xl w-full mx-auto border border-primary/20';
+    figmaBottomPromptBar.className = 'absolute bottom-20 left-6 z-30 flex items-center gap-3 px-4 py-2.5 rounded-2xl figma-floating-panel shadow-terra-deep max-w-md w-full border border-primary/20';
     figmaBottomPromptBar.innerHTML = `
       <button type="button" class="p-1 text-on-surface-variant hover:text-primary transition-colors" title="Tambah Lampiran">
         <span class="material-symbols-outlined text-lg">add</span>

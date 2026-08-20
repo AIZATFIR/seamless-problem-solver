@@ -1998,31 +1998,6 @@ class SeamlessProblemSolverApp {
         </div>
       `).join('');
 
-      const subtaskSectionHTML = `
-        <div class="mt-8 w-full max-w-lg p-4 sm:p-5 rounded-2xl bg-surface-container/70 border border-primary/20 text-left shadow-sm">
-          <div class="flex items-center justify-between mb-3">
-            <div class="flex items-center gap-2">
-              <span class="material-symbols-outlined text-primary text-lg">fact_check</span>
-              <span class="font-headline font-bold text-xs sm:text-sm text-on-surface">Poin Langkah Nyata (+1 Subtask)</span>
-            </div>
-            <span class="text-[10px] font-bold text-primary px-2.5 py-0.5 rounded-full bg-primary/10 border border-primary/20">
-              ${cogScore.label}
-            </span>
-          </div>
-
-          <div class="space-y-2 mb-3">
-            ${subtasksListHTML}
-          </div>
-
-          <div class="flex items-center gap-2">
-            <input type="text" id="input-new-subtask" class="flex-grow p-2 sm:p-2.5 rounded-xl bg-surface border border-outline-variant/30 text-xs text-on-surface focus:outline-none focus:border-primary" placeholder="+ Tambah 1 poin langkah nyata..." onkeydown="if(event.key==='Enter') app.addSubtaskItem()" />
-            <button class="px-3 py-2 rounded-xl bg-primary text-on-primary font-bold text-xs flex items-center gap-1 hover:scale-105 active:scale-95 transition-all shadow-sm" onclick="app.addSubtaskItem()">
-              <span class="material-symbols-outlined text-sm">add</span>
-              <span>Tambah</span>
-            </button>
-          </div>
-        </div>
-      `;
 
       canvas.innerHTML = `
         <div class="flow-card active-card flex flex-col items-center">
@@ -2040,8 +2015,6 @@ class SeamlessProblemSolverApp {
           <div class="flex flex-col sm:flex-row flex-wrap gap-4 w-full justify-center max-w-md mt-2">
             ${optionsHTML}
           </div>
-
-          ${subtaskSectionHTML}
 
           ${backBtnHTML}
         </div>
@@ -2219,33 +2192,55 @@ res_hemat: [HASIL] Hemat & Seduh Kopi Rumah
     const isEn = this.currentLang === 'en';
     const dict = translations[this.currentLang];
 
-    const allFlows = [...adminFlowcharts, ...this.customFlowcharts];
+    let allFlows = [...adminFlowcharts, ...this.customFlowcharts];
+
+    if (this.currentCommunityCategory && this.currentCommunityCategory !== 'all') {
+      if (this.currentCommunityCategory === 'admin') {
+        allFlows = allFlows.filter(f => f.isAdmin);
+      } else {
+        allFlows = allFlows.filter(f => f.category === this.currentCommunityCategory);
+      }
+    }
+
+    if (this.communitySearchQuery) {
+      const q = this.communitySearchQuery.toLowerCase();
+      allFlows = allFlows.filter(f => 
+        (f.title_id && f.title_id.toLowerCase().includes(q)) ||
+        (f.title_en && f.title_en.toLowerCase().includes(q)) ||
+        (f.desc_id && f.desc_id.toLowerCase().includes(q))
+      );
+    }
 
     grid.innerHTML = allFlows.map(flow => {
       const title = isEn ? (flow.title_en || flow.title_id) : flow.title_id;
       const desc = isEn ? (flow.desc_en || flow.desc_id || 'Flowchart interaktif.') : (flow.desc_id || 'Flowchart interaktif.');
-      const badge = flow.isAdmin ? `<span class="px-2.5 py-1 rounded-full bg-primary/10 text-primary font-bold text-[10px] uppercase tracking-wider flex items-center gap-1"><span class="material-symbols-outlined text-xs">verified</span> OFFICIAL ADMIN</span>` : `<span class="px-2.5 py-1 rounded-full bg-tertiary/10 text-tertiary font-bold text-[10px] uppercase tracking-wider">COMMUNITY</span>`;
+      const badge = flow.isAdmin
+        ? `<span class="px-2.5 py-1 rounded-full bg-gradient-to-r from-primary/20 via-primary/10 to-amber-500/20 text-primary border border-primary/30 font-extrabold text-[10px] uppercase tracking-wider flex items-center gap-1"><span class="material-symbols-outlined text-xs text-amber-500">verified</span> OFFICIAL ADMIN</span>`
+        : `<span class="px-2.5 py-1 rounded-full bg-tertiary/10 text-tertiary border border-tertiary/20 font-bold text-[10px] uppercase tracking-wider">COMMUNITY</span>`;
 
       return `
-        <div class="terra-card p-6 rounded-2xl border border-outline-variant/15 hover:border-primary/30 flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1">
+        <div class="terra-card p-6 rounded-3xl border border-primary/20 hover:border-primary/50 flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1.5 shadow-terra-soft hover:shadow-terra-glow bg-surface-container/70 backdrop-blur-md">
           <div>
             <div class="flex justify-between items-center mb-3">
               ${badge}
-              <span class="text-xs font-semibold text-on-surface-variant/60 flex items-center gap-1">
-                <span class="material-symbols-outlined text-sm">play_circle</span> ${flow.plays || 0}
+              <span class="text-xs font-bold text-on-surface-variant/70 flex items-center gap-1 bg-surface/60 px-2 py-0.5 rounded-full border border-primary/10">
+                <span class="material-symbols-outlined text-xs text-primary">play_circle</span> ${flow.plays || 0}
               </span>
             </div>
-            <h3 class="font-headline text-xl font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">${title}</h3>
+            <h3 class="font-headline text-lg sm:text-xl font-bold text-on-surface mb-2 group-hover:text-primary transition-colors leading-snug">${title}</h3>
             <p class="text-xs text-on-surface-variant/80 font-body leading-relaxed mb-6 line-clamp-2">${desc}</p>
           </div>
 
-          <div class="pt-4 border-t border-outline-variant/15 flex items-center justify-between">
-            <span class="text-xs text-on-surface-variant font-semibold">by ${flow.author || 'User'}</span>
+          <div class="pt-4 border-t border-primary/10 flex items-center justify-between">
+            <span class="text-xs text-on-surface-variant font-semibold flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm text-primary/70">account_circle</span>
+              <span>by ${flow.author || 'User'}</span>
+            </span>
             <div class="flex gap-2">
-              <button class="p-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-red-500 transition-colors text-xs flex items-center gap-1" onclick="app.likeFlowchart('${flow.id}')">
+              <button class="p-2 rounded-xl bg-surface-container/80 text-on-surface-variant hover:text-red-500 transition-colors text-xs flex items-center gap-1 border border-primary/10" onclick="app.likeFlowchart('${flow.id}')">
                 <span class="material-symbols-outlined text-base">favorite</span> ${flow.likes || 0}
               </button>
-              <button class="btn-terra btn-primary px-4 py-2 rounded-xl font-bold text-xs shadow-sm flex items-center gap-1" onclick="app.launchCommunityFlow('${flow.id}')">
+              <button class="btn-terra btn-primary px-4 py-2 rounded-xl font-bold text-xs shadow-terra-soft flex items-center gap-1.5 hover:scale-105 transition-all" onclick="app.launchCommunityFlow('${flow.id}')">
                 <span class="material-symbols-outlined text-sm">play_arrow</span>
                 <span>${dict.btnPlayFlow}</span>
               </button>

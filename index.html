@@ -263,7 +263,10 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
         <!-- Interactive Pillar 1: Kesadaran Murni (Dichotomy of Control) -->
-        <div class="terra-card pillar-interactive-card p-8 rounded-3xl flex flex-col justify-between border border-primary/20 bg-surface/90 backdrop-blur-md space-y-6 group">
+        <div class="terra-card pillar-interactive-card p-8 rounded-3xl flex flex-col justify-between border border-primary/20 bg-surface/90 backdrop-blur-md space-y-6 group relative">
+          <button class="absolute top-4 right-4 p-2 rounded-xl bg-surface-container/60 text-on-surface-variant hover:text-primary transition-all text-xs font-bold border border-primary/10" onclick="app.focusPillarCard(1)" title="Layar Penuh Fokus (Pilar 1)" data-focus-pillar="1">
+            <span class="material-symbols-outlined text-base">fullscreen</span>
+          </button>
           <div>
             <div class="w-14 h-14 bg-primary/15 rounded-2xl flex items-center justify-center text-primary mb-5 group-hover:scale-110 group-hover:bg-primary group-hover:text-on-primary transition-all shadow-sm">
               <span class="material-symbols-outlined text-3xl">psychology_alt</span>
@@ -288,7 +291,10 @@
         </div>
 
         <!-- Interactive Pillar 2: Tindakan Jernih (5-Minute Clarity Action) -->
-        <div class="terra-card pillar-interactive-card p-8 rounded-3xl flex flex-col justify-between border border-tertiary/20 bg-surface/90 backdrop-blur-md space-y-6 group">
+        <div class="terra-card pillar-interactive-card p-8 rounded-3xl flex flex-col justify-between border border-tertiary/20 bg-surface/90 backdrop-blur-md space-y-6 group relative">
+          <button class="absolute top-4 right-4 p-2 rounded-xl bg-surface-container/60 text-on-surface-variant hover:text-primary transition-all text-xs font-bold border border-primary/10" onclick="app.focusPillarCard(2)" title="Layar Penuh Fokus (Pilar 2)" data-focus-pillar="2">
+            <span class="material-symbols-outlined text-base">fullscreen</span>
+          </button>
           <div>
             <div class="w-14 h-14 bg-tertiary/15 rounded-2xl flex items-center justify-center text-tertiary mb-5 group-hover:scale-110 group-hover:bg-tertiary group-hover:text-on-primary transition-all shadow-sm">
               <span class="material-symbols-outlined text-3xl">auto_fix_high</span>
@@ -312,7 +318,10 @@
         </div>
 
         <!-- Interactive Pillar 3: Penerimaan Tulus (Amor Fati & Surrender) -->
-        <div class="terra-card pillar-interactive-card p-8 rounded-3xl flex flex-col justify-between border border-secondary/20 bg-surface/90 backdrop-blur-md space-y-6 group">
+        <div class="terra-card pillar-interactive-card p-8 rounded-3xl flex flex-col justify-between border border-secondary/20 bg-surface/90 backdrop-blur-md space-y-6 group relative">
+          <button class="absolute top-4 right-4 p-2 rounded-xl bg-surface-container/60 text-on-surface-variant hover:text-primary transition-all text-xs font-bold border border-primary/10" onclick="app.focusPillarCard(3)" title="Layar Penuh Fokus (Pilar 3)" data-focus-pillar="3">
+            <span class="material-symbols-outlined text-base">fullscreen</span>
+          </button>
           <div>
             <div class="w-14 h-14 bg-secondary-container rounded-2xl flex items-center justify-center text-secondary mb-5 group-hover:scale-110 group-hover:bg-secondary group-hover:text-on-primary transition-all shadow-sm">
               <span class="material-symbols-outlined text-3xl">self_improvement</span>
@@ -349,7 +358,7 @@
         <div class="flex flex-wrap items-center justify-between gap-3 border-b border-primary/10 pb-4">
           <div class="flex items-center gap-2.5">
             <div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xl font-bold shadow-sm" id="wisdom-avatar-icon">
-              ☸️
+              <span class="material-symbols-outlined text-xl">auto_stories</span>
             </div>
             <div>
               <span class="text-[10px] font-mono tracking-widest uppercase text-tertiary font-bold" data-i18n="wisdomLabel">KUTIPAN KEBIJAKSANAAN SEJATI</span>
@@ -360,6 +369,9 @@
           </div>
 
           <div class="flex items-center gap-2">
+            <button type="button" class="p-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary transition-all text-xs font-bold" title="Focus Fullscreen Wisdom" onclick="app.focusWisdomCard()">
+              <span class="material-symbols-outlined text-base">fullscreen</span>
+            </button>
             <button type="button" class="p-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary transition-all text-xs font-bold" title="Salin Kutipan" onclick="app.copyWisdomQuote()">
               <span class="material-symbols-outlined text-base">content_copy</span>
             </button>
@@ -748,6 +760,19 @@ res_cannotact["🏁 Lalu Kenapa Khawatir?"]'></textarea>
       <span class="material-symbols-outlined text-base" id="icon-global-fullscreen">fullscreen</span>
     </button>
   </aside>
+
+  <!-- CARD FOCUS FULLSCREEN MODAL -->
+  <div id="modal-card-focus" class="fixed inset-0 z-50 bg-on-background/70 backdrop-blur-md flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="terra-card p-8 sm:p-12 rounded-[2.5rem] max-w-3xl w-full relative border-2 border-primary/30 shadow-terra-deep scale-95 transition-transform duration-300 bg-surface/95" id="modal-card-focus-content">
+      <button class="absolute top-6 right-6 p-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary transition-all flex items-center gap-1 text-xs font-bold border border-primary/20" onclick="app.closeCardFocusModal()">
+        <span class="material-symbols-outlined text-lg">close</span>
+        <span>Tutup</span>
+      </button>
+      <div id="card-focus-body" class="mt-4">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
 
   <script type="module" src="./app.js"></script>
 </body>

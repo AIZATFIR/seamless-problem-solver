@@ -1781,6 +1781,10 @@ class SeamlessProblemSolverApp {
       this.canvasEditor.container = mountEl;
       this.canvasEditor.setNodes(this.builderNodes);
     }
+
+    // Default auto arrange layout when entering Studio / Create mode
+    this.canvasEditor.autoArrangeLayout();
+    this.canvasEditor.render();
   }
 
   // --- Clean Fallback Getters for Dynamic & i18n Nodes ---
@@ -3408,8 +3412,122 @@ res_hemat: [HASIL] Hemat & Seduh Kopi Rumah
     if (quoteEl) quoteEl.textContent = `"${isEn ? q.enQuote : q.idQuote}"`;
     if (authorEl) authorEl.textContent = `— ${q.author}`;
     if (schoolEl) schoolEl.textContent = isEn ? (q.school_en || q.school_id) : (q.school_id || 'Filsafat');
-    if (avatarEl) avatarEl.textContent = q.avatarIcon || '☸️';
+    if (avatarEl) avatarEl.innerHTML = `<span class="material-symbols-outlined text-xl">auto_stories</span>`;
     if (hintEl) hintEl.textContent = isEn ? (q.hint_en || q.hint_id) : (q.hint_id || '');
+  }
+
+  focusPillarCard(num) {
+    const modal = document.getElementById('modal-card-focus');
+    const body = document.getElementById('card-focus-body');
+    if (!modal || !body) return;
+
+    let contentHTML = '';
+    if (num === 1) {
+      contentHTML = `
+        <div class="space-y-6 text-center">
+          <div class="w-20 h-20 mx-auto bg-primary/15 rounded-3xl flex items-center justify-center text-primary shadow-terra-soft">
+            <span class="material-symbols-outlined text-5xl">psychology_alt</span>
+          </div>
+          <span class="text-xs font-mono font-bold tracking-widest uppercase text-primary bg-primary/10 px-3 py-1 rounded-full inline-block">PILAR 1 • KESADARAN MURNI</span>
+          <h2 class="font-headline text-3xl sm:text-4xl font-extrabold text-on-surface">Kesadaran Murni (Dikotomi Kendali)</h2>
+          <p class="text-on-surface-variant font-body leading-relaxed text-base max-w-xl mx-auto">
+            "Bukan hal-hal di luar diri yang membuat kita gelisah, melainkan tanggapan dan pertimbangan kita sendiri atas hal-hal tersebut." — Epictetus
+          </p>
+          <div class="p-6 rounded-3xl bg-surface-container/90 border border-primary/20 text-left space-y-3 max-w-xl mx-auto">
+            <h4 class="font-headline font-bold text-sm text-primary flex items-center gap-2">
+              <span class="material-symbols-outlined">filter_alt</span> Prinsip Utama:
+            </h4>
+            <ul class="text-xs text-on-surface-variant space-y-2 font-body leading-relaxed list-disc list-inside">
+              <li><strong>Dalam Kendali:</strong> Pikiran, keputusan, kata-kata, usaha, dan nilai moral pribadimu.</li>
+              <li><strong>Di Luar Kendali:</strong> Tindakan orang lain, cuaca, masa lalu, dan hasil akhir ekonomi.</li>
+            </ul>
+          </div>
+        </div>
+      `;
+    } else if (num === 2) {
+      contentHTML = `
+        <div class="space-y-6 text-center">
+          <div class="w-20 h-20 mx-auto bg-tertiary/15 rounded-3xl flex items-center justify-center text-tertiary shadow-terra-soft">
+            <span class="material-symbols-outlined text-5xl">auto_fix_high</span>
+          </div>
+          <span class="text-xs font-mono font-bold tracking-widest uppercase text-tertiary bg-tertiary/10 px-3 py-1 rounded-full inline-block">PILAR 2 • TINDAKAN JERNIH</span>
+          <h2 class="font-headline text-3xl sm:text-4xl font-extrabold text-on-surface">Tindakan Jernih (Aksi 5 Menit)</h2>
+          <p class="text-on-surface-variant font-body leading-relaxed text-base max-w-xl mx-auto">
+            "Fokuskan perhatian penuh pada 1 tugas terkecil yang bisa diselesaikan detik ini juga."
+          </p>
+          <div class="p-6 rounded-3xl bg-surface-container/90 border border-tertiary/20 text-left space-y-3 max-w-xl mx-auto">
+            <h4 class="font-headline font-bold text-sm text-tertiary flex items-center gap-2">
+              <span class="material-symbols-outlined">timer</span> Cara Kerja Aksi 5 Menit:
+            </h4>
+            <p class="text-xs text-on-surface-variant font-body leading-relaxed">
+              Kecemasan hilang ketika aksi dimulai. Pecah masalah besar menjadi micro-task berdurasi 5 menit tanpa memikirkan hasil akhir.
+            </p>
+          </div>
+        </div>
+      `;
+    } else if (num === 3) {
+      contentHTML = `
+        <div class="space-y-6 text-center">
+          <div class="w-20 h-20 mx-auto bg-secondary-container rounded-3xl flex items-center justify-center text-secondary shadow-terra-soft">
+            <span class="material-symbols-outlined text-5xl">self_improvement</span>
+          </div>
+          <span class="text-xs font-mono font-bold tracking-widest uppercase text-secondary bg-secondary-container/50 px-3 py-1 rounded-full inline-block">PILAR 3 • AMOR FATI</span>
+          <h2 class="font-headline text-3xl sm:text-4xl font-extrabold text-on-surface">Penerimaan Tulus (Amor Fati)</h2>
+          <p class="text-on-surface-variant font-body leading-relaxed text-base max-w-xl mx-auto">
+            "Mencintai takdir dan menerima setiap kejadian sebagai bahan bakar pertumbuhan jiwa." — Marcus Aurelius
+          </p>
+          <div class="p-6 rounded-3xl bg-surface-container/90 border border-secondary/20 text-left space-y-3 max-w-xl mx-auto">
+            <h4 class="font-headline font-bold text-sm text-secondary flex items-center gap-2">
+              <span class="material-symbols-outlined">spa</span> Latihan Keikhlasan Batin:
+            </h4>
+            <p class="text-xs text-on-surface-variant font-body leading-relaxed">
+              Tarik napas panjang, sadari ketegangan tubuhmu, dan lepaskan keinginan untuk mengontrol segala hal di luar kuasamu.
+            </p>
+          </div>
+        </div>
+      `;
+    }
+
+    body.innerHTML = contentHTML;
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    const innerCard = document.getElementById('modal-card-focus-content');
+    if (innerCard) innerCard.classList.remove('scale-95');
+  }
+
+  focusWisdomCard() {
+    const q = quotes[this.quoteIndex] || quotes[0];
+    const isEn = this.currentLang === 'en';
+    const modal = document.getElementById('modal-card-focus');
+    const body = document.getElementById('card-focus-body');
+    if (!modal || !body) return;
+
+    body.innerHTML = `
+      <div class="space-y-6 text-center">
+        <div class="w-16 h-16 mx-auto bg-primary/10 text-primary rounded-full flex items-center justify-center">
+          <span class="material-symbols-outlined text-3xl">auto_stories</span>
+        </div>
+        <span class="text-xs font-mono font-bold tracking-widest uppercase text-tertiary">${isEn ? (q.school_en || q.school_id) : (q.school_id || 'Wisdom')}</span>
+        <blockquote class="text-2xl sm:text-3xl font-semibold text-on-surface leading-relaxed">
+          "${isEn ? q.enQuote : q.idQuote}"
+        </blockquote>
+        <cite class="font-headline text-lg font-bold text-primary block not-italic">— ${q.author}</cite>
+        <p class="text-xs text-on-surface-variant italic max-w-md mx-auto">
+          ${isEn ? (q.hint_en || q.hint_id) : (q.hint_id || '')}
+        </p>
+      </div>
+    `;
+
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    const innerCard = document.getElementById('modal-card-focus-content');
+    if (innerCard) innerCard.classList.remove('scale-95');
+  }
+
+  closeCardFocusModal() {
+    const modal = document.getElementById('modal-card-focus');
+    if (!modal) return;
+    modal.classList.add('opacity-0', 'pointer-events-none');
+    const innerCard = document.getElementById('modal-card-focus-content');
+    if (innerCard) innerCard.classList.add('scale-95');
   }
 
   nextQuote() {

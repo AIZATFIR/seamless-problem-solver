@@ -531,8 +531,16 @@ body.is-fullscreen footer {
 .fullscreen-create-active header,
 .fullscreen-create-active footer,
 .fullscreen-create-active #section-daily-wisdom,
-.fullscreen-create-active .studio-header-meta {
+.fullscreen-create-active .studio-header-meta,
+.fullscreen-create-active #floating-dock,
+.fullscreen-create-active #btn-ambient {
   display: none !important;
+}
+
+/* Floating Bottom Dock Left Alignment */
+.floating-bottom-dock {
+  left: 24px !important;
+  transform: translateX(0) !important;
 }
 
 .fullscreen-create-active .visual-flow-canvas-wrapper {

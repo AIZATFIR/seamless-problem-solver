@@ -304,7 +304,7 @@ export class VisualFlowNodeComponent {
       nodesLayer.appendChild(nodeEl);
     });
 
-    // --- Figma Right Tool Bar (Matches Figma Screenshot) ---
+    // --- Figma Right Tool Bar ---
     const figmaRightToolbar = document.createElement('div');
     figmaRightToolbar.className = 'absolute right-6 top-1/2 -translate-y-1/2 z-30 flex flex-col items-center gap-2 p-2 rounded-2xl figma-floating-panel shadow-terra-deep';
     figmaRightToolbar.innerHTML = `
@@ -315,22 +315,8 @@ export class VisualFlowNodeComponent {
         <span class="material-symbols-outlined text-lg">crop_free</span>
       </button>
 
-      <button type="button" class="p-2.5 rounded-xl hover:bg-primary/10 text-on-surface hover:text-primary transition-all" title="Pencil / Draw (P)">
-        <span class="material-symbols-outlined text-lg">edit</span>
-      </button>
-
       <button type="button" id="figma-tool-hand" data-tool="hand" class="p-2.5 rounded-xl ${this.activeTool === 'hand' ? 'bg-primary/20 text-primary font-bold' : 'hover:bg-primary/10 text-on-surface hover:text-primary'} transition-all" title="Hand Pan Tool (H)">
         <span class="material-symbols-outlined text-lg">pan_tool</span>
-      </button>
-
-      <div class="w-4 h-px bg-primary/15 my-0.5"></div>
-
-      <button type="button" class="p-2.5 rounded-xl hover:bg-primary/10 text-on-surface hover:text-primary transition-all" title="Color Palette">
-        <span class="material-symbols-outlined text-lg">palette</span>
-      </button>
-
-      <button type="button" class="p-2.5 rounded-xl hover:bg-primary/10 text-on-surface hover:text-primary transition-all" title="Favorites">
-        <span class="material-symbols-outlined text-lg">star</span>
       </button>
     `;
     canvasViewport.appendChild(figmaRightToolbar);
@@ -348,23 +334,14 @@ export class VisualFlowNodeComponent {
       }
     });
 
-    // --- Figma Bottom Left Floating Prompt Input Bar (Positioned at Bottom-Left) ---
+    // --- Figma Bottom Left Floating Prompt Bar (Positioned at Bottom-Left) ---
     const figmaBottomPromptBar = document.createElement('div');
     figmaBottomPromptBar.className = 'absolute bottom-20 left-6 z-30 flex items-center gap-3 px-4 py-2.5 rounded-2xl figma-floating-panel shadow-terra-deep max-w-md w-full border border-primary/20';
     figmaBottomPromptBar.innerHTML = `
-      <button type="button" class="p-1 text-on-surface-variant hover:text-primary transition-colors" title="Tambah Lampiran">
-        <span class="material-symbols-outlined text-lg">add</span>
-      </button>
-      <button type="button" class="p-1 text-on-surface-variant hover:text-primary transition-colors" title="Prompt Command">
-        <span class="material-symbols-outlined text-lg">code</span>
-      </button>
-
+      <span class="material-symbols-outlined text-primary text-lg">auto_awesome</span>
       <input type="text" placeholder="Apa yang ingin Anda ubah atau buat?" class="flex-grow bg-transparent text-sm text-on-surface placeholder-on-surface-variant/40 focus:outline-none font-medium" />
-
-      <span class="px-2 py-0.5 rounded-md bg-primary/10 text-primary text-[10px] font-mono font-bold">3 Flash</span>
-
-      <button type="button" class="p-2 rounded-xl bg-primary hover:bg-primary/90 text-on-primary font-bold transition-all shadow-md flex items-center justify-center">
-        <span class="material-symbols-outlined text-base">auto_awesome</span>
+      <button type="button" class="px-3 py-1 rounded-xl bg-primary hover:bg-primary/90 text-on-primary font-bold text-xs transition-all shadow-md flex items-center justify-center gap-1">
+        <span>Buat</span>
       </button>
     `;
     canvasViewport.appendChild(figmaBottomPromptBar);
@@ -433,7 +410,7 @@ export class VisualFlowNodeComponent {
       }
     }, { passive: true });
 
-    // Wheel Zooming & Canvas Pan
+    // Wheel Zooming & Dampened Touchpad Canvas Pan (Prevents Jumping)
     canvasViewport.addEventListener('wheel', (e) => {
       e.preventDefault();
       if (e.ctrlKey || e.metaKey) {
@@ -444,9 +421,11 @@ export class VisualFlowNodeComponent {
           this.zoomLevel = Math.max(0.3, this.zoomLevel - 0.1);
         }
       } else {
-        // Panning Canvas
-        this.panOffset.x -= e.deltaX;
-        this.panOffset.y -= e.deltaY;
+        // Smooth Dampened Touchpad Panning
+        const clampDx = Math.max(-30, Math.min(30, e.deltaX * 0.4));
+        const clampDy = Math.max(-30, Math.min(30, e.deltaY * 0.4));
+        this.panOffset.x -= clampDx;
+        this.panOffset.y -= clampDy;
       }
       this._applyCanvasTransform();
     }, { passive: false });

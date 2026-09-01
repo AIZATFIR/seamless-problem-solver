@@ -1,61 +1,62 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap');
 
-/* Terra Organic Design System & Animations */
-
+/* --- Modern Spatial Design Tokens & Organic Color Palette --- */
 :root {
-  --color-primary: 74 124 89;
-  --color-primary-container: 120 168 134;
-  --color-primary-light: 142 207 158;
-  --color-secondary: 107 99 88;
-  --color-secondary-container: 240 232 219;
-  --color-tertiary: 112 92 48;
-  --color-tertiary-container: 196 166 106;
-  --color-background: 250 246 240;
-  --color-surface: 252 250 247;
-  --color-surface-container: 240 236 228;
-  --color-surface-container-high: 234 230 222;
-  --color-on-background: 46 50 48;
-  --color-on-surface: 46 50 48;
-  --color-on-surface-variant: 74 78 74;
-  --color-on-primary: 255 255 255;
-  --color-outline-variant: 212 206 202;
+  --color-primary: 52 211 153; /* Emerald 400 */
+  --color-primary-container: 16 185 129;
+  --color-primary-light: 110 231 183;
+  --color-secondary: 100 116 139;
+  --color-secondary-container: 241 245 249;
+  --color-tertiary: 245 158 11; /* Amber 500 */
+  --color-tertiary-container: 254 243 199;
+  --color-background: 250 250 249; /* Stone 50 Warm Ivory */
+  --color-surface: 255 255 255;
+  --color-surface-container: 245 245 244;
+  --color-surface-container-high: 231 229 228;
+  --color-on-background: 28 25 23;
+  --color-on-surface: 28 25 23;
+  --color-on-surface-variant: 87 83 78;
+  --color-on-primary: 15 23 42;
+  --color-outline-variant: 229 231 235;
 
-  --shadow-soft: 0 4px 25px rgba(46, 50, 48, 0.07);
-  --shadow-deep: 0 12px 35px rgba(46, 50, 48, 0.12);
+  --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -2px rgba(0, 0, 0, 0.03);
+  --shadow-deep: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 0 35px rgba(52, 211, 153, 0.22);
 }
 
 .dark {
-  --color-primary: 142 207 158;
-  --color-primary-container: 42 96 56;
-  --color-primary-light: 163 224 178;
-  --color-secondary: 212 204 191;
-  --color-secondary-container: 54 50 43;
-  --color-tertiary: 248 224 168;
-  --color-tertiary-container: 84 68 34;
-  --color-background: 20 24 22;
-  --color-surface: 28 34 30;
-  --color-surface-container: 36 44 39;
-  --color-surface-container-high: 45 55 49;
-  --color-on-background: 228 236 230;
-  --color-on-surface: 228 236 230;
-  --color-on-surface-variant: 176 184 178;
-  --color-on-primary: 18 33 21;
-  --color-outline-variant: 58 68 62;
+  --color-primary: 52 211 153;
+  --color-primary-container: 5 150 105;
+  --color-primary-light: 110 231 183;
+  --color-secondary: 148 163 184;
+  --color-secondary-container: 30 41 59;
+  --color-tertiary: 251 191 36;
+  --color-tertiary-container: 69 26 3;
+  --color-background: 15 23 42; /* Slate 900 Obsidian */
+  --color-surface: 24 33 47;
+  --color-surface-container: 30 41 59;
+  --color-surface-container-high: 51 65 85;
+  --color-on-background: 241 245 249;
+  --color-on-surface: 248 250 252;
+  --color-on-surface-variant: 148 163 184;
+  --color-on-primary: 15 23 42;
+  --color-outline-variant: 51 65 85;
 
-  --shadow-soft: 0 4px 25px rgba(0, 0, 0, 0.4);
-  --shadow-deep: 0 12px 35px rgba(0, 0, 0, 0.6);
+  --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+  --shadow-deep: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 35px rgba(52, 211, 153, 0.28);
 }
 
 body {
   background-color: rgb(var(--color-background));
   color: rgb(var(--color-on-background));
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   overflow-x: hidden;
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-h1, h2, h3, h4 {
-  font-family: 'Literata', serif;
+h1, h2, h3, h4, .font-headline {
+  font-family: 'Outfit', sans-serif;
 }
 
 /* Material Symbols Styling */
@@ -65,512 +66,221 @@ h1, h2, h3, h4 {
   vertical-align: middle;
 }
 
-/* Terra Card Glassmorphism */
-.terra-card {
-  background-color: rgb(var(--color-surface));
-  box-shadow: var(--shadow-soft);
-  transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
+/* --- Spatial Dot Grid Canvas --- */
+.spatial-dot-grid {
+  background-size: 24px 24px;
+  background-image: radial-gradient(circle, rgba(100, 116, 139, 0.16) 1px, transparent 1px);
 }
 
-.dark .terra-card {
-  background-color: rgba(28, 34, 30, 0.9);
-  backdrop-filter: blur(14px);
+.dark .spatial-dot-grid {
+  background-image: radial-gradient(circle, rgba(148, 163, 184, 0.14) 1px, transparent 1px);
 }
 
-/* Navigation Tabs */
-.nav-tab-btn.active-tab {
-  background-color: rgb(var(--color-primary));
-  color: rgb(var(--color-on-primary));
-  box-shadow: 0 2px 10px rgba(74, 124, 89, 0.3);
-}
-
-.dark .nav-tab-btn.active-tab {
-  color: #122115;
-}
-
-/* Category Filter Buttons */
-.cat-filter-btn.active-cat {
-  background-color: rgb(var(--color-primary));
-  color: rgb(var(--color-on-primary));
-}
-
-.dark .cat-filter-btn.active-cat {
-  color: #122115;
-}
-
-/* Step Indicators */
-.step-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 9999px;
-  background-color: rgba(116, 121, 110, 0.3);
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.step-dot.active-dot {
-  width: 28px;
-  background-color: rgb(var(--color-primary));
-  box-shadow: 0 0 12px rgba(74, 124, 89, 0.4);
-}
-
-/* Flow Card Transitions */
-.flow-card {
-  width: 100%;
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.flow-card.hidden-card {
-  opacity: 0;
-  transform: translateY(24px) scale(0.96);
-  pointer-events: none;
+/* --- Spatial Node Card --- */
+.spatial-node-card {
   position: absolute;
-  visibility: hidden;
+  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
 }
 
-.flow-card.active-card {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  pointer-events: auto;
-  position: relative;
-  visibility: visible;
+.spatial-node-card:hover {
+  transform: translateY(-2px);
 }
 
-/* Button Ripple & Interactive Effects */
-.btn-terra {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+.spatial-node-card.selected-node {
+  transform: scale(1.01);
 }
 
-.btn-terra::after {
-  content: '';
+/* --- 4-Way Sprouting Handles (+) --- */
+.edge-sprout-handle {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.5s ease-out, height 0.5s ease-out, opacity 0.5s ease-out;
-  opacity: 1;
-}
-
-.btn-terra:active::after {
-  width: 250%;
-  height: 250%;
-  opacity: 0;
-}
-
-.btn-primary {
-  background-color: rgb(var(--color-primary));
-  color: rgb(var(--color-on-primary));
-}
-
-.dark .btn-primary {
-  color: #122115;
-}
-
-/* Breathing Sphere Animations */
-#breath-circle.inhale {
-  transform: scale(1.6);
-  background-color: rgba(74, 124, 89, 0.4);
-  box-shadow: 0 0 50px rgba(74, 124, 89, 0.5);
-}
-
-#breath-circle.hold {
-  transform: scale(1.6);
-  background-color: rgba(112, 92, 48, 0.4);
-  box-shadow: 0 0 50px rgba(112, 92, 48, 0.5);
-}
-
-#breath-circle.exhale {
-  transform: scale(1);
-  background-color: rgba(74, 124, 89, 0.2);
-}
-
-/* Navigation Control Buttons */
-.nav-control-btn {
-  border: 1px solid rgba(116, 121, 110, 0.15);
-}
-
-.dark .nav-control-btn {
-  background-color: rgb(var(--color-surface-container));
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-/* Flowchart Central Focal Card & Hover Expand */
-#player-canvas-box {
-  cursor: pointer;
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.35s ease, background-color 0.35s ease;
-}
-
-#player-canvas-box:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 20px 45px rgba(74, 124, 89, 0.22), var(--shadow-deep);
-  border-color: rgba(var(--color-primary), 0.5);
-}
-
-.dark #player-canvas-box:hover {
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 40px rgba(142, 207, 158, 0.2);
-  border-color: rgba(var(--color-primary), 0.6);
-}
-
-/* True Fullscreen Pure Zen mode - Solid background, no blur, no menu bar */
-body.is-fullscreen header,
-body.is-fullscreen #player-flow-meta,
-body.is-fullscreen #flow-indicator-bar,
-body.is-fullscreen #player-diagram-overview,
-body.is-fullscreen section,
-body.is-fullscreen footer {
-  display: none !important;
-}
-
-#player-canvas-box.fullscreen-flow-active {
-  position: fixed !important;
-  inset: 0 !important;
-  z-index: 9999 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  max-width: 100vw !important;
-  max-height: 100vh !important;
-  border-radius: 0 !important;
-  border: none !important;
-  background-color: rgb(var(--color-background)) !important;
-  backdrop-filter: none !important;
-  padding: 3rem 2rem !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: space-between !important;
-  overflow-y: auto !important;
-  cursor: default !important;
-  transform: none !important;
-  box-shadow: none !important;
-  animation: fullscreenFadeIn 0.25s ease forwards;
-}
-
-.dark #player-canvas-box.fullscreen-flow-active {
-  background-color: #141816 !important;
-  backdrop-filter: none !important;
-}
-
-#player-canvas-box.fullscreen-flow-active:hover {
-  transform: none !important;
-  box-shadow: none !important;
-}
-
-@keyframes fullscreenFadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: rgb(var(--color-background));
-}
-::-webkit-scrollbar-thumb {
-  background: rgb(var(--color-primary-container));
+  width: 22px;
+  height: 22px;
   border-radius: 9999px;
-}
-
-/* ScrollFloat Component CSS (React Bits) */
-.scroll-float {
-  overflow: hidden;
-}
-
-.scroll-float-text {
-  display: inline-block;
-  font-weight: 900;
-  text-align: center;
-  line-height: 1.3;
-}
-
-.char {
-  display: inline-block;
-}
-
-/* ==========================================================================
-   4-Wing Direction Handles & Visual Flowchart Blueprint Engine Styling
-   ========================================================================== */
-
-/* Blueprint Organic Grid Pattern */
-.visual-grid-pattern {
-  background-size: 28px 28px;
-  background-image: 
-    linear-gradient(to right, rgba(74, 124, 89, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(74, 124, 89, 0.08) 1px, transparent 1px);
-}
-
-.dark .visual-grid-pattern {
-  background-image: 
-    linear-gradient(to right, rgba(142, 207, 158, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(142, 207, 158, 0.06) 1px, transparent 1px);
-}
-
-/* Visual Node Card Hover Elevate */
-.visual-node-card {
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
-}
-
-.visual-node-card:hover, .visual-node-card.active-node {
-  box-shadow: 0 16px 40px rgba(74, 124, 89, 0.18), var(--shadow-deep);
-  border-color: rgba(var(--color-primary), 0.7);
-}
-
-/* 4-Wing Direction Handles (Top, Right, Bottom, Left) */
-.wing-handle {
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  border-radius: 9999px;
-  background-color: rgb(var(--color-primary));
-  color: rgb(var(--color-on-primary));
+  background: #10b981;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  z-index: 25;
   opacity: 0;
-  pointer-events: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: scale(0.6);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  z-index: 40;
+  cursor: pointer;
+  border: 2px solid white;
+}
+
+.dark .edge-sprout-handle {
+  border-color: #0f172a;
+}
+
+.spatial-node-card:hover .edge-sprout-handle,
+.spatial-node-card.selected-node .edge-sprout-handle {
+  opacity: 0.85;
+  transform: scale(1);
+}
+
+.edge-sprout-handle:hover {
+  opacity: 1 !important;
+  transform: scale(1.25) !important;
+  background: #34d399;
+}
+
+.edge-handle-top {
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.6);
+}
+.spatial-node-card:hover .edge-handle-top {
+  transform: translateX(-50%) scale(1);
+}
+
+.edge-handle-right {
+  top: 50%;
+  right: -11px;
+  transform: translateY(-50%) scale(0.6);
+}
+.spatial-node-card:hover .edge-handle-right {
+  transform: translateY(-50%) scale(1);
+}
+
+.edge-handle-bottom {
+  bottom: -11px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.6);
+}
+.spatial-node-card:hover .edge-handle-bottom {
+  transform: translateX(-50%) scale(1);
+}
+
+.edge-handle-left {
+  top: 50%;
+  left: -11px;
+  transform: translateY(-50%) scale(0.6);
+}
+.spatial-node-card:hover .edge-handle-left {
+  transform: translateY(-50%) scale(1);
+}
+
+/* --- Connector Wire Pins --- */
+.connector-pin {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  background: #64748b;
+  border: 2px solid white;
+  z-index: 35;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  cursor: crosshair;
+}
+
+.dark .connector-pin {
+  border-color: #0f172a;
+}
+
+.spatial-node-card:hover .connector-pin,
+.spatial-node-card.selected-node .connector-pin {
+  opacity: 0.75;
+}
+
+.connector-pin:hover {
+  opacity: 1 !important;
+  transform: scale(1.3) !important;
+  background: #10b981;
+}
+
+.pin-output {
+  right: -6px;
+  top: 55px;
+}
+
+.pin-input {
+  left: -6px;
+  top: 55px;
+}
+
+/* --- Flowing Particle Animation for Connection Wires --- */
+@keyframes wireDashFlow {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.wire-flow-anim {
+  stroke-dasharray: 6, 6;
+  animation: wireDashFlow 0.8s linear infinite;
+}
+
+/* --- Glassmorphism Cards & Panels --- */
+.terra-card {
+  background-color: rgb(var(--color-surface));
+  box-shadow: var(--shadow-soft);
+  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.dark .terra-card {
+  background-color: rgba(24, 33, 47, 0.9);
+  backdrop-filter: blur(16px);
+}
+
+/* --- Navigation & Category Tab Buttons --- */
+.nav-tab-btn.active-tab {
+  background-color: #10b981;
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+}
+
+.dark .nav-tab-btn.active-tab {
+  color: #0f172a;
+}
+
+.cat-filter-btn.active-cat {
+  background-color: #10b981;
+  color: #ffffff;
+}
+
+.dark .cat-filter-btn.active-cat {
+  color: #0f172a;
+}
+
+/* --- Floating Bottom Dock --- */
+.floating-bottom-dock {
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.wing-handle:hover {
-  transform: scale(1.2) !important;
-  background-color: rgb(var(--color-primary-light));
-  box-shadow: 0 0 16px rgba(74, 124, 89, 0.7), 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* Slide-out Positions in Idle State */
-.wing-top {
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, -30%) scale(0.85);
-}
-
-.wing-bottom {
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, 30%) scale(0.85);
-}
-
-.wing-left {
-  left: 0;
-  top: 50%;
-  transform: translate(-30%, -50%) scale(0.85);
-}
-
-.wing-right {
-  right: 0;
-  top: 50%;
-  transform: translate(30%, -50%) scale(0.85);
-}
-
-/* Slide-out Activation on Hover or Active Card */
-.visual-node-card:hover .wing-top,
-.visual-node-card:focus-within .wing-top,
-.visual-node-card.active-wings .wing-top {
-  transform: translate(-50%, -100%) translateY(-6px) scale(1);
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.visual-node-card:hover .wing-bottom,
-.visual-node-card:focus-within .wing-bottom,
-.visual-node-card.active-wings .wing-bottom {
-  transform: translate(-50%, 100%) translateY(6px) scale(1);
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.visual-node-card:hover .wing-left,
-.visual-node-card:focus-within .wing-left,
-.visual-node-card.active-wings .wing-left {
-  transform: translate(-100%, -50%) translateX(-6px) scale(1);
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.visual-node-card:hover .wing-right,
-.visual-node-card:focus-within .wing-right,
-.visual-node-card.active-wings .wing-right {
-  transform: translate(100%, -50%) translateX(6px) scale(1);
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* Direction Popover Animation */
-@keyframes popoverIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.92) translateY(6px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-.animate-popover-in {
-  animation: popoverIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.direction-popover {
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25), 0 0 25px rgba(74, 124, 89, 0.3);
-}
-
-/* ==========================================================================
-   Ergonomic Floating Bottom Wellness Dock & Dual Navigation Styles
-   ========================================================================== */
-.floating-bottom-dock {
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18), 0 0 24px rgba(74, 124, 89, 0.2);
-}
-
 .floating-bottom-dock:hover {
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25), 0 0 32px rgba(74, 124, 89, 0.35);
-  transform: translateX(-50%) translateY(-2px);
+  transform: translate(-50%, -3px);
+  box-shadow: 0 20px 35px -5px rgba(0, 0, 0, 0.25), 0 0 25px rgba(16, 185, 129, 0.2);
 }
 
 .dock-pill-btn {
-  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.2s ease;
 }
 
 .dock-pill-btn:hover {
-  transform: translateY(-3px) scale(1.05);
-  background-color: rgba(var(--color-primary), 0.15);
-  color: rgb(var(--color-primary));
+  transform: scale(1.05);
 }
 
-.dock-pill-btn:active {
-  transform: translateY(0) scale(0.95);
+/* Button & Action Utilities */
+.btn-terra {
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* ==========================================================================
-   Full-Page Create Flowchart Canvas Styles
-   ========================================================================== */
-#section-create {
-  transition: all 0.3s ease;
+.btn-terra:hover {
+  transform: translateY(-1px);
 }
 
-#section-create.fullscreen-create-active {
-  position: fixed !important;
-  inset: 0 !important;
-  z-index: 60 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  max-width: 100vw !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  background-color: rgb(var(--color-background)) !important;
-  border-radius: 0 !important;
-  overflow: hidden !important;
+.btn-primary {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #ffffff;
 }
 
-#section-create.fullscreen-create-active .visual-flow-canvas-wrapper {
-  height: 100vh !important;
-  min-height: 100vh !important;
-  border-radius: 0 !important;
-  border: none !important;
+.dark .btn-primary {
+  background: linear-gradient(135deg, #34d399, #10b981);
+  color: #0f172a;
 }
-
-/* Draggable Node Cursor */
-.visual-node-card {
-  cursor: grab;
-}
-
-.visual-node-card:active {
-  cursor: grabbing;
-}
-
-/* ==========================================================================
-   Wisdom Quotes & Interactive 3 Pillars Styles
-   ========================================================================== */
-.wisdom-hero-card {
-  position: relative;
-  background: radial-gradient(circle at top right, rgba(var(--color-primary), 0.08), transparent 60%),
-              radial-gradient(circle at bottom left, rgba(var(--color-tertiary), 0.08), transparent 60%),
-              rgb(var(--color-surface));
-  transition: all 0.35s ease;
-}
-
-.wisdom-hero-card:hover {
-  box-shadow: 0 20px 50px rgba(74, 124, 89, 0.2), var(--shadow-deep);
-}
-
-.pillar-interactive-card {
-  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  transform-style: preserve-3d;
-}
-
-.pillar-interactive-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 0 25px rgba(74, 124, 89, 0.18);
-  border-color: rgba(var(--color-primary), 0.5);
-}
-
-/* Philosophical Quote Styling - Deep, Elegant, Wide Letter Spacing */
-.philosophical-quote {
-  font-family: 'Playfair Display', 'Cinzel', Georgia, serif !important;
-  letter-spacing: 0.08em;
-  line-height: 1.65;
-  font-style: italic;
-}
-
-/* Fullscreen Studio Create Mode - Pure Less is More UI */
-.fullscreen-create-active header,
-.fullscreen-create-active footer,
-.fullscreen-create-active #section-daily-wisdom,
-.fullscreen-create-active .studio-header-meta,
-.fullscreen-create-active #floating-dock,
-.fullscreen-create-active #btn-ambient {
-  display: none !important;
-}
-
-/* Floating Bottom Dock Left Alignment */
-.floating-bottom-dock {
-  left: 24px !important;
-  transform: translateX(0) !important;
-}
-
-.fullscreen-create-active .visual-flow-canvas-wrapper {
-  position: fixed !important;
-  inset: 0 !important;
-  z-index: 9999 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  min-height: 100vh !important;
-  border-radius: 0 !important;
-  border: none !important;
-}
-
-/* Big Action Buttons - Touch Target Accessibility */
-/* Figma Studio Organic Light Canvas System */
-.figma-canvas-bg {
-  background-color: #fbf9f5 !important;
-  background-image: radial-gradient(rgba(74, 124, 89, 0.18) 1.2px, transparent 1.2px) !important;
-  background-size: 24px 24px !important;
-}
-
-.figma-floating-panel {
-  background: rgba(255, 255, 255, 0.94) !important;
-  backdrop-filter: blur(16px) !important;
-  border: 1px solid rgba(74, 124, 89, 0.2) !important;
-  box-shadow: 0 12px 32px rgba(74, 124, 89, 0.12), 0 4px 12px rgba(0, 0, 0, 0.05) !important;
-  color: rgb(var(--color-on-surface)) !important;
-}
-
-
-
-
-

@@ -143,14 +143,15 @@
         </button>
 
         <!-- Language Switcher -->
-        <button id="btn-lang" class="nav-control-btn flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-primary transition-all text-xs font-bold uppercase tracking-wider" title="Ganti Bahasa" aria-label="Switch Language ID or EN">
-          <span class="material-symbols-outlined text-sm">translate</span>
+        <button id="btn-lang" class="nav-control-btn flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-primary transition-all text-xs font-bold uppercase tracking-wider" title="Ganti Bahasa">
+          <span class="material-symbols-outlined text-sm" aria-hidden="true">translate</span>
           <span id="txt-lang">ID</span>
         </button>
 
         <!-- Dark/Light Theme Toggle -->
-        <button id="btn-theme" class="nav-control-btn p-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-primary transition-all" title="Ganti Tema" aria-label="Toggle Dark or Light Theme">
-          <span class="material-symbols-outlined text-base" id="icon-theme">dark_mode</span>
+        <button id="btn-theme" class="nav-control-btn p-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-primary transition-all" title="Ganti Tema">
+          <span class="material-symbols-outlined text-base" id="icon-theme" aria-hidden="true">dark_mode</span>
+          <span class="sr-only">Tema Gelap Terang</span>
         </button>
       </div>
 
@@ -458,18 +459,22 @@
 
           <!-- Metadata Quick Inputs -->
           <div class="flex flex-wrap items-center gap-2">
-            <input type="text" id="builder-title" aria-label="Judul Flowchart" class="p-2 rounded-xl bg-surface border border-outline-variant/30 text-on-surface text-xs font-bold w-44 sm:w-56 focus:outline-none focus:border-primary" placeholder="Judul Flowchart..." value="Keputusan Hidup & Karir" />
+            <label for="builder-title" class="sr-only">Judul Flowchart</label>
+            <input type="text" id="builder-title" class="p-2 rounded-xl bg-surface border border-outline-variant/30 text-on-surface text-xs font-bold w-44 sm:w-56 focus:outline-none focus:border-primary" placeholder="Judul Flowchart..." value="Keputusan Hidup & Karir" />
             
-            <input type="text" id="builder-author" aria-label="Nama Pembuat Flowchart" class="p-2 rounded-xl bg-surface border border-outline-variant/30 text-on-surface text-xs w-32 focus:outline-none focus:border-primary" placeholder="Nama Author" value="Kamu" />
+            <label for="builder-author" class="sr-only">Nama Pembuat</label>
+            <input type="text" id="builder-author" class="p-2 rounded-xl bg-surface border border-outline-variant/30 text-on-surface text-xs w-32 focus:outline-none focus:border-primary" placeholder="Nama Author" value="Kamu" />
             
-            <select id="builder-category" aria-label="Kategori Flowchart" class="p-2 rounded-xl bg-surface border border-outline-variant/30 text-on-surface text-xs font-bold focus:outline-none focus:border-primary">
+            <label for="builder-category" class="sr-only">Kategori</label>
+            <select id="builder-category" class="p-2 rounded-xl bg-surface border border-outline-variant/30 text-on-surface text-xs font-bold focus:outline-none focus:border-primary">
               <option value="stoic">Stoik & Hidup</option>
               <option value="work">Kerja & Logika</option>
               <option value="humor">Humor & Meme</option>
               <option value="social">Sosial & Relasi</option>
             </select>
 
-            <select id="builder-template-select" aria-label="Pilih Template Framework" class="p-2 rounded-xl bg-surface border border-primary/30 text-xs font-bold text-primary focus:outline-none focus:border-primary" onchange="app.loadBuilderTemplate(this.value)">
+            <label for="builder-template-select" class="sr-only">Pilih Template</label>
+            <select id="builder-template-select" class="p-2 rounded-xl bg-surface border border-primary/30 text-xs font-bold text-primary focus:outline-none focus:border-primary" onchange="app.loadBuilderTemplate(this.value)">
               <option value="custom">-- Template Preset --</option>
               <option value="5whys">🔍 5 Whys Root Cause</option>
               <option value="stoic">🌿 Stoic Circle of Control</option>
@@ -714,12 +719,12 @@ res_cannotact["🏁 Lalu Kenapa Khawatir?"]'></textarea>
         </div>
 
         <nav aria-label="Footer Navigation" class="flex flex-wrap gap-6 font-body text-xs font-bold tracking-wider text-on-surface-variant uppercase">
-          <a href="#" class="hover:text-primary transition-colors" onclick="app.showSection('player', 'default')">Filosofi</a>
-          <a href="#" class="hover:text-primary transition-colors" onclick="app.showSection('community')">Komunitas</a>
-          <a href="#" class="hover:text-primary transition-colors" onclick="app.showSection('create')">Studio</a>
-          <a href="#about" class="hover:text-primary transition-colors" onclick="app.openInfoModal('about')">Tentang Kami</a>
-          <a href="#privacy" class="hover:text-primary transition-colors" onclick="app.openInfoModal('privacy')">Kebijakan Privasi</a>
-          <a href="#contact" class="hover:text-primary transition-colors" onclick="app.openInfoModal('contact')">Kontak</a>
+          <a href="/" class="hover:text-primary transition-colors" onclick="app.showSection('player', 'default')">Filosofi</a>
+          <a href="/#community" class="hover:text-primary transition-colors" onclick="app.showSection('community')">Komunitas</a>
+          <a href="/#create" class="hover:text-primary transition-colors" onclick="app.showSection('create')">Studio</a>
+          <a href="/about.html" class="hover:text-primary transition-colors">Tentang Kami</a>
+          <a href="/privacy.html" class="hover:text-primary transition-colors">Kebijakan Privasi</a>
+          <a href="/contact.html" class="hover:text-primary transition-colors">Kontak</a>
         </nav>
       </div>
 

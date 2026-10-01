@@ -6,6 +6,10 @@
   <title>Terra Flow — Seamless Problem Solver | Interactive Decision Flow</title>
   <meta name="description" content="Kendalikan pikiran, temukan ketenangan, dan buat keputusan jernih dengan diagram alur interaktif berbasis filosofi Stoik." />
   
+  <!-- Canonical URL & Favicon -->
+  <link rel="canonical" href="https://seamless-problem-solver.vercel.app/" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  
   <!-- Open Graph & Social Metadata (SEO) -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://seamless-problem-solver.vercel.app/" />
@@ -21,13 +25,34 @@
   <!-- Theme Color -->
   <meta name="theme-color" content="#4a7c59" />
 
-  <!-- Fonts: Outfit, Inter, Literata, Nunito Sans, JetBrains Mono -->
+  <!-- Preconnect to CDNs and Fonts -->
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Literata:ital,wght@0,300;0,600;1,400&family=Nunito+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
   
   <!-- Material Symbols -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <!-- JSON-LD Structured Data (SEO & E-E-A-T) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Terra Flow — Seamless Problem Solver",
+    "url": "https://seamless-problem-solver.vercel.app/",
+    "description": "Interactive Stoic problem solving and spatial flowchart thinking environment for mental clarity and decision making.",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "All",
+    "author": {
+      "@type": "Organization",
+      "name": "Terra Flow Team",
+      "url": "https://seamless-problem-solver.vercel.app/"
+    },
+    "datePublished": "2026-08-15",
+    "dateModified": "2026-10-01"
+  }
+  </script>
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -142,7 +167,7 @@
         <!-- Active Flowchart Banner Header -->
         <div id="player-flow-meta" class="mb-6 inline-flex flex-wrap items-center justify-center gap-2 bg-surface-container/80 px-4 py-2 rounded-2xl border border-primary/15 shadow-sm text-xs">
           <span id="player-badge" class="px-2 py-0.5 rounded-md bg-primary text-on-primary font-bold uppercase tracking-wider text-[10px]">MAIN</span>
-          <span id="player-title" class="font-headline font-bold text-on-surface text-sm sm:text-base">Terra Stoic Problem Solver</span>
+          <h1 id="player-title" class="font-headline font-bold text-on-surface text-sm sm:text-base inline-block m-0">Terra Stoic Problem Solver</h1>
           <span id="player-author" class="text-on-surface-variant/70 italic sm:inline">by Terra Admin</span>
           <button id="btn-back-community" class="hidden ml-2 text-primary hover:underline font-bold flex items-center gap-1" onclick="app.showSection('community')">
             <span class="material-symbols-outlined text-sm">grid_view</span>
@@ -239,7 +264,7 @@
         <!-- Search Input -->
         <div class="relative w-full md:w-80">
           <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant/60">search</span>
-          <input type="text" id="community-search" class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-surface-container border border-outline-variant/30 text-on-surface text-sm focus:outline-none focus:border-primary transition-all" placeholder="Cari flowchart..." oninput="app.filterCommunityFlows()" data-i18n-ph="phSearchFlow" />
+          <input type="text" id="community-search" aria-label="Cari flowchart komunitas" class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-surface-container border border-outline-variant/30 text-on-surface text-sm focus:outline-none focus:border-primary transition-all" placeholder="Cari flowchart..." oninput="app.filterCommunityFlows()" data-i18n-ph="phSearchFlow" />
         </div>
 
         <!-- Category Tabs -->
@@ -433,18 +458,18 @@
 
           <!-- Metadata Quick Inputs -->
           <div class="flex flex-wrap items-center gap-2">
-            <input type="text" id="builder-title" class="p-2 rounded-xl bg-surface border border-outline-variant/30 text-on-surface text-xs font-bold w-44 sm:w-56 focus:outline-none focus:border-primary" placeholder="Judul Flowchart..." value="Keputusan Hidup & Karir" />
+            <input type="text" id="builder-title" aria-label="Judul Flowchart" class="p-2 rounded-xl bg-surface border border-outline-variant/30 text-on-surface text-xs font-bold w-44 sm:w-56 focus:outline-none focus:border-primary" placeholder="Judul Flowchart..." value="Keputusan Hidup & Karir" />
             
-            <input type="text" id="builder-author" class="p-2 rounded-xl bg-surface border border-outline-variant/30 text-on-surface text-xs w-32 focus:outline-none focus:border-primary" placeholder="Nama Author" value="Kamu" />
+            <input type="text" id="builder-author" aria-label="Nama Pembuat Flowchart" class="p-2 rounded-xl bg-surface border border-outline-variant/30 text-on-surface text-xs w-32 focus:outline-none focus:border-primary" placeholder="Nama Author" value="Kamu" />
             
-            <select id="builder-category" class="p-2 rounded-xl bg-surface border border-outline-variant/30 text-on-surface text-xs font-bold focus:outline-none focus:border-primary">
+            <select id="builder-category" aria-label="Kategori Flowchart" class="p-2 rounded-xl bg-surface border border-outline-variant/30 text-on-surface text-xs font-bold focus:outline-none focus:border-primary">
               <option value="stoic">Stoik & Hidup</option>
               <option value="work">Kerja & Logika</option>
               <option value="humor">Humor & Meme</option>
               <option value="social">Sosial & Relasi</option>
             </select>
 
-            <select id="builder-template-select" class="p-2 rounded-xl bg-surface border border-primary/30 text-xs font-bold text-primary focus:outline-none focus:border-primary" onchange="app.loadBuilderTemplate(this.value)">
+            <select id="builder-template-select" aria-label="Pilih Template Framework" class="p-2 rounded-xl bg-surface border border-primary/30 text-xs font-bold text-primary focus:outline-none focus:border-primary" onchange="app.loadBuilderTemplate(this.value)">
               <option value="custom">-- Template Preset --</option>
               <option value="5whys">🔍 5 Whys Root Cause</option>
               <option value="stoic">🌿 Stoic Circle of Control</option>
@@ -661,20 +686,46 @@ res_cannotact["🏁 Lalu Kenapa Khawatir?"]'></textarea>
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="mt-auto py-10 bg-surface-container border-t border-primary/10 relative z-10">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-6">
-      <div class="flex items-center gap-2">
-        <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">schema</span>
-        <span class="font-headline font-bold text-xl text-on-surface">Terra Flow</span>
-        <span class="text-xs text-on-surface-variant/60 font-body ml-2">© 2026 Interactive Flowcharts & Stoic Wisdom</span>
+  <!-- ABOUT & LEGAL DISCLOSURES MODAL -->
+  <div id="modal-info" class="fixed inset-0 z-50 bg-on-background/60 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="terra-card p-6 sm:p-10 rounded-[2rem] max-w-2xl w-full relative border border-primary/30 shadow-terra-deep bg-surface max-h-[85vh] overflow-y-auto" id="modal-info-content">
+      <button class="absolute top-6 right-6 p-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-primary transition-all flex items-center gap-1 text-xs font-bold" onclick="app.closeInfoModal()">
+        <span class="material-symbols-outlined text-base">close</span>
+        <span>Tutup</span>
+      </button>
+      <div id="modal-info-body" class="space-y-4 text-on-surface text-xs sm:text-sm font-body leading-relaxed pt-2">
+        <!-- Dynamic content: About, Privacy Policy, Terms, or Contact -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Semantic Footer with E-E-A-T Links -->
+  <footer class="mt-auto py-12 bg-surface-container border-t border-primary/10 relative z-10">
+    <div class="max-w-7xl mx-auto px-6 space-y-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-primary/15 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">schema</span>
+          </div>
+          <div>
+            <span class="font-headline font-bold text-lg text-on-surface block leading-none">Terra Flow</span>
+            <span class="text-[11px] text-on-surface-variant/70 font-body">Spatial Thinking & Philosophical Problem Solver</span>
+          </div>
+        </div>
+
+        <nav aria-label="Footer Navigation" class="flex flex-wrap gap-6 font-body text-xs font-bold tracking-wider text-on-surface-variant uppercase">
+          <a href="#" class="hover:text-primary transition-colors" onclick="app.showSection('player', 'default')">Filosofi</a>
+          <a href="#" class="hover:text-primary transition-colors" onclick="app.showSection('community')">Komunitas</a>
+          <a href="#" class="hover:text-primary transition-colors" onclick="app.showSection('create')">Studio</a>
+          <a href="#about" class="hover:text-primary transition-colors" onclick="app.openInfoModal('about')">Tentang Kami</a>
+          <a href="#privacy" class="hover:text-primary transition-colors" onclick="app.openInfoModal('privacy')">Kebijakan Privasi</a>
+          <a href="#contact" class="hover:text-primary transition-colors" onclick="app.openInfoModal('contact')">Kontak</a>
+        </nav>
       </div>
 
-      <div class="flex gap-8 font-body text-xs font-bold tracking-wider text-on-surface-variant uppercase">
-        <a href="#" class="hover:text-primary transition-colors" data-i18n="footerPhilosophy" onclick="app.showSection('player', 'default')">Filosofi</a>
-        <a href="#" class="hover:text-primary transition-colors" data-i18n="footerCommunity" onclick="app.showSection('community')">Komunitas</a>
-        <a href="#" class="hover:text-primary transition-colors" data-i18n="footerBreathing" onclick="app.openBreathingModal()">Latihan Napas</a>
-        <a href="#" class="hover:text-primary transition-colors" data-i18n="footerJournal" onclick="app.toggleJournalDrawer(true)">Jurnal Refleksi</a>
+      <div class="pt-6 border-t border-primary/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-on-surface-variant/70">
+        <p>© 2026 Terra Flow. Terinspirasi oleh ajaran Stoikisme, Buddha, & Carl Jung. Data disimpan privat di browsermu.</p>
+        <p>Hosting & CDN: Vercel Edge Network · Open Web Standards</p>
       </div>
     </div>
   </footer>

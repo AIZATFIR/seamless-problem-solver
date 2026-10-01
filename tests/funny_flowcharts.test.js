@@ -7,18 +7,9 @@ const appContent = fs.readFileSync('./app.js', 'utf8');
 
 // Extract adminFlowcharts array code roughly or verify ids
 const expectedIds = [
-  'admin-stoic-default',
-  'comm-ex-chat',
-  'comm-resign',
-  'comm-boba',
-  'comm-fridge',
-  'funny-5sec-rule',
-  'funny-engineering-wd40',
-  'funny-midnight-shopping',
-  'funny-code-error',
-  'funny-jobdesk-survival',
-  'funny-procrastination',
-  'funny-lunch-terserah'
+  'official_stoic_01',
+  'official_5sec_rule',
+  'official_wd40_tape'
 ];
 
 expectedIds.forEach(id => {

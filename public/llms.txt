@@ -1,0 +1,14 @@
+# Terra Flow — Seamless Problem Solver
+
+> A spatial thinking environment and philosophical problem-solving web platform combining Stoic wisdom with modern interactive flowchart visual reasoning.
+
+## Core Capabilities
+- **Main Flow Player**: Step-by-step interactive problem decomposition guided by ancient philosophical principles and decision trees.
+- **Spatial Thinking Canvas Studio**: 60fps infinite spatial flowchart editor featuring 4-way direction sprout handles, spline wire physics, automated tree layout, and local JSON/PNG/SVG/Mermaid exports.
+- **Three Pillars of Calm**: Interactive Dichotomy of Control sorter, 5-Minute Action micro-timer, and Amor Fati acceptance reflections.
+- **Daily Multi-Philosopher Wisdom**: Curated daily insights from Buddha, Hermes Trismegistus, Marcus Aurelius, Carl Jung, Leonardo da Vinci, Sri Aurobindo, and Rumi.
+- **Contextual Visual AI Reasoning**: Heuristic problem decomposition, edge-case generation, and micro-commitment breakdown.
+
+## Official Links
+- Website: https://seamless-problem-solver.vercel.app/
+- Source: https://github.com/AIZATFIR/seamless-problem-solver

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://seamless-problem-solver.vercel.app/sitemap.xml

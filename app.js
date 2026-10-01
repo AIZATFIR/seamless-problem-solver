@@ -927,6 +927,9 @@ class SeamlessProblemSolverApp {
     }
 
     this.spatialCanvas.render();
+    if (this.spatialCanvas && typeof this.spatialCanvas.autoArrangeLayout === 'function') {
+      this.spatialCanvas.autoArrangeLayout();
+    }
     setTimeout(() => {
       this.spatialCanvas.fitView();
     }, 100);
@@ -1598,6 +1601,104 @@ Topik masalah: [TULISKAN MASALAH KAMU DI SINI]`;
     this.renderFlowchartPlayer();
     this.renderCommunityGrid();
     this.renderJournalList();
+  }
+
+  // --- About, Privacy & Legal Modal System ---
+  openInfoModal(type = 'about') {
+    const modal = document.getElementById('modal-info');
+    const body = document.getElementById('modal-info-body');
+    if (!modal || !body) return;
+
+    if (type === 'about') {
+      body.innerHTML = `
+        <div class="space-y-4">
+          <div class="flex items-center gap-2 text-primary font-bold text-base">
+            <span class="material-symbols-outlined">spa</span>
+            <span>Tentang Terra Flow</span>
+          </div>
+          <p>
+            <strong>Terra Flow</strong> adalah lingkungan berpikir visual spasial yang dirancang untuk mengubah kekacauan mental dan beban pikiran menjadi kejelasan langkah yang terstruktur.
+          </p>
+          <div class="p-4 rounded-2xl bg-primary/10 border border-primary/20 space-y-2">
+            <h4 class="font-bold text-on-surface">Pilar Filosofis & Logika:</h4>
+            <ul class="list-disc list-inside space-y-1 text-on-surface-variant">
+              <li><strong>Stoikisme (Dichotomy of Control):</strong> Memilah apa yang dalam kendali vs di luar kendali.</li>
+              <li><strong>Mindfulness & Buddhism:</strong> Mengamati pola pikiran tanpa menghakimi.</li>
+              <li><strong>Psikologi Analitik Carl Jung:</strong> Menghadapi bayangan (shadow) dan menemukan makna.</li>
+              <li><strong>First Principles & 5 Whys:</strong> Mengurai asumsi hingga fakta paling mendasar.</li>
+            </ul>
+          </div>
+          <p class="text-xs text-on-surface-variant/80">
+            Dibuat dengan ❤️ untuk membantu siapa saja yang ingin berpikir lebih tenang, rasional, dan berdaya.
+          </p>
+        </div>
+      `;
+    } else if (type === 'privacy') {
+      body.innerHTML = `
+        <div class="space-y-4">
+          <div class="flex items-center gap-2 text-primary font-bold text-base">
+            <span class="material-symbols-outlined">security</span>
+            <span>Kebijakan Privasi & Kedaulatan Data</span>
+          </div>
+          <p>
+            Privasi dan ketenangan pikiran Anda adalah komitmen utama kami. Kami menerapkan prinsip <strong>Local-First Privacy</strong>:
+          </p>
+          <div class="space-y-3">
+            <div class="p-3.5 rounded-xl bg-surface-container border border-outline-variant/30">
+              <h5 class="font-bold text-on-surface mb-1">1. Penyimpanan Lokal di Perangkat Anda</h5>
+              <p class="text-xs text-on-surface-variant">
+                Seluruh alur diagram, jurnal refleksi ketenangan, dan kustomisasi tersimpan secara privat di <code>localStorage</code> browser Anda. Data tidak diunggah ke database server eksternal tanpa izin Anda.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-surface-container border border-outline-variant/30">
+              <h5 class="font-bold text-on-surface mb-1">2. Sub-Prosesor & Infrastruktur Layanan</h5>
+              <p class="text-xs text-on-surface-variant">
+                Aplikasi ini di-hosting di <strong>Vercel Edge Network</strong> dan font web dilayani oleh <strong>Google Fonts</strong> dengan koneksi aman HTTPS terenkripsi. Tidak ada cookie pelacak iklan pihak ketiga yang digunakan.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-surface-container border border-outline-variant/30">
+              <h5 class="font-bold text-on-surface mb-1">3. Hak & Kontrol Data Pengguna</h5>
+              <p class="text-xs text-on-surface-variant">
+                Anda dapat mengekspor seluruh diagram dalam format JSON standar kapan saja atau menghapus cache peramban untuk mengosongkan seluruh riwayat.
+              </p>
+            </div>
+          </div>
+        </div>
+      `;
+    } else if (type === 'contact') {
+      body.innerHTML = `
+        <div class="space-y-4">
+          <div class="flex items-center gap-2 text-primary font-bold text-base">
+            <span class="material-symbols-outlined">alternate_email</span>
+            <span>Kontak & Kolaborasi Komunitas</span>
+          </div>
+          <p>
+            Punya ide framework baru, menemukan kendala, atau ingin berkontribusi pada pengembangan Terra Flow?
+          </p>
+          <div class="p-4 rounded-2xl bg-surface-container border border-outline-variant/30 space-y-3">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">code</span>
+              <span class="font-bold">Open Source / GitHub:</span>
+            </div>
+            <a href="https://github.com/AIZATFIR/seamless-problem-solver" target="_blank" rel="noopener noreferrer" class="block text-primary hover:underline text-xs font-mono break-all">
+              https://github.com/AIZATFIR/seamless-problem-solver
+            </a>
+          </div>
+          <p class="text-xs text-on-surface-variant">
+            Kami menyambut kontribusi dari para pengembang, desainer, dan pemikir yang peduli pada kesehatan mental dan kejernihan logika.
+          </p>
+        </div>
+      `;
+    }
+
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+  }
+
+  closeInfoModal() {
+    const modal = document.getElementById('modal-info');
+    if (modal) {
+      modal.classList.add('opacity-0', 'pointer-events-none');
+    }
   }
 
   escapeHtml(str) {

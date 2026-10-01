@@ -303,3 +303,13 @@ h1, h2, h3, h4, .font-headline {
   display: inline-block;
   transform-origin: 50% 0%;
 }
+
+/* Ambient Dock Controls */
+#btn-ambient {
+  transition: all 0.25s ease;
+}
+
+.fullscreen-create-active #btn-ambient {
+  display: none !important;
+}
+

@@ -5736,3 +5736,56 @@ console.assert(
 
 Skipped: Dynamic edge collision routing, canvas pinch-zoom matrices, and JS-based spring physics.
 Add when: Canvas supports intersecting multi-tier branches or canvas scaling requires dynamic SVG level-of-detail.
+
+
+### Cycle #96 Directive (2026-11-03 06:07)
+### 1. Organic Warm Canvas Surface
+
+```css
+/* Ambient warm paper canvas; zero image assets */
+.spatial-canvas {
+  background-color: #faf8f5;
+  background-image: radial-gradient(circle, rgba(90, 75, 60, 0.12) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+  touch-action: none;
+}
+```
+skipped: Canvas pattern zoom scaling, add when canvas scale drops below 0.4x.
+
+---
+
+### 2. Natural Auto-Curving Edge Connector
+
+```ts
+// Smooth S-curve horizontal bezier path; stdlib math only
+export const getCurvedPath = (x1: number, y1: number, x2: number, y2: number): string => {
+  const offset = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + offset} ${y1}, ${x2 - offset} ${y2}, ${x2} ${y2}`;
+};
+
+// ponytail: basic cubic bezier; upgrade to obstacle routing if nodes overlap heavily
+```
+skipped: Obstacle collision avoidance, add when graph density exceeds 50 overlapping nodes.
+
+---
+
+### 3. Tactile Node Lift & Settle
+
+```css
+/* Warm nature-toned diffused elevation; GPU-accelerated */
+.spatial-node {
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(80, 65, 50, 0.08);
+  box-shadow: 0 1px 3px rgba(60, 45, 30, 0.04), 0 4px 12px rgba(60, 45, 30, 0.03);
+  transition: transform 120ms cubic-bezier(0.2, 0, 0, 1), box-shadow 120ms ease;
+  user-select: none;
+}
+
+.spatial-node:active,
+.spatial-node[data-dragging="true"] {
+  transform: scale(1.025);
+  box-shadow: 0 12px 32px rgba(60, 45, 30, 0.12), 0 2px 6px rgba(60, 45, 30, 0.04);
+}
+```
+skipped: Inertial velocity spring physics, add when dragging via pointer-events API requires momentum throw.

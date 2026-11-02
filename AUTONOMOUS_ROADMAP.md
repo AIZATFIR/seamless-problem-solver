@@ -5415,3 +5415,64 @@ console.assert(getOrganicPath(0, 0, 100, 50) === 'M 0 0 C 50 0, 50 50, 100 50', 
 ```
 → skipped: External spring physics engines (e.g., Framer Motion, React Spring).  
 → add when: Interrupted momentum-tossing interactions with velocity inheritance are required.
+
+
+### Cycle #90 Directive (2026-11-03 05:34)
+### 1. Nature UI Canvas Backing (Warm Stone & Dot-Grid Vignette)
+
+```css
+/* Replace plain background with tactile, organic stone grid */
+.spatial-canvas {
+  background-color: #f7f6f2;
+  background-image: radial-gradient(circle, #ded9d0 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 65%, rgba(0, 0, 0, 0) 100%);
+}
+```
+skipped: Canvas rendering loops and raster noise textures.  
+add when: Infinite-zoom LOD requires dynamic grid re-scaling via WebGL/Canvas2D.
+
+---
+
+### 2. Natural Bezier Flow Connectors (Native Path Math)
+
+```typescript
+// ponytail: horizontal s-curve; upgrade to orthogonal routing if nodes overlap vertically
+export const getCurvedPath = (x1: number, y1: number, x2: number, y2: number): string => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+
+// Self-check
+console.assert(
+  getCurvedPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100",
+  "Path calculation failed"
+);
+```
+skipped: Graph layout engines (dagre/elkjs) and edge-routing algorithms.  
+add when: Flowcharts exceed ~25 nodes and require automated collision avoidance.
+
+---
+
+### 3. Tactile Node Elevation & Spring Response
+
+```css
+.canvas-node {
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(220, 215, 205, 0.6);
+  box-shadow: 0 1px 3px rgba(45, 40, 30, 0.04), 0 8px 24px rgba(45, 40, 30, 0.03);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: grab;
+  user-select: none;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(45, 40, 30, 0.08), 0 16px 36px rgba(45, 40, 30, 0.06);
+}
+```
+skipped: JS physics/spring libraries (framer-motion, react-spring).  
+add when: Freeform multi-body momentum throw/inertia physics are required.

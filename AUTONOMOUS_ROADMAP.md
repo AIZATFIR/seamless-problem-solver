@@ -2980,3 +2980,54 @@ export const getConnectorPath = (from: { x: number; y: number }, to: { x: number
 ```
 → skipped: Framer Motion / JS spring animations.  
 → add when: nodes require physics-driven multi-body collisions on drag release.
+
+
+### Cycle #49 Directive (2026-11-03 01:45)
+### 1. Zen Ambient Backdrop
+
+```css
+/* Ambient warm stone surface with organic micro-dot grid */
+.spatial-canvas {
+  background-color: #FBF9F5;
+  background-image: radial-gradient(rgba(46, 52, 42, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+  overscroll-behavior: none;
+}
+```
+skipped: WebGL noise textures and custom canvas render loop.  
+add when: Dynamic dynamic paper grain or canvas lighting shifts with time of day.
+
+---
+
+### 2. Natural S-Curve Connectors
+
+```typescript
+// ponytail: pure horizontal cubic bezier; upgrade to orthogonal A* routing if crossing density exceeds 30 edges
+export const getNaturalPath = (x1: number, y1: number, x2: number, y2: number): string => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 32);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+```
+skipped: Path routing engines and collision avoidance libraries.  
+add when: Users demand automated non-overlapping edge rerouting around large node clusters.
+
+---
+
+### 3. Tactile Frosted-Leaf Node Physics
+
+```css
+.canvas-node {
+  border: 1px solid rgba(46, 52, 42, 0.07);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 4px 20px -2px rgba(46, 52, 42, 0.04), 0 1px 2px rgba(46, 52, 42, 0.02);
+  transition: box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1), transform 0.1s ease-out;
+  will-change: transform;
+}
+.canvas-node:active {
+  cursor: grabbing;
+  box-shadow: 0 14px 36px -4px rgba(46, 52, 42, 0.09), 0 2px 4px rgba(46, 52, 42, 0.03);
+}
+```
+skipped: Framer Motion / Spring physics libraries.  
+add when: Nodes require velocity-based inertia/toss release physics.

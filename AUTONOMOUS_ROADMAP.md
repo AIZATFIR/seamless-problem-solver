@@ -5974,3 +5974,55 @@ skipped: A* obstacle avoidance, add when automated layout overlaps 3+ sibling br
 }
 ```
 skipped: spring physics engine (Framer Motion/popmotion), add when users request multi-node magnetic snapping.
+
+
+### Cycle #100 Directive (2026-11-03 06:30)
+### 1. Zen Ambient Backdrop (Native CSS)
+
+```css
+.canvas-viewport {
+  background-color: #fbfaf7;
+  background-image: 
+    radial-gradient(ellipse at 15% 10%, rgba(235, 230, 218, 0.6) 0%, transparent 60%),
+    radial-gradient(circle, #e2ddd3 1px, transparent 1px);
+  background-size: 100% 100%, 28px 28px;
+}
+```
+*skipped: WebGL noise shaders or canvas rendering loops; add when dynamic reactive lighting is needed.*
+
+---
+
+### 2. Natural Bezier Connectors (Zero-dep Pathing)
+
+```javascript
+// ponytail: assumes horizontal left-to-right flow; add auto-port detection when multi-axis routing lands
+function getSmoothEdge(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 48);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// self-check
+console.assert(getSmoothEdge(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100", "Connector path mismatch");
+```
+*skipped: Complex orthogonal routing algorithms (Dijkstra/A*); add when nodes overlap or loop backward.*
+
+---
+
+### 3. Tactile Node Physics (CSS Spring Response)
+
+```css
+.canvas-node {
+  border: 1px solid rgba(60, 50, 40, 0.08);
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(45, 38, 28, 0.04), 0 4px 12px rgba(45, 38, 28, 0.02);
+  transition: transform 160ms cubic-bezier(0.2, 0, 0, 1), box-shadow 160ms ease;
+  user-select: none;
+}
+.canvas-node:active, .canvas-node[data-dragging="true"] {
+  transform: scale(1.02);
+  box-shadow: 0 6px 16px rgba(45, 38, 28, 0.07), 0 16px 32px rgba(45, 38, 28, 0.04);
+  cursor: grabbing;
+}
+```
+*skipped: Framer Motion / JS spring simulations; add when multi-object inertia fling is required.*

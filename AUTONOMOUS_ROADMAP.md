@@ -857,3 +857,85 @@ console.assert(getOrganicConnector(0, 0, 100, 100).startsWith("M 0 0 C 55 0, 45 
 
 skipped: dynamic obstacle routing and JS-driven spring physics.  
 add when: edge collisions visually obstruct node labels during complex tree folds.
+
+
+### Cycle #14 Directive (2026-11-02 22:26)
+### 1. Zen Ambient Backdrop & Frosted Node Tokens (CSS)
+
+```css
+/* Ambient warm-paper canvas & tactile nodes */
+.spatial-canvas {
+  background-color: #fbfbfa;
+  background-image: radial-gradient(rgba(60, 64, 55, 0.06) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+}
+
+.canvas-node {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(68, 73, 65, 0.1);
+  border-radius: 14px;
+  box-shadow: 0 4px 16px -2px rgba(45, 49, 42, 0.05);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+  user-select: none;
+  touch-action: none;
+}
+
+.canvas-node:hover {
+  border-color: rgba(68, 73, 65, 0.2);
+  box-shadow: 0 8px 24px -4px rgba(45, 49, 42, 0.08);
+}
+
+.canvas-node[data-dragging="true"] {
+  cursor: grabbing;
+  transform: scale(1.02);
+  box-shadow: 0 16px 36px -4px rgba(45, 49, 42, 0.12);
+  /* ponytail: static drag elevation; upgrade to velocity-driven tilt if 3D gestures needed */
+}
+```
+→ skipped: WebGL background shaders and CSS grid overlay abstractions; add when dynamic terrain themes are requested.
+
+---
+
+### 2. Organic S-Curve Connector Layout (Native Bezier)
+
+```ts
+// Smooth horizontal flow spline with automatic dynamic tension
+export function getOrganicConnector(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 32);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getOrganicConnector(0, 0, 100, 50) === "M 0 0 C 55 0, 45 50, 100 50",
+  "getOrganicConnector should compute correct cubic bezier control points"
+);
+```
+→ skipped: Full path routing/collision avoidance library; add when nodes overlap regularly and lines need smart obstacle bypass.
+
+---
+
+### 3. Tactile SVG Connector Stroke Styling (SVG/CSS)
+
+```svg
+<!-- Insert inside canvas SVG definition layer -->
+<defs>
+  <linearGradient id="flow-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#8a9284" stop-opacity="0.6" />
+    <stop offset="100%" stop-color="#555d50" stop-opacity="0.85" />
+  </linearGradient>
+</defs>
+
+<!-- Flow line render -->
+<path
+  d={pathData}
+  fill="none"
+  stroke="url(#flow-gradient)"
+  stroke-width="2"
+  stroke-linecap="round"
+  style="transition: stroke 0.2s ease, stroke-width 0.2s ease;"
+/>
+```
+→ skipped: Animated crawling ants and active particle streams; add when real-time graph computation states require active signaling.

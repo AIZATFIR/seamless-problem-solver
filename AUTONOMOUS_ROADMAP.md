@@ -2198,3 +2198,83 @@ export const bindDrag = (el: HTMLElement, onMove: (dx: number, dy: number) => vo
 ```
 *skipped: Inertia/momentum spring physics library.*  
 *add when: Users explicitly request flick-scrolling across massive canvas bounds.*
+
+
+### Cycle #37 Directive (2026-11-03 00:37)
+### 1. Organic S-Curve Flowchart Connectors
+
+```typescript
+// connector.ts
+export function getFlowPath(x1: number, y1: number, x2: number, y2: number): string {
+  // ponytail: horizontal midpoint curve; upgrade to obstacle routing if nodes overlap heavily.
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getFlowPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100",
+  "Connector path generation failed"
+);
+```
+skipped: Orthogonal/elbow routing algorithms and edge bundling.  
+add when: Graph density exceeds ~50 nodes with overlapping bounding boxes.
+
+---
+
+### 2. Nature UI Ambient Warmth & Tactile Nodes
+
+```css
+/* canvas.css */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: radial-gradient(circle, rgba(74, 60, 49, 0.11) 1px, transparent 1px);
+  background-size: 24px 24px;
+  touch-action: none;
+}
+
+.canvas-node {
+  background: #ffffff;
+  border: 1px solid rgba(74, 60, 49, 0.08);
+  border-radius: 12px;
+  /* ponytail: static dual-tone ambient shadow; upgrade to dynamic light source if multi-layer z-index explodes */
+  box-shadow: 0 4px 16px -2px rgba(60, 45, 30, 0.05), 0 1px 3px rgba(60, 45, 30, 0.03);
+  transition: box-shadow 150ms ease, transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+.canvas-node:hover {
+  border-color: rgba(74, 60, 49, 0.16);
+  box-shadow: 0 8px 24px -4px rgba(60, 45, 30, 0.08), 0 2px 6px rgba(60, 45, 30, 0.04);
+}
+```
+skipped: Canvas-drawn background grid via WebGL or 2D context.  
+add when: Zoom scale ranges exceed 0.2x–3.0x where CSS subpixel aliasing breaks down.
+
+---
+
+### 3. Native Smooth Interaction (Drag Capture)
+
+```typescript
+// useDraggable.ts
+export function bindNativeDrag(el: HTMLElement, onMove: (dx: number, dy: number) => void) {
+  el.onpointerdown = (e) => {
+    if (e.button !== 0) return;
+    el.setPointerCapture(e.pointerId);
+    let lx = e.clientX, ly = e.clientY;
+
+    el.onpointermove = (ev) => {
+      onMove(ev.clientX - lx, ev.clientY - ly);
+      lx = ev.clientX;
+      ly = ev.clientY;
+    };
+
+    el.onpointerup = el.onpointercancel = (ev) => {
+      el.releasePointerCapture(ev.pointerId);
+      el.onpointermove = el.onpointerup = el.onpointercancel = null;
+    };
+  };
+}
+```
+skipped: External drag-and-drop gesture libraries and physics springs.  
+add when: Momentum-based flick-scrolling or multi-touch canvas pinch-to-zoom is required.

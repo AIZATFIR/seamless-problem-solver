@@ -1843,3 +1843,45 @@ console.assert(
 ---
 skipped: canvas/webgl layout engines, spring animation dependencies (Framer Motion), complex Manhattan edge routing.  
 add when: canvas exceeds 500 simultaneous active nodes or edges need automatic obstacle clearance.
+
+
+### Cycle #31 Directive (2026-11-03 00:03)
+```css
+/* 1. Ambient Warmth Canvas: pure CSS tactile parchment + sub-pixel grain */
+.spatial-canvas {
+  background-color: #fcfbf9;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(120, 100, 80, 0.07) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 0%, rgba(240, 232, 220, 0.5) 0%, transparent 75%);
+  background-size: 20px 20px, 100% 100%;
+}
+
+/* 2. Tactile Apple-grade Node Elevation */
+.canvas-node {
+  touch-action: none;
+  border: 1px solid rgba(60, 50, 40, 0.08);
+  box-shadow: 0 2px 8px -2px rgba(40, 30, 20, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms ease;
+}
+.canvas-node:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px -4px rgba(40, 30, 20, 0.08), 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+.canvas-node.dragging {
+  cursor: grabbing;
+  transform: scale(1.02);
+  box-shadow: 0 16px 32px -6px rgba(40, 30, 20, 0.12), 0 0 0 1px rgba(60, 50, 40, 0.12);
+}
+```
+
+```typescript
+// 3. Organic Flowchart Curvature (Native SVG Cubic Bézier)
+// ponytail: clamped horizontal S-curve; upgrade to A* pathfinding if edges must route around obstacle nodes
+export const getOrganicEdgePath = (x1: number, y1: number, x2: number, y2: number): string => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+```
+
+skipped: Canvas pan/zoom matrix library and complex edge collision avoidance engines.  
+add when: Flowcharts exceed ~50 overlapping nodes requiring auto-orthogonal routing or viewport scaling.

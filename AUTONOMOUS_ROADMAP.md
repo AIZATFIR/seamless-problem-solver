@@ -2117,3 +2117,84 @@ console.assert(getOrganicPath(0, 0, 100, 50) === "M 0 0 C 55 0, 45 50, 100 50", 
 skipped: dynamic obstacle avoidance & DAG layout engines, add when node overlap becomes unmanageable.  
 skipped: WebGL paper-grain shaders, add when standard CSS subpixel rendering drops below 60fps.  
 skipped: custom gesture recognizers, add when multi-pointer trackpad gestures conflict with native canvas pinch-zoom.
+
+
+### Cycle #36 Directive (2026-11-03 00:32)
+### 1. Organic Bezier Edge Connector
+
+```typescript
+// utils/flowchart.ts
+export const getOrganicPath = (x1: number, y1: number, x2: number, y2: number): string => {
+  // ponytail: horizontal-biased S-curve; upgrade to dynamic obstacle-routing if nodes overlap
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+
+// Self-check
+console.assert(
+  getOrganicPath(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50",
+  "Bezier curve calculation failed"
+);
+```
+*skipped: Obstacle avoidance / orthogonal line routing.*  
+*add when: Complex overlapping multi-tier branch graphs collide.*
+
+---
+
+### 2. Nature UI Ambient Backdrop & Zen Card Elevation
+
+```css
+/* canvas.css */
+.spatial-canvas {
+  background-color: #faf8f5;
+  background-image: radial-gradient(circle, #e6e0d6 0.8px, transparent 0.8px);
+  background-size: 24px 24px;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+
+.spatial-node {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(218, 212, 202, 0.65);
+  border-radius: 14px;
+  box-shadow: 0 4px 18px -2px rgba(50, 42, 32, 0.04), 0 1px 2px rgba(50, 42, 32, 0.03);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.spatial-node:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 10px 28px -4px rgba(50, 42, 32, 0.08), 0 2px 4px rgba(50, 42, 32, 0.04);
+}
+```
+*skipped: Complex canvas textures (SVG noise, animated grain shaders).*  
+*add when: Visual depth feels flat on non-retina displays.*
+
+---
+
+### 3. Native Pointer Capture Canvas Pan/Drag Interaction
+
+```typescript
+// hooks/useDirectDrag.ts
+export const bindDrag = (el: HTMLElement, onMove: (dx: number, dy: number) => void) => {
+  el.onpointerdown = (e: PointerEvent) => {
+    if (e.button !== 0) return;
+    el.setPointerCapture(e.pointerId);
+    let lx = e.clientX, ly = e.clientY;
+
+    el.onpointermove = (ev: PointerEvent) => {
+      onMove(ev.clientX - lx, ev.clientY - ly);
+      lx = ev.clientX;
+      ly = ev.clientY;
+    };
+
+    el.onpointerup = el.onpointercancel = () => {
+      el.onpointermove = el.onpointerup = el.onpointercancel = null;
+    };
+  };
+};
+```
+*skipped: Inertia/momentum spring physics library.*  
+*add when: Users explicitly request flick-scrolling across massive canvas bounds.*

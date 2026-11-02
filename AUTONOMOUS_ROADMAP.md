@@ -2393,3 +2393,75 @@ export const getOrganicSpline = (x1: number, y1: number, x2: number, y2: number)
 }
 ```
 *skipped: Framer Motion / spring physics runloop on drag, add when: nodes need momentum throw or magnetic auto-alignment.*
+
+
+### Cycle #40 Directive (2026-11-03 00:54)
+### 1. Zen Ambient Canvas Surface (CSS)
+Replace sterile gridlines with an Apple-warm, paper-tinted ambient canvas with a soft tactile dot matrix.
+
+```css
+/* canvas.css */
+.spatial-canvas {
+  background-color: #fbf9f5; /* Warm alabaster */
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(245, 240, 230, 0.6) 0%, transparent 100%),
+    radial-gradient(rgba(44, 38, 34, 0.08) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+```
+`skipped: WebGL noise/shaders, add when canvas scale exceeds viewport without performance dip.`
+
+---
+
+### 2. Natural S-Curve Flowchart Connectors (Native SVG)
+Replace angular or stiff lines with an organic, weighted cubic bezier path generator.
+
+```javascript
+// connector.js
+export function getOrganicPath(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  // ponytail: horizontal-first layout; upgrade to 4-way orthogonal when manual anchor selection lands.
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+```
+```css
+/* connector.css */
+.flow-edge {
+  fill: none;
+  stroke: #c8c2b7;
+  stroke-width: 1.75px;
+  stroke-linecap: round;
+  transition: stroke 0.2s cubic-bezier(0.16, 1, 0.3, 1), stroke-width 0.2s ease;
+}
+.flow-edge:hover {
+  stroke: #7c7267;
+  stroke-width: 2.25px;
+}
+```
+`skipped: Obstacle avoidance / path routing engine, add when user nodes exceed 50 dense overlaps.`
+
+---
+
+### 3. Tactile Node Float Interaction (CSS/Transform)
+Apple-like subtle lift on drag/hover using GPU transforms and soft shadow dispersal.
+
+```css
+/* node.css */
+.canvas-node {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(44, 38, 34, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(40, 30, 20, 0.04), 0 1px 2px rgba(40, 30, 20, 0.02);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+.canvas-node.is-dragging {
+  cursor: grabbing;
+  transform: scale(1.025) translateY(-2px);
+  box-shadow: 0 12px 28px rgba(40, 30, 20, 0.1), 0 4px 8px rgba(40, 30, 20, 0.04);
+}
+```
+`skipped: Physics spring solver, add when inertia tossing is requested.`

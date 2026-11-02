@@ -5789,3 +5789,71 @@ skipped: Obstacle collision avoidance, add when graph density exceeds 50 overlap
 }
 ```
 skipped: Inertial velocity spring physics, add when dragging via pointer-events API requires momentum throw.
+
+
+### Cycle #97 Directive (2026-11-03 06:13)
+### 1. Organic Flowchart Connectors (SVG S-Curve)
+
+```ts
+// connector.ts
+export function getOrganicPath(x1: number, y1: number, x2: number, y2: number): string {
+  // ponytail: horizontal layout assumed; upgrade to dynamic axis when vertical graphs are supported.
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 32);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getOrganicPath(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50", "Path calc mismatch");
+```
+```svg
+<!-- SVG Connector Style -->
+<path d={path} fill="none" stroke="#7A7165" stroke-width="1.5" stroke-linecap="round" opacity="0.45" />
+```
+skipped: Obstacle-avoidance routing and orthogonal elbows.  
+add when: Flowcharts routinely exceed 50+ intersecting nodes.
+
+---
+
+### 2. Nature UI Ambient Backdrop & Card Surface
+
+```css
+/* canvas.css */
+.spatial-canvas {
+  background-color: #FBF9F5; /* Warm rice paper */
+  background-image: radial-gradient(#E5DFD5 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.canvas-node {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(220, 214, 203, 0.7);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px -2px rgba(65, 55, 45, 0.05), 0 1px 2px rgba(65, 55, 45, 0.03);
+}
+```
+skipped: Custom WebGL canvas background shaders and noise generators.  
+add when: Native CSS radial tiling drops below 60fps on low-end hardware.
+
+---
+
+### 3. Smooth Kinetic Drag State
+
+```css
+/* node-interaction.css */
+.canvas-node {
+  touch-action: none;
+  user-select: none;
+  will-change: transform;
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease;
+}
+
+.canvas-node.is-dragging {
+  transition: none;
+  cursor: grabbing;
+  box-shadow: 0 14px 28px -4px rgba(65, 55, 45, 0.12), 0 2px 4px rgba(65, 55, 45, 0.04);
+  transform: scale(1.015);
+}
+```
+skipped: JS physics/spring animation library (e.g., framer-motion/popmotion).  
+add when: Canvas demands multi-body collision physics or gesture flinging.

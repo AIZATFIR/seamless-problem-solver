@@ -6026,3 +6026,63 @@ console.assert(getSmoothEdge(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100"
 }
 ```
 *skipped: Framer Motion / JS spring simulations; add when multi-object inertia fling is required.*
+
+
+### Cycle #101 Directive (2026-11-03 06:35)
+### 1. Zen Canvas Ambient & Tactile Node Surface
+
+```css
+/* spatial-theme.css */
+.spatial-viewport {
+  background-color: #fbf9f5;
+  background-image: radial-gradient(circle at 50% 50%, rgba(68, 64, 60, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  touch-action: none;
+}
+
+.canvas-node {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(120, 113, 108, 0.14);
+  border-radius: 14px;
+  box-shadow: 0 1px 2px rgba(44, 40, 37, 0.03), 0 8px 24px -4px rgba(44, 40, 37, 0.06);
+  transition: transform 0.14s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.14s ease;
+}
+
+.canvas-node:active {
+  transform: scale(0.985);
+  box-shadow: 0 1px 2px rgba(44, 40, 37, 0.04), 0 4px 12px -2px rgba(44, 40, 37, 0.08);
+}
+```
+
+### 2. Nature-Curved Flowchart Connector (Organic Tangent)
+
+```typescript
+// getConnectorPath.ts
+export function getOrganicConnector(x1: number, y1: number, x2: number, y2: number): string {
+  // ponytail: fixed horizontal cubic curve; upgrade to dynamic port normal detection if supporting 4-way attachments.
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getOrganicConnector(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50",
+  "Path calculation failed"
+);
+```
+
+### 3. Native Low-Drag Canvas Transform (Zero-Jank Pan/Zoom)
+
+```typescript
+// useCanvasTransform.ts
+export function applyCanvasTransform(el: HTMLElement, x: number, y: number, scale: number): void {
+  // Uses translate3d to force compositor promotion without layout recalculations
+  el.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
+}
+```
+
+skipped: Orthogonal routing and obstacle avoidance; add when nodes visibly overlap or user explicitly connects non-horizontal ports.
+skipped: Motion animation libraries (Framer/GSAP); add when fluid layout transitions exceed native CSS cubic-bezier capabilities.
+skipped: Multi-layer zoom levels with LOD; add when canvas node count consistently exceeds 100 on screen.

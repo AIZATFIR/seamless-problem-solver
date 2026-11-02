@@ -3602,3 +3602,82 @@ console.assert(getFlowPath(0, 0, 100, 50) === "M 0 0 C 45 0, 55 50, 100 50", "Pa
 
 skipped: Obstacle-avoidance routing, multi-stop gradients, drag sound effects.
 add when: Nodes visually overlap on zoom-out, or user requests custom edge bend points.
+
+
+### Cycle #61 Directive (2026-11-03 02:52)
+### 1. Organic Warm Canvas Grid (Pure CSS)
+
+```css
+/* Ambient warm-linen backdrop with soft organic dot matrix */
+.spatial-canvas {
+  background-color: #fbfaf7; /* warm paper tint */
+  background-image: radial-gradient(rgba(44, 38, 34, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+  /* ponytail: static dot grid; add dynamic canvas LOD/scaling transform when zoom is implemented */
+}
+
+.canvas-node {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(44, 38, 34, 0.08);
+  box-shadow: 0 4px 16px -2px rgba(44, 38, 34, 0.05), 0 1px 2px rgba(44, 38, 34, 0.03);
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.02);
+  box-shadow: 0 12px 28px -4px rgba(44, 38, 34, 0.12);
+}
+```
+skipped: complex SVG background patterns and canvas context rendering.  
+add when: canvas zoom level drops below 40% and causes dot moiré artifacts.
+
+---
+
+### 2. Natural Flowchart Bézier Connector (Stdlib Math)
+
+```typescript
+// Computes an organic, tension-adjusted horizontal cubic Bézier curve
+export function createNaturalPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.abs(x2 - x1);
+  const cx = Math.max(dx * 0.5, 40); // ponytail: fixed horizontal bias; upgrade to auto-port routing on multi-side ports
+  return `M ${x1} ${y1} C ${x1 + cx} ${y1}, ${x2 - cx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(createNaturalPath(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50");
+```
+skipped: full Manhattan obstacle-avoidance routing algorithm.  
+add when: nodes heavily overlap and connections cross through node bodies.
+
+---
+
+### 3. Inertial Canvas Pan (Native Pointer Capture)
+
+```typescript
+export function bindCanvasPan(canvas: HTMLElement) {
+  let pan = { x: 0, y: 0, startX: 0, startY: 0, active: false };
+
+  canvas.addEventListener('pointerdown', (e) => {
+    if (e.target !== canvas) return;
+    pan.active = true;
+    pan.startX = e.clientX - pan.x;
+    pan.startY = e.clientY - pan.y;
+    canvas.setPointerCapture(e.pointerId);
+  });
+
+  canvas.addEventListener('pointermove', (e) => {
+    if (!pan.active) return;
+    pan.x = e.clientX - pan.startX;
+    pan.y = e.clientY - pan.startY;
+    canvas.style.transform = `translate3d(${pan.x}px, ${pan.y}px, 0)`; // ponytail: raw transform; upgrade to CSS matrix with zoom scale factor
+  });
+
+  const end = () => { pan.active = false; };
+  canvas.addEventListener('pointerup', end);
+  canvas.addEventListener('pointercancel', end);
+}
+```
+skipped: friction-based momentum decay and pinch-to-zoom math.  
+add when: gesture zoom is hooked into the trackpad/touch lifecycle.

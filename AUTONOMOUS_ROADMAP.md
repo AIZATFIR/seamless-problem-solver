@@ -1653,3 +1653,76 @@ export function bindCanvasPan(viewportEl, targetEl) {
 }
 ```
 `skipped: Inertial momentum/flick physics; add when high-velocity dragging feels abruptly truncated by users.`
+
+
+### Cycle #28 Directive (2026-11-02 23:46)
+### 1. Organic Bezier Flow Connectors
+
+```typescript
+// connector.ts - Zero-dependency organic bezier routing
+export function getFlowPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = x2 - x1;
+  const dy = y2 - y1;
+  const cx1 = x1 + Math.max(Math.abs(dx) * 0.5, 32) * Math.sign(dx || 1);
+  const cx2 = x2 - Math.max(Math.abs(dx) * 0.5, 32) * Math.sign(dx || 1);
+  // ponytail: flat horizontal bias; replace with Manhattan A* if nodes overlap.
+  return `M ${x1} ${y1} C ${cx1} ${y1}, ${cx2} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getFlowPath(0, 0, 100, 100).startsWith('M 0 0 C 50 0, 50 100, 100 100'));
+```
+skipped: Obstacle avoidance / edge routing. Add when node density causes overlapping lines.
+
+---
+
+### 2. Nature UI Ambient Palette & Canvas Texture
+
+```css
+/* canvas-ambient.css */
+:root {
+  --canvas-bg: #fcfbf9;
+  --canvas-grid-dot: rgba(74, 60, 49, 0.06);
+  --node-surface: #ffffff;
+  --node-border: rgba(60, 50, 40, 0.07);
+  --node-shadow: 0 1px 2px rgba(60, 50, 40, 0.04), 0 10px 24px -6px rgba(60, 50, 40, 0.06);
+  --ease-nature: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.canvas-viewport {
+  background-color: var(--canvas-bg);
+  background-image: radial-gradient(var(--canvas-grid-dot) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+```
+skipped: Dynamic dark mode palette and multi-layered noise SVGs. Add when user explicitly selects a dark theme.
+
+---
+
+### 3. Tactile Node Interaction & Spring Elevation
+
+```css
+/* node-interaction.css */
+.canvas-node {
+  background: var(--node-surface);
+  border: 1px solid var(--node-border);
+  border-radius: 12px;
+  box-shadow: var(--node-shadow);
+  transition: transform 0.22s var(--ease-nature), box-shadow 0.22s var(--ease-nature);
+  will-change: transform;
+}
+
+.canvas-node:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(60, 50, 40, 0.05), 0 14px 28px -6px rgba(60, 50, 40, 0.08);
+}
+
+.canvas-node.is-dragging {
+  cursor: grabbing;
+  transform: scale(1.02);
+  box-shadow: 0 16px 36px -8px rgba(60, 50, 40, 0.12);
+}
+```
+skipped: Multi-axis tilt shaders and canvas blur filters. Add when WebGL pipeline is requested.

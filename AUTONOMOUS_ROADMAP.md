@@ -5917,3 +5917,60 @@ console.assert(createNaturalPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 
 ```
 *skipped: JavaScript-driven spring simulation libraries (Framer Motion).*  
 *add when: Multi-touch physics or custom velocity toss-and-catch is required.*
+
+
+### Cycle #99 Directive (2026-11-03 06:24)
+### 1. Zen Ambient Canvas Grid & Tactile Backdrop
+
+```css
+/* Ambient warm paper canvas with infinite dot grid */
+.spatial-canvas {
+  background-color: #fbfbfa;
+  background-image: 
+    radial-gradient(circle at 50% 40%, rgba(235, 230, 220, 0.4) 0%, transparent 70%),
+    radial-gradient(rgba(40, 35, 25, 0.08) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+```
+skipped: dynamic canvas zoom-scaling background recalculation, add when user zoom level drops below 0.4x.
+
+---
+
+### 2. Natural Bezier Flowchart Connectors
+
+```ts
+// Smooth organic tangent curve between nodes
+// ponytail: horizontal-biased tangents; swap to orthogonal router if nodes overlap vertically.
+export const getOrganicPath = (x1: number, y1: number, x2: number, y2: number): string => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.52, 36);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+
+// Self-check
+console.assert(getOrganicPath(0, 0, 100, 100) === "M 0 0 C 52 0, 48 100, 100 100");
+```
+skipped: A* obstacle avoidance, add when automated layout overlaps 3+ sibling branches.
+
+---
+
+### 3. Apple-Grade Frosted Tactile Node Physics
+
+```css
+.flow-node {
+  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.82);
+  border: 0.5px solid rgba(50, 45, 35, 0.09);
+  box-shadow: 0 1px 3px rgba(40, 30, 20, 0.04), 0 10px 24px -4px rgba(40, 30, 20, 0.06);
+  transition: transform 140ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 140ms ease;
+  will-change: transform;
+}
+
+.flow-node:active {
+  cursor: grabbing;
+  transform: scale(0.988);
+  box-shadow: 0 1px 2px rgba(40, 30, 20, 0.04), 0 4px 12px -2px rgba(40, 30, 20, 0.08);
+}
+```
+skipped: spring physics engine (Framer Motion/popmotion), add when users request multi-node magnetic snapping.

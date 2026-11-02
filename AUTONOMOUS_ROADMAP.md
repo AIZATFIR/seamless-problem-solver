@@ -292,3 +292,70 @@ skipped: Collision avoidance and edge-rerouting algorithms; add when graph densi
 }
 ```
 skipped: Physics-based spring library (e.g., Framer Motion / Popmotion); add when multi-node group inertia or magnetic snapping is implemented.
+
+
+### Cycle #5 Directive (2026-11-02 21:35)
+### 1. Organic Bezier Edge Connector (Visual Layout)
+Native S-curve with adaptive tension based on node distance; replaces rigid lines or layout graph dependencies.
+
+```ts
+// connector.ts
+export function getOrganicEdge(x1: number, y1: number, x2: number, y2: number): string {
+  // ponytail: fixed horizontal curvature; upgrade to port-aware normals if nodes support multi-directional docking
+  const offset = Math.min(Math.max(Math.abs(x2 - x1) * 0.45, 40), 120);
+  return `M ${x1} ${y1} C ${x1 + offset} ${y1}, ${x2 - offset} ${y2}, ${x2} ${y2}`;
+}
+```
+*skipped: Obstacle routing/Dijkstra auto-avoidance; add when node overlapping exceeds dense branch thresholds.*
+
+---
+
+### 2. Warm Zen Ambient Canvas & Surface Tokens (Nature UI)
+Replaces sterile cool grays with warm Japanese paper / Apple matte materials (`#F9F8F5`, warm dot-matrix, ambient depth).
+
+```css
+:root {
+  --canvas-bg: #f9f8f5;
+  --canvas-grid: rgba(60, 50, 40, 0.08);
+  --node-surface: rgba(255, 255, 255, 0.78);
+  --node-stroke: rgba(60, 50, 40, 0.08);
+  --node-shadow: 0 4px 18px -2px rgba(45, 35, 25, 0.05), 0 1px 2px rgba(45, 35, 25, 0.04);
+  --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.canvas-viewport {
+  background-color: var(--canvas-bg);
+  background-image: radial-gradient(circle, var(--canvas-grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.canvas-node {
+  background: var(--node-surface);
+  border: 1px solid var(--node-stroke);
+  box-shadow: var(--node-shadow);
+  backdrop-filter: blur(12px) saturate(110%);
+  border-radius: 14px;
+  transition: transform 180ms var(--ease-apple), box-shadow 180ms var(--ease-apple);
+}
+```
+*skipped: WebGL canvas noise/vignette overlays; add when native CSS backdrop-filter drops frames on target client devices.*
+
+---
+
+### 3. Micro-Haptic Node Drag Lift (Smooth Interaction)
+Instant GPU-bound response during drag; spring settle on drop with zero layout thrashing.
+
+```css
+.canvas-node:hover {
+  border-color: rgba(60, 50, 40, 0.16);
+}
+
+.canvas-node[data-dragging="true"] {
+  cursor: grabbing;
+  transform: scale(1.018) translateY(-1px);
+  box-shadow: 0 14px 28px -4px rgba(45, 35, 25, 0.10), 0 3px 8px rgba(45, 35, 25, 0.04);
+  transition: none;
+  z-index: 50;
+}
+```
+*skipped: Full physics engine (Matter.js/Spring library); add when momentum/flick multi-node velocity throwing is required.*

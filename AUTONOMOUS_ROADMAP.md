@@ -4365,3 +4365,45 @@ export function CanvasNode({ id, x, y, onMove }: { id: string; x: number; y: num
 }
 ```
 → skipped: momentum/inertia physics simulation, add when users explicitly demand gestural flinging.
+
+
+### Cycle #73 Directive (2026-11-03 03:59)
+### 1. Ambient Warmth Canvas Grid (CSS)
+```css
+.canvas-viewport {
+  background-color: #faf8f5;
+  background-image: radial-gradient(circle, rgba(145, 135, 120, 0.16) 1px, transparent 1px);
+  background-size: 24px 24px;
+  touch-action: none;
+}
+```
+
+### 2. Tactile Zen Nodes (CSS)
+```css
+.canvas-node {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(215, 208, 196, 0.65);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px -2px rgba(60, 50, 40, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s ease;
+  user-select: none;
+}
+.canvas-node:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px -4px rgba(60, 50, 40, 0.08);
+}
+```
+
+### 3. Natural Organic Edge Router (JS)
+```javascript
+function getConnectorPath(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+// ponytail: static cubic handles; add orthogonal A* pathing only if connectors cross nodes.
+```
+
+`skipped: complex canvas themes; add when user toggles dark/sepia mode.`  
+`skipped: multi-handle curve editing; add when user manually drags bezier points.`  
+`skipped: canvas zooming matrix lib; add when native CSS transforms drop frames.`

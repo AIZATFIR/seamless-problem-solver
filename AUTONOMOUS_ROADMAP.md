@@ -3463,3 +3463,49 @@ console.assert(createNaturalPath(0, 0, 100, 100) === "M 0 0 C 45 15, 55 85, 100 
 
 skipped: WebGL canvas rendering, physics-based spring solver libraries, complex edge-routing graphs.  
 add when: Canvas exceeds 500 simultaneous nodes or requires cycle-avoiding orthogonal obstacle wraps.
+
+
+### Cycle #58 Directive (2026-11-03 02:36)
+```css
+/* 1. Nature UI ambient backdrop (pure CSS, zero JS overhead) */
+.spatial-canvas {
+  background-color: var(--canvas-bg, #fbfaf7);
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(220, 215, 201, 0.3) 0%, transparent 70%),
+    radial-gradient(var(--canvas-dot, #d8d4cb) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+  touch-action: none;
+}
+
+/* 2. Zen tactile node surface (Apple-style frosted elevation) */
+.canvas-node {
+  position: absolute;
+  will-change: transform;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(60, 50, 30, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 4px 16px -2px rgba(60, 50, 30, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: box-shadow 0.15s cubic-bezier(0.2, 0, 0, 1), transform 0.05s linear;
+}
+.canvas-node:active {
+  box-shadow: 0 14px 32px -4px rgba(60, 50, 30, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+```
+
+```typescript
+// 3. Natural adaptive bezier connector path
+export const getSmoothPath = (x1: number, y1: number, x2: number, y2: number): string => {
+  // ponytail: horizontal-biased S-curve ceiling; upgrade to 4-quadrant port routing if vertical ports needed
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+
+// Self-check
+console.assert(getSmoothPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100", "Connector path mismatch");
+```
+
+skipped: dynamic obstacle-avoidance edge routing, add when diagram density exceeds 25 overlapping nodes.
+skipped: canvas particle/light physics, add when explicit ambient idle state requested.
+skipped: full gesture engine dependency, add when multi-touch pinch-to-zoom requires rotation support.

@@ -148,3 +148,88 @@ console.assert(
 skipped: Path collision avoidance and layout engines (D3/ELK), add when automatic graph relayout is requested.
 skipped: Canvas zoom/pan velocity physics JS library, add when standard CSS zoom feels too rigid on touchpads.
 skipped: Custom WebGL shaders for noise/grain, add when CSS radial gradients fail 60fps render checks.
+
+
+### Cycle #3 Directive (2026-11-02 21:23)
+### 1. Nature Canvas Ambient Grid (CSS)
+Replace flat backdrops or JS grid renders with a warm stone-paper gradient and sub-pixel tactile dot mesh.
+
+```css
+.spatial-canvas {
+  /* zen warmth: raw paper base with moss/clay undertone */
+  background-color: #f9f8f5;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(92, 85, 75, 0.08) 1px, transparent 1px),
+    radial-gradient(ellipse at top left, rgba(235, 230, 220, 0.4) 0%, transparent 70%);
+  background-size: 24px 24px, 100% 100%;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+.node-card {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid rgba(180, 172, 158, 0.28);
+  box-shadow: 
+    0 1px 2px rgba(60, 50, 40, 0.03),
+    0 6px 18px -4px rgba(60, 50, 40, 0.05);
+  border-radius: 14px;
+}
+```
+*skipped: Canvas-based grid renderer and noise texture PNGs.*  
+*add when: Viewport zoom scale drops below 0.25x and requires LOD grid decimation.*
+
+---
+
+### 2. Natural Organic Bezier Connector (Native SVG Path)
+Generates relaxed, organic horizontal S-curves rather than rigid orthodiagonal lines.
+
+```typescript
+export function getOrganicPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.abs(x2 - x1);
+  const cx = Math.max(dx * 0.45, 32); // ponytail: fixed control bias; upgrade to obstacle routing if lines cross nodes
+  return `M ${x1} ${y1} C ${x1 + cx} ${y1}, ${x2 - cx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getOrganicPath(0, 0, 100, 100) === "M 0 0 C 45 0, 55 100, 100 100", "Curve calc failed");
+```
+*skipped: Complex A* pathfinding and node avoidance algorithms.*  
+*add when: Canvas graph density causes overlapping edge-on-node collisions.*
+
+---
+
+### 3. Native Low-Overhead Pointer Capture
+Eliminate pan jitter, drag drops outside windows, and library state bloat using native pointer capture.
+
+```typescript
+function bindSurfacePan(el: HTMLElement, onPan: (dx: number, dy: number) => void) {
+  let prevX = 0, prevY = 0, dragging = false;
+
+  el.addEventListener('pointerdown', (e) => {
+    if (e.target !== el || e.button !== 0) return;
+    dragging = true;
+    prevX = e.clientX;
+    prevY = e.clientY;
+    el.setPointerCapture(e.pointerId);
+  });
+
+  el.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    onPan(e.clientX - prevX, e.clientY - prevY);
+    prevX = e.clientX;
+    prevY = e.clientY;
+  });
+
+  const stop = (e: PointerEvent) => {
+    if (dragging) {
+      dragging = false;
+      el.releasePointerCapture(e.pointerId);
+    }
+  };
+  el.addEventListener('pointerup', stop);
+  el.addEventListener('pointercancel', stop);
+}
+```
+*skipped: Inertial momentum/spring physics loop.*  
+*add when: User testing demands flick-scroll kinetic feel on touchpad/mobile.*

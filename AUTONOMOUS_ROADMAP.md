@@ -5228,3 +5228,68 @@ console.assert(
 
 skipped: dynamic obstacle routing and webgl canvas, add when node count exceeds 200.
 skipped: complex spring physics library, add when CSS cubic-bezier lacks multi-axis gesture tracking.
+
+
+### Cycle #87 Directive (2026-11-03 05:17)
+### 1. Organic Flowchart Edges (Adaptive Cubic S-Curve)
+
+```typescript
+// Computes an organic, tension-adaptive bezier curve between two nodes
+export function getOrganicConnector(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = x2 - x1;
+  const dy = y2 - y1;
+  const cx = x1 + Math.max(Math.abs(dx) * 0.5, 40) * Math.sign(dx || 1);
+  // ponytail: static cubic control points; upgrade to obstacle-avoiding A* if node density > 50
+  return `M ${x1} ${y1} C ${cx} ${y1}, ${x2 - (cx - x1)} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getOrganicConnector(0, 0, 100, 100).startsWith('M 0 0 C 50 0'), 'Connector anchor failed');
+```
+`skipped: [Obstacle routing and edge label placement], add when [nodes visually overlap edges].`
+
+---
+
+### 2. Nature Ambient Canvas (Zen Warmth & Linen Substrate)
+
+```css
+:root {
+  --bg-zen: #fbf9f5;
+  --node-stone: #f2eee6;
+  --line-sage: rgba(82, 94, 84, 0.35);
+  --ink-primary: #2d2b28;
+}
+
+.canvas-viewport {
+  background-color: var(--bg-zen);
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(214, 207, 194, 0.45) 1px, transparent 1px);
+  background-size: 24px 24px;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+```
+`skipped: [Dynamic canvas pan-tiling in JS], add when [infinite zoom causes CSS sub-pixel moiré].`
+
+---
+
+### 3. Tactile Spring Interaction (Node Drag & Selection)
+
+```css
+.canvas-node {
+  background: var(--node-stone);
+  color: var(--ink-primary);
+  border-radius: 14px;
+  box-shadow: 0 2px 8px -2px rgba(45, 43, 40, 0.06), 0 0 0 1px rgba(45, 43, 40, 0.05);
+  cursor: grab;
+  transition: transform 0.18s cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 0.18s ease;
+  will-change: transform;
+}
+
+.canvas-node:active, .canvas-node.is-dragging {
+  cursor: grabbing;
+  transform: scale(1.025) translateY(-2px);
+  box-shadow: 0 12px 24px -6px rgba(45, 43, 40, 0.12), 0 0 0 1px rgba(82, 94, 84, 0.2);
+}
+```
+`skipped: [Framer Motion / WebGL physics dependencies], add when [multi-node physics clustering is required].`

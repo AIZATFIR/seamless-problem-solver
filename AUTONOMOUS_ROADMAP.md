@@ -816,3 +816,44 @@ export function getOrganicPath(x1: number, y1: number, x2: number, y2: number): 
 
 skipped: Canvas raster rendering, WebGL background shaders, and complex graph routing libraries.  
 add when: Graph exceeds 300+ visible nodes simultaneously or requires automated edge obstacle avoidance.
+
+
+### Cycle #13 Directive (2026-11-02 22:20)
+```css
+/* 1. Nature UI ambient rice-paper canvas */
+.canvas-viewport {
+  background-color: #fbf9f4;
+  background-image: 
+    radial-gradient(ellipse at 50% 40%, rgba(228, 222, 206, 0.4) 0%, transparent 75%),
+    radial-gradient(#cfc5b0 1px, transparent 1px);
+  background-size: 100% 100%, 28px 28px;
+  touch-action: none;
+}
+
+/* 2. Apple-grade tactile node physics */
+.canvas-node {
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+  box-shadow: 0 1px 2px rgba(45, 38, 26, 0.04), 0 4px 14px rgba(45, 38, 26, 0.03);
+  border: 1px solid rgba(184, 173, 148, 0.3);
+  will-change: transform;
+}
+.canvas-node[data-dragging="true"] {
+  transform: scale(1.025);
+  box-shadow: 0 16px 32px rgba(45, 38, 26, 0.08), 0 3px 8px rgba(45, 38, 26, 0.04);
+}
+```
+
+```typescript
+// 3. Organic flow connector path
+export function getOrganicConnector(x1: number, y1: number, x2: number, y2: number): string {
+  // ponytail: horizontal-biased S-curve. Upgrade to obstacle avoidance if nodes overlap.
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getOrganicConnector(0, 0, 100, 100).startsWith("M 0 0 C 55 0, 45 100, 100 100"));
+```
+
+skipped: dynamic obstacle routing and JS-driven spring physics.  
+add when: edge collisions visually obstruct node labels during complex tree folds.

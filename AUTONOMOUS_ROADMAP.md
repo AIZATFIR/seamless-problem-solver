@@ -1313,3 +1313,53 @@ console.assert(
 
 skipped: dynamic obstacle avoidance, full canvas coordinate transforms, multi-bus routing.  
 add when: user needs freeform vertical/arbitrary connector directions and node overlaps occur.
+
+
+### Cycle #22 Directive (2026-11-02 23:12)
+```javascript
+// 1. Organic Bezier connector path (Natural Flow)
+export function getOrganicPath(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.45, 36);
+  // ponytail: fixed horizontal tangent; upgrade to anchor-normal vectors if nodes rotate
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getOrganicPath(0, 0, 100, 50) === "M 0 0 C 45 0, 55 50, 100 50",
+  "getOrganicPath calculation failed"
+);
+```
+
+```css
+/* 2. Nature UI Ambient Backdrop & Smooth Canvas */
+.spatial-canvas {
+  background-color: #f8f6f0;
+  background-image:
+    radial-gradient(ellipse at 50% 20%, rgba(255, 255, 255, 0.6) 0%, transparent 75%),
+    radial-gradient(circle, #d9d4c7 0.8px, transparent 0.8px);
+  background-size: 100% 100%, 28px 28px;
+  touch-action: none;
+  contain: strict;
+}
+
+/* 3. Tactile Zen Warmth Nodes */
+.canvas-node {
+  background: rgba(253, 252, 249, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(80, 70, 50, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(40, 35, 25, 0.03), 0 6px 16px rgba(40, 35, 25, 0.04);
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+.canvas-node:active, .canvas-node.is-dragging {
+  cursor: grabbing;
+  transform: scale(1.018);
+  box-shadow: 0 12px 32px rgba(40, 35, 25, 0.08), 0 2px 6px rgba(40, 35, 25, 0.04);
+}
+```
+
+skipped: dynamic collision avoidance and routing grids; add when paths overlap heavily.
+skipped: multi-layered SVG noise filters; add when users request physical linen texture emulation.
+skipped: physics-based spring drag library; add when CSS transforms and pointer-events prove insufficient for multi-touch gestures.

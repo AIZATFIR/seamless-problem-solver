@@ -4897,3 +4897,62 @@ add when: Connecting lines cut directly through intermediate nodes.
 ```
 skipped: Framer Motion/JS animation libraries and custom elevation state-machines.  
 add when: Fluid multi-touch gestures require velocity-preserved momentum physics.
+
+
+### Cycle #82 Directive (2026-11-03 04:49)
+### 1. Organic Zen Canvas Background & Viewport Fix
+
+```css
+/* Nature UI ambient paper background with subtle coordinate grid */
+.spatial-canvas {
+  background-color: #fbf9f5; /* warm linen */
+  background-image: radial-gradient(circle at 1px 1px, rgba(60, 50, 40, 0.08) 1.2px, transparent 0);
+  background-size: 24px 24px;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+
+/* Tactile node elevation with Apple-grade spring */
+.canvas-node {
+  will-change: transform;
+  transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              box-shadow 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(44, 35, 25, 0.04), 0 4px 12px rgba(44, 35, 25, 0.03);
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(0.99) translateY(-1px);
+  box-shadow: 0 4px 12px rgba(44, 35, 25, 0.08), 0 16px 28px rgba(44, 35, 25, 0.06);
+}
+```
+
+### 2. Natural Flowchart Link Spline (Native S-Curve Math)
+
+```javascript
+// ponytail: Horizontal/vertical auto-curved Bezier. Upgrades to full obstacle avoidance pathing if nodes overlap.
+export function getOrganicPath(x1, y1, x2, y2) {
+  const dx = Math.abs(x2 - x1) * 0.5;
+  const cx1 = x1 + Math.max(dx, 40);
+  const cx2 = x2 - Math.max(dx, 40);
+  return `M ${x1} ${y1} C ${cx1} ${y1}, ${cx2} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getOrganicPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100", "Path generation mismatch");
+```
+
+### 3. Native Smooth Canvas Pan Decay (No Third-Party Physics Lib)
+
+```javascript
+// Native momentum pan on pointer release
+export function applyPanInertia(canvasEl, vx, vy) {
+  if (Math.hypot(vx, vy) < 0.1) return;
+  canvasEl.scrollBy(-vx * 0.92, -vy * 0.92);
+  requestAnimationFrame(() => applyPanInertia(canvasEl, vx * 0.92, vy * 0.92));
+}
+```
+
+skipped: A* obstacle-avoiding routing paths; add when users report overlapping node lines.
+skipped: Canvas-level WebGL/Lottie grain overlay; add when 60fps static CSS fails zen aesthetic benchmarks.
+skipped: External drag-and-drop or gesture framework; add when multi-pointer pinch-zoom requirements land.

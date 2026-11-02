@@ -5071,3 +5071,99 @@ add when: Flowcharts routinely exceed 20+ interconnected nodes with overlapping 
 ```
 skipped: Custom physics spring engine in JS.
 add when: Canvas requires spatial momentum flick/throw interactions.
+
+
+### Cycle #85 Directive (2026-11-03 05:06)
+### 1. Zen Warmth Paper Texture & Natural Node Elevation
+
+```css
+/* Ambient canvas & warm organic nodes */
+.canvas-root {
+  background-color: #FAF8F5;
+  background-image: radial-gradient(circle at 50% 50%, rgba(217, 211, 200, 0.35) 1px, transparent 1px);
+  background-size: 24px 24px;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+
+.canvas-node {
+  background: rgba(255, 254, 251, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(226, 220, 209, 0.6);
+  border-radius: 14px;
+  box-shadow: 
+    0 1px 2px rgba(60, 52, 42, 0.04),
+    0 8px 24px -4px rgba(60, 52, 42, 0.06);
+  transition: box-shadow 180ms ease, transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+.canvas-node:active {
+  box-shadow: 
+    0 1px 2px rgba(60, 52, 42, 0.04),
+    0 16px 32px -6px rgba(60, 52, 42, 0.1);
+  transform: scale(1.015);
+}
+```
+skipped: Custom noise textures and WebGL shaders.  
+add when: Flat SVG/CSS gradients fail visual fidelity targets under high-DPI scaling.
+
+---
+
+### 2. Natural S-Curve Flowchart Connectors (Native Pathing)
+
+```typescript
+// Computes an organic, tension-adaptive bezier curve between two nodes
+export function getOrganicConnector(
+  x1: number, y1: number, 
+  x2: number, y2: number
+): string {
+  // ponytail: fixed horizontal egress ceiling; upgrade to 4-port orthogonal routing when multi-edge collisions occur
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getOrganicConnector(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100",
+  "Connector geometry mismatch"
+);
+```
+```svg
+<!-- Connector rendering -->
+<path 
+  d={getOrganicConnector(from.x, from.y, to.x, to.y)} 
+  fill="none" 
+  stroke="rgba(120, 112, 102, 0.35)" 
+  stroke-width="1.75" 
+  stroke-linecap="round" 
+/>
+```
+skipped: Dynamic obstacle avoidance and A* pathfinding.  
+add when: Crossing lines cause visual ambiguity in deep graphs (>20 nodes).
+
+---
+
+### 3. Kinetic Drag Damping
+
+```typescript
+// Apply smooth deceleration on drag release
+export function applyDamping(
+  vx: number, 
+  vy: number, 
+  onTick: (dx: number, dy: number) => void
+) {
+  let frame: number;
+  const step = () => {
+    vx *= 0.88; // ponytail: simple friction multiplier; upgrade to spring RK4 if interactive physics scale up
+    vy *= 0.88;
+    if (Math.hypot(vx, vy) < 0.05) return;
+    onTick(vx, vy);
+    frame = requestAnimationFrame(step);
+  };
+  frame = requestAnimationFrame(step);
+  return () => cancelAnimationFrame(frame);
+}
+```
+skipped: External physics runtimes (`framer-motion`, `popmotion`).  
+add when: Nodes require complex multi-body momentum collisions.

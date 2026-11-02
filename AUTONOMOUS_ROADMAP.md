@@ -1949,3 +1949,70 @@ export function applyCanvasTransform(viewportEl, x, y, scale) {
 
 skipped: Physics-based inertia/momentum spring math.  
 add when: Native pan-drag feels abrupt without deceleration.
+
+
+### Cycle #33 Directive (2026-11-03 00:15)
+### 1. Organic Zen Canvas Background
+Eliminate stark gridlines. Use a dual-layered warm paper base with muted organic points using pure CSS.
+
+```css
+/* canvas-ambient.css */
+.spatial-canvas {
+  background-color: #fcfbf9;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(240, 235, 225, 0.6) 0%, transparent 80%),
+    radial-gradient(circle, rgba(130, 120, 105, 0.16) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+  /* ponytail: CSS background pattern ceiling; upgrade to WebGL/Canvas tiles if viewport scale < 0.2 causes moiré */
+}
+```
+→ skipped: complex canvas-rendered grid or custom SVG pattern assets.  
+→ add when: pan/zoom scaling introduces visual aliasing at extreme zoom levels.
+
+---
+
+### 2. Natural S-Curve Flowchart Connectors
+Generate clean, tension-adaptive cubic bezier paths natively instead of importing heavy layout or graph libraries.
+
+```javascript
+// connector.js
+export function getFlowPath(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 32);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+  // ponytail: fixed horizontal tangent ceiling; upgrade to 4-way orthogonal router if nodes cross perpendicularly
+}
+
+// Self-check
+console.assert(getFlowPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100", "Connector path calculation error");
+```
+→ skipped: A* obstacle-avoiding router or ElkJS/Dagre integration.  
+→ add when: user nodes overlap heavily and straight visual bridges become ambiguous.
+
+---
+
+### 3. Tactile Glass-and-Stone Node Surfaces
+Apply Apple-standard specular borders, ambient warm depth, and native spring-damped press feedback without JavaScript event hooks.
+
+```css
+/* node-tactile.css */
+.canvas-node {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px) saturate(130%);
+  border: 1px solid rgba(225, 220, 210, 0.8);
+  border-radius: 14px;
+  box-shadow: 
+    0 1px 2px rgba(45, 35, 20, 0.03),
+    0 10px 28px -6px rgba(45, 35, 20, 0.07);
+  transition: transform 160ms cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 160ms ease;
+  user-select: none;
+}
+
+.canvas-node:active {
+  transform: scale(0.985);
+  box-shadow: 
+    0 1px 2px rgba(45, 35, 20, 0.03),
+    0 4px 12px -2px rgba(45, 35, 20, 0.05);
+}
+```
+→ skipped: Framer Motion / Spring physics JS libraries.  
+→ add when: velocity-based node release gestures or throw momentum are required.

@@ -2864,3 +2864,61 @@ console.assert(
 }
 ```
 → skipped: Physics spring velocity solver (Framer/react-spring), add when momentum-flinging gestures are requested.
+
+
+### Cycle #47 Directive (2026-11-03 01:34)
+### 1. Organic Bezier Edge Flow (Native SVG Path)
+
+```ts
+// Smooth S-curve with horizontal tension; replaces rigid straight/jagged links
+export function getOrganicPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 32);
+  // ponytail: horizontal-biased flow; switch to auto-axis orientation if vertical flow is added
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getOrganicPath(0, 0, 100, 100) === "M 0 0 C 55 0, 45 100, 100 100");
+```
+skipped: complex obstacle-avoidance routing, add when node collisions cause severe line occlusions.
+
+---
+
+### 2. Zen Warmth Canvas Theme (CSS Native)
+
+```css
+/* Ambient warm paper canvas + noise-free dot field */
+.spatial-canvas {
+  background-color: #fcfbf7; /* Zen bone/linen */
+  background-image: radial-gradient(circle, rgba(90, 80, 70, 0.14) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: -1px -1px;
+  overscroll-behavior: none;
+  user-select: none;
+}
+```
+skipped: WebGL paper shaders / grain SVG filter, add when target runtime proves 60fps GPU budget headroom.
+
+---
+
+### 3. Tactile Node Rest & Lift (Physical Precision)
+
+```css
+/* Subtly lifted frosted card with warm shadow staging */
+.canvas-node {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(140, 130, 115, 0.18);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(60, 50, 40, 0.03), 0 8px 24px rgba(60, 50, 40, 0.05);
+  transition: transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 160ms ease;
+  will-change: transform;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.012) translateY(-1px);
+  box-shadow: 0 3px 6px rgba(60, 50, 40, 0.05), 0 16px 32px rgba(60, 50, 40, 0.08);
+}
+```
+skipped: spring physics library (e.g. Framer Motion/react-spring), add when multi-finger gestural momentum is introduced.

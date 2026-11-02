@@ -4041,3 +4041,71 @@ add when: Users request toggleable canvas themes or deep dark mode.
 ```
 skipped: Heavy Framer Motion/JS gesture springs.  
 add when: Drag velocity-based momentum physics are needed.
+
+
+### Cycle #68 Directive (2026-11-03 03:31)
+### 1. Organic Canvas Surface & Tactile Lift (CSS Native)
+
+```css
+/* Warm stone canvas + tactile node lift */
+.spatial-canvas {
+  background-color: #faf8f5;
+  background-image: radial-gradient(circle, rgba(70, 55, 40, 0.075) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .spatial-canvas {
+    background-color: #161514;
+    background-image: radial-gradient(circle, rgba(235, 225, 210, 0.06) 1px, transparent 1px);
+  }
+}
+
+.canvas-node {
+  /* ponytail: simple spring-like cubic bezier; upgrade to popmotion/framer-motion if non-linear gestures needed */
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms ease;
+  touch-action: none;
+  border: 1px solid rgba(60, 45, 30, 0.08);
+  box-shadow: 0 2px 8px -2px rgba(40, 30, 20, 0.04);
+}
+
+.canvas-node:active {
+  transform: scale(1.018);
+  box-shadow: 0 16px 32px -8px rgba(40, 30, 20, 0.12), 0 4px 12px -2px rgba(40, 30, 20, 0.06);
+  cursor: grabbing;
+}
+```
+
+---
+
+### 2. Natural S-Curve Flowchart Connectors (Zero-Dep SVG)
+
+```typescript
+// ponytail: horizontal cubic S-curve; upgrade to orthogonal A* pathing if automatic node obstacle avoidance is needed
+export function getOrganicConnector(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 32);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getOrganicConnector(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100",
+  "Path calculation failed"
+);
+```
+
+---
+
+### 3. Pointer Snapping & Boundary Clamping (Native Event Hook)
+
+```typescript
+// ponytail: simple 8px grid snap; upgrade to dynamic collision/magnetic snap guides when multi-selection drops
+export function snapToFlowGrid(val: number, step = 8): number {
+  return Math.round(val / step) * step;
+}
+
+console.assert(snapToFlowGrid(14) === 16 && snapToFlowGrid(11) === 8, "Snap logic failed");
+```
+
+skipped: Third-party gesture/physics engines, canvas webgl rendering, complex orthogonal routing engines.  
+add when: Scene exceeds 1,000+ simultaneous nodes or requires dynamic obstacle routing around intersecting cards.

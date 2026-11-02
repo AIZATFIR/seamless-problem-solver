@@ -1058,3 +1058,46 @@ export function makeDraggable(el: HTMLElement, onPan: (dx: number, dy: number) =
 ```
 * Skipped: Third-party gesture libraries (Use-Gesture/Framer Motion) and manual window listeners.
 * Add when: Multi-touch pinching and inertia-fling physics are demanded.
+
+
+### Cycle #17 Directive (2026-11-02 22:43)
+```css
+/* 1. Nature ambient warm canvas backdrop */
+.canvas-root {
+  background-color: #faf9f5;
+  background-image: radial-gradient(circle at 50% 50%, rgba(180, 160, 130, 0.22) 1px, transparent 1px);
+  background-size: 24px 24px;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+```
+→ skipped: canvas-level SVG noise/grain shaders, add when bespoke skeuomorphic paper textures are explicitly requested.
+
+```javascript
+// 2. Natural organic S-curve connector
+export const getSmoothEdge = (x1, y1, x2, y2) => {
+  // ponytail: constant delta clamped to 40px; upgrade to dynamic port angle vectors if nodes rotate
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+```
+→ skipped: A* / obstacle avoidance routing, add when complex node clustering creates visual line overlap.
+
+```css
+/* 3. Tactile node elevation & smooth interaction */
+.canvas-node {
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(70, 60, 50, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px -2px rgba(60, 45, 20, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.018);
+  box-shadow: 0 12px 24px -6px rgba(60, 45, 20, 0.1), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
+}
+```
+→ skipped: external spring physics library, add when gesture momentum flick/throw interaction is needed.

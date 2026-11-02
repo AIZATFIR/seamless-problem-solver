@@ -5674,3 +5674,65 @@ export function getFlowPath(x1: number, y1: number, x2: number, y2: number): str
 
 * skipped: Canvas-based dot rendering, layout physics engines, and edge collision routing.
 * add when: Flowchart density exceeds 200 concurrent nodes or paths require obstacle avoidance.
+
+
+### Cycle #95 Directive (2026-11-03 06:02)
+### 1. Natural Flowchart Connector (Auto-Curving S-Spline)
+
+```typescript
+// ponytail: Horizontal-bias S-curve; upgrade to dynamic obstacle avoidance when graph density exceeds ~40 nodes.
+export function getNaturalEdgePath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 32);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getNaturalEdgePath(0, 0, 100, 100) === "M 0 0 C 55 0, 45 100, 100 100",
+  "Path calc failed"
+);
+```
+
+### 2. Nature Ambient Canvas (CSS Lattice & Palette)
+
+```css
+/* Ambient limestone + sage dot matrix */
+.spatial-canvas {
+  background-color: #f7f6f2;
+  background-image: radial-gradient(circle, #8a9a86 0.75px, transparent 0.75px);
+  background-size: 24px 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .spatial-canvas {
+    background-color: #141513;
+    background-image: radial-gradient(circle, #3d463b 0.75px, transparent 0.75px);
+  }
+}
+```
+
+### 3. Apple Fluid Spring Node States
+
+```css
+/* Tactile spring response on hover and drag */
+.canvas-node {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 6px 16px rgba(45, 52, 42, 0.05);
+}
+
+.canvas-node:hover {
+  transform: translateY(-1.5px) scale(1.008);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04), 0 14px 28px rgba(45, 52, 42, 0.08);
+}
+
+.canvas-node:active,
+.canvas-node[data-dragging="true"] {
+  transition: none;
+  transform: scale(1.02);
+  box-shadow: 0 16px 36px rgba(35, 42, 32, 0.16);
+  cursor: grabbing;
+}
+```
+
+Skipped: Dynamic edge collision routing, canvas pinch-zoom matrices, and JS-based spring physics.
+Add when: Canvas supports intersecting multi-tier branches or canvas scaling requires dynamic SVG level-of-detail.

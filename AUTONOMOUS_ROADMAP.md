@@ -997,3 +997,64 @@ add when: Canvas density causes overlapping node occlusions.
 ```
 skipped: Complex spring-physics engine (Framer Motion/react-spring).
 add when: Velocity-based momentum throwing is explicitly required.
+
+
+### Cycle #16 Directive (2026-11-02 22:37)
+### 1. Organic Bezier Edge Connector
+
+```ts
+// Natural horizontal S-curve with fluid curvature tension
+export function getFlowPath(x1: number, y1: number, x2: number, y2: number): string {
+  const cx = x1 + (x2 - x1) * 0.5;
+  return `M ${x1} ${y1} C ${cx} ${y1}, ${cx} ${y2}, ${x2} ${y2}`;
+}
+// ponytail: midpoint control points; upgrade to A* or elkjs if nodes overlap bodies.
+```
+* Skipped: ELK/Dagre graph-routing dependencies and path intersection checks.
+* Add when: Complex multi-branch graphs cause edges to cut directly through intervening nodes.
+
+---
+
+### 2. Ambient Warm Paper Canvas
+
+```css
+/* Warm stone-paper texture with center ambient light falloff */
+.spatial-canvas {
+  background-color: #faf8f5;
+  background-image: 
+    radial-gradient(ellipse at 50% 40%, rgba(255, 255, 255, 0.8) 0%, rgba(243, 239, 233, 0.4) 100%),
+    radial-gradient(#dcd5cb 0.75px, transparent 0.75px);
+  background-size: 100% 100%, 20px 20px;
+}
+```
+* Skipped: Heavy WebGL noise shaders and multi-layer SVG filters.
+* Add when: Dynamic daylight cycle or physical paper-fiber simulation is explicitly requested.
+
+---
+
+### 3. Zero-Lag Drag Physics via Native Pointer Capture
+
+```ts
+export function makeDraggable(el: HTMLElement, onPan: (dx: number, dy: number) => void) {
+  let lx = 0, ly = 0;
+  el.addEventListener('pointerdown', (e) => {
+    if (e.button !== 0) return;
+    el.setPointerCapture(e.pointerId);
+    lx = e.clientX; ly = e.clientY;
+
+    const move = (ev: PointerEvent) => {
+      onPan(ev.clientX - lx, ev.clientY - ly);
+      lx = ev.clientX; ly = ev.clientY;
+    };
+    const up = () => {
+      el.removeEventListener('pointermove', move);
+      el.removeEventListener('pointerup', up);
+    };
+    el.addEventListener('pointermove', move, { passive: true });
+    el.addEventListener('pointerup', up, { once: true });
+  });
+}
+// ponytail: raw pointer tracking; upgrade to RAF throttle if dragging updates >60 SVGs simultaneously.
+```
+* Skipped: Third-party gesture libraries (Use-Gesture/Framer Motion) and manual window listeners.
+* Add when: Multi-touch pinching and inertia-fling physics are demanded.

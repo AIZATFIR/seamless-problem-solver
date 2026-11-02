@@ -2278,3 +2278,57 @@ export function bindNativeDrag(el: HTMLElement, onMove: (dx: number, dy: number)
 ```
 skipped: External drag-and-drop gesture libraries and physics springs.  
 add when: Momentum-based flick-scrolling or multi-touch canvas pinch-to-zoom is required.
+
+
+### Cycle #38 Directive (2026-11-03 00:43)
+### 1. Nature Ambient Viewport & Warm Dot Grid
+```css
+/* Ambient paper warmth + tactile canvas surface */
+.canvas-viewport {
+  background-color: #fbfaf7;
+  background-image: 
+    radial-gradient(at 50% 0%, rgba(228, 221, 209, 0.45) 0%, transparent 75%),
+    radial-gradient(circle, #dcd7ce 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+}
+```
+
+### 2. Natural Flowchart Connector Curvature
+```javascript
+// Native cubic drape between nodes
+export function getFlowPath(x1, y1, x2, y2) {
+  const dx = x2 - x1;
+  // ponytail: fixed horizontal bezier inflection; upgrade to obstacle routing if nodes collide
+  const cx = Math.max(Math.abs(dx) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + cx} ${y1}, ${x2 - cx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getFlowPath(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50",
+  "Path calculation failed"
+);
+```
+
+### 3. Zen Tactile Node Interaction
+```css
+/* Subpixel glass-paper elevation and smooth grab state */
+.canvas-node {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(214, 208, 196, 0.65);
+  box-shadow: 0 4px 14px -2px rgba(60, 52, 42, 0.05), 0 1px 2px rgba(60, 52, 42, 0.04);
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms ease;
+  cursor: grab;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.015) translateY(-1px);
+  box-shadow: 0 12px 24px -4px rgba(60, 52, 42, 0.09), 0 2px 6px rgba(60, 52, 42, 0.05);
+}
+```
+
+skipped: dynamic orthogonal rerouting, canvas physics engine, and custom webgl noise.  
+add when: graph density exceeds 50+ intersecting nodes or user asks for procedural wire simulations.

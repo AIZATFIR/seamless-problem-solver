@@ -4461,3 +4461,65 @@ export const getNatureConnector = (x1, y1, x2, y2) => {
 ```
 * skipped: Custom JS spring physics engine.
 * add when: Native CSS timing curves cannot synchronize node inertia during continuous drag.
+
+
+### Cycle #75 Directive (2026-11-03 04:10)
+### 1. Organic S-Curve Flowchart Connectors (SVG Native)
+
+```typescript
+// utils/geometry.ts
+export function getOrganicPath(x1: number, y1: number, x2: number, y2: number): string {
+  // ponytail: fixed horizontal tangent; upgrade to orthogonal routing if nodes cycle backwards
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+```
+skipped: Obstacle collision avoidance and dynamic port selection.  
+add when: Nodes visually overlap or user requires backward-pointing loops.
+
+---
+
+### 2. Nature Ambient Canvas Texture (Pure CSS)
+
+```css
+/* styles/canvas.css */
+.spatial-canvas {
+  background-color: #F8F6F1;
+  background-image: radial-gradient(circle, rgba(100, 90, 80, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .spatial-canvas {
+    background-color: #1A1918;
+    background-image: radial-gradient(circle, rgba(230, 220, 205, 0.08) 1px, transparent 1px);
+  }
+}
+```
+skipped: Canvas webgl noise shader or DOM grid lines.  
+add when: Zoom scale drops below 0.3x and subpixel moiré occurs.
+
+---
+
+### 3. Apple-Grade Drag Lift & Elevation Transition
+
+```css
+/* styles/node.css */
+.canvas-node {
+  touch-action: none;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(80, 70, 60, 0.08);
+  box-shadow: 0 2px 8px -2px rgba(40, 35, 30, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+}
+
+.canvas-node.is-dragging {
+  cursor: grabbing;
+  transform: scale(1.02);
+  box-shadow: 0 14px 28px -4px rgba(40, 35, 30, 0.12), 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+```
+skipped: Spring physics JS runtime engine.  
+add when: Multi-node velocity rubber-banding or spatial flick-toss is requested.

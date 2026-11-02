@@ -648,3 +648,65 @@ add when: Device profile confirms high-DPI desktop display baseline.
 
 skipped: Web Animations API/Framer Motion physics engine.
 add when: Multi-node cluster momentum fling is explicitly required.
+
+
+### Cycle #10 Directive (2026-11-02 22:04)
+### 1. Organic S-Curve Flowchart Connectors
+```javascript
+// connector.js — Native smooth cubic bezier with horizontal tension
+export function getOrganicPath(x1, y1, x2, y2) {
+  // ponytail: assumes primarily left-to-right flow; expand to 4-quadrant routing if user requests multi-directional loops.
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getOrganicPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100", "Connector math failed");
+```
+skipped: complex A* pathfinding around nodes, add when manual routing visually collides with >5 nodes.
+
+---
+
+### 2. Ambient Zen-Warmth Paper Canvas
+```css
+/* canvas.css — Warm nature texture, zero image assets */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: radial-gradient(circle at 1px 1px, rgba(60, 50, 42, 0.08) 1.2px, transparent 0);
+  background-size: 24px 24px;
+  touch-action: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .spatial-canvas {
+    background-color: #171614;
+    background-image: radial-gradient(circle at 1px 1px, rgba(236, 230, 220, 0.06) 1.2px, transparent 0);
+  }
+}
+```
+skipped: WebGL noise shader / dynamic lighting, add when high-DPI GPU overhead is profile-verified.
+
+---
+
+### 3. Tactile Apple-Grade Node Elevation
+```css
+/* node.css — Dynamic kinetic pickup without JS spring libraries */
+.canvas-node {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(60, 50, 42, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(60, 50, 42, 0.04), 0 4px 12px rgba(60, 50, 42, 0.03);
+  transition: transform 140ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 140ms cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: grab;
+  user-select: none;
+}
+
+.canvas-node:active,
+.canvas-node.is-dragging {
+  cursor: grabbing;
+  transform: scale(1.015) translateY(-3px);
+  box-shadow: 0 16px 28px -6px rgba(60, 50, 42, 0.12), 0 6px 10px -2px rgba(60, 50, 42, 0.04);
+}
+```
+skipped: JS physics loop (Framer Motion / Spring), add when momentum toss-and-fling is explicitly needed.

@@ -359,3 +359,106 @@ Instant GPU-bound response during drag; spring settle on drop with zero layout t
 }
 ```
 *skipped: Full physics engine (Matter.js/Spring library); add when momentum/flick multi-node velocity throwing is required.*
+
+
+### Cycle #6 Directive (2026-11-02 21:41)
+### 1. Organic Flowchart Bezier Connectors
+
+```typescript
+// path.ts - Organic horizontal S-curve connector
+export function getFlowPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  // ponytail: fixed horizontal tangent; upgrade to orthogonal obstacle-avoidance routing if nodes overlap heavily.
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getFlowPath(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50",
+  "Bezier curve failed inflection test"
+);
+```
+skipped: A* / Dijkstra pathfinding routing and edge collision detection.  
+add when: Flowcharts exceed 20+ intersecting cards requiring automatic obstacle avoidance.
+
+---
+
+### 2. Nature UI Ambient Warmth & Tactile Nodes
+
+```css
+/* ambient.css */
+:root {
+  --canvas-bg: #fbf9f5;
+  --grid-dot: rgba(92, 84, 73, 0.12);
+  --node-bg: rgba(255, 255, 255, 0.86);
+  --node-border: rgba(140, 128, 112, 0.18);
+  --shadow-rest: 0 4px 20px -2px rgba(60, 48, 36, 0.05), 0 1px 3px rgba(60, 48, 36, 0.03);
+  --shadow-lift: 0 12px 32px -4px rgba(60, 48, 36, 0.12), 0 4px 8px rgba(60, 48, 36, 0.04);
+}
+
+.spatial-canvas {
+  background-color: var(--canvas-bg);
+  background-image: radial-gradient(var(--grid-dot) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+}
+
+.canvas-node {
+  background: var(--node-bg);
+  backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid var(--node-border);
+  box-shadow: var(--shadow-rest);
+  border-radius: 12px;
+  touch-action: none;
+  transition: transform 0.15s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.15s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.canvas-node:active {
+  box-shadow: var(--shadow-lift);
+  transform: scale(1.015);
+  cursor: grabbing;
+}
+```
+skipped: WebGL noise shaders, animated mesh gradients, and dark mode theme matrix.  
+add when: Ambient light theme is fully unified across all four suite apps.
+
+---
+
+### 3. Native Pointer Capture Canvas Drag
+
+```typescript
+// drag.ts - Zero-dependency smooth card repositioning
+export function attachDrag(
+  el: HTMLElement, 
+  onMove: (dx: number, dy: number) => void
+): () => void {
+  let prevX = 0, prevY = 0;
+
+  const onPointerDown = (e: PointerEvent) => {
+    if (e.button !== 0 || (e.target as HTMLElement).closest("button, input, [data-nodrag]")) return;
+    prevX = e.clientX;
+    prevY = e.clientY;
+    el.setPointerCapture(e.pointerId);
+
+    const onPointerMove = (ev: PointerEvent) => {
+      onMove(ev.clientX - prevX, ev.clientY - prevY);
+      prevX = ev.clientX;
+      prevY = ev.clientY;
+    };
+
+    const cleanup = () => {
+      el.removeEventListener("pointermove", onPointerMove);
+      el.removeEventListener("pointerup", cleanup);
+      el.removeEventListener("pointercancel", cleanup);
+    };
+
+    el.addEventListener("pointermove", onPointerMove);
+    el.addEventListener("pointerup", cleanup);
+    el.addEventListener("pointercancel", cleanup);
+  };
+
+  el.addEventListener("pointerdown", onPointerDown);
+  return () => el.removeEventListener("pointerdown", onPointerDown);
+}
+```
+skipped: Spring-inertia momentum physics engine and multi-selection marquee drag.  
+add when: Moving clusters of 3+ connected nodes in a single selection gesture.

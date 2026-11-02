@@ -521,3 +521,57 @@ add when: Flowcharts require automatic hierarchical collision avoidance and mult
 ```
 skipped: JS physics spring library (framer-motion, popmotion).  
 add when: Canvas nodes support gesture flick-velocity and continuous inertia throwing.
+
+
+### Cycle #8 Directive (2026-11-02 21:52)
+### 1. Organic Bezier Edge Connector
+
+```typescript
+// path-utils.ts
+export function getOrganicEdge(x1: number, y1: number, x2: number, y2: number): string {
+  // ponytail: horizontal left-to-right bias; swap axis logic if nodes connect top-to-bottom
+  const dx = Math.max(Math.abs(x2 - x1) * 0.45, 32);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Runnable self-check
+const path = getOrganicEdge(0, 0, 100, 100);
+if (!path.startsWith("M 0 0 C 45 0, 55 100, 100 100")) throw new Error("Path curve mismatch");
+```
+
+### 2. Nature Ambient Canvas (Zen Warmth & Grid)
+
+```css
+/* canvas.css */
+.spatial-canvas {
+  background-color: #fcfbf9; /* warm washi paper tone */
+  background-image: radial-gradient(circle at 1px 1px, rgba(58, 51, 44, 0.07) 1px, transparent 0);
+  background-size: 24px 24px;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+```
+
+### 3. Tactile Glass Node Styling
+
+```css
+/* node.css */
+.canvas-node {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px) saturate(130%);
+  border: 1px solid rgba(58, 51, 44, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 3px 12px -2px rgba(58, 51, 44, 0.04), 0 1px 2px rgba(58, 51, 44, 0.03);
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease;
+  will-change: transform;
+}
+
+.canvas-node:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 8px 20px -4px rgba(58, 51, 44, 0.08);
+}
+```
+
+skipped: dynamic port auto-routing (top/bottom/left/right), add when nodes allow freeform multi-axis port binding.  
+skipped: WebGL/Canvas2D grid rendering, add when viewport scaling drops below 60fps on low-tier mobile.  
+skipped: physics-based spring dragging library, add when pointer-event delta tracking needs momentum flicking.

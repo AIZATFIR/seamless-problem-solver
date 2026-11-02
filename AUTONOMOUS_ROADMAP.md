@@ -1573,3 +1573,83 @@ export function bindDraggable(nodeEl, onMove) {
 ```
 skipped: Momentum/inertia physics loop and multi-touch gestures.  
 add when: Touchpad/canvas pinch-to-zoom is integrated into coordinate space.
+
+
+### Cycle #27 Directive (2026-11-02 23:40)
+### 1. Organic Flowchart Béziers (Native SVG Smoothstep)
+
+```javascript
+// Natural directional cubic bezier with distance-proportional sway
+export function getOrganicPath(x1, y1, x2, y2) {
+  const dx = (x2 - x1) * 0.5;
+  const dy = y2 - y1;
+  // ponytail: horizontal flow only; upgrade to directional port vectoring if ports exist on top/bottom
+  return `M ${x1} ${y1} C ${x1 + Math.max(dx, 40)} ${y1}, ${x2 - Math.max(dx, 40)} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getOrganicPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100", "Bézier calculation mismatch");
+```
+`skipped: Custom orthogonal edge routers and obstacle avoidance; add when node density causes overlapping lines.`
+
+---
+
+### 2. Zen Ambient Canvas & Node Material (Pure CSS)
+
+```css
+/* Ambient warmth: stone paper base + diffused dot grid + frosted organic nodes */
+.spatial-canvas {
+  background-color: #fbfaf8;
+  background-image: radial-gradient(circle at center, rgba(145, 134, 120, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+  touch-action: none;
+}
+
+.canvas-node {
+  background: rgba(255, 254, 252, 0.82);
+  backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid rgba(180, 170, 155, 0.28);
+  box-shadow: 
+    0 1px 2px rgba(60, 50, 40, 0.03),
+    0 6px 16px -4px rgba(60, 50, 40, 0.05);
+  border-radius: 14px;
+  transition: box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.15s ease;
+}
+
+.canvas-node:hover {
+  border-color: rgba(140, 128, 112, 0.45);
+  box-shadow: 
+    0 2px 4px rgba(60, 50, 40, 0.04),
+    0 12px 28px -6px rgba(60, 50, 40, 0.08);
+}
+```
+`skipped: Canvas noise textures and dynamic lighting shaders; add when GPU overhead budget is verified on mobile.`
+
+---
+
+### 3. Jitter-Free Native Pan Interaction
+
+```javascript
+export function bindCanvasPan(viewportEl, targetEl) {
+  let state = { x: 0, y: 0, ox: 0, oy: 0, active: false };
+
+  viewportEl.addEventListener('pointerdown', (e) => {
+    if (e.target !== viewportEl) return;
+    state = { ...state, ox: e.clientX - state.x, oy: e.clientY - state.y, active: true };
+    viewportEl.setPointerCapture(e.pointerId);
+  });
+
+  viewportEl.addEventListener('pointermove', (e) => {
+    if (!state.active) return;
+    state.x = e.clientX - state.ox;
+    state.y = e.clientY - state.oy;
+    // ponytail: linear assignment; upgrade to CSS Matrix3D + transform scale when pinch-to-zoom is hooked
+    targetEl.style.transform = `translate3d(${state.x}px, ${state.y}px, 0)`;
+  });
+
+  const stop = (e) => { state.active = false; try { viewportEl.releasePointerCapture(e.pointerId); } catch {} };
+  viewportEl.addEventListener('pointerup', stop);
+  viewportEl.addEventListener('pointercancel', stop);
+}
+```
+`skipped: Inertial momentum/flick physics; add when high-velocity dragging feels abruptly truncated by users.`

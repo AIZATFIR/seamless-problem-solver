@@ -4658,3 +4658,76 @@ console.assert(
 
 skipped: Obstacle-avoidance routing algorithms; add when intersecting node densities exceed simple horizontal Béziers.
 skipped: External gesture engines (Framer Motion/use-gesture); add when multi-touch pinch-zoom gestures are required on touchscreens.
+
+
+### Cycle #78 Directive (2026-11-03 04:27)
+### 1. Organic Flowchart Connectors (Auto S-Curves)
+
+```ts
+// connector.ts
+export function getFlowPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 32);
+  // ponytail: fixed horizontal tangent; adjust inflection points if nodes dock vertically
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+```
+skipped: Orthogonal routing engines & collision avoidance.  
+add when: Graph density causes edge-node overlap.
+
+---
+
+### 2. Warm Nature Canvas & Organic Glass Nodes
+
+```css
+/* canvas-ambient.css */
+.canvas-root {
+  background-color: #fbf9f5;
+  background-image: radial-gradient(#dfd9ce 1.1px, transparent 1.1px);
+  background-size: 24px 24px;
+}
+
+.canvas-node {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(220, 214, 204, 0.7);
+  border-radius: 14px;
+  box-shadow: 0 4px 20px -3px rgba(60, 50, 40, 0.04), 0 1px 3px rgba(60, 50, 40, 0.02);
+  transition: transform 120ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 120ms ease;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(0.985);
+  box-shadow: 0 10px 28px -4px rgba(60, 50, 40, 0.08);
+}
+```
+skipped: WebGL shaders, noise image overlays, and dynamic light trackers.  
+add when: Low-end devices experience framerate drops on backdrop-filter.
+
+---
+
+### 3. Native Pointer Pan Interaction
+
+```ts
+// canvas-pan.ts
+export function bindCanvasPan(target: HTMLElement, onPan: (dx: number, dy: number) => void) {
+  target.onpointerdown = (e) => {
+    if (e.target !== target) return;
+    target.setPointerCapture(e.pointerId);
+    let { clientX: lx, clientY: ly } = e;
+
+    target.onpointermove = (ev) => {
+      onPan(ev.clientX - lx, ev.clientY - ly);
+      lx = ev.clientX;
+      ly = ev.clientY;
+    };
+
+    target.onpointerup = () => {
+      target.onpointermove = null;
+      target.releasePointerCapture(e.pointerId);
+    };
+  };
+}
+```
+skipped: Inertial momentum simulation and zoom pinch-handlers.  
+add when: Multi-touch trackpad or touch tablet gestures are formally targeted.

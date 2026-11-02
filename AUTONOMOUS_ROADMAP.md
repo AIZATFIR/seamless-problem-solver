@@ -2672,3 +2672,43 @@ export function bindNodeDrag(el: HTMLElement, onDelta: (dx: number, dy: number) 
 ```
 → skipped: Inertial physics / momentum lerping.  
 → add when: Canvas supports high-velocity touch swipe interactions.
+
+
+### Cycle #44 Directive (2026-11-03 01:17)
+```css
+/* 1. Ambient Warm Canvas: 0-JS layered paper texture */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: 
+    radial-gradient(circle, rgba(120, 100, 80, 0.14) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 0%, rgba(245, 235, 220, 0.6), transparent 75%);
+  background-size: 20px 20px, 100% 100%;
+}
+
+/* 2. Tactile Zen Lift: Smooth native interaction without physics runtime */
+.canvas-node {
+  touch-action: none;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 6px -1px rgba(50, 40, 30, 0.04), 0 0 0 1px rgba(50, 40, 30, 0.06);
+  transition: transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 150ms ease;
+}
+.canvas-node:active, .canvas-node[data-dragging="true"] {
+  cursor: grabbing;
+  transform: scale(1.018) translateY(-2px);
+  box-shadow: 0 14px 28px -6px rgba(50, 40, 30, 0.09), 0 0 0 1px rgba(50, 40, 30, 0.08);
+}
+```
+
+```ts
+// 3. Organic Flowchart Bézier with relaxed gravitational sag
+export const getFlowPath = (x1: number, y1: number, x2: number, y2: number) => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 40);
+  // ponytail: static cubic control points; upgrade to dynamic collision deflection if edges overlap
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+```
+
+skipped: Canvas WebGL shaders, third-party spring physics engine (Framer Motion), and dynamic edge obstacle routing.
+add when: Scene exceeds 500 simultaneous nodes or edge crossings cause visual ambiguity under dense cluster graphs.

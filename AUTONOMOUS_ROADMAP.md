@@ -3984,3 +3984,60 @@ export function bindNodeDrag(el: HTMLElement, onMove: (dx: number, dy: number) =
 }
 ```
 → skipped: Inertia physics & grid snapping; add when multi-selection bulk dragging lands.
+
+
+### Cycle #67 Directive (2026-11-03 03:26)
+### 1. Organic Bezier Connectors (`smooth-flow.ts`)
+```typescript
+// ponytail: Horizontal S-curve; upgrade to dynamic axis snapping if ports shift vertically.
+export function getFlowPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getFlowPath(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50");
+```
+skipped: Obstacle collision avoidance and multi-angle routing.  
+add when: Nodes overlap or density exceeds canvas viewport.
+
+---
+
+### 2. Nature Paper Ambient Canvas (`canvas.css`)
+```css
+/* Ambient rice-paper warmth + native tactile cursor */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: radial-gradient(rgba(58, 48, 38, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  cursor: grab;
+}
+.spatial-canvas:active {
+  cursor: grabbing;
+}
+```
+skipped: WebGL canvas shaders / noise overlays.  
+add when: Users request toggleable canvas themes or deep dark mode.
+
+---
+
+### 3. Apple-Tier Spring Dynamics & Elevation (`node.css`)
+```css
+/* Tactile node card with warm ambient shadow and blur */
+.canvas-node {
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(60, 46, 32, 0.08);
+  box-shadow: 0 4px 16px -2px rgba(40, 30, 20, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+  will-change: transform;
+}
+.canvas-node:hover,
+.canvas-node.selected {
+  transform: translateY(-1px) scale(1.008);
+  box-shadow: 0 12px 28px -4px rgba(40, 30, 20, 0.08), 0 0 0 1.5px rgba(180, 140, 90, 0.4);
+}
+```
+skipped: Heavy Framer Motion/JS gesture springs.  
+add when: Drag velocity-based momentum physics are needed.

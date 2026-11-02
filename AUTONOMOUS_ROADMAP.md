@@ -3146,3 +3146,57 @@ Frosted glass card with warm diffused shadows and Apple-like compression on drag
 skipped: Path obstacle avoidance; add when nodes visibly overlap connections.
 skipped: Canvas theme switcher; add when dark mode is explicitly required.
 skipped: WebGL rendering layer; add when node count exceeds 500 DOM elements.
+
+
+### Cycle #52 Directive (2026-11-03 02:02)
+### 1. Organic Bezier Flowchart Connectors (Native SVG)
+
+```typescript
+// utils/flow.ts
+export const getOrganicPath = (x1: number, y1: number, x2: number, y2: number): string => {
+  // ponytail: fixed horizontal bezier offset; upgrade to dynamic obstacle avoidance if nodes overlap
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+```
+skipped: Dagre/ELK graph layout engines and manual line-routing algos.
+add when: Graph exceeds 50+ nodes with complex multi-directional routing loops.
+
+---
+
+### 2. Nature Ambient Canvas (Warm Paper & Stippled Grid)
+
+```css
+/* canvas.css */
+.spatial-canvas {
+  background-color: #fbf9f5; /* Warm Japanese paper */
+  background-image: 
+    radial-gradient(circle, rgba(56, 50, 38, 0.08) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, rgba(224, 214, 196, 0.25) 0%, transparent 80%);
+  background-size: 24px 24px, 100% 100%;
+}
+```
+skipped: HTML5 `<canvas>` background rendering loop and noise SVG filter textures.
+add when: Dynamic multi-light shadows or real-time day/night ambient cycles are requested.
+
+---
+
+### 3. GPU-Bound Node Drag & Kinetic Warmth
+
+```css
+/* node.css */
+.canvas-node {
+  touch-action: none;
+  transform: translate3d(var(--x, 0px), var(--y, 0px), 0);
+  transition: transform 0.05s linear, box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1);
+  box-shadow: 0 1px 3px rgba(40, 35, 25, 0.04), 0 4px 12px rgba(40, 35, 25, 0.03);
+}
+
+.canvas-node.is-dragging {
+  transition: none;
+  box-shadow: 0 12px 28px rgba(40, 35, 25, 0.12), 0 2px 4px rgba(40, 35, 25, 0.04);
+  cursor: grabbing;
+}
+```
+skipped: Heavy Framer Motion / Spring physics libraries.
+add when: Multi-node cluster fling physics or collision detection is required.

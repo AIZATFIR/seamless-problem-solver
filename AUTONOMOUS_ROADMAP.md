@@ -5017,3 +5017,57 @@ export const attachSmoothDrag = (nodeEl, onDelta) => {
 };
 ```
 skipped: Full gesture physics/momentum libraries, add when multi-touch pinch-zoom is introduced.
+
+
+### Cycle #84 Directive (2026-11-03 05:00)
+### 1. Nature Ambient Canvas Backdrop (Pure CSS)
+```css
+.canvas-viewport {
+  background-color: #fbfaf8;
+  background-image: 
+    radial-gradient(at 100% 0%, oklch(0.96 0.03 80 / 0.6) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, oklch(0.95 0.02 55 / 0.4) 0px, transparent 50%),
+    radial-gradient(circle at 1px 1px, oklch(0.7 0.01 60 / 0.25) 1px, transparent 0);
+  background-size: 100% 100%, 100% 100%, 24px 24px;
+}
+```
+skipped: WebGL shaders or dynamic canvas lighting.
+add when: Users request dynamic day/night ambient shifting.
+
+---
+
+### 2. Organic Flowchart Connectors (Curved SVG Path)
+```typescript
+export function getOrganicPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  // ponytail: horizontal-first bezier; upgrade to A* or orthogonal routing if bidirectional node wrapping occurs
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getOrganicPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100", "Path generation mismatch");
+```
+skipped: Complex collision avoidance and multi-segment edge routers.
+add when: Flowcharts routinely exceed 20+ interconnected nodes with overlapping paths.
+
+---
+
+### 3. Tactile Zen Node Shell & Elevation
+```css
+.canvas-node {
+  background: oklch(0.99 0.005 85 / 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid oklch(0.88 0.01 75 / 0.8);
+  box-shadow: 0 4px 20px -2px oklch(0.2 0.02 60 / 0.04), 0 1px 3px oklch(0.2 0.02 60 / 0.02);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  will-change: transform;
+}
+
+.canvas-node:hover,
+.canvas-node[data-selected="true"] {
+  border-color: oklch(0.68 0.06 65);
+  box-shadow: 0 10px 28px -4px oklch(0.4 0.05 60 / 0.12), 0 0 0 1px oklch(0.68 0.06 65 / 0.25);
+}
+```
+skipped: Custom physics spring engine in JS.
+add when: Canvas requires spatial momentum flick/throw interactions.

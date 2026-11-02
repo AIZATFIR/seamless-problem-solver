@@ -2465,3 +2465,59 @@ Apple-like subtle lift on drag/hover using GPU transforms and soft shadow disper
 }
 ```
 `skipped: Physics spring solver, add when inertia tossing is requested.`
+
+
+### Cycle #41 Directive (2026-11-03 01:00)
+### 1. Adaptive Organic Flow Path
+
+```ts
+// ponytail: Horizontal cubic bezier. Upgrade to dynamic port orientation (top/bottom) if vertical layouts are supported.
+export function getOrganicEdge(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getOrganicEdge(0, 0, 100, 100) === 'M 0 0 C 50 0, 50 100, 100 100', 'Edge curve calculation failed');
+```
+*skipped: Obstacle routing & self-intersect collision. Add when canvas density exceeds 50+ overlapping nodes.*
+
+---
+
+### 2. Nature Zen Paper & Ambient Dot Grid
+
+```css
+.spatial-canvas {
+  background-color: #fcfbf9; /* warm washi base */
+  background-image: 
+    radial-gradient(circle at 50% 40%, rgba(217, 185, 155, 0.12) 0%, transparent 70%),
+    radial-gradient(#cfc7bd 1px, transparent 1px);
+  background-size: 100% 100%, 28px 28px;
+  background-position: 0 0, var(--pan-x, 0px) var(--pan-y, 0px);
+}
+```
+*skipped: Canvas-based GPU tile renderers. Add when pan/zoom matrix operations stutter on low-end mobile devices.*
+
+---
+
+### 3. Tactile Leaf-Elevation Node Physics
+
+```css
+.canvas-node {
+  touch-action: none;
+  user-select: none;
+  border-radius: 14px;
+  border: 1px solid rgba(180, 160, 140, 0.22);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 1px 2px rgba(60, 45, 30, 0.04), 0 8px 20px -6px rgba(60, 45, 30, 0.05);
+  transition: transform 120ms cubic-bezier(0.2, 0, 0, 1), box-shadow 120ms ease;
+  will-change: transform;
+}
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.018);
+  box-shadow: 0 4px 14px rgba(60, 45, 30, 0.08), 0 20px 32px -8px rgba(60, 45, 30, 0.08);
+}
+```
+*skipped: Complex physics engine (e.g., Matter.js springs). Add when nodes need kinetic collisions during drag-release.*

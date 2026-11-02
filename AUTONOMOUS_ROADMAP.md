@@ -2332,3 +2332,64 @@ console.assert(
 
 skipped: dynamic orthogonal rerouting, canvas physics engine, and custom webgl noise.  
 add when: graph density exceeds 50+ intersecting nodes or user asks for procedural wire simulations.
+
+
+### Cycle #39 Directive (2026-11-03 00:49)
+### 1. Zen Ambient Canvas Grid (CSS Native)
+
+```css
+/* Replace JS-rendered canvas grid with native hardware-accelerated warm paper grid */
+.spatial-canvas {
+  background-color: #faf8f5; /* warm stone base */
+  background-image: 
+    radial-gradient(circle, rgba(115, 95, 75, 0.12) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 50%, transparent 60%, rgba(220, 210, 195, 0.4) 100%);
+  background-size: 24px 24px, 100% 100%;
+  background-attachment: local;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+```
+*skipped: HTML5 Canvas draw loop / WebGL background, add when: dynamic zoom scale breaks subpixel CSS tiling.*
+
+---
+
+### 2. Natural Organic Bezier Connector (One-Line Math)
+
+```typescript
+// Smooth nature-feel horizontal/vertical cubic spline without layout engine bloat
+export const getOrganicSpline = (x1: number, y1: number, x2: number, y2: number): string => {
+  const dx = Math.abs(x2 - x1) * 0.45;
+  // ponytail: fixed horizontal tangent; upgrade to orthogonal axis-switching when multi-edge routing needs it
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+```
+*skipped: ELK/D3-dag layout solvers and multi-segment obstacle avoidance, add when: overlapping nodes cause illegible wire crossings.*
+
+---
+
+### 3. Tactile Node Rest & Select (Apple-Tuned Spring CSS)
+
+```css
+/* Warm elevation with tactile spring response */
+.canvas-node {
+  contain: layout style paint;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(180, 160, 140, 0.22);
+  box-shadow: 
+    0 1px 2px rgba(60, 50, 40, 0.04), 
+    0 6px 16px -4px rgba(70, 55, 40, 0.08);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+
+.canvas-node:active, .canvas-node[data-dragging="true"] {
+  cursor: grabbing;
+  transform: scale(1.02);
+  box-shadow: 
+    0 4px 8px rgba(60, 50, 40, 0.06), 
+    0 16px 32px -6px rgba(70, 55, 40, 0.14);
+}
+```
+*skipped: Framer Motion / spring physics runloop on drag, add when: nodes need momentum throw or magnetic auto-alignment.*

@@ -4839,3 +4839,61 @@ add when: Flowchart density causes overlapping edges across node bodies.
 ```
 skipped: Third-party pan/zoom library dependency.  
 add when: Multi-touch pinch-to-zoom gesture recognition is needed on native touchscreens.
+
+
+### Cycle #81 Directive (2026-11-03 04:43)
+### 1. Organic Ambient Canvas (Pure CSS)
+
+```css
+.canvas-surface {
+  background-color: #fbf9f5;
+  background-image: 
+    radial-gradient(circle at 50% 50%, transparent 50%, rgba(65, 72, 51, 0.05) 100%),
+    radial-gradient(circle, rgba(50, 45, 35, 0.08) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+```
+skipped: HTML5 `<canvas>` rendering loop or image asset overlays.  
+add when: Dynamic multi-layer parallax or 10k+ nodes cause CSS repaint degradation.
+
+---
+
+### 2. Natural Bezier Flow Connectors
+
+```javascript
+function getConnectorPath(x1, y1, x2, y2) {
+  // ponytail: fixed horizontal curve; switch to 4-way orthogonal router if port snapping is added
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 48);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getConnectorPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100", "Connector path failed");
+```
+skipped: Complex collision avoidance, A* pathfinding, and port-direction resolvers.  
+add when: Connecting lines cut directly through intermediate nodes.
+
+---
+
+### 3. Tactile Frosted Node Feedback
+
+```css
+.canvas-node {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(82, 92, 70, 0.14);
+  box-shadow: 0 4px 18px -2px rgba(40, 35, 25, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+  border-radius: 14px;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+  user-select: none;
+}
+.canvas-node:active {
+  transform: scale(0.985);
+  box-shadow: 0 2px 6px -1px rgba(40, 35, 25, 0.08);
+}
+```
+skipped: Framer Motion/JS animation libraries and custom elevation state-machines.  
+add when: Fluid multi-touch gestures require velocity-preserved momentum physics.

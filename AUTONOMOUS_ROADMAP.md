@@ -5524,3 +5524,60 @@ console.assert(getFlowPath(0, 0, 100, 50) === 'M 0 0 C 50 0, 50 50, 100 50', 'Co
 
 skipped: dynamic obstacle-avoidance routing, multi-stop spring curves, and custom shader grains.
 add when: canvas density exceeds 50 overlapping nodes or user reports wire tangling.
+
+
+### Cycle #92 Directive (2026-11-03 05:45)
+### 1. Organic Bezier Flowchart Connectors
+
+```typescript
+// ponytail: pure horizontal cubic bezier; upgrade to dynamic axis/port routing if vertical layouts are supported.
+export function getFlowPath(x1: number, y1: number, x2: number, y2: number): string {
+  const cx = x1 + Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${cx} ${y1}, ${x2 - (cx - x1)} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getFlowPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100", "Path failed");
+```
+skipped: Obstacle avoidance & dynamic port detection.  
+add when: Nodes overlap or multi-directional port connections are requested.
+
+---
+
+### 2. Nature Ambient Canvas (Zen Warmth & Paper Grid)
+
+```css
+/* Warm rice-paper ambient base with tactile dot-grid */
+.canvas-ambient {
+  background-color: #fbfbfa;
+  background-image: 
+    radial-gradient(ellipse at 50% 30%, rgba(244, 238, 224, 0.5) 0%, transparent 75%),
+    radial-gradient(#d5d2cc 0.8px, transparent 0.8px);
+  background-size: 100% 100%, 24px 24px;
+}
+```
+skipped: Canvas-rendered procedural grain shader / noise textures.  
+add when: Pure CSS gradients fail performance profiles on low-end mobile.
+
+---
+
+### 3. Apple-Grade Node Tactility & Elevation
+
+```css
+.canvas-node {
+  touch-action: none;
+  user-select: none;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(45, 38, 28, 0.04), 0 4px 12px rgba(45, 38, 28, 0.02);
+  transition: transform 160ms cubic-bezier(0.2, 0, 0, 1), box-shadow 160ms cubic-bezier(0.2, 0, 0, 1);
+}
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.018);
+  box-shadow: 0 14px 28px -4px rgba(45, 38, 28, 0.08), 0 2px 6px -1px rgba(45, 38, 28, 0.04);
+}
+```
+skipped: Framer Motion / spring physics libraries.  
+add when: Multi-node magnetic snapping or multi-touch gestures require gesture trackers.

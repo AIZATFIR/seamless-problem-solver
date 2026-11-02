@@ -3200,3 +3200,61 @@ add when: Dynamic multi-light shadows or real-time day/night ambient cycles are 
 ```
 skipped: Heavy Framer Motion / Spring physics libraries.
 add when: Multi-node cluster fling physics or collision detection is required.
+
+
+### Cycle #53 Directive (2026-11-03 02:08)
+### 1. Organic Warmth Ambient Canvas (CSS)
+```css
+/* Ambient zen paper texture + soft warmth falloff */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: 
+    radial-gradient(ellipse at 50% 40%, rgba(245, 238, 224, 0.5) 0%, transparent 80%),
+    radial-gradient(#e6ded2 0.8px, transparent 0.8px);
+  background-size: 100% 100%, 24px 24px;
+  overscroll-behavior: none;
+}
+```
+*skipped:* Canvas DOM/WebGL noise rendering.  
+*add when:* User asks for real-time paper grain or procedural shading.
+
+---
+
+### 2. Natural Flowchart S-Curve Connectors (Native JS)
+```javascript
+// ponytail: Horizontal S-curve. Swap axes if layout flow turns vertical.
+export function getFlowPath(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Verification
+console.assert(getFlowPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100", "Path logic failed");
+```
+*skipped:* Obstacle-avoiding A* routing library.  
+*add when:* Nodes routinely overlap direct path corridors.
+
+---
+
+### 3. Tactile Apple-Calibrated Node Surface (CSS)
+```css
+.canvas-node {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(215, 208, 196, 0.65);
+  box-shadow: 0 1px 2px rgba(60, 50, 30, 0.03), 0 6px 16px rgba(60, 50, 30, 0.04);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms ease;
+  user-select: none;
+}
+
+.canvas-node:hover {
+  box-shadow: 0 2px 4px rgba(60, 50, 30, 0.04), 0 10px 24px rgba(60, 50, 30, 0.06);
+}
+
+.canvas-node:active {
+  transform: scale(0.985);
+}
+```
+*skipped:* Custom spring physics drag engine.  
+*add when:* Canvas requires multi-body velocity inertia on release.

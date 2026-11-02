@@ -3906,3 +3906,81 @@ console.assert(
 
 skipped: d3/dagre routing and canvas-render loops, add when node count exceeds 200 on screen.  
 skipped: dynamic pan-zoom coordinate projection matrix, add when canvas camera controls are wired.
+
+
+### Cycle #66 Directive (2026-11-03 03:20)
+### 1. Ambient Warm Canvas & Zen Node Material (CSS)
+
+```css
+/* Warm rice-paper ambient canvas + frosted zen cards */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: radial-gradient(circle, rgba(120, 110, 95, 0.12) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+}
+
+.canvas-node {
+  background: rgba(255, 253, 250, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(215, 205, 190, 0.55);
+  border-radius: 14px;
+  box-shadow: 0 4px 18px -4px rgba(70, 55, 40, 0.05), 0 1px 2px rgba(70, 55, 40, 0.04);
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s ease;
+  touch-action: none;
+  user-select: none;
+}
+
+.canvas-node:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 8px 24px -4px rgba(70, 55, 40, 0.08), 0 2px 4px rgba(70, 55, 40, 0.04);
+}
+```
+→ skipped: WebGL shader grain & dynamic lighting overlays; add when hardware canvas rendering is required for 500+ nodes.
+
+---
+
+### 2. Natural Organic Flowchart Connectors (SVG Path Generator)
+
+```ts
+// Smooth S-curve connector with nature-weighted horizontal tangents
+export function getOrganicConnector(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+  // ponytail: assumes L-to-R flow; upgrade to 4-way orthogonal routing when bi-directional cycles are introduced.
+}
+
+// Self-check
+console.assert(getOrganicConnector(0, 0, 100, 50) === "M 0 0 C 55 0, 45 50, 100 50", "Connector path mismatch");
+```
+→ skipped: A* pathfinding and obstacle avoidance; add when nodes overlap or loop backward.
+
+---
+
+### 3. Drift-Free Fluid Node Dragging (Native Pointer Capture)
+
+```ts
+export function bindNodeDrag(el: HTMLElement, onMove: (dx: number, dy: number) => void) {
+  let startX = 0, startY = 0;
+
+  el.onpointerdown = (e) => {
+    if ((e.target as HTMLElement).closest('input, textarea, button')) return;
+    startX = e.clientX;
+    startY = e.clientY;
+    el.setPointerCapture(e.pointerId);
+    el.style.cursor = 'grabbing';
+
+    el.onpointermove = (ev) => {
+      onMove(ev.clientX - startX, ev.clientY - startY);
+      startX = ev.clientX;
+      startY = ev.clientY;
+    };
+
+    el.onpointerup = el.onpointercancel = () => {
+      el.onpointermove = null;
+      el.style.cursor = '';
+    };
+  };
+}
+```
+→ skipped: Inertia physics & grid snapping; add when multi-selection bulk dragging lands.

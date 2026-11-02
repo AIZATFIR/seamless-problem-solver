@@ -102,3 +102,49 @@ console.assert(getFlowSpline(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100"
 
 skipped: dynamic obstacle routing and physics simulation engines.
 add when: canvas density exceeds 50+ interconnected nodes causing spline collisions.
+
+
+### Cycle #2 Directive (2026-11-02 21:17)
+```css
+/* 1. Warm Zen Ambient Canvas: Earthy paper-grain dot matrix */
+.canvas-root {
+  background-color: #fbf9f5;
+  background-image: radial-gradient(circle, rgba(120, 105, 85, 0.14) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* 2. Tactile Card Interaction: Spring lift without layout thrash */
+.canvas-node {
+  touch-action: none;
+  user-select: none;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(60, 50, 40, 0.04), 0 0 0 1px rgba(60, 50, 40, 0.06);
+  transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms ease;
+  will-change: transform;
+}
+.canvas-node:is(:active, [data-dragging="true"]) {
+  cursor: grabbing;
+  transform: scale(1.018) translateY(-1px);
+  box-shadow: 0 12px 28px -4px rgba(60, 50, 40, 0.1), 0 0 0 1px rgba(60, 50, 40, 0.08);
+}
+```
+
+```javascript
+// 3. Fluid Organic Connector: Native horizontal S-curve
+export function getOrganicSpline(x1, y1, x2, y2) {
+  // ponytail: horizontal auto-tangents; upgrade to obstacle-avoiding A* only if nodes overlap
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getOrganicSpline(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50",
+  "Spline calculation mismatch"
+);
+```
+
+skipped: Path collision avoidance and layout engines (D3/ELK), add when automatic graph relayout is requested.
+skipped: Canvas zoom/pan velocity physics JS library, add when standard CSS zoom feels too rigid on touchpads.
+skipped: Custom WebGL shaders for noise/grain, add when CSS radial gradients fail 60fps render checks.

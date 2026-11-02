@@ -4956,3 +4956,64 @@ export function applyPanInertia(canvasEl, vx, vy) {
 skipped: A* obstacle-avoiding routing paths; add when users report overlapping node lines.
 skipped: Canvas-level WebGL/Lottie grain overlay; add when 60fps static CSS fails zen aesthetic benchmarks.
 skipped: External drag-and-drop or gesture framework; add when multi-pointer pinch-zoom requirements land.
+
+
+### Cycle #83 Directive (2026-11-03 04:54)
+### 1. Zen Warmth Canvas Substrate
+
+```css
+/* Ambient warm stone canvas with soft dot matrix */
+.canvas-root {
+  background-color: #fbfaf8;
+  background-image: radial-gradient(circle at 50% 50%, #e5e0d8 1px, transparent 1px);
+  background-size: 24px 24px;
+  /* ponytail: static grid size; upgrade to zoom-scaled LOD when viewport scaling is wired */
+}
+```
+skipped: WebGL/canvas-drawn infinite grids, add when infinite zoom with dynamic LOD is needed.
+
+---
+
+### 2. Natural Organic Flowchart Curvature
+
+```javascript
+// Fluid S-curve for organic horizontal flowchart connections
+export const getCurvedConnector = (x1, y1, x2, y2) => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 32);
+  // ponytail: fixed horizontal cubic bias; upgrade to orthogonal routing if nodes collide
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+
+// Self-check
+console.assert(
+  getCurvedConnector(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50",
+  "Connector path mismatch"
+);
+```
+skipped: Dagre/ELK auto-routing engines, add when auto-layout with cycle/collision avoidance is required.
+
+---
+
+### 3. Native Pointer-Capture Smooth Drag
+
+```javascript
+export const attachSmoothDrag = (nodeEl, onDelta) => {
+  let anchor = null;
+  nodeEl.onpointerdown = (e) => {
+    if (e.button !== 0) return;
+    anchor = { x: e.clientX, y: e.clientY };
+    nodeEl.setPointerCapture(e.pointerId);
+  };
+  nodeEl.onpointermove = (e) => {
+    if (!anchor) return;
+    onDelta(e.clientX - anchor.x, e.clientY - anchor.y);
+    anchor = { x: e.clientX, y: e.clientY };
+  };
+  nodeEl.onpointerup = (e) => {
+    anchor = null;
+    nodeEl.releasePointerCapture(e.pointerId);
+  };
+  // ponytail: direct deltas; add requestAnimationFrame accumulator if framerate drops below 60fps
+};
+```
+skipped: Full gesture physics/momentum libraries, add when multi-touch pinch-zoom is introduced.

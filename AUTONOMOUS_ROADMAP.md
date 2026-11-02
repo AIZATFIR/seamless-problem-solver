@@ -3258,3 +3258,56 @@ console.assert(getFlowPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100", 
 ```
 *skipped:* Custom spring physics drag engine.  
 *add when:* Canvas requires multi-body velocity inertia on release.
+
+
+### Cycle #54 Directive (2026-11-03 02:13)
+### 1. Zen Ambient Backdrop (Pure CSS)
+
+```css
+/* Replace sterile grey canvas with warm parchment & organic dot mesh */
+.canvas-viewport {
+  background-color: #fbf9f5;
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(225, 215, 198, 0.35) 0%, transparent 70%),
+    radial-gradient(circle, #d8d0c5 0.8px, transparent 0.8px);
+  background-size: 100% 100%, 28px 28px;
+}
+```
+skipped: custom WebGL canvas shaders or texture image assets.  
+add when: dynamic day/night light cycles are explicitly requested.
+
+---
+
+### 2. Natural Flowchart Edges (Adaptive Cubic Bezier)
+
+```javascript
+// ponytail: horizontal flow only; upgrade to directional port vectoring if vertical layouts appear
+export const getFlowPath = (x1, y1, x2, y2) => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+```
+skipped: complex obstacle-avoidance routing algorithm (A*/orthogonal).  
+add when: node overlap density makes direct curves unreadable.
+
+---
+
+### 3. Butter-Smooth Node Pan (Native Pointer Capture)
+
+```javascript
+export const bindSmoothDrag = (el, onDrag) => {
+  el.style.touchAction = 'none';
+  el.onpointerdown = (e) => {
+    el.setPointerCapture(e.pointerId);
+    let lx = e.clientX, ly = e.clientY;
+    el.onpointermove = (ev) => {
+      onDrag(ev.clientX - lx, ev.clientY - ly);
+      lx = ev.clientX;
+      ly = ev.clientY;
+    };
+    el.onpointerup = el.onpointercancel = () => (el.onpointermove = null);
+  };
+};
+```
+skipped: full gesture/physics momentum engine (use native CSS transition for settling).  
+add when: free-flinging nodes across large viewport is prioritized over precision placement.

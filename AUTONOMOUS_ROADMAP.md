@@ -4109,3 +4109,67 @@ console.assert(snapToFlowGrid(14) === 16 && snapToFlowGrid(11) === 8, "Snap logi
 
 skipped: Third-party gesture/physics engines, canvas webgl rendering, complex orthogonal routing engines.  
 add when: Scene exceeds 1,000+ simultaneous nodes or requires dynamic obstacle routing around intersecting cards.
+
+
+### Cycle #69 Directive (2026-11-03 03:37)
+### 1. Zen Ambient Canvas Surface & Micro-Grid
+Replace flat backgrounds or heavy SVG patterns with a native dual-tone paper wash.
+
+```css
+/* Ambient Nature Canvas: zen warmth + sub-pixel grain */
+.spatial-canvas {
+  background-color: #f9f8f6; /* Wabi-sabi warm bone */
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(60, 50, 40, 0.07) 1px, transparent 0);
+  background-size: 24px 24px;
+  /* ponytail: screen-space grid; add canvas-to-viewport scale matrix when infinite zoom lands */
+}
+```
+* Skipped: Dynamic canvas-level viewport LOD scaling.
+* Add when: Deep zoom (<0.5x or >2x) causes moiré artifacts.
+
+---
+
+### 2. Natural Flow Connectors (Organic S-Curve)
+Pure-math cubic Bezier pathing to eliminate robotic angular lines without layout libraries.
+
+```typescript
+// Smooth organic connector path between node centers or ports
+export function getOrganicConnector(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = (x2 - x1) * 0.45;
+  const dy = (y2 - y1) * 0.1;
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1 + dy}, ${x2 - dx} ${y2 - dy}, ${x2} ${y2}`;
+  // ponytail: fixed horizontal tangent; add auto-port axis detection if nodes rotate
+}
+
+// Self-check
+console.assert(getOrganicConnector(0, 0, 100, 100).startsWith("M 0 0 C 45 10"), "Invalid Bezier anchor math");
+```
+* Skipped: A* obstacle avoidance and edge rerouting.
+* Add when: Complex tree overlaps cause line collisions.
+
+---
+
+### 3. Tactile Leaf-Node Elevation & Damping
+Native hardware-accelerated lift on grab using Apple spring curve easing.
+
+```css
+.canvas-node {
+  border-radius: 14px;
+  border: 1px solid rgba(44, 40, 37, 0.08);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 2px rgba(44, 40, 37, 0.04), 0 4px 12px rgba(44, 40, 37, 0.03);
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
+  touch-action: none;
+}
+
+.canvas-node:active,
+.canvas-node[data-dragging="true"] {
+  cursor: grabbing;
+  transform: scale(1.018) translateY(-2px);
+  box-shadow: 0 12px 28px -6px rgba(44, 40, 37, 0.12), 0 2px 4px rgba(44, 40, 37, 0.04);
+}
+```
+* Skipped: Full Web Animations API inertia physics.
+* Add when: Users request flick-to-toss momentum gestures.

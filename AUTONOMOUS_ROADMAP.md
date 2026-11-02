@@ -5361,3 +5361,57 @@ add when: Visual edge-crossing degrades node readability in complex graphs.
 ```
 skipped: Spring physics engine (Framer Motion / react-spring).  
 add when: Gestural drag velocity or flick-to-throw interactions are introduced.
+
+
+### Cycle #89 Directive (2026-11-03 05:28)
+### 1. Zen Ambient Canvas Backdrop (Warm paper texture + soft grid)
+
+```css
+.spatial-canvas {
+  background-color: #fbfbf9;
+  background-image:
+    radial-gradient(circle at 50% 50%, rgba(226, 221, 210, 0.3) 0%, transparent 85%),
+    radial-gradient(circle, #dcd8d0 0.8px, transparent 0.8px);
+  background-size: 100% 100%, 24px 24px;
+}
+```
+→ skipped: Canvas/WebGL noise generation and raster assets.  
+→ add when: Infinite dynamic zoom scales require procedural LOD texture mipmapping.
+
+---
+
+### 2. Natural Flowchart Connectors (Adaptive Bezier)
+
+```javascript
+export function getOrganicPath(x1, y1, x2, y2) {
+  // ponytail: horizontal-biased flow; upgrade to orthogonal A* if user drag supports multi-side routing
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 32);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getOrganicPath(0, 0, 100, 50) === 'M 0 0 C 50 0, 50 50, 100 50', 'Invalid path generation');
+```
+→ skipped: Obstacle avoidance, dynamic routing libraries, and edge label anchoring.  
+→ add when: Nodes overlap or layout exceeds 50+ interlinked nodes.
+
+---
+
+### 3. Apple-Grade Tactile Node Lift & Snap Interaction
+
+```css
+.canvas-node {
+  touch-action: none;
+  user-select: none;
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease;
+  will-change: transform;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.018) translateY(-1px);
+  box-shadow: 0 14px 28px -6px rgba(44, 39, 32, 0.12), 0 3px 8px -1px rgba(44, 39, 32, 0.05);
+}
+```
+→ skipped: External spring physics engines (e.g., Framer Motion, React Spring).  
+→ add when: Interrupted momentum-tossing interactions with velocity inheritance are required.

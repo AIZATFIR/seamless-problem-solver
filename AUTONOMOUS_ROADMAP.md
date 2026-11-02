@@ -1101,3 +1101,55 @@ export const getSmoothEdge = (x1, y1, x2, y2) => {
 }
 ```
 → skipped: external spring physics library, add when gesture momentum flick/throw interaction is needed.
+
+
+### Cycle #18 Directive (2026-11-02 22:49)
+### 1. Zen Ambient Backdrop (Pure CSS)
+
+```css
+/* Warm parchment surface with ambient light wash and tactile grid */
+.spatial-canvas {
+  --bg-sand: #fbf9f5;
+  --dot-color: rgba(94, 82, 64, 0.08);
+  background-color: var(--bg-sand);
+  background-image: 
+    radial-gradient(ellipse at 50% 20%, rgba(255, 255, 255, 0.7) 0%, transparent 70%),
+    radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+}
+```
+skipped: Canvas-based grain shaders, add when static CSS causes noticeable banding on low-gamut displays.
+
+---
+
+### 2. Natural Flowchart Connectors (Zero-Dep SVG S-Curve)
+
+```javascript
+// ponytail: Horizontal bezier; upgrade to full A* pathing if obstacle avoidance is required
+export function getNaturalConnectorPath(x1, y1, x2, y2) {
+  const dx = Math.abs(x2 - x1) * 0.5;
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+```
+skipped: Orthogonal obstacle avoidance routing, add when node overlap degrades edge legibility.
+
+---
+
+### 3. Tactile Node Rest & Lift (Pure CSS)
+
+```css
+/* Anti-slop tactile feedback: smooth lift on drag with subpixel text stabilization */
+.canvas-node {
+  transform: translate3d(var(--x, 0), var(--y, 0), 0);
+  transition: box-shadow 180ms ease, border-color 180ms ease;
+  box-shadow: 0 1px 3px rgba(45, 35, 20, 0.05), 0 8px 24px -4px rgba(45, 35, 20, 0.04);
+  border: 1px solid rgba(82, 68, 48, 0.1);
+  user-select: none;
+  cursor: grab;
+}
+.canvas-node:active {
+  cursor: grabbing;
+  box-shadow: 0 4px 12px rgba(45, 35, 20, 0.08), 0 20px 32px -6px rgba(45, 35, 20, 0.06);
+}
+```
+skipped: Spring physics JS runtime, add when drag release needs simulated velocity/inertia.

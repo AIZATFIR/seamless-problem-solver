@@ -3415,3 +3415,51 @@ console.assert(getOrganicPath([0, 0], [100, 100]) === "M 0 0 C 55 0, 45 100, 100
 
 skipped: dynamic port snapping, complex pathfinding algorithms, and WebGL backdrop shaders.  
 add when: canvas nodes overlap regularly or graph size exceeds 50 simultaneous nodes.
+
+
+### Cycle #57 Directive (2026-11-03 02:30)
+### 1. Nature UI Canvas Surface (CSS)
+```css
+/* Ambient warm paper foundation with subtle subpixel grid */
+.spatial-canvas {
+  background-color: #faf7f2;
+  background-image: 
+    radial-gradient(#dfd7cc 0.8px, transparent 0.8px),
+    radial-gradient(ellipse at 50% 10%, rgba(255, 253, 249, 0.9) 0%, rgba(238, 230, 219, 0.5) 100%);
+  background-size: 24px 24px, 100% 100%;
+  overscroll-behavior: none;
+}
+```
+
+### 2. Natural Organic Connectors (SVG Spline)
+```javascript
+// ponytail: hardcoded 0.45/0.15 tension coefficients; upgrade to angle-aware vectors if adding self-loops
+function createNaturalPath(x1, y1, x2, y2) {
+  const dx = Math.abs(x2 - x1) * 0.45;
+  const dy = Math.abs(y2 - y1) * 0.15;
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1 + dy}, ${x2 - dx} ${y2 - dy}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(createNaturalPath(0, 0, 100, 100) === "M 0 0 C 45 15, 55 85, 100 100", "Connector path failed");
+```
+
+### 3. Tactile Node Elevation & Spring Response (CSS)
+```css
+.canvas-node {
+  background: rgba(255, 254, 252, 0.88);
+  border: 1px solid rgba(190, 178, 162, 0.35);
+  box-shadow: 0 1px 3px rgba(60, 50, 40, 0.04), 0 8px 24px -4px rgba(70, 55, 40, 0.07);
+  backdrop-filter: blur(12px);
+  will-change: transform;
+  transition: transform 120ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 120ms ease;
+}
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.012);
+  box-shadow: 0 4px 12px rgba(60, 50, 40, 0.08), 0 16px 32px -6px rgba(70, 55, 40, 0.12);
+}
+```
+
+skipped: WebGL canvas rendering, physics-based spring solver libraries, complex edge-routing graphs.  
+add when: Canvas exceeds 500 simultaneous nodes or requires cycle-avoiding orthogonal obstacle wraps.

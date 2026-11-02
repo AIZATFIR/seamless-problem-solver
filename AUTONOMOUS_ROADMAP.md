@@ -1726,3 +1726,59 @@ skipped: Dynamic dark mode palette and multi-layered noise SVGs. Add when user e
 }
 ```
 skipped: Multi-axis tilt shaders and canvas blur filters. Add when WebGL pipeline is requested.
+
+
+### Cycle #29 Directive (2026-11-02 23:52)
+### 1. Organic S-Curve Connectors (Native SVG Path)
+
+```ts
+// ponytail: basic horizontal bezier; replace with obstacle routing if nodes overlap heavily
+export function getFlowPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+```
+skipped: Manhattan/orthogonal pathfinding and self-intersection routing.  
+add when: Flowcharts exceed 50 dense, multi-directional overlapping nodes.
+
+---
+
+### 2. Warm Zen Paper Canvas (Pure CSS)
+
+```css
+/* Warm ambient canvas with tactile dot grid */
+.spatial-canvas {
+  background-color: #fbfaf7;
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(235, 225, 205, 0.3) 0%, transparent 60%),
+    radial-gradient(#dcd8d0 0.8px, transparent 0.8px);
+  background-size: 100% 100%, 24px 24px;
+}
+```
+skipped: Canvas noise textures, WebGL shaders, or heavy raster background assets.  
+add when: Explicit low-power mode toggles or complex custom theme engines are requested.
+
+---
+
+### 3. Tactile Card Elevation & Spring Feedback (Pure CSS)
+
+```css
+.canvas-node {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(60, 45, 20, 0.07);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(40, 30, 20, 0.04), 0 8px 20px rgba(40, 30, 20, 0.03);
+  backdrop-filter: blur(16px);
+  cursor: grab;
+  transition: transform 140ms cubic-bezier(0.2, 0, 0, 1), box-shadow 140ms ease;
+  user-select: none;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.015);
+  box-shadow: 0 4px 10px rgba(40, 30, 20, 0.06), 0 16px 32px rgba(40, 30, 20, 0.06);
+}
+```
+skipped: Framer Motion / external gesture libraries for node dragging feedback.  
+add when: Physics velocity-based card flicking or multi-node grouping animations are introduced.

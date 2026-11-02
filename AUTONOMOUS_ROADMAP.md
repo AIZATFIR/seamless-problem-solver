@@ -5634,3 +5634,43 @@ function flowPath(x1, y1, x2, y2) {
 ```
 * Skipped: Web Animations API/Framer Motion physics engine.
 * Add when: Multi-node cluster mass/momentum mechanics are explicitly required.
+
+
+### Cycle #94 Directive (2026-11-03 05:56)
+### 1. Nature Ambient Grid (CSS)
+```css
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: radial-gradient(circle, rgba(120, 105, 85, 0.14) 1px, transparent 1px);
+  background-size: 24px 24px;
+  overscroll-behavior: contain;
+}
+```
+
+### 2. Natural S-Curve Connectors (Native Path Generator)
+```typescript
+export function getFlowPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  // ponytail: horizontal-biased S-curve; upgrade to port-aware routing if adding 4-way connectors.
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+```
+
+### 3. Tactile Zen Node Elevation (CSS)
+```css
+.canvas-node {
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms ease-out;
+  box-shadow: 0 1px 2px rgba(45, 35, 20, 0.05), 0 4px 12px rgba(45, 35, 20, 0.04);
+  will-change: transform;
+}
+.canvas-node:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 8px rgba(45, 35, 20, 0.08), 0 12px 24px rgba(45, 35, 20, 0.06);
+}
+.canvas-node:active {
+  transform: scale(0.99);
+}
+```
+
+* skipped: Canvas-based dot rendering, layout physics engines, and edge collision routing.
+* add when: Flowchart density exceeds 200 concurrent nodes or paths require obstacle avoidance.

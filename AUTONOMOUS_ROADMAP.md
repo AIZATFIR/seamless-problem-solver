@@ -4582,3 +4582,79 @@ export const getSplinePath = (x1: number, y1: number, x2: number, y2: number): s
 * skipped: Canvas pan-zoom matrix math in JS; add when viewport bounds exceed 100vw/100vh.
 * skipped: Obstacle avoidance routing (A*); add when overlapping node edge crossings cause readability issues.
 * skipped: Spring-physics animation engine; add if CSS bezier transitions fail frame-rate targets during multi-touch gestures.
+
+
+### Cycle #77 Directive (2026-11-03 04:22)
+```ts
+// 1. Organic S-curve connector path
+export function getOrganicPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// 2. Native pointer pan (zero deps, hardware-direct)
+export function bindCanvasPan(el: HTMLElement, onPan: (dx: number, dy: number) => void) {
+  let down = false, px = 0, py = 0;
+  el.addEventListener('pointerdown', (e) => {
+    if (e.button !== 0 || (e.target as HTMLElement).closest('.canvas-node')) return;
+    down = true; [px, py] = [e.clientX, e.clientY];
+    el.setPointerCapture(e.pointerId);
+  });
+  el.addEventListener('pointermove', (e) => {
+    if (!down) return;
+    onPan(e.clientX - px, e.clientY - py);
+    [px, py] = [e.clientX, e.clientY];
+  });
+  const end = (e: PointerEvent) => { down = false; try { el.releasePointerCapture(e.pointerId); } catch {} };
+  el.addEventListener('pointerup', end);
+  el.addEventListener('pointercancel', end);
+}
+
+// Self-check
+console.assert(
+  getOrganicPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100",
+  "getOrganicPath failed"
+);
+```
+
+```css
+/* 3. Zen nature UI ambient polish (Apple-clean warm backdrop + frosted tactile cards) */
+.spatial-canvas {
+  background-color: #fcfbf9;
+  background-image:
+    radial-gradient(circle at 50% 50%, rgba(160, 140, 115, 0.12) 1px, transparent 1px),
+    radial-gradient(circle at 10% 20%, rgba(235, 226, 212, 0.45) 0%, transparent 50%);
+  background-size: 28px 28px, 100% 100%;
+  touch-action: none;
+}
+
+.canvas-node {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(180, 160, 135, 0.22);
+  border-radius: 14px;
+  box-shadow: 
+    0 1px 2px rgba(90, 70, 50, 0.04),
+    0 8px 24px -4px rgba(90, 70, 50, 0.06);
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms ease;
+  user-select: none;
+}
+
+.canvas-node:hover {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 2px 4px rgba(90, 70, 50, 0.04),
+    0 12px 32px -4px rgba(90, 70, 50, 0.09);
+}
+
+.canvas-connector {
+  stroke: rgba(140, 120, 95, 0.35);
+  stroke-width: 1.75px;
+  fill: none;
+  stroke-linecap: round;
+}
+```
+
+skipped: Obstacle-avoidance routing algorithms; add when intersecting node densities exceed simple horizontal Béziers.
+skipped: External gesture engines (Framer Motion/use-gesture); add when multi-touch pinch-zoom gestures are required on touchscreens.

@@ -2521,3 +2521,63 @@ console.assert(getOrganicEdge(0, 0, 100, 100) === 'M 0 0 C 50 0, 50 100, 100 100
 }
 ```
 *skipped: Complex physics engine (e.g., Matter.js springs). Add when nodes need kinetic collisions during drag-release.*
+
+
+### Cycle #42 Directive (2026-11-03 01:06)
+### 1. Zen Ambient Canvas Backdrop (CSS)
+Replace flat or harsh grid backdrops with an organic, warm-bone paper gradient and subtle tactile dot grid.
+
+```css
+/* canvas.css */
+.spatial-canvas {
+  background-color: #faf8f5;
+  background-image: 
+    radial-gradient(circle, rgba(140, 120, 100, 0.12) 1px, transparent 1px),
+    radial-gradient(ellipse 90% 70% at 50% 0%, rgba(240, 230, 215, 0.5) 0%, transparent 80%);
+  background-size: 24px 24px, 100% 100%;
+}
+```
+skipped: Canvas noise textures and WebGL shaders.  
+add when: Dynamic daylight/lighting cycle is requested.
+
+---
+
+### 2. Natural Organic Flowchart Curvature (JS)
+Compute fluid, adaptive cubic Bézier paths between anchors without external diagramming libraries.
+
+```javascript
+// linkPath.js
+// ponytail: horizontal clamped bezier; switch to obstacle-avoiding router if nodes overlap.
+export const getSmoothEdge = (x1, y1, x2, y2) => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+```
+skipped: Complex collision-avoiding A* path routing.  
+add when: Users produce dense overlapping tree structures.
+
+---
+
+### 3. Tactile Glass Node States (CSS)
+Native glassmorphic warmth with hardware-accelerated lift on grab.
+
+```css
+/* node.css */
+.canvas-node {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(210, 195, 180, 0.6);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px -2px rgba(60, 50, 40, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.15s ease;
+  will-change: transform;
+}
+
+.canvas-node:active, .canvas-node[data-dragging="true"] {
+  transform: scale(1.02);
+  box-shadow: 0 14px 30px -4px rgba(60, 50, 40, 0.12), 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+```
+skipped: Framer Motion / physics spring runtime.  
+add when: Custom dampening or momentum throws are required.

@@ -5167,3 +5167,64 @@ export function applyDamping(
 ```
 skipped: External physics runtimes (`framer-motion`, `popmotion`).  
 add when: Nodes require complex multi-body momentum collisions.
+
+
+### Cycle #86 Directive (2026-11-03 05:11)
+```css
+/* 1. Nature UI Canvas Texture & Tactile Node Elevation */
+.canvas-root {
+  background-color: #fbf9f5; /* Warm stone */
+  background-image: radial-gradient(circle, #e2ded4 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.canvas-node {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(214, 209, 197, 0.6);
+  border-radius: 14px;
+  box-shadow: 0 4px 16px -2px rgba(44, 38, 27, 0.05);
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease;
+  will-change: transform;
+}
+
+.canvas-node:active, .canvas-node.is-dragging {
+  cursor: grabbing;
+  transform: scale(1.018) translateZ(0);
+  box-shadow: 0 12px 32px -4px rgba(44, 38, 27, 0.12);
+}
+```
+
+```javascript
+// 2. Natural Organic Flowchart S-Curves
+export function getOrganicConnector(x1, y1, x2, y2) {
+  const dx = Math.abs(x2 - x1) * 0.55;
+  // ponytail: fixed cubic control points; upgrade to obstacle-avoiding A* if paths collide
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Runnable check
+console.assert(
+  getOrganicConnector(0, 0, 100, 100) === "M 0 0 C 55 0, 45 100, 100 100",
+  "Path generator failed"
+);
+```
+
+```css
+/* 3. Fluid Organic Connector Rendering */
+.connector-path {
+  fill: none;
+  stroke: #a8a294;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  transition: stroke 0.2s ease, stroke-width 0.2s ease;
+}
+
+.connector-path:hover {
+  stroke: #5e584d;
+  stroke-width: 2.5px;
+}
+```
+
+skipped: dynamic obstacle routing and webgl canvas, add when node count exceeds 200.
+skipped: complex spring physics library, add when CSS cubic-bezier lacks multi-axis gesture tracking.

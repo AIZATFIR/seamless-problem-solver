@@ -2794,3 +2794,73 @@ add when: CSS sub-pixel rendering stutters during infinite pan/zoom.
 
 skipped: Physics engine springs (framer-motion, popmotion).
 add when: Multi-node cluster dragging requires spring drag-latencies.
+
+
+### Cycle #46 Directive (2026-11-03 01:29)
+### 1. Zen Ambient Canvas Grid & Tactile Depth
+
+```css
+/* Warm rice-paper ambient canvas + frosted glass nodes */
+.canvas-viewport {
+  background-color: #f8f6f0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(74, 68, 60, 0.09) 1px, transparent 0);
+  background-size: 24px 24px;
+  touch-action: none;
+  user-select: none;
+}
+
+.flow-node {
+  background: rgba(255, 253, 250, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(60, 50, 40, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px -2px rgba(50, 40, 30, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: transform 120ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 120ms ease;
+  will-change: transform;
+}
+
+.flow-node:active {
+  cursor: grabbing;
+  transform: scale(0.985);
+  box-shadow: 0 8px 28px -4px rgba(50, 40, 30, 0.12);
+}
+```
+→ skipped: WebGL paper shaders and dynamic lighting, add when user zoom scale causes pattern aliasing.
+
+---
+
+### 2. Natural Bezier Flow Curves
+
+```ts
+// Natural S-curve with horizontal drift
+export const getOrganicEdge = (x1: number, y1: number, x2: number, y2: number): string => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 36);
+  // ponytail: horizontal layout bias only; upgrade to port-normal vector math if 4-sided ports are added
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+
+// Self-check
+console.assert(
+  getOrganicEdge(0, 0, 100, 100) === "M 0 0 C 55 0, 45 100, 100 100",
+  "Bezier computation mismatch"
+);
+```
+→ skipped: Collision routing around intermediary nodes, add when layout reaches high-density node clusters.
+
+---
+
+### 3. Native Smooth Pan Inertia (Zero JS Library)
+
+```css
+/* GPU-bound canvas transform viewport layer */
+.canvas-world {
+  transform-origin: 0 0;
+  transition: transform 80ms cubic-bezier(0.25, 1, 0.5, 1);
+  contain: layout style paint;
+}
+.canvas-world.is-dragging {
+  transition: none; /* Bypass interpolation latency during direct manipulation */
+}
+```
+→ skipped: Physics spring velocity solver (Framer/react-spring), add when momentum-flinging gestures are requested.

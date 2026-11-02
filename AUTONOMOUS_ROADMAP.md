@@ -710,3 +710,66 @@ skipped: WebGL noise shader / dynamic lighting, add when high-DPI GPU overhead i
 }
 ```
 skipped: JS physics loop (Framer Motion / Spring), add when momentum toss-and-fling is explicitly needed.
+
+
+### Cycle #11 Directive (2026-11-02 22:09)
+### 1. Organic Flowchart Bézier Connectors
+
+```javascript
+// Dynamic horizontal S-curve with natural droop
+export function naturalPath(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 40);
+  // ponytail: Simple S-curve ceiling; upgrade to AABB obstacle routing if nodes overlap heavily.
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(naturalPath(0, 0, 100, 50) === "M 0 0 C 55 0, 45 50, 100 50", "path calculation failed");
+```
+skipped: Obstacle collision avoidance and Manhattan routing. Add when nodes overlap frequently during freeform layout.
+
+---
+
+### 2. Ambient Warm Paper & Zen Dot Grid
+
+```css
+/* Zero-repaint viewport with warm tactile tone */
+.canvas-viewport {
+  background-color: #FAF8F5;
+  background-image: radial-gradient(rgba(60, 45, 30, 0.09) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: var(--pan-x, 0px) var(--pan-y, 0px);
+}
+```
+skipped: HTML5 Canvas background rendering loop. Add when grid requires dynamic LOD zoom-fading beyond CSS capabilities.
+
+---
+
+### 3. Tactile Spring & Warm Elevation on Nodes
+
+```css
+.spatial-node {
+  background: #FFFFFF;
+  border-radius: 12px;
+  border: 1px solid rgba(60, 45, 30, 0.07);
+  box-shadow: 
+    0 1px 2px rgba(60, 45, 30, 0.03), 
+    0 4px 16px rgba(60, 45, 30, 0.04);
+  transition: transform 0.15s cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 0.15s ease;
+  will-change: transform;
+}
+
+.spatial-node:hover {
+  border-color: rgba(60, 45, 30, 0.14);
+  box-shadow: 
+    0 3px 6px rgba(60, 45, 30, 0.04), 
+    0 8px 24px rgba(60, 45, 30, 0.06);
+}
+
+.spatial-node.is-dragging {
+  cursor: grabbing;
+  transform: scale(1.02);
+  box-shadow: 0 12px 32px rgba(60, 45, 30, 0.12);
+}
+```
+skipped: Physics engine (Framer Motion / Spring JS). Add when multi-node collective rubber-banding is required.

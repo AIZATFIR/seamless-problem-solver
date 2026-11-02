@@ -2922,3 +2922,61 @@ skipped: WebGL paper shaders / grain SVG filter, add when target runtime proves 
 }
 ```
 skipped: spring physics library (e.g. Framer Motion/react-spring), add when multi-finger gestural momentum is introduced.
+
+
+### Cycle #48 Directive (2026-11-03 01:40)
+### 1. Organic Zen Ambient Canvas (CSS)
+
+```css
+/* Warm ambient paper texture + subtle sub-pixel dot matrix */
+.canvas-root {
+  background-color: #faf9f5;
+  background-image: 
+    radial-gradient(ellipse at 15% 10%, rgba(220, 226, 215, 0.45) 0%, transparent 60%),
+    radial-gradient(circle, rgba(60, 60, 50, 0.08) 1px, transparent 1px);
+  background-size: 100% 100%, 28px 28px;
+}
+```
+→ skipped: WebGL shaders or heavy SVG noise textures.  
+→ add when: dynamic day/night light transitions are required.
+
+---
+
+### 2. Natural Flow Connectors (Pure SVG Cubic Spline)
+
+```typescript
+// Smooth horizontal S-curve between two node anchor points
+export const getConnectorPath = (from: { x: number; y: number }, to: { x: number; y: number }): string => {
+  const offset = Math.max(Math.abs(to.x - from.x) * 0.5, 48);
+  // ponytail: assumes left-to-right flow; add auto-anchoring when multi-directional linking lands
+  return `M ${from.x} ${from.y} C ${from.x + offset} ${from.y}, ${to.x - offset} ${to.y}, ${to.x} ${to.y}`;
+};
+```
+→ skipped: Dagre/ELK layout engines or complex obstacle-avoidance routing.  
+→ add when: flowchart edges intersect heavily and require automated port negotiation.
+
+---
+
+### 3. Apple-Grade Tactile Canvas Node (CSS)
+
+```css
+.canvas-node {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 14px;
+  box-shadow: 0 2px 6px -1px rgba(20, 20, 10, 0.04), 0 8px 18px -4px rgba(20, 20, 10, 0.03);
+  transition: transform 160ms cubic-bezier(0.2, 0, 0, 1), box-shadow 160ms ease;
+  user-select: none;
+  cursor: grab;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(0.985);
+  box-shadow: 0 12px 28px -6px rgba(20, 20, 10, 0.08);
+}
+```
+→ skipped: Framer Motion / JS spring animations.  
+→ add when: nodes require physics-driven multi-body collisions on drag release.

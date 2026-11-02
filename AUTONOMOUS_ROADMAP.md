@@ -3850,3 +3850,59 @@ console.assert(
 
 skipped: dynamic obstacle collision avoidance on edges; add when node density causes overlapping lines.
 skipped: canvas pan/zoom transforms in CSS; add when zoom range exceeds 0.5x–2.0x bounds.
+
+
+### Cycle #65 Directive (2026-11-03 03:15)
+### 1. Zen Ambient Canvas (Paper Warmth & Stippled Grid)
+
+```css
+/* canvas-ambient.css */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: radial-gradient(circle, rgba(120, 100, 80, 0.14) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+```
+
+### 2. Fluid Organic Connector (Native SVG Smooth S-Curve)
+
+```javascript
+// flowchart-curve.js
+export function getOrganicPath(x1, y1, x2, y2) {
+  const dx = (x2 - x1) * 0.5;
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// ponytail: basic horizontal S-curve; upgrade to orthogonal/obstacle-avoidance routing if nodes overlap
+console.assert(
+  getOrganicPath(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50",
+  "Path generator failed"
+);
+```
+
+### 3. Tactile Card Hover & Active Feel (Frosted Glass & Depth)
+
+```css
+/* canvas-node.css */
+.canvas-node {
+  border: 1px solid rgba(80, 65, 50, 0.08);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  box-shadow: 0 4px 14px -2px rgba(60, 45, 30, 0.04), 0 1px 2px rgba(60, 45, 30, 0.03);
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+  will-change: transform;
+}
+
+.canvas-node:hover {
+  transform: translateY(-1px) scale(1.005);
+  box-shadow: 0 8px 24px -4px rgba(60, 45, 30, 0.08), 0 2px 6px rgba(60, 45, 30, 0.04);
+}
+
+.canvas-node:active {
+  transform: scale(0.99);
+}
+```
+
+skipped: d3/dagre routing and canvas-render loops, add when node count exceeds 200 on screen.  
+skipped: dynamic pan-zoom coordinate projection matrix, add when canvas camera controls are wired.

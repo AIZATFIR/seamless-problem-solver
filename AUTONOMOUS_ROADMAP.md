@@ -4234,3 +4234,52 @@ console.assert(
 }
 ```
 *skipped: Web Animations API/Framer Motion physics engine; add when inertia flick-throw gestures are implemented.*
+
+
+### Cycle #71 Directive (2026-11-03 03:48)
+### 1. Organic Flowchart Connectors (SVG Smooth Bezier)
+
+```typescript
+// ponytail: S-curve assumes primary left-to-right flow; add auto-port detection if multi-directional.
+export function organicLink(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+```
+*skipped: Obstacle routing & self-intersection math; add when canvas density exceeds 50+ nodes.*
+
+---
+
+### 2. Nature Ambient Canvas Pattern (Pure CSS)
+
+```css
+.canvas-viewport {
+  background-color: #faf9f5; /* Warm stone-paper */
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(94, 84, 72, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+```
+*skipped: Canvas-level WebGL background shaders; add when dynamic day/night ambient cycle is required.*
+
+---
+
+### 3. Apple-grade Node Micro-physics (CSS Hardware Layer)
+
+```css
+.node-card {
+  touch-action: none;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px -2px rgba(60, 50, 40, 0.06), 0 0 0 1px rgba(60, 50, 40, 0.05);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+}
+.node-card.is-dragging {
+  transition: none;
+  cursor: grabbing;
+  transform: scale(1.02);
+  box-shadow: 0 14px 28px -4px rgba(60, 50, 40, 0.12), 0 0 0 1px rgba(60, 50, 40, 0.08);
+}
+```
+*skipped: Custom JS physics/spring engine; add when multi-node spring-tension chains are requested.*

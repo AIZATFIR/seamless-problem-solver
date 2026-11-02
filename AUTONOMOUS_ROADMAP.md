@@ -1153,3 +1153,64 @@ skipped: Orthogonal obstacle avoidance routing, add when node overlap degrades e
 }
 ```
 skipped: Spring physics JS runtime, add when drag release needs simulated velocity/inertia.
+
+
+### Cycle #19 Directive (2026-11-02 22:54)
+### 1. Organic Bezier Flowchart Connectors
+
+```ts
+export function getOrganicConnector(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.45, 40);
+  // ponytail: horizontal-flow biased. Upgrade to 4-way port routing if vertical/cycle branching is added.
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getOrganicConnector(0, 0, 100, 50) === "M 0 0 C 45 0, 55 50, 100 50");
+```
+→ skipped: Obstacle-avoidance path routing (A*).
+→ add when: Dense graphs cause frequent node-edge intersections.
+
+---
+
+### 2. Ambient Zen Parchment Backdrop
+
+```css
+.canvas-viewport {
+  background-color: #fbf9f5;
+  background-image: 
+    radial-gradient(circle at 50% 10%, rgba(235, 230, 218, 0.6) 0%, transparent 60%),
+    radial-gradient(circle, #ded9ce 0.85px, transparent 0.85px);
+  background-size: 100% 100%, 24px 24px;
+}
+```
+→ skipped: Heavy canvas-rendered dynamic grid or tiled noise PNG.
+→ add when: Infinite zoom requires dynamic sub-pixel lod level scaling.
+
+---
+
+### 3. Tactile Apple-Grade Node Elevation & Drag Physics
+
+```css
+.canvas-node {
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(214, 208, 196, 0.6);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+  box-shadow: 0 1px 3px rgba(50, 40, 30, 0.04), 0 4px 12px rgba(50, 40, 30, 0.02);
+}
+
+.canvas-node:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 14px rgba(50, 40, 30, 0.08);
+}
+
+.canvas-node.is-dragging {
+  cursor: grabbing;
+  transform: scale(1.025) translateY(-3px);
+  box-shadow: 0 14px 28px rgba(50, 40, 30, 0.12), 0 3px 8px rgba(50, 40, 30, 0.04);
+}
+```
+→ skipped: WebGL or JS-driven spring physics engines.
+→ add when: Nodes require complex multi-body velocity inertia on release.

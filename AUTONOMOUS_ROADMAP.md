@@ -1461,3 +1461,45 @@ console.assert(
 
 skipped: Canvas-level grid rendering scripts and complex edge-routing graphs (e.g. ELK/D3).
 add when: Dynamic obstacle-avoidance routing or 1,000+ simultaneous visible edges require quadtree virtualization.
+
+
+### Cycle #25 Directive (2026-11-02 23:29)
+```css
+/* 1. Ambient Stone Dot Grid (CSS Native) */
+.canvas-viewport {
+  background-color: #fbfbfa;
+  background-image: radial-gradient(circle, rgba(55, 45, 35, 0.075) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* 2. Tactile Zen Node Surface */
+.canvas-node {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(40, 30, 20, 0.06);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(40, 30, 20, 0.04), 0 8px 20px -4px rgba(40, 30, 20, 0.05);
+  transition: transform 120ms cubic-bezier(0.2, 0, 0, 1), box-shadow 120ms ease;
+  will-change: transform;
+}
+.canvas-node:active {
+  transform: scale(0.985);
+  box-shadow: 0 14px 28px -4px rgba(40, 30, 20, 0.1);
+}
+```
+
+```javascript
+// 3. Smooth Natural S-Curve Connector
+export const getCurvedPath = (x1, y1, x2, y2) => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 32);
+  // ponytail: horizontal cubic S-curve; upgrade to orthogonal A* when nodes overlap.
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+
+// Self-check
+console.assert(getCurvedPath(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50", "Path gen failed");
+```
+
+skipped: dynamic obstacle-avoidance routing, add when edge crossings cause legibility issues.  
+skipped: WebGL canvas tiling, add when canvas element count exceeds 1,000 nodes.  
+skipped: physics spring engine, add when interactive multi-node drag rubber-banding is explicitly requested.

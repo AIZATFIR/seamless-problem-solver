@@ -2712,3 +2712,85 @@ export const getFlowPath = (x1: number, y1: number, x2: number, y2: number) => {
 
 skipped: Canvas WebGL shaders, third-party spring physics engine (Framer Motion), and dynamic edge obstacle routing.
 add when: Scene exceeds 500 simultaneous nodes or edge crossings cause visual ambiguity under dense cluster graphs.
+
+
+### Cycle #45 Directive (2026-11-03 01:23)
+### 1. Organic Bezier Flowchart Connectors
+
+```ts
+// connector.ts
+export function getOrganicPath(x1: number, y1: number, x2: number, y2: number): string {
+  // ponytail: horizontal S-curve ceiling; upgrade to 4-way orthogonal routing if canvas supports bidirectional loops
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Runnable check
+console.assert(
+  getOrganicPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100",
+  "Path calculation failed"
+);
+```
+
+```css
+/* connector.css */
+.flow-edge {
+  fill: none;
+  stroke: #8c8275;
+  stroke-width: 1.5px;
+  stroke-linecap: round;
+  opacity: 0.55;
+  transition: stroke 0.2s ease, opacity 0.2s ease;
+}
+.flow-edge:hover {
+  stroke: #5c5346;
+  opacity: 0.9;
+}
+```
+
+skipped: Path bundling algorithms, dynamic obstacle avoidance.
+add when: Graph density exceeds 50 crossing edges causing occlusion.
+
+---
+
+### 2. Ambient Nature Canvas Texture
+
+```css
+/* canvas.css */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: 
+    radial-gradient(circle at 50% 40%, rgba(240, 234, 224, 0.6) 0%, transparent 75%),
+    radial-gradient(rgba(140, 130, 115, 0.18) 0.75px, transparent 0.75px);
+  background-size: 100% 100%, 20px 20px;
+}
+```
+
+skipped: WebGL paper-grain shader / noise texture images.
+add when: CSS sub-pixel rendering stutters during infinite pan/zoom.
+
+---
+
+### 3. Native Fluid Drag Micro-Interaction
+
+```css
+/* node.css */
+.canvas-node {
+  touch-action: none;
+  user-select: none;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(140, 130, 115, 0.14);
+  box-shadow: 0 2px 6px rgba(60, 50, 40, 0.03), 0 10px 24px -4px rgba(60, 50, 40, 0.04);
+  transition: transform 0.15s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.15s ease;
+}
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.018);
+  box-shadow: 0 8px 16px rgba(60, 50, 40, 0.06), 0 20px 32px -6px rgba(60, 50, 40, 0.08);
+}
+```
+
+skipped: Physics engine springs (framer-motion, popmotion).
+add when: Multi-node cluster dragging requires spring drag-latencies.

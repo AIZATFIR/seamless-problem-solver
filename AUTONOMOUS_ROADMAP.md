@@ -3031,3 +3031,62 @@ add when: Users demand automated non-overlapping edge rerouting around large nod
 ```
 skipped: Framer Motion / Spring physics libraries.  
 add when: Nodes require velocity-based inertia/toss release physics.
+
+
+### Cycle #50 Directive (2026-11-03 01:51)
+### 1. Organic Bezier Flowchart Connectors
+Replace rigid orthogonal/jagged connectors with organic, natural cubic Beziers that adapt curvature to distance.
+
+```ts
+// connector.ts
+export function getOrganicPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = x2 - x1;
+  const dy = y2 - y1;
+  const cx = x1 + Math.max(Math.abs(dx) * 0.5, 40) * Math.sign(dx || 1);
+  // ponytail: assumes left-to-right flow; add quadrant switching when multi-directional branching is needed
+  return `M ${x1} ${y1} C ${cx} ${y1}, ${x2 - (cx - x1)} ${y2}, ${x2} ${y2}`;
+}
+```
+*skipped: Obstacle routing & self-intersection checks; add when node density causes visual overlap.*
+
+---
+
+### 2. Nature UI Ambient Backdrop (Washi Paper / Warm Stone)
+Drop stark digital whites and heavy grid lines for warm, anti-slop ambient lighting via native CSS.
+
+```css
+/* canvas.css */
+.spatial-canvas {
+  background-color: #f7f5f0; /* Warm rice paper */
+  background-image: 
+    radial-gradient(at 10% 10%, rgba(228, 220, 207, 0.45) 0px, transparent 50%),
+    radial-gradient(at 90% 90%, rgba(214, 206, 191, 0.35) 0px, transparent 50%),
+    radial-gradient(circle, #d8d2c4 0.75px, transparent 0.75px);
+  background-size: 100% 100%, 100% 100%, 24px 24px;
+}
+```
+*skipped: WebGL noise/grain texture shaders; add when low-end mobile supports high-DPI grain without battery hit.*
+
+---
+
+### 3. Tactile Node Rest-to-Drag Elevation
+Apple-spec physics feel: lift nodes off the canvas on interaction using GPU-accelerated transforms and ambient occlusion shadows instead of heavy border strokes.
+
+```css
+/* node.css */
+.canvas-node {
+  transform: translate3d(var(--x), var(--y), 0);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 14px;
+  box-shadow: 0 2px 6px -1px rgba(60, 50, 40, 0.04), 0 8px 16px -4px rgba(60, 50, 40, 0.04);
+  transition: box-shadow 180ms cubic-bezier(0.16, 1, 0.3, 1), transform 0s;
+  cursor: grab;
+}
+.canvas-node:active {
+  cursor: grabbing;
+  box-shadow: 0 12px 28px -6px rgba(60, 50, 40, 0.12), 0 4px 10px -2px rgba(60, 50, 40, 0.06);
+}
+```
+*skipped: Spring physics engine (e.g., Framer Motion); add when canvas transitions require interruptible gesture velocity.*

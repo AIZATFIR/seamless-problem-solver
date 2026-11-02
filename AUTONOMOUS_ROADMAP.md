@@ -3681,3 +3681,63 @@ export function bindCanvasPan(canvas: HTMLElement) {
 ```
 skipped: friction-based momentum decay and pinch-to-zoom math.  
 add when: gesture zoom is hooked into the trackpad/touch lifecycle.
+
+
+### Cycle #62 Directive (2026-11-03 02:58)
+### 1. Organic Flowchart Connectors (SVG Native)
+
+```ts
+export function connectorPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 40);
+  // ponytail: fixed horizontal tangents; upgrade to 4-way orthogonal ports when node docking is added
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+```
+skipped: Complex collision avoidance / A* routing.  
+add when: Flowcharts routinely exceed 20 overlapping edges.
+
+---
+
+### 2. Nature Ambient Canvas Backdrop (Pure CSS)
+
+```css
+.spatial-canvas {
+  background-color: #f6f4ee;
+  background-image:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.6) 0%, transparent 70%),
+    radial-gradient(circle, rgba(82, 73, 59, 0.12) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+  overscroll-behavior: none;
+}
+```
+skipped: Heavy noise SVG filters or canvas-rendered grid textures.  
+add when: Users request high-DPI custom dot-pitch configurations.
+
+---
+
+### 3. Tactile Node Physics & Interaction (Zero JS)
+
+```css
+.canvas-node {
+  contain: layout style;
+  touch-action: none;
+  background: #fbfaf7;
+  border: 1px solid rgba(82, 73, 59, 0.12);
+  border-radius: 10px;
+  box-shadow: 0 2px 6px -1px rgba(50, 42, 30, 0.04), 0 8px 16px -4px rgba(50, 42, 30, 0.02);
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+}
+
+.canvas-node:hover {
+  border-color: rgba(82, 73, 59, 0.24);
+  box-shadow: 0 4px 12px -2px rgba(50, 42, 30, 0.06), 0 12px 24px -6px rgba(50, 42, 30, 0.03);
+}
+
+.canvas-node.is-dragging {
+  cursor: grabbing;
+  transform: scale(1.015);
+  box-shadow: 0 12px 28px -6px rgba(50, 42, 30, 0.12);
+}
+```
+skipped: Framer Motion / spring physics libraries.  
+add when: Multi-node cluster elastic snapping is explicitly spec'd.

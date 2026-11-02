@@ -4407,3 +4407,57 @@ function getConnectorPath(x1, y1, x2, y2) {
 `skipped: complex canvas themes; add when user toggles dark/sepia mode.`  
 `skipped: multi-handle curve editing; add when user manually drags bezier points.`  
 `skipped: canvas zooming matrix lib; add when native CSS transforms drop frames.`
+
+
+### Cycle #74 Directive (2026-11-03 04:05)
+### 1. Ambient Zen Stone Canvas Backdrop
+
+```css
+/* Warm parchment-stone base with subtle organic dot grid */
+.spatial-canvas {
+  background-color: #faf8f5;
+  background-image: radial-gradient(circle, rgba(82, 68, 54, 0.09) 1.25px, transparent 1.25px);
+  background-size: 28px 28px;
+}
+```
+* skipped: Canvas-level WebGL/noise shaders.
+* add when: Device profiling confirms 120fps headroom with heavy canvas state.
+
+---
+
+### 2. Natural Dynamic Flowchart Connectors (SVG)
+
+```js
+// Smooth horizontal S-curve with natural droop tension
+export const getNatureConnector = (x1, y1, x2, y2) => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+// ponytail: hardcoded horizontal bias; upgrade to 4-port orthogonal routing when multi-axis graphs ship.
+```
+* skipped: Complex obstacle-avoidance pathfinding (A* / grid routers).
+* add when: Node overlap collisions degrade visual readability.
+
+---
+
+### 3. Tactile Frosted-Glass Node Surface
+
+```css
+.flow-node {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(214, 206, 194, 0.65);
+  border-radius: 16px;
+  box-shadow: 0 4px 18px -2px rgba(48, 38, 28, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: transform 140ms cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 140ms ease;
+  user-select: none;
+  cursor: grab;
+}
+.flow-node:active {
+  cursor: grabbing;
+  transform: scale(0.985);
+  box-shadow: 0 14px 30px -4px rgba(48, 38, 28, 0.12);
+}
+```
+* skipped: Custom JS spring physics engine.
+* add when: Native CSS timing curves cannot synchronize node inertia during continuous drag.

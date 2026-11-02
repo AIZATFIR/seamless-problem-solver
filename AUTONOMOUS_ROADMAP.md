@@ -1503,3 +1503,73 @@ console.assert(getCurvedPath(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50", "
 skipped: dynamic obstacle-avoidance routing, add when edge crossings cause legibility issues.  
 skipped: WebGL canvas tiling, add when canvas element count exceeds 1,000 nodes.  
 skipped: physics spring engine, add when interactive multi-node drag rubber-banding is explicitly requested.
+
+
+### Cycle #26 Directive (2026-11-02 23:35)
+### 1. Organic S-Curve Flow Connectors (SVG)
+
+```javascript
+// Computes natural, organic flow curve between two node anchor points
+export function getFlowPath([x1, y1], [x2, y2]) {
+  const dx = Math.abs(x2 - x1) * 0.5;
+  const cx1 = x1 + Math.max(dx, 40);
+  const cx2 = x2 - Math.max(dx, 40);
+  // ponytail: horizontal-biased S-curve; upgrade to directional port heuristics if 4-way routing needed
+  return `M ${x1} ${y1} C ${cx1} ${y1}, ${cx2} ${y2}, ${x2} ${y2}`;
+}
+```
+skipped: Obstacle avoidance & multi-axis routing.  
+add when: Flowchart density exceeds 20 overlapping edges.
+
+---
+
+### 2. Nature Ambient Canvas Tone & Grain (CSS)
+
+```css
+/* Zen paper canvas: warm stone background, organic dot field, zero extra DOM */
+.spatial-canvas {
+  background-color: #f7f5f0;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(44, 42, 38, 0.08) 1px, transparent 1px),
+    radial-gradient(ellipse at top, rgba(235, 230, 218, 0.6) 0%, transparent 70%);
+  background-size: 24px 24px, 100% 100%;
+  touch-action: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .spatial-canvas {
+    background-color: #171614;
+    background-image: 
+      radial-gradient(circle at 50% 50%, rgba(214, 208, 196, 0.07) 1px, transparent 1px),
+      radial-gradient(ellipse at top, rgba(40, 37, 33, 0.8) 0%, transparent 70%);
+  }
+}
+```
+skipped: Canvas noise SVG textures or WebGL shaders.  
+add when: Static CSS gradients fail high-DPI tactile inspection.
+
+---
+
+### 3. Tactile Node Drag with Native Pointer Capture
+
+```javascript
+export function bindDraggable(nodeEl, onMove) {
+  nodeEl.onpointerdown = (e) => {
+    if (e.target.closest('button, input, [contenteditable]')) return;
+    nodeEl.setPointerCapture(e.pointerId);
+    let lx = e.clientX, ly = e.clientY;
+
+    nodeEl.onpointermove = (ev) => {
+      onMove(ev.clientX - lx, ev.clientY - ly);
+      lx = ev.clientX;
+      ly = ev.clientY;
+    };
+    nodeEl.onpointerup = () => {
+      nodeEl.onpointermove = null;
+      nodeEl.onpointerup = null;
+    };
+  };
+}
+```
+skipped: Momentum/inertia physics loop and multi-touch gestures.  
+add when: Touchpad/canvas pinch-to-zoom is integrated into coordinate space.

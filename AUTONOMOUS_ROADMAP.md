@@ -3311,3 +3311,68 @@ export const bindSmoothDrag = (el, onDrag) => {
 ```
 skipped: full gesture/physics momentum engine (use native CSS transition for settling).  
 add when: free-flinging nodes across large viewport is prioritized over precision placement.
+
+
+### Cycle #55 Directive (2026-11-03 02:19)
+### 1. Organic Bezier Link Path (Replace rigid/broken elbow connectors)
+
+```ts
+// connector.ts: stdlib cubic spline with natural curvature damping
+export function getFlowPath(x1: number, y1: number, x2: number, y2: number): string {
+  // ponytail: assumes L-to-R primary flow. Upgrade to multi-cardinal boundary projection if nodes rotate.
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getFlowPath(0, 0, 100, 50).startsWith("M 0 0 C 55 0, 45 50, 100 50"));
+```
+`getFlowPath` → skipped: auto-routing collision avoidance, add when graph density causes node-overlap links.
+
+---
+
+### 2. Nature Ambient Canvas (Warm stone & tactile micro-dot backdrop)
+
+```css
+/* Replace harsh monochrome canvas grids with zen ambient warmth */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: 
+    radial-gradient(ellipse at 50% 30%, rgba(243, 238, 228, 0.6) 0%, transparent 70%),
+    radial-gradient(circle, #d9d4cc 0.8px, transparent 0.8px);
+  background-size: 100% 100%, 24px 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .spatial-canvas {
+    background-color: #171614;
+    background-image: 
+      radial-gradient(ellipse at 50% 30%, rgba(38, 35, 32, 0.6) 0%, transparent 70%),
+      radial-gradient(circle, #2d2a26 0.8px, transparent 0.8px);
+    background-size: 100% 100%, 24px 24px;
+  }
+}
+```
+CSS Canvas styling → skipped: WebGL shader background, add when interactive canvas particles are explicitly requested.
+
+---
+
+### 3. Tactile Node Lift & Kinetic Settle (Smooth Interaction)
+
+```css
+/* Hardware-accelerated lift with warm ambient occlusion */
+.canvas-node {
+  touch-action: none;
+  user-select: none;
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms ease;
+  box-shadow: 0 1px 2px rgba(36, 32, 28, 0.04), 0 6px 18px rgba(36, 32, 28, 0.02);
+  will-change: transform;
+}
+
+.canvas-node:is(:active, [data-dragging="true"]) {
+  cursor: grabbing;
+  transform: scale(1.018) translateY(-3px);
+  box-shadow: 0 14px 32px rgba(36, 32, 28, 0.09), 0 3px 8px rgba(36, 32, 28, 0.04);
+}
+```
+CSS Node lift → skipped: JS-driven spring physics library, add when gesture momentum flicking is required.

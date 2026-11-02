@@ -6131,3 +6131,52 @@ export function bindSmoothDrag(el: HTMLElement, onMove: (dx: number, dy: number)
 skipped: Path collision avoidance / obstacle rerouting. Add when nodes overlap frequently.  
 skipped: Noise texture overlay via Canvas/WebGL. Add if CSS radial grain lacks physical depth on calibrated displays.  
 skipped: Inertial momentum physics on release. Add if nodes feel too static after rapid flick gestures.
+
+
+### Cycle #103 Directive (2026-11-03 06:47)
+### 1. Ambient Warm-Stone Canvas Surface
+
+```css
+/* Ambient nature canvas: stone warmth + low-contrast dot lattice */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: radial-gradient(#d6cfc4 0.8px, transparent 0.8px);
+  background-size: 20px 20px;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+```
+
+### 2. Natural S-Curve Flowchart Spline
+
+```javascript
+// Native cubic bezier with organic tension
+function getSmoothSpline(x1, y1, x2, y2) {
+  const offset = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  // ponytail: horizontal anchors only; switch to perimeter collision when node ports are arbitrary.
+  return `M ${x1} ${y1} C ${x1 + offset} ${y1}, ${x2 - offset} ${y2}, ${x2} ${y2}`;
+}
+```
+
+### 3. Tactile Leaf Node Elevation
+
+```css
+/* Tactile node resting & drag lift */
+.flow-node {
+  background: #ffffff;
+  border: 1px solid rgba(214, 207, 196, 0.7);
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(40, 35, 28, 0.04), 0 4px 12px rgba(40, 35, 28, 0.02);
+  transition: transform 0.15s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.15s ease;
+  cursor: grab;
+  user-select: none;
+}
+.flow-node:active, .flow-node.is-dragging {
+  cursor: grabbing;
+  transform: translateY(-2px) scale(1.015);
+  box-shadow: 0 12px 20px -4px rgba(40, 35, 28, 0.08), 0 4px 6px -2px rgba(40, 35, 28, 0.03);
+}
+```
+
+skipped: Obstacle-avoidance pathing algorithms and edge-rerouting workers.
+add when: Flowchart density exceeds 20 overlapping node clusters.

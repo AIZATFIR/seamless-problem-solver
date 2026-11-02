@@ -5476,3 +5476,51 @@ add when: Flowcharts exceed ~25 nodes and require automated collision avoidance.
 ```
 skipped: JS physics/spring libraries (framer-motion, react-spring).  
 add when: Freeform multi-body momentum throw/inertia physics are required.
+
+
+### Cycle #91 Directive (2026-11-03 05:39)
+### 1. Organic Bezier Flow Connectors
+
+```ts
+// Natural horizontal S-curve connector
+export const getFlowPath = (x1: number, y1: number, x2: number, y2: number): string => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 32);
+  // ponytail: assumes L-to-R or auto-aligned flow; upgrade to edge-intersect pathing if supporting freeform 360-degree node docking
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+
+// Self-check
+console.assert(getFlowPath(0, 0, 100, 50) === 'M 0 0 C 50 0, 50 50, 100 50', 'Connector path calculation failed');
+```
+
+### 2. Zen Ambient Backdrop & Tactile Nodes
+
+```css
+/* Ambient warm-linen backdrop */
+.spatial-canvas {
+  background-color: #faf8f5;
+  background-image: radial-gradient(#dfd9cd 0.85px, transparent 0.85px);
+  background-size: 24px 24px;
+}
+
+/* Tactile nature-UI node */
+.canvas-node {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(216, 210, 198, 0.65);
+  box-shadow: 0 4px 20px -2px rgba(48, 42, 34, 0.05), 0 1px 3px rgba(48, 42, 34, 0.03);
+  border-radius: 12px;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+  will-change: transform;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(0.985);
+  box-shadow: 0 10px 28px -4px rgba(48, 42, 34, 0.09);
+}
+```
+
+skipped: dynamic obstacle-avoidance routing, multi-stop spring curves, and custom shader grains.
+add when: canvas density exceeds 50 overlapping nodes or user reports wire tangling.

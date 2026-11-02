@@ -4283,3 +4283,85 @@ export function organicLink(x1: number, y1: number, x2: number, y2: number): str
 }
 ```
 *skipped: Custom JS physics/spring engine; add when multi-node spring-tension chains are requested.*
+
+
+### Cycle #72 Directive (2026-11-03 03:54)
+### 1. Organic Bezier Connector (Native SVG)
+
+Replace stiff lines or orthogonal routing with tension-adjusted horizontal cubic curves:
+
+```ts
+// lib/edge.ts
+export const getOrganicPath = (x1: number, y1: number, x2: number, y2: number): string => {
+  const cx = (x1 + x2) / 2;
+  // ponytail: fixed cubic handles; upgrade to full obstacle routing if nodes overlap heavily
+  return `M ${x1} ${y1} C ${cx} ${y1}, ${cx} ${y2}, ${x2} ${y2}`;
+};
+
+// runnable self-check
+console.assert(getOrganicPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100", "path mismatch");
+```
+→ skipped: A* / Dijkstra path routing, add when edge collision occlusion becomes a problem.
+
+---
+
+### 2. Nature UI Canvas Texture & Tactile Node (Pure CSS)
+
+Replace clinical gridlines with warm ambient rice-paper stippling and frosted Apple-grade cards:
+
+```css
+/* canvas.css */
+.canvas-bg {
+  background-color: #fcfbf9;
+  background-image: radial-gradient(rgba(60, 48, 40, 0.09) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.canvas-node {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(40, 30, 20, 0.07);
+  border-radius: 14px;
+  box-shadow: 0 4px 16px -2px rgba(44, 34, 24, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: transform 120ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 120ms ease;
+  user-select: none;
+}
+
+.canvas-node:active {
+  transform: scale(0.985);
+  box-shadow: 0 2px 6px -1px rgba(44, 34, 24, 0.06);
+}
+```
+→ skipped: custom canvas shader / noise texture image, add when device baseline allows WebGL background without battery drain.
+
+---
+
+### 3. Native Pointer-Capture Dragging (Zero-dep interaction)
+
+Eliminate `window.addEventListener` lag and broken drops with native pointer captures:
+
+```tsx
+// CanvasNode.tsx
+export function CanvasNode({ id, x, y, onMove }: { id: string; x: number; y: number; onMove: (id: string, dx: number, dy: number) => void }) {
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = e.currentTarget;
+    el.setPointerCapture(e.pointerId);
+    let [lastX, lastY] = [e.clientX, e.clientY];
+
+    const onPointerMove = (ev: PointerEvent) => {
+      onMove(id, ev.clientX - lastX, ev.clientY - lastY);
+      [lastX, lastY] = [ev.clientX, ev.clientY];
+    };
+
+    el.onpointermove = onPointerMove;
+    el.onpointerup = () => {
+      el.releasePointerCapture(e.pointerId);
+      el.onpointermove = null;
+      el.onpointerup = null;
+    };
+  };
+
+  return <div className="canvas-node" style={{ transform: `translate3d(${x}px, ${y}px, 0)` }} onPointerDown={onPointerDown} />;
+}
+```
+→ skipped: momentum/inertia physics simulation, add when users explicitly demand gestural flinging.

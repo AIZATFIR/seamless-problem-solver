@@ -1415,3 +1415,49 @@ add when: Native CSS banding occurs on low-DPI legacy panels.
 ```
 skipped: Heavy spring physics library (Framer Motion / react-spring).
 add when: Multi-element interactive gesture velocity chaining is requested.
+
+
+### Cycle #24 Directive (2026-11-02 23:23)
+```css
+/* 1. Ambient Warm Substrate & Tactile Canvas Node */
+.spatial-canvas {
+  background-color: #fbfaf6;
+  background-image: radial-gradient(circle, rgba(80, 65, 50, 0.075) 1px, transparent 1px);
+  background-size: 24px 24px;
+  touch-action: none;
+}
+
+.canvas-node {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(80, 65, 50, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(60, 45, 30, 0.03), 0 1px 2px rgba(60, 45, 30, 0.04);
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms ease;
+  will-change: transform;
+}
+
+.canvas-node:active, .canvas-node[data-dragging="true"] {
+  transform: scale(1.015) translateY(-1px);
+  box-shadow: 0 12px 28px rgba(60, 45, 30, 0.08), 0 2px 6px rgba(60, 45, 30, 0.04);
+  cursor: grabbing;
+}
+```
+
+```typescript
+// 2. Natural Visual Flowchart Edge (Self-balancing S-curve)
+export function getOrganicConnector(x1: number, y1: number, x2: number, y2: number): string {
+  // ponytail: horizontal left-to-right default; upgrade to directional port vector calculus if freeform 360 routing is added
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Runnable assertion
+console.assert(
+  getOrganicConnector(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100",
+  "Path calculation failed"
+);
+```
+
+skipped: Canvas-level grid rendering scripts and complex edge-routing graphs (e.g. ELK/D3).
+add when: Dynamic obstacle-avoidance routing or 1,000+ simultaneous visible edges require quadtree virtualization.

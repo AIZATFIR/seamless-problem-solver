@@ -3509,3 +3509,50 @@ console.assert(getSmoothPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100"
 skipped: dynamic obstacle-avoidance edge routing, add when diagram density exceeds 25 overlapping nodes.
 skipped: canvas particle/light physics, add when explicit ambient idle state requested.
 skipped: full gesture engine dependency, add when multi-touch pinch-to-zoom requires rotation support.
+
+
+### Cycle #59 Directive (2026-11-03 02:41)
+### 1. Ambient Warm Canvas (CSS)
+```css
+.spatial-canvas {
+  background-color: #faf9f5;
+  background-image: radial-gradient(circle, rgba(50, 40, 30, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse at center, black 70%, transparent 100%);
+}
+```
+
+### 2. Organic Flowchart Connectors (Vanilla SVG Path)
+```javascript
+export function getOrganicConnector(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 32);
+  // ponytail: Simple horizontal cubic bezier. Upgrade to orthogonal A* pathing if auto-routing around nodes is needed.
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getOrganicConnector(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50",
+  "Connector path generation failed"
+);
+```
+
+### 3. Tactile Node Physics (CSS)
+```css
+.canvas-node {
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+  transition: box-shadow 160ms cubic-bezier(0.16, 1, 0.3, 1), transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(40, 30, 20, 0.04), 0 4px 12px rgba(40, 30, 20, 0.02);
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.015);
+  box-shadow: 0 10px 24px rgba(40, 30, 20, 0.08), 0 2px 6px rgba(40, 30, 20, 0.04);
+}
+```
+
+skipped: Canvas noise textures, edge collision routing, and third-party physics libraries (e.g., Framer Motion, Dagre).
+add when: Flowcharts require automatic multi-node obstacle avoidance or dynamic cycle layout.

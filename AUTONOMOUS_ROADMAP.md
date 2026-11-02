@@ -5293,3 +5293,71 @@ console.assert(getOrganicConnector(0, 0, 100, 100).startsWith('M 0 0 C 50 0'), '
 }
 ```
 `skipped: [Framer Motion / WebGL physics dependencies], add when [multi-node physics clustering is required].`
+
+
+### Cycle #88 Directive (2026-11-03 05:22)
+### 1. Nature Ambient Canvas (Earthy Linen Dot-Matrix)
+
+```css
+/* Replace sterile gray grid with warm alabaster & organic ink dots */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: radial-gradient(rgba(78, 68, 55, 0.11) 1.25px, transparent 1.25px);
+  background-size: 28px 28px;
+  /* ponytail: static background; add canvas-layer rendering if zoom scaling causes artifacting */
+}
+```
+skipped: Canvas rendering context and zoom-dependent grid recalculations.  
+add when: Canvas zoom exceeds 0.25x–2.0x range and CSS tiling causes moiré.
+
+---
+
+### 2. Smooth S-Curve Spline for Natural Flowchart Paths
+
+```ts
+// Native cubic bezier: natural horizontal flow without layout engines
+export function getFlowPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 40);
+  // ponytail: pure cubic bezier; add pathfinding/collision avoidance when nodes overlap frequently
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getFlowPath(0, 0, 100, 100) === "M 0 0 C 55 0, 45 100, 100 100", "Path gen failed");
+```
+```css
+.flow-edge {
+  fill: none;
+  stroke: rgba(68, 58, 48, 0.35);
+  stroke-width: 1.75px;
+  stroke-linecap: round;
+}
+```
+skipped: Obstacle routing (A*) and dynamic connector anchor selection.  
+add when: Visual edge-crossing degrades node readability in complex graphs.
+
+---
+
+### 3. Tactile Apple-Grade Node Lift & Press
+
+```css
+.canvas-node {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(80, 70, 60, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px -2px rgba(45, 35, 20, 0.04), 0 1px 2px rgba(45, 35, 20, 0.02);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+  touch-action: none;
+  user-select: none;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.015);
+  box-shadow: 0 14px 28px -4px rgba(45, 35, 20, 0.09), 0 2px 6px rgba(45, 35, 20, 0.04);
+}
+```
+skipped: Spring physics engine (Framer Motion / react-spring).  
+add when: Gestural drag velocity or flick-to-throw interactions are introduced.

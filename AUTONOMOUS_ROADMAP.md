@@ -1260,3 +1260,56 @@ console.assert(getNaturalCurve([0, 0], [100, 50]).startsWith('M 0 0 C 50 0'), 'C
 skipped: Auto-layout collision solver (force-directed graph / dagre), add when node counts exceed 50 per canvas.
 skipped: Multi-stop gradient paths & edge animations, add when state transitions need active data-flow signaling.
 skipped: Custom noise-texture canvas filters, add when target runtime supports WebGL background blits without battery drain.
+
+
+### Cycle #21 Directive (2026-11-02 23:06)
+### 1. Warm Zen Canvas Backdrop
+
+```css
+/* Nature UI: warm Japanese paper tone with organic subtle dot lattice */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: radial-gradient(rgba(60, 48, 40, 0.075) 1px, transparent 1px);
+  background-size: 24px 24px;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+```
+
+### 2. Apple-Grade Tactile Node Lift
+
+```css
+/* Tactile spring elevation on drag/focus */
+.flow-node {
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 2px rgba(40, 32, 24, 0.04), 0 4px 12px rgba(40, 32, 24, 0.03);
+}
+
+.flow-node:active,
+.flow-node[data-dragging="true"] {
+  transform: scale(1.018);
+  box-shadow: 0 8px 24px rgba(40, 32, 24, 0.08), 0 2px 6px rgba(40, 32, 24, 0.04);
+  cursor: grabbing;
+}
+```
+
+### 3. Natural Flow S-Curve Connectors
+
+```javascript
+// Native organic cubic bezier between nodes
+function getSmoothFlowPath(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+// ponytail: horizontal LR flow only; upgrade to directional multi-anchor routing if vertical layout added.
+
+// Self-check
+console.assert(
+  getSmoothFlowPath(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50",
+  "Path interpolation failed"
+);
+```
+
+skipped: dynamic obstacle avoidance, full canvas coordinate transforms, multi-bus routing.  
+add when: user needs freeform vertical/arbitrary connector directions and node overlaps occur.

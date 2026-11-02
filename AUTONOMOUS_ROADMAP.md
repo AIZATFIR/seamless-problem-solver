@@ -3741,3 +3741,51 @@ add when: Users request high-DPI custom dot-pitch configurations.
 ```
 skipped: Framer Motion / spring physics libraries.  
 add when: Multi-node cluster elastic snapping is explicitly spec'd.
+
+
+### Cycle #63 Directive (2026-11-03 03:04)
+### 1. Organic Flowchart Bézier Routing
+
+```javascript
+// Natural cubic bezier with horizontal tension
+export const getCurvedPath = (x1, y1, x2, y2) => {
+  const offset = Math.max(Math.abs(x2 - x1) * 0.45, 32);
+  return `M ${x1} ${y1} C ${x1 + offset} ${y1}, ${x2 - offset} ${y2}, ${x2} ${y2}`;
+};
+// ponytail: Left-to-right only. Upgrade to 4-way orthogonal router when bi-directional cycles are introduced.
+```
+`skipped: Obstacle avoidance / path intersection math, add when canvas node density causes frequent overlaps.`
+
+---
+
+### 2. Ambient Zen-Paper Canvas Texture
+
+```css
+.canvas-backdrop {
+  background-color: #fbfaf7;
+  background-image: 
+    radial-gradient(circle at 50% 50%, transparent 40%, rgba(215, 208, 196, 0.35) 100%),
+    radial-gradient(rgba(110, 100, 85, 0.14) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+}
+```
+`skipped: Canvas noise shader & WebGL grain, add when low-end mobile devices can guarantee 60fps with heavy shaders.`
+
+---
+
+### 3. Tactile Fluid Node State
+
+```css
+.canvas-node {
+  touch-action: none;
+  cursor: grab;
+  transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 150ms ease;
+  box-shadow: 0 2px 6px -1px rgba(50, 40, 30, 0.04), 0 0 0 1px rgba(50, 40, 30, 0.05);
+}
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(0.985);
+  box-shadow: 0 14px 28px -4px rgba(50, 40, 30, 0.09), 0 0 0 1px rgba(50, 40, 30, 0.07);
+}
+```
+`skipped: JS spring physics runtime, add when drag release requires realistic inertial velocity throw.`

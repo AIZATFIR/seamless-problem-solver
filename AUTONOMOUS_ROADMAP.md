@@ -1363,3 +1363,55 @@ console.assert(
 skipped: dynamic collision avoidance and routing grids; add when paths overlap heavily.
 skipped: multi-layered SVG noise filters; add when users request physical linen texture emulation.
 skipped: physics-based spring drag library; add when CSS transforms and pointer-events prove insufficient for multi-touch gestures.
+
+
+### Cycle #23 Directive (2026-11-02 23:18)
+### 1. Organic Bézier Flowchart Connector
+
+```ts
+// ponytail: Horizontal organic S-curve; upgrade to orthogonal routing if nodes collide.
+export const getSmoothPath = (x1: number, y1: number, x2: number, y2: number): string => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 48);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+```
+skipped: A* routing / obstacle avoidance.
+add when: Flowchart density causes overlapping paths.
+
+---
+
+### 2. Nature Zen Ambient Backdrop
+
+```css
+/* Ambient surface: warm stone substrate + sub-perceptual organic dot matrix */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: radial-gradient(#2d2722 0.75px, transparent 0.75px);
+  background-size: 24px 24px;
+  background-position: var(--pan-x, 0px) var(--pan-y, 0px);
+  touch-action: none;
+  overscroll-behavior: none;
+}
+```
+skipped: WebGL canvas shaders / noise textures.
+add when: Native CSS banding occurs on low-DPI legacy panels.
+
+---
+
+### 3. Tactile Node Drag Micro-Interactions
+
+```css
+/* Low-latency native drag release with subtle warm elevation */
+.flow-node {
+  will-change: transform;
+  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
+  box-shadow: 0 1px 3px rgba(45, 39, 34, 0.04), 0 8px 24px -4px rgba(45, 39, 34, 0.06);
+}
+
+.flow-node.is-dragging {
+  transition: none;
+  box-shadow: 0 14px 36px -6px rgba(45, 39, 34, 0.12);
+}
+```
+skipped: Heavy spring physics library (Framer Motion / react-spring).
+add when: Multi-element interactive gesture velocity chaining is requested.

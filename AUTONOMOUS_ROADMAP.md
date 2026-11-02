@@ -2071,3 +2071,49 @@ add when: Flat CSS gradient fails texture benchmarks on 4K displays.
 ```
 skipped: Spring physics JS runtime (Framer Motion/react-spring).  
 add when: Physics momentum/toss-to-pan is explicitly scoped.
+
+
+### Cycle #35 Directive (2026-11-03 00:26)
+```css
+/* 1. Ambient Warm Canvas (Nature/Zen Canvas Backdrop) */
+.canvas-root {
+  background-color: #fbfaf8;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(225, 219, 205, 0.4) 0%, transparent 60%),
+    radial-gradient(#d6d0c4 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+}
+
+/* 2. Tactile Zen Node Physics */
+.flow-node {
+  touch-action: none;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(214, 208, 196, 0.6);
+  box-shadow: 0 4px 16px -2px rgba(60, 50, 40, 0.04), 0 1px 2px rgba(60, 50, 40, 0.03);
+  transition: transform 0.18s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.18s ease;
+}
+.flow-node:hover {
+  transform: translateY(-1.5px) scale(1.008);
+  box-shadow: 0 8px 24px -4px rgba(60, 50, 40, 0.08), 0 2px 4px rgba(60, 50, 40, 0.04);
+}
+.flow-node:active {
+  transform: scale(0.995);
+}
+```
+
+```ts
+// 3. Organic Natural Flowchart Path Generator (Pure Math, Native SVG)
+export function getOrganicPath(x1: number, y1: number, x2: number, y2: number): string {
+  // ponytail: assumes primarily left-to-right flow; upgrade to 4-quadrant routing if nodes loop backwards
+  const dx = Math.abs(x2 - x1) * 0.55;
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getOrganicPath(0, 0, 100, 50) === "M 0 0 C 55 0, 45 50, 100 50", "Path failed");
+```
+
+skipped: dynamic obstacle avoidance & DAG layout engines, add when node overlap becomes unmanageable.  
+skipped: WebGL paper-grain shaders, add when standard CSS subpixel rendering drops below 60fps.  
+skipped: custom gesture recognizers, add when multi-pointer trackpad gestures conflict with native canvas pinch-zoom.

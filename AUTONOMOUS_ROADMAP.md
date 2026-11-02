@@ -939,3 +939,61 @@ console.assert(
 />
 ```
 → skipped: Animated crawling ants and active particle streams; add when real-time graph computation states require active signaling.
+
+
+### Cycle #15 Directive (2026-11-02 22:32)
+### 1. Tactile Warmth Canvas Background
+
+```css
+/* Ambient paper texture: subtle warm dot-matrix replacing cold tech grids */
+.spatial-canvas {
+  background-color: #faf8f5;
+  background-image: radial-gradient(circle, rgba(74, 60, 49, 0.09) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+```
+skipped: Canvas noise shaders and DOM-based tile renderers.
+add when: Dynamic infinite zoom requires LOD (level-of-detail) dot clustering.
+
+---
+
+### 2. Nature-Curve Bezier Connectors
+
+```js
+// Natural organic flow line between node anchor points
+function getOrganicEdge(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.45, 40);
+  // ponytail: assumes primarily horizontal L-to-R flow; adapt axis via max(dx, dy) if omnidirectional
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getOrganicEdge(0, 0, 100, 50) === "M 0 0 C 45 0, 55 50, 100 50", "Edge math invalid");
+```
+skipped: A* routing, obstacle avoidance, and dynamic edge-detour packages.
+add when: Canvas density causes overlapping node occlusions.
+
+---
+
+### 3. Apple-Grade Node Elevation & Settling Interaction
+
+```css
+/* Physics-like weight during drag and drop */
+.flow-node {
+  touch-action: none;
+  user-select: none;
+  background: #ffffff;
+  border: 1px solid rgba(60, 50, 40, 0.08);
+  box-shadow: 0 1px 3px rgba(45, 35, 20, 0.04), 0 4px 12px rgba(45, 35, 20, 0.03);
+  transition: transform 0.16s cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 0.16s ease;
+}
+
+.flow-node:active,
+.flow-node.is-dragging {
+  cursor: grabbing;
+  transform: scale(1.018) translateZ(0);
+  box-shadow: 0 12px 32px rgba(45, 35, 20, 0.09), 0 2px 6px rgba(45, 35, 20, 0.04);
+}
+```
+skipped: Complex spring-physics engine (Framer Motion/react-spring).
+add when: Velocity-based momentum throwing is explicitly required.

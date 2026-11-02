@@ -4173,3 +4173,64 @@ Native hardware-accelerated lift on grab using Apple spring curve easing.
 ```
 * Skipped: Full Web Animations API inertia physics.
 * Add when: Users request flick-to-toss momentum gestures.
+
+
+### Cycle #70 Directive (2026-11-03 03:42)
+### 1. Organic Bezier Edge Layout (Native SVG)
+
+```typescript
+// utils/flow.ts
+export function getOrganicPath(x1: number, y1: number, x2: number, y2: number): string {
+  // ponytail: fixed 0.5 curvature weight; upgrade to obstacle-avoidance routing if nodes overlap densely
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 32);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getOrganicPath(0, 0, 100, 100) === 'M 0 0 C 50 0, 50 100, 100 100',
+  'getOrganicPath failed'
+);
+```
+*skipped: full routing/collision engine; add when nodes overlap and require strict collision avoidance.*
+
+---
+
+### 2. Nature UI Ambient Backdrop (Pure CSS)
+
+```css
+/* styles/canvas.css */
+.spatial-canvas {
+  background-color: #fcfbf9;
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(214, 204, 184, 0.15) 0%, transparent 60%),
+    radial-gradient(circle, rgba(68, 56, 42, 0.07) 1px, transparent 1px);
+  background-size: 100% 100%, 28px 28px;
+  overscroll-behavior: none;
+}
+```
+*skipped: WebGL noise shader & multi-scale dynamic lod; add when infinite zoom degrades dot rasterization.*
+
+---
+
+### 3. Tactile Spring & Elevation (Zero-JS Interaction)
+
+```css
+/* styles/node.css */
+.canvas-node {
+  touch-action: none;
+  user-select: none;
+  border: 1px solid rgba(60, 48, 36, 0.08);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px -2px rgba(48, 38, 28, 0.04), 0 1px 2px rgba(48, 38, 28, 0.03);
+  transition: transform 0.16s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.16s ease;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.018);
+  box-shadow: 0 12px 24px -6px rgba(48, 38, 28, 0.09), 0 4px 8px -2px rgba(48, 38, 28, 0.04);
+}
+```
+*skipped: Web Animations API/Framer Motion physics engine; add when inertia flick-throw gestures are implemented.*

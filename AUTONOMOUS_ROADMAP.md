@@ -3090,3 +3090,59 @@ Apple-spec physics feel: lift nodes off the canvas on interaction using GPU-acce
 }
 ```
 *skipped: Spring physics engine (e.g., Framer Motion); add when canvas transitions require interruptible gesture velocity.*
+
+
+### Cycle #51 Directive (2026-11-03 01:57)
+### 1. Organic Bezier S-Curve Connectors
+Natural horizontal flow with dynamic control-point tension:
+
+```javascript
+// ponytail: hardcoded horizontal bias (dx); upgrade to 4-direction orthogonal ports when multi-docking is needed.
+export function getFlowPath(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 48);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Runnable self-check
+console.assert(
+  getFlowPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100",
+  "getFlowPath calculation failure"
+);
+```
+
+### 2. Warm Zen Ambient Canvas
+Subtle Japanese paper/warm-stone backdrop using zero image assets:
+
+```css
+.canvas-viewport {
+  background-color: #fbf9f5;
+  background-image: 
+    radial-gradient(circle at 50% 8%, rgba(224, 214, 198, 0.4) 0%, transparent 60%),
+    radial-gradient(#d3c9b8 0.75px, transparent 0.75px);
+  background-size: 100% 100%, 24px 24px;
+}
+```
+
+### 3. Tactile Spring-Damped Node Micro-Physics
+Frosted glass card with warm diffused shadows and Apple-like compression on drag:
+
+```css
+.canvas-node {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(180, 168, 150, 0.28);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px -4px rgba(70, 55, 40, 0.07), 0 1px 3px rgba(70, 55, 40, 0.03);
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms ease;
+  will-change: transform;
+}
+.canvas-node:active {
+  transform: scale(0.985);
+  box-shadow: 0 2px 8px -2px rgba(70, 55, 40, 0.09);
+  cursor: grabbing;
+}
+```
+
+skipped: Path obstacle avoidance; add when nodes visibly overlap connections.
+skipped: Canvas theme switcher; add when dark mode is explicitly required.
+skipped: WebGL rendering layer; add when node count exceeds 500 DOM elements.

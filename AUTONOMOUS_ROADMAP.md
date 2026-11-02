@@ -3789,3 +3789,64 @@ export const getCurvedPath = (x1, y1, x2, y2) => {
 }
 ```
 `skipped: JS spring physics runtime, add when drag release requires realistic inertial velocity throw.`
+
+
+### Cycle #64 Directive (2026-11-03 03:09)
+### 1. Organic Bezier Flowchart Path
+
+```ts
+// connector.ts - Zero-dependency organic bezier path
+export function getCurvedPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  // ponytail: fixed horizontal tangents; upgrade to auto-port directional vectors if multi-side ports needed
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getCurvedPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100",
+  "Connector path mismatch"
+);
+```
+
+### 2. Ambient Zen Washi Canvas (Pure CSS)
+
+```css
+/* canvas.css - Replaces canvas-loop background redraws */
+.spatial-canvas {
+  background-color: #faf9f5; /* Warm washi paper base */
+  background-image: 
+    radial-gradient(circle at 50% 50%, transparent 60%, rgba(230, 224, 212, 0.45) 100%),
+    radial-gradient(rgba(120, 110, 95, 0.14) 1px, transparent 1px);
+  background-size: 100% 100%, 20px 20px;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+```
+
+### 3. Tactile Ambient Node Elevation
+
+```css
+/* node.css - Frosted glass card with organic micro-interaction */
+.canvas-node {
+  background: rgba(255, 254, 250, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(80, 60, 40, 0.08);
+  box-shadow: 
+    0 1px 2px rgba(60, 50, 30, 0.03),
+    0 8px 20px -4px rgba(60, 50, 30, 0.05);
+  border-radius: 12px;
+  transition: transform 140ms cubic-bezier(0.2, 0, 0, 1), box-shadow 140ms ease;
+  will-change: transform;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(0.992);
+  box-shadow: 0 2px 6px rgba(60, 50, 30, 0.04);
+}
+```
+
+skipped: dynamic obstacle collision avoidance on edges; add when node density causes overlapping lines.
+skipped: canvas pan/zoom transforms in CSS; add when zoom range exceeds 0.5x–2.0x bounds.

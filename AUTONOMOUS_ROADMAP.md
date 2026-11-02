@@ -6235,3 +6235,60 @@ export const getConnectorPath = (x1: number, y1: number, x2: number, y2: number)
 skipped: Obstacle-avoiding pathing engines (e.g. ELK/Dagre), add when node density causes unreadable overlap.
 skipped: Canvas-level WebGL/noise shaders, add when static CSS dot-matrix drops below 60fps on low-end mobile.
 skipped: Physics-based spring inertia libraries, add when users request free-toss canvas momentum.
+
+
+### Cycle #105 Directive (2026-11-03 06:58)
+### 1. Zen Ambient Canvas Grid & Tactile Elevation
+
+```css
+/* Warm stone paper canvas + tactile node lift */
+.spatial-canvas {
+  background-color: #fcfbf9;
+  background-image: radial-gradient(circle, rgba(68, 56, 40, 0.075) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+}
+
+.canvas-node {
+  touch-action: none;
+  background: #ffffff;
+  border: 1px solid rgba(68, 56, 40, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(40, 30, 20, 0.04), 0 4px 12px rgba(40, 30, 20, 0.02);
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: translateY(-2px) scale(1.015);
+  box-shadow: 0 14px 28px -4px rgba(40, 30, 20, 0.09), 0 6px 12px -2px rgba(40, 30, 20, 0.04);
+}
+```
+
+### 2. Natural Bezier Connectors
+
+```javascript
+// ponytail: horizontal S-curve assumes left-to-right flow; add directional branching when canvas supports free-angle docking
+function getOrganicConnectorPath(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getOrganicConnectorPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100",
+  "Connector path mismatch"
+);
+```
+
+### 3. Native Smooth Viewport Clamping
+
+```javascript
+function applyCanvasPan(viewportEl, x, y) {
+  // Use 3D transform for hardware compositing without repainting canvas grid
+  viewportEl.style.transform = `translate3d(${Math.round(x)}px, ${Math.round(y)}px, 0)`;
+}
+```
+
+---
+skipped: Layout physics engine & dynamic port re-routing.
+add when: Flowcharts exceed 50 interrelated nodes or require automated orthogonal collision avoidance.

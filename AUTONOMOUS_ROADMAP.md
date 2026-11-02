@@ -2581,3 +2581,94 @@ Native glassmorphic warmth with hardware-accelerated lift on grab.
 ```
 skipped: Framer Motion / physics spring runtime.  
 add when: Custom dampening or momentum throws are required.
+
+
+### Cycle #43 Directive (2026-11-03 01:12)
+### 1. Organic Flowchart Bézier Connectors (Native SVG)
+
+Replace stepped or rigid linear SVG edges with organic, directional Bézier curves.
+
+```ts
+// connector.ts
+export function getOrganicEdge(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  // ponytail: horizontal flow assumption; upgrade to 4-quadrant vector anchors if nodes route vertically.
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getOrganicEdge(0, 0, 100, 100).startsWith("M 0 0 C 50 0, 50 100, 100 100"));
+```
+→ skipped: Obstacle avoidance, edge routing algorithms (Dagre/Elk).  
+→ add when: Nodes overlap or require automated maze routing.
+
+---
+
+### 2. Ambient Warmth & Tactile Elevation (Pure CSS)
+
+Replace stark monochrome canvas grid and harsh drop-shadows with earth-toned ambient occlusion.
+
+```css
+/* canvas-theme.css */
+.canvas-viewport {
+  background-color: #faf9f5; /* Warm stone-50 */
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(224, 218, 206, 0.4) 0%, transparent 80%),
+    radial-gradient(#dfd9cd 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+  overscroll-behavior: none;
+}
+
+.canvas-node {
+  background: #ffffff;
+  border: 1px solid rgba(120, 110, 95, 0.12);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px -2px rgba(60, 50, 40, 0.04), 0 1px 2px rgba(60, 50, 40, 0.03);
+  transition: transform 0.12s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.12s ease;
+  user-select: none;
+}
+
+.canvas-node:hover {
+  border-color: rgba(120, 110, 95, 0.22);
+}
+
+.canvas-node[data-dragging="true"] {
+  cursor: grabbing;
+  transform: scale(1.015) translateY(-2px);
+  box-shadow: 0 16px 32px -6px rgba(60, 50, 40, 0.08), 0 6px 12px -2px rgba(60, 50, 40, 0.03);
+}
+```
+→ skipped: Dynamic canvas lighting shaders and DOM blur filters (`backdrop-filter`).  
+→ add when: Custom dark mode is explicitly scheduled.
+
+---
+
+### 3. Zero-Dependency Pointer Dragging (Native Pointer Capture)
+
+Replaces laggy mouse event listeners or bloated drag libraries with direct browser pointer capture.
+
+```ts
+// drag.ts
+export function bindNodeDrag(el: HTMLElement, onDelta: (dx: number, dy: number) => void) {
+  let sx = 0, sy = 0;
+
+  el.onpointerdown = (e) => {
+    if ((e.target as HTMLElement).closest("button, input, [data-no-drag]")) return;
+    el.setPointerCapture(e.pointerId);
+    sx = e.clientX; sy = e.clientY;
+    el.dataset.dragging = "true";
+
+    el.onpointermove = (ev) => {
+      onDelta(ev.clientX - sx, ev.clientY - sy);
+      sx = ev.clientX; sy = ev.clientY;
+    };
+
+    el.onpointerup = el.onpointercancel = () => {
+      el.onpointermove = el.onpointerup = el.onpointercancel = null;
+      delete el.dataset.dragging;
+    };
+  };
+}
+```
+→ skipped: Inertial physics / momentum lerping.  
+→ add when: Canvas supports high-velocity touch swipe interactions.

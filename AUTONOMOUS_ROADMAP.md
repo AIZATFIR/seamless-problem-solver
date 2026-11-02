@@ -6180,3 +6180,58 @@ function getSmoothSpline(x1, y1, x2, y2) {
 
 skipped: Obstacle-avoidance pathing algorithms and edge-rerouting workers.
 add when: Flowchart density exceeds 20 overlapping node clusters.
+
+
+### Cycle #104 Directive (2026-11-03 06:53)
+```ts
+// 1. Natural organic cubic bezier connector
+export const getConnectorPath = (x1: number, y1: number, x2: number, y2: number): string => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+// ponytail: Horizontal-bias S-curve; upgrade to orthogonal routing if edge crossings become messy.
+```
+
+```css
+/* 2. Nature ambient warmth canvas & frosted nodes */
+.spatial-canvas {
+  background-color: #fcfbf9;
+  background-image: radial-gradient(circle, #e4ded5 0.8px, transparent 0.8px);
+  background-size: 24px 24px;
+}
+
+.spatial-node {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 220, 210, 0.7);
+  box-shadow: 0 4px 16px -2px rgba(70, 60, 50, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: transform 120ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 120ms ease;
+  will-change: transform;
+}
+
+.spatial-node:hover {
+  transform: translateY(-1px) scale(1.005);
+  box-shadow: 0 8px 24px -4px rgba(70, 60, 50, 0.08);
+}
+```
+
+```css
+/* 3. Smooth connector rendering with organic nature tone */
+.connector-line {
+  stroke: #c8bfb0;
+  stroke-width: 1.5;
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke 150ms ease, stroke-width 150ms ease;
+}
+
+.connector-line:hover {
+  stroke: #9d8f7c;
+  stroke-width: 2;
+}
+```
+
+skipped: Obstacle-avoiding pathing engines (e.g. ELK/Dagre), add when node density causes unreadable overlap.
+skipped: Canvas-level WebGL/noise shaders, add when static CSS dot-matrix drops below 60fps on low-end mobile.
+skipped: Physics-based spring inertia libraries, add when users request free-toss canvas momentum.

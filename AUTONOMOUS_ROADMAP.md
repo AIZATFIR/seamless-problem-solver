@@ -5581,3 +5581,56 @@ add when: Pure CSS gradients fail performance profiles on low-end mobile.
 ```
 skipped: Framer Motion / spring physics libraries.  
 add when: Multi-node magnetic snapping or multi-touch gestures require gesture trackers.
+
+
+### Cycle #93 Directive (2026-11-03 05:51)
+### 1. Organic Bezier Connectors
+
+```javascript
+// Native cubic spline: horizontal bias with dynamic tension
+function flowPath(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 32);
+  // ponytail: horizontal left-to-right only; add port angle vectors if nodes rotate
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+```
+* Skipped: Dynamic collision avoidance, port routing logic.
+* Add when: Connectors cross intersecting node boundaries.
+
+---
+
+### 2. Ambient Paper Canvas Pattern
+
+```css
+/* Warm parchment surface with subtle stone dot grid */
+.spatial-canvas {
+  background-color: #FAF8F5;
+  background-image: radial-gradient(#D6CFC4 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+}
+```
+* Skipped: Canvas-drawn infinite grid looping and zoom lod stepping.
+* Add when: Zoom scale dips below 0.4x or exceeds 2.5x.
+
+---
+
+### 3. Tactile Leaf-Node Elevation
+
+```css
+.canvas-node {
+  background: #FCFCFA;
+  border: 1px solid #E3DED6;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(64, 52, 40, 0.03), 0 8px 16px rgba(64, 52, 40, 0.03);
+  transition: transform 0.15s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.15s ease;
+}
+
+.canvas-node:active,
+.canvas-node[data-dragging="true"] {
+  cursor: grabbing;
+  transform: scale(1.018) translateY(-2px);
+  box-shadow: 0 12px 28px rgba(64, 52, 40, 0.08), 0 3px 8px rgba(64, 52, 40, 0.04);
+}
+```
+* Skipped: Web Animations API/Framer Motion physics engine.
+* Add when: Multi-node cluster mass/momentum mechanics are explicitly required.

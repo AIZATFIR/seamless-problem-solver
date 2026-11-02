@@ -233,3 +233,62 @@ function bindSurfacePan(el: HTMLElement, onPan: (dx: number, dy: number) => void
 ```
 *skipped: Inertial momentum/spring physics loop.*  
 *add when: User testing demands flick-scroll kinetic feel on touchpad/mobile.*
+
+
+### Cycle #4 Directive (2026-11-02 21:29)
+### 1. Zen Ambient Backdrop (Warm Stone & Organic Dot Grid)
+
+```css
+/* Ambient canvas backdrop with warm paper radial vignette */
+.canvas-backdrop {
+  background-color: #faf9f5;
+  background-image: 
+    radial-gradient(circle at 50% 40%, rgba(245, 242, 234, 0.8) 0%, transparent 85%),
+    radial-gradient(#d8d4cb 0.85px, transparent 0.85px);
+  background-size: 100% 100%, 24px 24px;
+}
+```
+skipped: Canvas/WebGL noise generation; add when dynamic terrain or paper-fiber shaders are requested.
+
+---
+
+### 2. Natural Organic Bezier Connectors
+
+```typescript
+// ponytail: Horizontal S-curve layout. Upgrade to obstacle-aware orthogonal routing if flow loops back.
+export function getOrganicPath(x1: number, y1: number, x2: number, y2: number): string {
+  const curvature = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + curvature} ${y1}, ${x2 - curvature} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getOrganicPath(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50",
+  "Bezier curve calculation failed"
+);
+```
+skipped: Collision avoidance and edge-rerouting algorithms; add when graph density exceeds simple feed-forward branch structures.
+
+---
+
+### 3. Tactile Flowchart Node Elevation
+
+```css
+.canvas-node {
+  touch-action: none;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(220, 215, 206, 0.6);
+  box-shadow: 0 1px 3px rgba(45, 41, 38, 0.04), 0 4px 12px rgba(45, 41, 38, 0.03);
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.canvas-node:active,
+.canvas-node[data-dragging="true"] {
+  cursor: grabbing;
+  transform: scale(1.018) translateY(-1px);
+  box-shadow: 0 8px 24px rgba(45, 41, 38, 0.08), 0 2px 6px rgba(45, 41, 38, 0.04);
+}
+```
+skipped: Physics-based spring library (e.g., Framer Motion / Popmotion); add when multi-node group inertia or magnetic snapping is implemented.

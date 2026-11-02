@@ -1214,3 +1214,49 @@ console.assert(getOrganicConnector(0, 0, 100, 50) === "M 0 0 C 45 0, 55 50, 100 
 ```
 → skipped: WebGL or JS-driven spring physics engines.
 → add when: Nodes require complex multi-body velocity inertia on release.
+
+
+### Cycle #20 Directive (2026-11-02 23:00)
+```javascript
+// 1. Organic Bezier Connectors
+export function getNaturalCurve([x1, y1], [x2, y2]) {
+  const dx = Math.abs(x2 - x1) * 0.5;
+  // ponytail: fixed horizontal tangent; upgrade to orthogonal port-aware routing if nodes stack vertically
+  return `M ${x1} ${y1} C ${x1 + Math.max(dx, 36)} ${y1}, ${x2 - Math.max(dx, 36)} ${y2}, ${x2} ${y2}`;
+}
+console.assert(getNaturalCurve([0, 0], [100, 50]).startsWith('M 0 0 C 50 0'), 'Curve math failed');
+```
+
+```css
+/* 2. Zen Ambient Canvas Surface */
+.canvas-viewport {
+  background-color: oklch(0.975 0.008 85);
+  background-image: radial-gradient(oklch(0.35 0.02 85 / 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: var(--pan-x, 0) var(--pan-y, 0);
+  overscroll-behavior: none;
+}
+
+/* 3. Tactile Nature-UI Node Elevation */
+.canvas-node {
+  background: oklch(0.995 0.004 85 / 0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid oklch(0.88 0.012 85 / 0.8);
+  border-radius: 14px;
+  box-shadow: 
+    0 1px 2px oklch(0.2 0.02 85 / 0.03),
+    0 8px 20px -4px oklch(0.2 0.02 85 / 0.06);
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms ease;
+  will-change: transform;
+}
+.canvas-node:hover {
+  box-shadow: 0 12px 28px -4px oklch(0.2 0.02 85 / 0.1);
+}
+.canvas-node:active {
+  transform: scale(0.99);
+}
+```
+
+skipped: Auto-layout collision solver (force-directed graph / dagre), add when node counts exceed 50 per canvas.
+skipped: Multi-stop gradient paths & edge animations, add when state transitions need active data-flow signaling.
+skipped: Custom noise-texture canvas filters, add when target runtime supports WebGL background blits without battery drain.

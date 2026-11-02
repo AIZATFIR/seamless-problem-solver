@@ -4731,3 +4731,46 @@ export function bindCanvasPan(target: HTMLElement, onPan: (dx: number, dy: numbe
 ```
 skipped: Inertial momentum simulation and zoom pinch-handlers.  
 add when: Multi-touch trackpad or touch tablet gestures are formally targeted.
+
+
+### Cycle #79 Directive (2026-11-03 04:33)
+```css
+/* 1. Nature UI Ambient Backdrop: Warm tactile canvas without asset bloat */
+.spatial-canvas {
+  background-color: #fbfaf8; /* Zen warm stone/linen */
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(180, 160, 140, 0.12) 1px, transparent 1px),
+    radial-gradient(ellipse at center, transparent 60%, rgba(220, 215, 205, 0.3) 100%);
+  background-size: 24px 24px, 100% 100%;
+  overscroll-behavior: contain;
+  touch-action: none;
+}
+
+/* 2. Tactile Micro-Interactions: Physics-like Apple-style spring lift on nodes */
+.canvas-node {
+  will-change: transform, box-shadow;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  box-shadow: 0 1px 3px rgba(45, 35, 25, 0.04), 0 4px 12px rgba(45, 35, 25, 0.03);
+}
+
+.canvas-node:active, .canvas-node[data-dragging="true"] {
+  transform: scale(1.025);
+  box-shadow: 0 12px 28px rgba(45, 35, 25, 0.08), 0 2px 6px rgba(45, 35, 25, 0.04);
+  cursor: grabbing;
+}
+```
+
+```javascript
+// 3. Natural Organic Connectors: Smooth organic horizontal S-curve
+function getOrganicPath(x1, y1, x2, y2) {
+  const dx = Math.abs(x2 - x1) * 0.55;
+  // ponytail: fixed midpoint bezier; upgrade to obstacle avoidance routing if nodes overlap densely
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Runnable self-check
+console.assert(getOrganicPath(0, 0, 100, 50) === "M 0 0 C 55 0, 45 50, 100 50", "Path failed");
+```
+
+skipped: Complex auto-layout engines (D3/ELK) and WebGL grain shaders.
+add when: Graph density exceeds ~80 nodes simultaneously or user requests manual re-clustering.

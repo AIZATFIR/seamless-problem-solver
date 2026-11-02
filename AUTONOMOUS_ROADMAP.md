@@ -2016,3 +2016,58 @@ Apply Apple-standard specular borders, ambient warm depth, and native spring-dam
 ```
 → skipped: Framer Motion / Spring physics JS libraries.  
 → add when: velocity-based node release gestures or throw momentum are required.
+
+
+### Cycle #34 Directive (2026-11-03 00:20)
+### 1. Organic Bezier Connector Curve
+
+```ts
+export function getOrganicPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.abs(x2 - x1) * 0.55;
+  const dy = y2 - y1;
+  const cx1 = x1 + Math.max(dx, 32);
+  const cx2 = x2 - Math.max(dx, 32);
+  // ponytail: horizontal flow assumption; replace with full 4-quadrant routing when nodes dock vertically
+  return `M ${x1} ${y1} C ${cx1} ${y1 + dy * 0.1}, ${cx2} ${y2 - dy * 0.1}, ${x2} ${y2}`;
+}
+```
+skipped: Obstacle-avoiding orthogonal pathfinder (A*).  
+add when: Dense node clusters overlap connector lines.
+
+---
+
+### 2. Nature UI Ambient Canvas (Washi/Parchment Depth)
+
+```css
+.canvasSurface {
+  background-color: #fbf9f4;
+  background-image: radial-gradient(circle at 1px 1px, rgba(120, 105, 85, 0.13) 1px, transparent 0);
+  background-size: var(--grid-step, 24px) var(--grid-step, 24px);
+  mask-image: radial-gradient(ellipse at 50% 50%, black 75%, transparent 100%);
+  user-select: none;
+}
+```
+skipped: WebGL noise shader and canvas-redraw paper grain.  
+add when: Flat CSS gradient fails texture benchmarks on 4K displays.
+
+---
+
+### 3. Tactile Fluid Drag Damping
+
+```css
+.flowNode {
+  touch-action: none;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(160, 140, 115, 0.18);
+  box-shadow: 0 2px 8px -2px rgba(70, 50, 30, 0.04), 0 8px 20px -4px rgba(70, 50, 30, 0.06);
+  transition: transform 140ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 140ms ease;
+}
+.flowNode:active {
+  cursor: grabbing;
+  transform: scale(1.018) translateY(-2px);
+  box-shadow: 0 12px 30px -4px rgba(70, 50, 30, 0.12), 0 4px 10px -2px rgba(70, 50, 30, 0.06);
+}
+```
+skipped: Spring physics JS runtime (Framer Motion/react-spring).  
+add when: Physics momentum/toss-to-pan is explicitly scoped.

@@ -1885,3 +1885,67 @@ export const getOrganicEdgePath = (x1: number, y1: number, x2: number, y2: numbe
 
 skipped: Canvas pan/zoom matrix library and complex edge collision avoidance engines.  
 add when: Flowcharts exceed ~50 overlapping nodes requiring auto-orthogonal routing or viewport scaling.
+
+
+### Cycle #32 Directive (2026-11-03 00:09)
+### 1. Organic Bezier Connector Curve
+
+```javascript
+// ponytail: Horizontal-only cubic spline. Upgrade to 4-way orthogonal router if nodes overlap vertically.
+export function getOrganicPath(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 32);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Runnable check
+console.assert(
+  getOrganicPath(0, 0, 100, 50) === "M 0 0 C 55 0, 45 50, 100 50",
+  "Path calculation failed"
+);
+```
+
+skipped: Obstacle collision and A* pathfinding.  
+add when: Flowcharts routinely stack nodes directly on top of each other.
+
+---
+
+### 2. Zen Warmth Canvas & Glass Node Styling
+
+```css
+/* Ambient warm substrate */
+.spatial-canvas-bg {
+  background-color: #fbf9f4;
+  background-image: radial-gradient(circle, #e3dcce 0.8px, transparent 0.8px);
+  background-size: 24px 24px;
+}
+
+/* Apple-grade frosted tactile node */
+.spatial-node {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(216, 208, 196, 0.6);
+  border-radius: 14px;
+  box-shadow: 
+    0 1px 2px rgba(60, 50, 40, 0.03),
+    0 8px 24px -4px rgba(60, 50, 40, 0.06);
+  will-change: transform;
+}
+```
+
+skipped: CSS custom themes and dark mode tokens.  
+add when: Dark palette is explicitly requested.
+
+---
+
+### 3. GPU-Threaded Canvas Transform
+
+```javascript
+// Hardware-accelerated viewport manipulation
+export function applyCanvasTransform(viewportEl, x, y, scale) {
+  viewportEl.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
+}
+```
+
+skipped: Physics-based inertia/momentum spring math.  
+add when: Native pan-drag feels abrupt without deceleration.

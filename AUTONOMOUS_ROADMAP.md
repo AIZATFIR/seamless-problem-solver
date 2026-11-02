@@ -1782,3 +1782,64 @@ add when: Explicit low-power mode toggles or complex custom theme engines are re
 ```
 skipped: Framer Motion / external gesture libraries for node dragging feedback.  
 add when: Physics velocity-based card flicking or multi-node grouping animations are introduced.
+
+
+### Cycle #30 Directive (2026-11-02 23:57)
+### 1. Organic Flowchart S-Curve (Native SVG Cubic Bezier)
+
+```ts
+// ponytail: natural cubic curve; upgrade to obstacle-avoiding orthogonal router if nodes overlap
+export const getConnectorPath = (x1: number, y1: number, x2: number, y2: number): string => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+
+// runnable self-check
+console.assert(
+  getConnectorPath(0, 0, 100, 100) === "M 0 0 C 55 0, 45 100, 100 100",
+  "Connector path generation failed"
+);
+```
+
+### 2. Ambient Zen Backdrop (CSS Native Paper & Sage Air)
+
+```css
+/* Warm stone paper canvas with subtle sage wash and tactile dot grid */
+.spatial-canvas {
+  background-color: #F9F8F6;
+  background-image: 
+    radial-gradient(rgba(44, 41, 37, 0.07) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 0%, rgba(142, 158, 134, 0.08), transparent 75%);
+  background-size: 24px 24px, 100% 100%;
+  overscroll-behavior: none;
+}
+```
+
+### 3. Tactile Node Depth & Interaction (Apple Precision Spring)
+
+```css
+/* Zero-JS tactile physics: contact shadow + micro-spring grab */
+.canvas-node {
+  background: #FFFFFF;
+  border: 1px solid rgba(44, 41, 37, 0.08);
+  border-radius: 14px;
+  box-shadow: 
+    0 1px 2px rgba(44, 41, 37, 0.03),
+    0 6px 20px -4px rgba(44, 41, 37, 0.05);
+  cursor: grab;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+  user-select: none;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.018) translateY(-2px);
+  box-shadow: 
+    0 2px 4px rgba(44, 41, 37, 0.04),
+    0 16px 36px -6px rgba(44, 41, 37, 0.09);
+}
+```
+
+---
+skipped: canvas/webgl layout engines, spring animation dependencies (Framer Motion), complex Manhattan edge routing.  
+add when: canvas exceeds 500 simultaneous active nodes or edges need automatic obstacle clearance.

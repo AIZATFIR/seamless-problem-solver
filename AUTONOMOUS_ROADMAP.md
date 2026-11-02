@@ -575,3 +575,76 @@ if (!path.startsWith("M 0 0 C 45 0, 55 100, 100 100")) throw new Error("Path cur
 skipped: dynamic port auto-routing (top/bottom/left/right), add when nodes allow freeform multi-axis port binding.  
 skipped: WebGL/Canvas2D grid rendering, add when viewport scaling drops below 60fps on low-tier mobile.  
 skipped: physics-based spring dragging library, add when pointer-event delta tracking needs momentum flicking.
+
+
+### Cycle #9 Directive (2026-11-02 21:58)
+### 1. Organic Flow Connectors (Native Bézier)
+
+```typescript
+// ponytail: Fixed horizontal control points. Upgrade to dynamic port vectors when 4-side multi-anchors exist.
+export function getOrganicPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.45, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getOrganicPath(0, 0, 100, 100) === "M 0 0 C 45 0, 55 100, 100 100",
+  "Path calculation failed"
+);
+```
+
+skipped: Obstacle routing & self-intersections.
+add when: Flowcharts exceed ~25 overlapping edges.
+
+---
+
+### 2. Ambient Nature Canvas & Edge Rendering
+
+```css
+/* Warm zen paper surface & organic SVG connectors */
+.spatial-canvas {
+  background-color: #faf8f5;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(68, 64, 60, 0.08) 1px, transparent 1px),
+    radial-gradient(circle at 10% 10%, rgba(220, 215, 201, 0.45) 0%, transparent 50%);
+  background-size: 24px 24px, 100% 100%;
+}
+
+.flow-connector {
+  fill: none;
+  stroke: #78716c;
+  stroke-width: 1.5px;
+  stroke-linecap: round;
+}
+```
+
+skipped: Canvas GPU grain shaders.
+add when: Device profile confirms high-DPI desktop display baseline.
+
+---
+
+### 3. Apple-Grade Drag Micro-Physics
+
+```css
+/* Zero-JS layout recovery: bypass transforms on drag, spring damp on drop */
+.canvas-node {
+  touch-action: none;
+  user-select: none;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(231, 229, 228, 0.8);
+  box-shadow: 0 1px 3px rgba(41, 37, 36, 0.04);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+}
+
+.canvas-node.is-dragging {
+  transition: none;
+  cursor: grabbing;
+  box-shadow: 0 14px 28px -4px rgba(41, 37, 36, 0.12), 0 4px 8px -2px rgba(41, 37, 36, 0.06);
+}
+```
+
+skipped: Web Animations API/Framer Motion physics engine.
+add when: Multi-node cluster momentum fling is explicitly required.

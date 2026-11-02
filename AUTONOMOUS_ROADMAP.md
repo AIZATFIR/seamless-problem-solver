@@ -773,3 +773,46 @@ skipped: HTML5 Canvas background rendering loop. Add when grid requires dynamic 
 }
 ```
 skipped: Physics engine (Framer Motion / Spring JS). Add when multi-node collective rubber-banding is required.
+
+
+### Cycle #12 Directive (2026-11-02 22:15)
+```css
+/* 1. Nature ambient canvas: warm stone/sand base with low-overhead CSS dot mesh */
+.spatial-canvas {
+  background-color: oklch(0.965 0.01 70);
+  background-image: 
+    radial-gradient(oklch(0.78 0.015 65 / 0.3) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 0%, oklch(0.99 0.02 85 / 0.6) 0%, transparent 70%);
+  background-size: 24px 24px, 100% 100%;
+  overscroll-behavior: none;
+}
+
+/* 2. Tactile frosted node with Apple-style micro-lift */
+.canvas-node {
+  background: oklch(0.99 0.005 80 / 0.9);
+  backdrop-filter: blur(12px);
+  border: 1px solid oklch(0.90 0.01 75 / 0.8);
+  border-radius: 14px;
+  box-shadow: 0 4px 16px -2px oklch(0.2 0.02 60 / 0.04), 0 1px 2px oklch(0.2 0.02 60 / 0.03);
+  transition: transform 140ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 140ms ease;
+  touch-action: none;
+  user-select: none;
+}
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.018);
+  box-shadow: 0 12px 28px -4px oklch(0.2 0.02 60 / 0.08);
+}
+```
+
+```ts
+// 3. Natural organic connector path (adaptive S-curve)
+export function getOrganicPath(x1: number, y1: number, x2: number, y2: number): string {
+  // ponytail: horizontal-biased S-curve; upgrade to orthogonal obstacle-avoidance if nodes overlap.
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 36);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+```
+
+skipped: Canvas raster rendering, WebGL background shaders, and complex graph routing libraries.  
+add when: Graph exceeds 300+ visible nodes simultaneously or requires automated edge obstacle avoidance.

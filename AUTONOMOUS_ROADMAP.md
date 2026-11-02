@@ -4523,3 +4523,62 @@ add when: Zoom scale drops below 0.3x and subpixel moiré occurs.
 ```
 skipped: Spring physics JS runtime engine.  
 add when: Multi-node velocity rubber-banding or spatial flick-toss is requested.
+
+
+### Cycle #76 Directive (2026-11-03 04:16)
+### 1. Zen Ambient Canvas Backdrop (CSS)
+
+```css
+/* Warm stone/parchment background with soft organic stipple */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: radial-gradient(circle, rgba(90, 80, 70, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+  /* ponytail: static dot grid; add dynamic lod/zoom scaling when canvas zoom < 0.5 */
+}
+```
+
+### 2. Natural S-Curve Flowchart Connectors (SVG Spline)
+
+```ts
+// Natural cubic bezier drape between horizontal ports
+export const getSplinePath = (x1: number, y1: number, x2: number, y2: number): string => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 32);
+  // ponytail: fixed horizontal tangency; add port orientation detection when vertical layouts land
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+```
+
+```css
+.spline-edge {
+  fill: none;
+  stroke: #8c8275;
+  stroke-width: 1.5px;
+  stroke-linecap: round;
+}
+```
+
+### 3. Tactile Apple-Grade Node Physics (CSS)
+
+```css
+.canvas-node {
+  touch-action: none;
+  user-select: none;
+  background: #ffffff;
+  border: 1px solid rgba(140, 130, 117, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(60, 50, 40, 0.03), 0 6px 16px rgba(60, 50, 40, 0.04);
+  transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.16s ease;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.018);
+  box-shadow: 0 12px 28px rgba(60, 50, 40, 0.09);
+}
+```
+
+---
+* skipped: Canvas pan-zoom matrix math in JS; add when viewport bounds exceed 100vw/100vh.
+* skipped: Obstacle avoidance routing (A*); add when overlapping node edge crossings cause readability issues.
+* skipped: Spring-physics animation engine; add if CSS bezier transitions fail frame-rate targets during multi-touch gestures.

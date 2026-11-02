@@ -3556,3 +3556,49 @@ console.assert(
 
 skipped: Canvas noise textures, edge collision routing, and third-party physics libraries (e.g., Framer Motion, Dagre).
 add when: Flowcharts require automatic multi-node obstacle avoidance or dynamic cycle layout.
+
+
+### Cycle #60 Directive (2026-11-03 02:47)
+```css
+/* 1. Ambient Warmth Canvas Base */
+.canvas-root {
+  background-color: #faf9f5;
+  background-image: 
+    radial-gradient(circle at center, transparent 0%, rgba(240, 237, 230, 0.4) 100%),
+    radial-gradient(circle, rgba(60, 50, 40, 0.06) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+}
+
+/* 2. Tactile Zen Node Surface */
+.canvas-node {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(60, 50, 40, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px -2px rgba(60, 50, 40, 0.04), 0 1px 2px rgba(60, 50, 40, 0.02);
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+  will-change: transform;
+}
+.canvas-node:active, .canvas-node[data-dragging="true"] {
+  cursor: grabbing;
+  transform: scale(1.012) translateY(-1px);
+  box-shadow: 0 14px 28px -4px rgba(60, 50, 40, 0.08), 0 2px 4px rgba(60, 50, 40, 0.03);
+}
+```
+
+```typescript
+// 3. Natural Organic Connector (Horizontal S-Curve with distance-aware curvature)
+// ponytail: Fixed horizontal tangent. Upgrade to dynamic port normal vectors when 4-side routing is needed.
+export function getFlowPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = x2 - x1;
+  const cx = Math.max(Math.abs(dx) * 0.45, 32);
+  return `M ${x1} ${y1} C ${x1 + cx} ${y1}, ${x2 - cx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getFlowPath(0, 0, 100, 50) === "M 0 0 C 45 0, 55 50, 100 50", "Path curvature mismatch");
+```
+
+skipped: Obstacle-avoidance routing, multi-stop gradients, drag sound effects.
+add when: Nodes visually overlap on zoom-out, or user requests custom edge bend points.

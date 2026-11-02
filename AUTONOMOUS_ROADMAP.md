@@ -462,3 +462,62 @@ export function attachDrag(
 ```
 skipped: Spring-inertia momentum physics engine and multi-selection marquee drag.  
 add when: Moving clusters of 3+ connected nodes in a single selection gesture.
+
+
+### Cycle #7 Directive (2026-11-02 21:47)
+### 1. Nature Canvas Ambient Background (CSS)
+
+```css
+/* Ambient warm stone canvas with native fixed dot-grid */
+.canvas-viewport {
+  background-color: #fbf9f5;
+  background-image: radial-gradient(#d9d2c7 0.75px, transparent 0.75px);
+  background-size: 24px 24px;
+  touch-action: none;
+  user-select: none;
+}
+```
+skipped: Canvas render loop / WebGL background texture.  
+add when: Moving background particles or multi-layer parallax depth are explicitly requested.
+
+---
+
+### 2. Natural Organic Bezier Connector (Native SVG)
+
+```javascript
+// Generates natural flowing horizontal s-curves between nodes
+export function getFlowPath(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 36);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+  // ponytail: fixed horizontal delta. Upgrade to orthogonal routing if cycle loops occur.
+}
+
+console.assert(getFlowPath(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50", "Flow path calculation mismatch");
+```
+skipped: External graph layout engine (D3/ELK/Dagre).  
+add when: Flowcharts require automatic hierarchical collision avoidance and multi-tier re-routing.
+
+---
+
+### 3. Tactile Zen Node Interaction (CSS)
+
+```css
+/* Zen warmth paper card with native hardware-accelerated spring-down */
+.canvas-node {
+  background: rgba(254, 253, 251, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(217, 210, 199, 0.7);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px -4px rgba(58, 50, 38, 0.04);
+  transition: transform 120ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 120ms ease;
+  cursor: grab;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(0.985);
+  box-shadow: 0 1px 6px -1px rgba(58, 50, 38, 0.08);
+}
+```
+skipped: JS physics spring library (framer-motion, popmotion).  
+add when: Canvas nodes support gesture flick-velocity and continuous inertia throwing.

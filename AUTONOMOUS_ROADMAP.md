@@ -6086,3 +6086,48 @@ export function applyCanvasTransform(el: HTMLElement, x: number, y: number, scal
 skipped: Orthogonal routing and obstacle avoidance; add when nodes visibly overlap or user explicitly connects non-horizontal ports.
 skipped: Motion animation libraries (Framer/GSAP); add when fluid layout transitions exceed native CSS cubic-bezier capabilities.
 skipped: Multi-layer zoom levels with LOD; add when canvas node count consistently exceeds 100 on screen.
+
+
+### Cycle #102 Directive (2026-11-03 06:41)
+### 1. Organic Flowchart Connectors (SVG Native)
+
+```typescript
+// ponytail: Horizontal S-curve. Upgrade to directional port-aware tangents if multi-directional docking is added.
+export function naturalPath(x1: number, y1: number, x2: number, y2: number): string {
+  const cx = Math.max(Math.abs(x2 - x1) * 0.55, 32);
+  return `M ${x1} ${y1} C ${x1 + cx} ${y1}, ${x2 - cx} ${y2}, ${x2} ${y2}`;
+}
+```
+
+### 2. Ambient Warm Paper Canvas (Pure CSS)
+
+```css
+.canvas-root {
+  background-color: #fbfaf6;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(242, 235, 222, 0.45) 0%, transparent 100%),
+    radial-gradient(#d8d2c5 0.75px, transparent 0.75px);
+  background-size: 100% 100%, 20px 20px;
+}
+```
+
+### 3. Drift-Free Fluid Node Dragging (Native Pointer Capture)
+
+```typescript
+// ponytail: Mutates inline style directly to bypass React re-renders during drag. Upgrade to rAF batching if dropping frames on low-tier mobile.
+export function bindSmoothDrag(el: HTMLElement, onMove: (dx: number, dy: number) => void) {
+  el.onpointerdown = (e) => {
+    el.setPointerCapture(e.pointerId);
+    let [lx, ly] = [e.clientX, e.clientY];
+    el.onpointermove = (ev) => {
+      onMove(ev.clientX - lx, ev.clientY - ly);
+      [lx, ly] = [ev.clientX, ev.clientY];
+    };
+    el.onpointerup = el.onpointercancel = () => { el.onpointermove = null; el.onpointerup = null; };
+  };
+}
+```
+
+skipped: Path collision avoidance / obstacle rerouting. Add when nodes overlap frequently.  
+skipped: Noise texture overlay via Canvas/WebGL. Add if CSS radial grain lacks physical depth on calibrated displays.  
+skipped: Inertial momentum physics on release. Add if nodes feel too static after rapid flick gestures.

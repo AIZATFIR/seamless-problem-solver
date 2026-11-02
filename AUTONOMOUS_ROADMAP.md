@@ -5857,3 +5857,63 @@ add when: Native CSS radial tiling drops below 60fps on low-end hardware.
 ```
 skipped: JS physics/spring animation library (e.g., framer-motion/popmotion).  
 add when: Canvas demands multi-body collision physics or gesture flinging.
+
+
+### Cycle #98 Directive (2026-11-03 06:18)
+### 1. Organic Warm Canvas Base (CSS)
+```css
+/* Ambient Zen canvas surface replacing cold digital slate */
+.canvas-viewport {
+  background-color: #fcfbf9;
+  background-image: radial-gradient(circle at 50% 50%, rgba(68, 64, 60, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  overscroll-behavior: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .canvas-viewport {
+    background-color: #161514;
+    background-image: radial-gradient(circle at 50% 50%, rgba(245, 245, 240, 0.05) 1px, transparent 1px);
+  }
+}
+```
+*skipped: Canvas-drawn procedural grain shader or heavy noise PNG assets.*  
+*add when: Users demand high-zoom tactile skeuomorphism.*
+
+---
+
+### 2. Natural Flow Connectors (Pure SVG Bezier)
+```js
+// ponytail: fixed horizontal bezier ceiling; add obstacle routing only if dense edge crossing occurs.
+export const createNaturalPath = (x1, y1, x2, y2) => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+
+// Self-check
+console.assert(createNaturalPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100", "Path generation failed");
+```
+*skipped: Heavy graph layout engines (dagre/elkjs) and dynamic orthogonal avoidance.*  
+*add when: Nodes overlap or require automated auto-layout graphs.*
+
+---
+
+### 3. Tactile Spring Node Feedback (CSS)
+```css
+.canvas-node {
+  touch-action: none;
+  user-select: none;
+  will-change: transform;
+  border: 1px solid rgba(68, 64, 60, 0.08);
+  box-shadow: 0 2px 6px rgba(44, 39, 36, 0.04);
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms ease;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.018) translateY(-1px);
+  box-shadow: 0 14px 28px -6px rgba(44, 39, 36, 0.12), 0 2px 4px rgba(44, 39, 36, 0.04);
+}
+```
+*skipped: JavaScript-driven spring simulation libraries (Framer Motion).*  
+*add when: Multi-touch physics or custom velocity toss-and-catch is required.*

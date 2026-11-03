@@ -6969,3 +6969,63 @@ skipped: A* orthogonal routing; add when edge crossing density causes visual amb
 }
 ```
 skipped: Spring physics library (Framer Motion/GSAP); add when nodes require throw-and-fling momentum.
+
+
+### Cycle #118 Directive (2026-11-03 08:12)
+### 1. Organic Bezier Edge Connector
+
+```ts
+// Natural organic S-curve with horizontal tension
+export function getNaturalPath(x1: number, y1: number, x2: number, y2: number): string {
+  // ponytail: fixed horizontal tension; upgrade to angle-aware vectors if freeform 360° ports needed
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+```
+→ skipped: Obstacle-avoidance path routing (A* / Dijkstra).  
+→ add when: Nodes overlap or layout exceeds 50+ dense cross-connections.
+
+---
+
+### 2. Nature Ambient Canvas (Warm Alabaster & Micro-Dot Grid)
+
+```css
+.spatial-canvas {
+  background-color: #faf8f5;
+  background-image: 
+    radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.7) 0%, rgba(240, 236, 228, 0.5) 100%),
+    radial-gradient(rgba(110, 100, 90, 0.18) 0.75px, transparent 0.75px);
+  background-size: 100% 100%, 20px 20px;
+}
+```
+→ skipped: Heavy noise texture PNGs / canvas shaders.  
+→ add when: Custom artistic canvas themes (e.g. parchment, dark slate) are user-selectable.
+
+---
+
+### 3. Tactile Zen Node Physics & Glass Finish
+
+```css
+.canvas-node {
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(80, 65, 50, 0.08);
+  border-radius: 12px;
+  box-shadow: 
+    0 1px 2px rgba(60, 50, 40, 0.04),
+    0 8px 24px -4px rgba(60, 50, 40, 0.06);
+  touch-action: none;
+  user-select: none;
+  transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.16s ease;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.018);
+  box-shadow: 
+    0 2px 4px rgba(60, 50, 40, 0.04),
+    0 16px 36px -6px rgba(60, 50, 40, 0.12);
+}
+```
+→ skipped: Spring physics animation libraries (Framer Motion / React Spring).  
+→ add when: Multi-node velocity throw & flick momentum are required.

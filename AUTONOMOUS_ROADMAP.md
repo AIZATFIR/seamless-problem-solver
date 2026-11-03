@@ -7481,3 +7481,72 @@ console.assert(
 skipped: dynamic obstacle-avoidance routing, add when edge collisions cause visual ambiguity.  
 skipped: WebGL canvas background rendering, add when node count exceeds 500.  
 skipped: audio/haptic feedback on connection snap, add when interaction loop feel is validated.
+
+
+### Cycle #127 Directive (2026-11-03 09:03)
+### 1. Natural S-Curve Connectors (Native SVG Bezier)
+
+```typescript
+// ponytail: Horizontal bias bezier. Ceiling: simple left-to-right graphs. Upgrade path: A* pathfinding.
+export function getOrganicEdge(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.45, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getOrganicEdge(0, 0, 100, 100) === "M 0 0 C 45 0, 55 100, 100 100",
+  "Edge calculation mismatch"
+);
+```
+`skipped: Obstacle avoidance / edge routing algorithms, add when nodes overlap regularly.`
+
+---
+
+### 2. Nature UI Ambient Warmth & Surface Elevation (CSS)
+
+```css
+/* Warm linen canvas & frosted mineral cards */
+.spatial-canvas {
+  background-color: #faf8f5;
+  background-image: radial-gradient(circle, #e6e0d6 1.25px, transparent 1.25px);
+  background-size: 28px 28px;
+}
+
+.canvas-node {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(224, 218, 208, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px -2px rgba(58, 48, 38, 0.05), 0 1px 3px rgba(58, 48, 38, 0.03);
+  will-change: transform;
+}
+
+.canvas-edge {
+  stroke: #beb4a5;
+  stroke-width: 1.75px;
+  stroke-linecap: round;
+  fill: none;
+}
+```
+`skipped: WebGL noise shaders or heavy raster grain textures, add when target hardware is guaranteed 60fps+ and thermal throttling is not a concern.`
+
+---
+
+### 3. Tactile Drag Physics (Native CSS GPU Transform)
+
+```css
+.canvas-node {
+  touch-action: none;
+  user-select: none;
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease;
+}
+
+.canvas-node.is-dragging {
+  cursor: grabbing;
+  transform: translate3d(var(--x), var(--y), 0) scale(1.02);
+  box-shadow: 0 20px 32px -8px rgba(58, 48, 38, 0.12), 0 4px 8px rgba(58, 48, 38, 0.04);
+  transition: box-shadow 0.12s ease;
+}
+```
+`skipped: Third-party physics engines (framer-motion / matter.js), add when spatial nodes require actual multi-body collision momentum.`

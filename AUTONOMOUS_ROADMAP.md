@@ -6800,3 +6800,61 @@ console.assert(
 
 skipped: D3/dagre layout engine and canvas particle layers.
 add when: Graph exceeds 50 simultaneous nodes requiring auto-untangling.
+
+
+### Cycle #115 Directive (2026-11-03 07:55)
+### 1. Organic Bezier Connectors (Native SVG)
+
+Replace straight lines or rigid step-connectors with an organic cubic bezier curve biased for natural reading direction.
+
+```javascript
+// ponytail: hardcoded horizontal curve; add orthogonal pathing when nodes wrap vertically
+export function getCurvedPath(x1, y1, x2, y2) {
+  const dx = Math.abs(x2 - x1) * 0.5;
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+```
+* Skipped: Full A* obstacle avoidance and edge routing.
+* Add when: Connectors cross intersecting node boundaries.
+
+---
+
+### 2. Zen Ambient Canvas Backdrop (CSS-only)
+
+Warm stone background with subtle organic grid dots using native CSS gradients; eliminates canvas redraw loops.
+
+```css
+.spatial-canvas {
+  background-color: #fbfbfa;
+  background-image: radial-gradient(circle, rgba(120, 113, 108, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+  overscroll-behavior: contain;
+  touch-action: none;
+}
+```
+* Skipped: Dynamic canvas background shader or SVG background layers.
+* Add when: Zoom scale exceeds 300% and sub-pixel dot drift occurs.
+
+---
+
+### 3. Drift-free Direct Manipulation (Native Pointer Capture)
+
+Replaces flaky `mousemove` / `mouseup` listeners on `window` with native hardware-accelerated pointer capture.
+
+```javascript
+function onPointerDown(e) {
+  const el = e.currentTarget;
+  el.setPointerCapture(e.pointerId);
+  const start = { x: e.clientX - el.offsetLeft, y: e.clientY - el.offsetTop };
+
+  el.onpointermove = (ev) => {
+    el.style.transform = `translate3d(${ev.clientX - start.x}px, ${ev.clientY - start.y}px, 0)`;
+  };
+  el.onpointerup = () => {
+    el.onpointermove = null;
+    el.onpointerup = null;
+  };
+}
+```
+* Skipped: Inertial momentum physics engine.
+* Add when: Velocity-based flick-to-toss behavior is explicitly needed.

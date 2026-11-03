@@ -6575,3 +6575,51 @@ export function attachCanvasPan(el: HTMLElement, onPan: (dx: number, dy: number)
 ```
 `skipped: Momentum/inertia decay math.`  
 `add when: Trackpad flick feel tests sluggish on physical touch surfaces.`
+
+
+### Cycle #111 Directive (2026-11-03 07:32)
+### 1. Zen Warm Canvas Grid & Gesture Locking
+```css
+.spatial-canvas {
+  background-color: #fbfaf8;
+  background-image: radial-gradient(circle, rgba(120, 110, 100, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+```
+*skipped: WebGL/Canvas2D grid rendering loop; add when grid scale dynamically renders millions of visible cells.*
+
+---
+
+### 2. Natural Organic Flowchart Connectors
+```javascript
+// ponytail: Horizontal-dominant S-curves. Upgrade to multi-directional anchor routing if orthogonal links are needed.
+export function getFlowPath(x1, y1, x2, y2) {
+  const offset = Math.max(Math.abs(x2 - x1) * 0.5, 48);
+  return `M ${x1} ${y1} C ${x1 + offset} ${y1}, ${x2 - offset} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getFlowPath(0, 0, 100, 100).startsWith("M 0 0 C 50 0, 50 100, 100 100"));
+```
+*skipped: Obstacle avoidance & pathfinding (A*); add when nodes overlap or cross-cuts become unreadable.*
+
+---
+
+### 3. Apple-Grade Zen Node Surface & Micro-Spring
+```css
+.canvas-node {
+  background: #ffffff;
+  border: 1px solid rgba(80, 70, 60, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(60, 50, 40, 0.03), 0 8px 24px rgba(60, 50, 40, 0.04);
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.24s ease;
+  user-select: none;
+}
+.canvas-node:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 3px 8px rgba(60, 50, 40, 0.06), 0 12px 28px rgba(60, 50, 40, 0.06);
+}
+```
+*skipped: JS spring animation libraries (Framer Motion/React Spring); add when drag-release requires momentum physics.*

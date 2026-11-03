@@ -7965,3 +7965,50 @@ export function setCanvasTransform(el: HTMLElement, x: number, y: number, scale:
 ```
 skipped: momentum-based inertia deceleration math.  
 add when: native wheel trackpad gestures require natural post-release coasting.
+
+
+### Cycle #135 Directive (2026-11-03 09:48)
+```css
+/* 1. Nature ambient canvas: warm daylight wash over earthy tactile grid */
+.spatial-canvas {
+  background-color: #fbfaf7;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(235, 225, 205, 0.45), transparent),
+    radial-gradient(circle, rgba(140, 125, 105, 0.15) 1px, transparent 1px);
+  background-size: 100% 100%, 28px 28px;
+}
+
+/* 2. Apple-grade tactile node interaction & soft shadow elevation */
+.canvas-node {
+  touch-action: none;
+  user-select: none;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(210, 200, 185, 0.5);
+  box-shadow: 0 1px 3px rgba(70, 60, 45, 0.04), 0 8px 20px rgba(70, 60, 45, 0.03);
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease;
+}
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(0.985);
+  box-shadow: 0 12px 28px rgba(70, 60, 45, 0.08);
+}
+```
+
+```javascript
+// 3. Natural organic S-curve connector (avoids robotic angled polylines)
+export function getOrganicConnector(src, dst) {
+  // ponytail: horizontal flow only; upgrade to 4-quadrant edge routing when multi-directional layouts are added.
+  const dx = Math.max(Math.abs(dst.x - src.x) * 0.55, 48);
+  return `M ${src.x} ${src.y} C ${src.x + dx} ${src.y}, ${dst.x - dx} ${dst.y}, ${dst.x} ${dst.y}`;
+}
+
+// Runnable check
+console.assert(
+  getOrganicConnector({x: 0, y: 10}, {x: 100, y: 50}) === "M 0 10 C 55 10, 45 50, 100 50",
+  "Connector curve failed expected control points"
+);
+```
+
+skipped: dynamic obstacle-avoidance routing, add when node overlap becomes an observed user issue.
+skipped: canvas physics simulation/force engine, add when user creates >50 interconnected nodes without manual positioning.

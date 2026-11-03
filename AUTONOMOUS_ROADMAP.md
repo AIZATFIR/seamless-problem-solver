@@ -6687,3 +6687,73 @@ assert.strictEqual(getFlowPath(0, 0, 100, 50), "M 0 0 C 50 0, 50 50, 100 50");
 ```
 * Skipped: External graph router packages (Dagre/ELK/ReactFlow layout engines).
 * Add when: Canvas requires automatic dense DAG auto-layout.
+
+
+### Cycle #113 Directive (2026-11-03 07:43)
+### 1. Organic Bézier Connectors (Natural Flow Layout)
+
+```typescript
+// utils/connector.ts
+export function getOrganicPath(x1: number, y1: number, x2: number, y2: number): string {
+  // ponytail: horizontal bias; upgrade to port-normal vector math if nodes support 4-sided ports
+  const offset = Math.max(Math.abs(x2 - x1) * 0.45, Math.abs(y2 - y1) * 0.2, 32);
+  return `M ${x1} ${y1} C ${x1 + offset} ${y1}, ${x2 - offset} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getOrganicPath(0, 0, 100, 100).startsWith("M 0 0 C 45 0, 55 100, 100 100"));
+```
+
+---
+
+### 2. Nature UI Ambient Backdrop (Pure CSS)
+
+```css
+/* Warm zen paper surface with ambient light drop and subtle guide dots */
+.spatial-canvas {
+  background-color: #fbfaf7;
+  background-image:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(226, 218, 202, 0.35) 0%, transparent 80%),
+    radial-gradient(rgba(52, 45, 36, 0.07) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+```
+
+---
+
+### 3. Tactile Node Elevation & Spring Response
+
+```css
+/* Apple-grade glass-paper tactile node */
+.canvas-node {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(44, 38, 30, 0.08);
+  box-shadow: 
+    0 1px 2px rgba(44, 38, 30, 0.03),
+    0 4px 12px -2px rgba(44, 38, 30, 0.04);
+  transition: transform 160ms cubic-bezier(0.2, 0.9, 0.4, 1), box-shadow 160ms ease;
+  will-change: transform;
+}
+
+.canvas-node:is(:hover, :focus-within) {
+  border-color: rgba(44, 38, 30, 0.16);
+}
+
+.canvas-node.is-dragging {
+  cursor: grabbing;
+  transform: scale(1.018);
+  box-shadow: 
+    0 8px 24px -4px rgba(44, 38, 30, 0.08),
+    0 2px 6px -1px rgba(44, 38, 30, 0.04);
+}
+```
+
+---
+
+skipped: Dynamic collision obstacle-avoidance routing, add when edge crossing causes readability issues.  
+skipped: Multi-octave SVG canvas noise textures, add when target hardware profile is verified 60fps+.  
+skipped: Custom physics simulation library, add when freeform force-directed layout is requested.

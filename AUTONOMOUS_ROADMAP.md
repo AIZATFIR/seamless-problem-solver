@@ -6858,3 +6858,54 @@ function onPointerDown(e) {
 ```
 * Skipped: Inertial momentum physics engine.
 * Add when: Velocity-based flick-to-toss behavior is explicitly needed.
+
+
+### Cycle #116 Directive (2026-11-03 08:00)
+```css
+/* 1. Ambient Warm Paper/Stone Canvas */
+.canvas-bg {
+  background-color: #fbfaf7;
+  background-image: radial-gradient(circle at 1px 1px, rgba(60, 50, 40, 0.07) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+@media (prefers-color-scheme: dark) {
+  .canvas-bg {
+    background-color: #161514;
+    background-image: radial-gradient(circle at 1px 1px, rgba(240, 235, 225, 0.06) 1px, transparent 0);
+  }
+}
+
+/* 2. Apple-Grade Spring Nodes */
+.flow-node {
+  contain: layout style paint;
+  will-change: transform;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 6px -1px rgba(50, 40, 30, 0.04), 0 8px 20px -4px rgba(50, 40, 30, 0.06);
+  transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
+}
+.flow-node:active {
+  cursor: grabbing;
+  transition: none; /* ponytail: native instantaneous drag tracking; upgrade to pointer lock if panning off-screen */
+  box-shadow: 0 14px 28px -4px rgba(50, 40, 30, 0.12);
+}
+```
+
+```javascript
+// 3. Fluid Organic Connector Routing
+export function getOrganicPath(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 32);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getOrganicPath(0, 0, 100, 100) === "M 0 0 C 55 0, 45 100, 100 100",
+  "Path generation failed"
+);
+```
+
+skipped: Obstacle avoidance routing, add when node overlap occurs.
+skipped: Canvas noise SVG textures, add when CSS radial dot contrast feels flat.
+skipped: Spring physics JS library, add when gesture momentum flicking is required.

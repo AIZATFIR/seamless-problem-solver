@@ -7194,3 +7194,60 @@ console.assert(getOrganicPath(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50");
 skipped: Obstacle-avoidance pathing algorithms; add when nodes visibly overlap connectors.
 skipped: Canvas noise-texture shaders; add when CSS radial matrix lacks depth on high-DPI displays.
 skipped: External spring-physics libraries; add when multi-node drag chaining is required.
+
+
+### Cycle #122 Directive (2026-11-03 08:34)
+### 1. Organic Bezier Flowchart Connectors
+
+```typescript
+// utils/edge.ts
+// ponytail: horizontal flow only; upgrade to quadrant routing when bidirectional loops land.
+export const getCurvedPath = (x1: number, y1: number, x2: number, y2: number): string => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+```
+
+### 2. Ambient Warm Paper Canvas Surface
+
+```css
+/* styles/canvas.css */
+.spatial-canvas {
+  background-color: #faf8f5;
+  background-image: radial-gradient(circle, rgba(140, 125, 105, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .spatial-canvas {
+    background-color: #171615;
+    background-image: radial-gradient(circle, rgba(210, 195, 175, 0.1) 1px, transparent 1px);
+  }
+}
+```
+
+### 3. Apple-Grade Kinetic Node Elevation
+
+```css
+/* styles/node.css */
+.canvas-node {
+  will-change: transform;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--node-bg, #ffffff) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(140, 125, 105, 0.18);
+  box-shadow: 0 2px 8px rgba(40, 30, 20, 0.04), 0 1px 2px rgba(40, 30, 20, 0.02);
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.018) translateY(-2px);
+  box-shadow: 0 12px 32px rgba(40, 30, 20, 0.08), 0 2px 6px rgba(40, 30, 20, 0.04);
+}
+```
+
+---
+skipped: Complex collision-avoiding edge routing; add when canvas supports overlapping cyclic cycles.
+skipped: Canvas-level WebGL/noise shaders; add when static CSS dot-grids drop below 60fps on low-end mobile.
+skipped: Custom inertia physics simulation libraries; add when multi-selection fling gestures are explicitly prioritized.

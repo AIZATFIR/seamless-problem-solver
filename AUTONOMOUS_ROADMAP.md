@@ -7684,3 +7684,58 @@ export function bindZenDrag(el: HTMLElement, onCommit: (x: number, y: number) =>
 ```
 * Skipped: React state subscriptions and physics/spring dependencies (`framer-motion`).
 * Add when: Multi-node lasso dragging or momentum-based fling kinetics are required.
+
+
+### Cycle #130 Directive (2026-11-03 09:20)
+### 1. Zen Ambient Canvas Surface
+
+```css
+/* canvas-ambient.css */
+.spatial-canvas {
+  background-color: #f7f5f0;
+  background-image: radial-gradient(circle, rgba(60, 50, 40, 0.07) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+  /* ponytail: static dot-grid ceiling; switch to canvas raster rendering if matrix zoom LOD is required */
+}
+```
+skipped: Dynamic canvas grid redraw and LOD scaling loops.  
+add when: Infinite zoom scale drops below `0.4x` or exceeds `2.5x`.
+
+---
+
+### 2. Organic Flowchart Cubic Bezier Connectors
+
+```typescript
+// connector.ts
+export function getFlowPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 32);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+  // ponytail: horizontal-flow biased bezier; switch to path-finding when nodes overlap.
+}
+```
+skipped: Obstacle collision avoidance and orthogonal auto-routing algorithms.  
+add when: Dense node clusters produce overlapping connectors.
+
+---
+
+### 3. Tactile Node Elevation & Native Pointer Drag
+
+```css
+/* node-interaction.css */
+.canvas-node {
+  touch-action: none;
+  user-select: none;
+  border: 1px solid rgba(60, 50, 40, 0.08);
+  border-radius: 12px;
+  background: #ffffff;
+  transition: transform 0.16s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.16s ease;
+  box-shadow: 0 1px 3px rgba(45, 35, 20, 0.04), 0 4px 12px rgba(45, 35, 20, 0.03);
+}
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.025);
+  box-shadow: 0 12px 32px rgba(45, 35, 20, 0.10);
+}
+```
+skipped: Third-party spring physics libraries (Framer Motion / Popmotion).  
+add when: Canvas demands velocity-based inertia flings or magnetic snap-to-grid.

@@ -7434,3 +7434,50 @@ Eliminate layout jank and spring library bloat using native CSS hardware transit
 ```
 → skipped: Framer Motion / react-spring dependencies  
 → add when: complex multi-step choreographies or gesture velocity handoffs are required.
+
+
+### Cycle #126 Directive (2026-11-03 08:57)
+```css
+/* 1. Nature ambient grid & canvas physics */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: radial-gradient(circle, rgba(110, 95, 78, 0.14) 1px, transparent 1px);
+  background-size: 24px 24px;
+  touch-action: none;
+  cursor: grab;
+}
+.spatial-canvas:active { cursor: grabbing; }
+
+/* 2. Zen stone node styling */
+.canvas-node {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(130, 115, 95, 0.12);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px -2px rgba(45, 38, 30, 0.05);
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease;
+}
+.canvas-node:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px -4px rgba(45, 38, 30, 0.08);
+}
+```
+
+```javascript
+// 3. Smooth natural flowchart bezier connector
+// ponytail: pure horizontal S-curve; upgrade to orthogonal routing if nodes loop backward
+export function naturalConnector(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  naturalConnector(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100",
+  "Connector path mismatch"
+);
+```
+
+skipped: dynamic obstacle-avoidance routing, add when edge collisions cause visual ambiguity.  
+skipped: WebGL canvas background rendering, add when node count exceeds 500.  
+skipped: audio/haptic feedback on connection snap, add when interaction loop feel is validated.

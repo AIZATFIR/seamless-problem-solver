@@ -7739,3 +7739,70 @@ add when: Dense node clusters produce overlapping connectors.
 ```
 skipped: Third-party spring physics libraries (Framer Motion / Popmotion).  
 add when: Canvas demands velocity-based inertia flings or magnetic snap-to-grid.
+
+
+### Cycle #131 Directive (2026-11-03 09:26)
+### 1. Organic Bezier Connector (Natural Tree Flow)
+
+```typescript
+// ponytail: assumes left-to-right hierarchy; upgrade to 4-quadrant obstacle routing if cyclic graphs are introduced.
+export function getOrganicPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.abs(x2 - x1) * 0.55;
+  const dy = (y2 - y1) * 0.1;
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1 + dy}, ${x2 - dx} ${y2 - dy}, ${x2} ${y2}`;
+}
+
+// Runnable check
+console.assert(
+  getOrganicPath(0, 0, 100, 50) === 'M 0 0 C 55 5, 45 45, 100 50',
+  'Connector path calculation mismatch'
+);
+```
+*skipped: Obstacle collision and A\* pathing.*  
+*add when: Freeform overlapping nodes block direct paths.*
+
+---
+
+### 2. Nature Ambient Canvas (CSS Native Warmth)
+
+```css
+/* Warm organic paper backdrop with subtle earth-tone grid, zero JS overhead */
+.spatial-canvas {
+  --canvas-bg: #fdfbf7;
+  --canvas-dot: rgba(74, 68, 56, 0.08);
+  background-color: var(--canvas-bg);
+  background-image: radial-gradient(circle at 50% 50%, var(--canvas-dot) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .spatial-canvas {
+    --canvas-bg: #1a1916;
+    --canvas-dot: rgba(220, 210, 190, 0.06);
+  }
+}
+```
+*skipped: Canvas-layer noise shaders and canvas-loop rendering.*  
+*add when: Dynamic paper textures or interactive surface lighting are explicitly needed.*
+
+---
+
+### 3. Spring-Settle Node Physics (Smooth Interaction)
+
+```css
+/* Zero-JS spring settling on drop with layout containment */
+.canvas-node {
+  contain: layout paint;
+  will-change: transform;
+  transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.12),
+              box-shadow 0.2s ease;
+}
+
+.canvas-node[data-dragging="true"] {
+  transition: none;
+  box-shadow: 0 12px 28px -6px rgba(45, 38, 28, 0.15);
+  cursor: grabbing;
+}
+```
+*skipped: JS-driven spring physics engines (e.g., Framer Motion, Popmotion).*  
+*add when: Velocity-inheriting inertial drag-throws are required.*

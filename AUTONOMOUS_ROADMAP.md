@@ -6504,3 +6504,74 @@ export const getFlowPath = ([x1, y1], [x2, y2]) => {
 }
 ```
 `.canvas-node` → skipped: JS spring physics engine (Framer Motion/react-spring), add when gestures require momentum throwing.
+
+
+### Cycle #110 Directive (2026-11-03 07:26)
+### 1. Organic Flowchart Bézier Connector
+
+```typescript
+// utils/curve.ts
+// ponytail: assumes left-to-right bias; upgrade to orthogonal port-aware routing if cyclic graphs collide
+export const getNaturalEdge = (x1: number, y1: number, x2: number, y2: number): string => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+
+// Self-check
+console.assert(
+  getNaturalEdge(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100",
+  "Edge calculation failed"
+);
+```
+`skipped: Obstacle avoidance / edge bundling.`  
+`add when: Canvas routinely hosts >50 overlapping node connections.`
+
+---
+
+### 2. Ambient Zen Warmth Canvas Surface
+
+```css
+/* canvas.css */
+.spatial-canvas {
+  --bg-sand: #FAF7F2;
+  --dot-color: rgba(68, 58, 48, 0.08);
+  background-color: var(--bg-sand);
+  background-image: radial-gradient(circle at center, var(--dot-color) 1.25px, transparent 1.25px);
+  background-size: 24px 24px;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .spatial-canvas {
+    --bg-sand: #181716;
+    --dot-color: rgba(220, 210, 195, 0.08);
+  }
+}
+```
+`skipped: Dynamic canvas tile streaming and procedural noise textures.`  
+`add when: Zoom scale drops below 0.2x where subpixel grids moiré.`
+
+---
+
+### 3. Native RAF-Smoothed Pan
+
+```typescript
+// hooks/useCanvasPan.ts
+export function attachCanvasPan(el: HTMLElement, onPan: (dx: number, dy: number) => void) {
+  let dx = 0, dy = 0, raf = 0;
+  el.addEventListener('pointermove', (e) => {
+    if (e.buttons !== 1 && e.buttons !== 4) return;
+    dx += e.movementX;
+    dy += e.movementY;
+    if (!raf) {
+      raf = requestAnimationFrame(() => {
+        onPan(dx, dy);
+        dx = 0; dy = 0; raf = 0;
+      });
+    }
+  });
+}
+```
+`skipped: Momentum/inertia decay math.`  
+`add when: Trackpad flick feel tests sluggish on physical touch surfaces.`

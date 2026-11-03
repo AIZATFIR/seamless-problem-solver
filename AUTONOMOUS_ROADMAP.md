@@ -7142,3 +7142,55 @@ console.assert(
 skipped: dynamic obstacle avoidance & external routing libraries, add when node overlaps block direct visibility.  
 skipped: WebGL canvas shaders for ambient noise, add when CSS radial gradients fail 60fps frame budgeting.  
 skipped: spring physics simulator for edge curves, add when drag latency requires real-time tension simulation.
+
+
+### Cycle #121 Directive (2026-11-03 08:28)
+### 1. Organic Warm Canvas (Ambient CSS)
+
+```css
+.spatial-canvas {
+  background-color: #f7f6f2;
+  background-image: radial-gradient(circle, rgba(58, 48, 38, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+  touch-action: none;
+}
+```
+
+### 2. Natural S-Curve Flowchart Connectors (SVG Native)
+
+```ts
+// ponytail: horizontal clamp only; upgrade to 4-side port normal vectors when arbitrary connector routing is needed
+export const getOrganicPath = (x1: number, y1: number, x2: number, y2: number): string => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+
+// Self-check
+console.assert(getOrganicPath(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50");
+```
+
+### 3. Tactile Node Surface & Smooth Physics (CSS)
+
+```css
+.canvas-node {
+  border-radius: 14px;
+  border: 1px solid rgba(58, 48, 38, 0.08);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px -2px rgba(44, 38, 34, 0.05), 0 1px 2px rgba(44, 38, 34, 0.03);
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+  will-change: transform;
+}
+.canvas-node:hover {
+  transform: translateY(-1.5px);
+  box-shadow: 0 10px 24px -4px rgba(44, 38, 34, 0.09), 0 2px 4px rgba(44, 38, 34, 0.04);
+}
+.canvas-node:active {
+  transform: scale(0.99);
+  cursor: grabbing;
+}
+```
+
+skipped: Obstacle-avoidance pathing algorithms; add when nodes visibly overlap connectors.
+skipped: Canvas noise-texture shaders; add when CSS radial matrix lacks depth on high-DPI displays.
+skipped: External spring-physics libraries; add when multi-node drag chaining is required.

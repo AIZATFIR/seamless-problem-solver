@@ -7251,3 +7251,57 @@ export const getCurvedPath = (x1: number, y1: number, x2: number, y2: number): s
 skipped: Complex collision-avoiding edge routing; add when canvas supports overlapping cyclic cycles.
 skipped: Canvas-level WebGL/noise shaders; add when static CSS dot-grids drop below 60fps on low-end mobile.
 skipped: Custom inertia physics simulation libraries; add when multi-selection fling gestures are explicitly prioritized.
+
+
+### Cycle #123 Directive (2026-11-03 08:40)
+### 1. Zen Ambient Canvas Surface (CSS)
+```css
+/* Ambient Nature Canvas: Warm rice-paper tone with soft morning-light vignette */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(224, 214, 196, 0.35) 0%, transparent 70%),
+    radial-gradient(circle, rgba(140, 130, 115, 0.15) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+}
+```
+skipped: WebGL shaders or heavy noise PNGs.  
+add when: Dynamic time-of-day ambient shifts are requested.
+
+---
+
+### 2. Natural Organic Curved Edge (Minimal Bezier Math)
+```javascript
+// ponytail: Fixed horizontal tangent. Upgrade to 4-direction port routing when nodes support arbitrary docking.
+export const getOrganicEdge = (x1, y1, x2, y2) => {
+  const cx = (x1 + x2) / 2;
+  return `M ${x1} ${y1} C ${cx} ${y1}, ${cx} ${y2}, ${x2} ${y2}`;
+};
+
+// Self-check
+console.assert(getOrganicEdge(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50", "Edge calculation mismatch");
+```
+skipped: Multi-point obstacle-avoidance routing library.  
+add when: Connectors cross intersecting node boundaries.
+
+---
+
+### 3. Apple-Grade Tactile Lift (CSS Micro-Interaction)
+```css
+.canvas-node {
+  touch-action: none;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(60, 50, 40, 0.08);
+  box-shadow: 0 2px 6px -1px rgba(50, 40, 30, 0.04), 0 8px 18px -4px rgba(50, 40, 30, 0.06);
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms ease;
+}
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.018) translateY(-3px);
+  box-shadow: 0 16px 32px -6px rgba(50, 40, 30, 0.12), 0 6px 12px -2px rgba(50, 40, 30, 0.06);
+}
+```
+skipped: Spring physics JS library (Framer Motion/React Spring).  
+add when: Physics velocity needs to preserve drag momentum on release.

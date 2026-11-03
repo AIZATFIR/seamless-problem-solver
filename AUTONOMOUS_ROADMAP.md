@@ -7550,3 +7550,49 @@ console.assert(
 }
 ```
 `skipped: Third-party physics engines (framer-motion / matter.js), add when spatial nodes require actual multi-body collision momentum.`
+
+
+### Cycle #128 Directive (2026-11-03 09:09)
+```css
+/* 1. Nature UI ambient backdrop & node micro-feel */
+.canvas-root {
+  background-color: #fbfaf6;
+  background-image: radial-gradient(#e6e1d6 1px, transparent 1px);
+  background-size: 24px 24px;
+  overscroll-behavior: none;
+}
+
+.canvas-node {
+  touch-action: none;
+  user-select: none;
+  background: #ffffff;
+  border: 1px solid #eeebe3;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(68, 60, 48, 0.04);
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+}
+
+.canvas-node:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(68, 60, 48, 0.07);
+}
+```
+
+```javascript
+// 2. Natural organic S-curve connector (native SVG path)
+// ponytail: straight cubic curve assumes horizontal flow; upgrade to orthogonal A* routing if nodes overlap heavily.
+export function getOrganicPath(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// 1 runnable check
+console.assert(
+  getOrganicPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100",
+  "Path generator failed"
+);
+```
+
+skipped: Graph layout library (dagre/elkjs); add when automatic dag auto-layout is explicitly required.
+skipped: Canvas/WebGL rendering engine; add when node count exceeds 250 visible DOM elements.
+skipped: Multi-point collision routing; add when connectors cross over intermediate nodes.

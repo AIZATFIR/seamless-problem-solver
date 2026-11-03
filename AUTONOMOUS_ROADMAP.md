@@ -6442,3 +6442,65 @@ export const getNaturalPath = (x1, y1, x2, y2) => {
 }
 ```
 `skipped: Multi-state physics spring lib, add when dynamic gesture velocity throws nodes on release.`
+
+
+### Cycle #109 Directive (2026-11-03 07:21)
+### 1. Organic S-Curve Flow Connectors
+
+```javascript
+// ponytail: Horizontal bezier only; upgrade to obstacle routing when node density causes overlap.
+export const getFlowPath = ([x1, y1], [x2, y2]) => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.45, 32);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+```
+```svg
+<path 
+  d={getFlowPath(source, target)} 
+  fill="none" 
+  stroke="#8c8273" 
+  stroke-width="1.5" 
+  stroke-linecap="round" 
+  stroke-opacity="0.45" 
+/>
+```
+`getFlowPath` → skipped: A* routing / obstacle avoidance, add when canvas exceeds 50 densely clustered nodes.
+
+---
+
+### 2. Zen Warmth Canvas Atmosphere
+
+```css
+.canvas-ambient {
+  background-color: #fbf9f5;
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(229, 221, 209, 0.5) 0%, transparent 65%),
+    radial-gradient(circle, #ded7cb 0.75px, transparent 0.75px);
+  background-size: 100% 100%, 24px 24px;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+```
+`.canvas-ambient` → skipped: WebGL/Canvas noise shaders, add when cross-browser subpixel CSS rendering is insufficient.
+
+---
+
+### 3. Tactile Paper-Spring Node Physics
+
+```css
+.canvas-node {
+  background: rgba(255, 254, 251, 0.86);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(216, 208, 196, 0.65);
+  box-shadow: 0 4px 18px -4px rgba(44, 38, 28, 0.05), 0 1px 2px rgba(44, 38, 28, 0.03);
+  border-radius: 12px;
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease;
+  will-change: transform;
+}
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(0.985);
+  box-shadow: 0 8px 24px -4px rgba(44, 38, 28, 0.1);
+}
+```
+`.canvas-node` → skipped: JS spring physics engine (Framer Motion/react-spring), add when gestures require momentum throwing.

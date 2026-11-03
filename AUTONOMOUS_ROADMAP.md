@@ -7093,3 +7093,52 @@ console.assert(
 ```
 → skipped: JS spring physics libraries (Framer Motion / Popmotion).  
 → add when: canvas needs multi-node velocity momentum or throw inertia.
+
+
+### Cycle #120 Directive (2026-11-03 08:23)
+```css
+/* 1. Nature UI ambient canvas backdrop */
+.spatial-canvas {
+  background-color: #faf8f5;
+  background-image: 
+    radial-gradient(circle at 50% 50%, transparent 60%, rgba(214, 206, 194, 0.35) 100%),
+    radial-gradient(#dcd5c9 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+}
+
+/* 2. Tactile frosted-glass node micro-interactions */
+.canvas-node {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(214, 208, 196, 0.6);
+  box-shadow: 0 4px 16px -2px rgba(80, 70, 60, 0.05);
+  transition: transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 160ms ease;
+  will-change: transform;
+}
+.canvas-node:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px -4px rgba(80, 70, 60, 0.09);
+}
+.canvas-node:active {
+  transform: scale(0.985);
+}
+```
+
+```typescript
+// 3. Natural organic Bezier edge path generator
+export function getSmoothEdgePath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  // ponytail: fixed horizontal tangent; add port direction vectors if 4-way ports are needed.
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Verification
+console.assert(
+  getSmoothEdgePath(0, 0, 100, 50) === 'M 0 0 C 50 0, 50 50, 100 50',
+  'Edge path calculation failed'
+);
+```
+
+skipped: dynamic obstacle avoidance & external routing libraries, add when node overlaps block direct visibility.  
+skipped: WebGL canvas shaders for ambient noise, add when CSS radial gradients fail 60fps frame budgeting.  
+skipped: spring physics simulator for edge curves, add when drag latency requires real-time tension simulation.

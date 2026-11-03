@@ -8273,3 +8273,55 @@ export function bindFluidPan(viewport, canvas) {
 ```
 skipped: Momentum physics and zoom scaling matrix.  
 add when: Pinch-to-zoom or multi-level canvas scaling is introduced.
+
+
+### Cycle #140 Directive (2026-11-03 10:16)
+### 1. Zen Ambient Canvas Backdrop (Native CSS)
+
+```css
+/* Warm paper dot-mesh + ambient vignette, replacing clinical grids */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(240, 235, 225, 0.5) 0%, rgba(251, 249, 245, 0) 100%),
+    radial-gradient(rgba(140, 125, 110, 0.15) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+}
+```
+`skipped: WebGL noise/grain canvas layer, add when custom GPU shader toggle is requested.`
+
+---
+
+### 2. Natural Flow Connectors (1-Line Organic S-Spline)
+
+```js
+// ponytail: Horizontal S-curve; upgrade to obstacle routing if nodes collide.
+export const getNaturePath = ([x1, y1], [x2, y2]) => {
+  const mx = (x1 + x2) / 2;
+  return `M ${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}`;
+};
+```
+`skipped: Pathfinding/A* obstacle-avoidance router, add when auto-layout density causes edge collisions.`
+
+---
+
+### 3. Tactile Node Spring & Depth (CSS Micro-Interaction)
+
+```css
+.canvas-node {
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(225, 218, 206, 0.7);
+  box-shadow: 0 4px 20px -2px rgba(80, 65, 50, 0.04), 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition: transform 140ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 140ms ease;
+  will-change: transform;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.018);
+  box-shadow: 0 14px 32px -4px rgba(80, 65, 50, 0.12);
+}
+```
+`skipped: Framer-Motion / Spring physics engine, add when interactive multi-axis velocity dragging is needed.`

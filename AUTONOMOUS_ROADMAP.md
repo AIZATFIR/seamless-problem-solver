@@ -7911,3 +7911,57 @@ add when: Dynamic zoom level renders the 24px fixed SVG grid visually aliased.
 ```
 skipped: Physics-based spring simulation library (e.g., Framer Motion / Popmotion).  
 add when: Multi-selection inertia/flings require momentum handoff.
+
+
+### Cycle #134 Directive (2026-11-03 09:43)
+### 1. Organic Bezier Flowchart Edges
+
+```ts
+// Smooth S-curve edge with adaptive horizontal tension
+export function getFlowPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+  // ponytail: horizontal-biased curve assumes L-to-R flow; upgrade to auto-cardinal vector routing if bi-directional.
+}
+```
+skipped: edge intersection/obstacle avoidance algorithms.  
+add when: canvas nodes visibly overlap or wrap into complex cyclical graphs.
+
+---
+
+### 2. Ambient Zen Warmth & Frosted Card Material
+
+```css
+/* Warm parchment background + tactile frosted nodes */
+.canvas-root {
+  background-color: #faf8f5;
+  background-image: radial-gradient(rgba(180, 170, 155, 0.3) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.canvas-node {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(215, 208, 196, 0.7);
+  box-shadow: 0 4px 16px -2px rgba(80, 65, 50, 0.04), 0 1px 2px rgba(80, 65, 50, 0.03);
+  border-radius: 12px;
+  touch-action: none;
+  will-change: transform;
+}
+```
+skipped: dark-mode color-token variations and theme toggles.  
+add when: cross-app persistent user theme preferences are wired.
+
+---
+
+### 3. Zero-Allocation Pan / Transform Sync
+
+```ts
+// Native GPU-bound viewport transform bypassing component re-renders
+export function setCanvasTransform(el: HTMLElement, x: number, y: number, scale: number) {
+  // ponytail: bypasses framework state updates during pointermove for steady 120fps
+  el.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
+}
+```
+skipped: momentum-based inertia deceleration math.  
+add when: native wheel trackpad gestures require natural post-release coasting.

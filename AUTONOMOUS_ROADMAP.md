@@ -8075,3 +8075,66 @@ console.assert(naturalPath(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50", "Ba
 }
 ```
 *skipped: JS spring animation libraries (Framer Motion/React Spring); add when dragging requires multi-axis inertia physics.*
+
+
+### Cycle #137 Directive (2026-11-03 10:00)
+### 1. Organic Flowchart Connectors (SVG Cubic Beziers)
+
+```ts
+// Natural S-curve with relaxed horizontal tension
+export function getNaturalEdgePath(x1: number, y1: number, x2: number, y2: number): string {
+  // ponytail: constant tension scalar works for delta > 40px; upgrade to dynamic clamping if nodes overlap closely
+  const tension = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + tension} ${y1}, ${x2 - tension} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getNaturalEdgePath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100", "Edge path calculation failed");
+```
+
+skipped: Path routing algorithms (A*, orthogonal collision avoidance).  
+add when: Flowcharts exceed ~50 intersecting nodes and lines cross destructively.
+
+---
+
+### 2. Ambient Warm Canvas Backdrop (Pure CSS)
+
+```css
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: 
+    radial-gradient(circle, rgba(140, 120, 100, 0.12) 1px, transparent 1px),
+    radial-gradient(circle at 10% 10%, rgba(225, 215, 195, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 90% 90%, rgba(210, 220, 205, 0.3) 0%, transparent 50%);
+  background-size: 24px 24px, 100% 100%, 100% 100%;
+}
+```
+
+skipped: WebGL noise shaders or heavy canvas rendering loops.  
+add when: Dynamic interactive light sources follow the cursor.
+
+---
+
+### 3. Tactile Zen Node Surface & Physics-Like Lift
+
+```css
+.canvas-node {
+  background: color-mix(in srgb, #ffffff 82%, #f2ede4 18%);
+  border: 1px solid color-mix(in srgb, #4a4036 10%, transparent);
+  box-shadow: 0 2px 6px -1px rgba(70, 50, 30, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  backdrop-filter: blur(16px);
+  border-radius: 12px;
+  cursor: grab;
+  will-change: transform;
+  transition: transform 120ms cubic-bezier(0.2, 0, 0, 1), box-shadow 120ms ease;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.02);
+  box-shadow: 0 12px 28px -6px rgba(70, 50, 30, 0.12), 0 4px 8px -2px rgba(0, 0, 0, 0.04);
+}
+```
+
+skipped: Custom spring-physics JS animation libraries (e.g., Framer Motion / Spring).  
+add when: Canvas elements need velocity-inherited drag-and-throw inertia.

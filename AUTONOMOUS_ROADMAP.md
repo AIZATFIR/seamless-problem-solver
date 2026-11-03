@@ -6397,3 +6397,48 @@ export function getEdgePath(x1, y1, x2, y2) {
 
 skipped: Graph layout libraries (ELK/dagre) and WebGL canvas backgrounds.
 add when: Graph exceeds 200 concurrent nodes or requires automated cycle avoidance.
+
+
+### Cycle #108 Directive (2026-11-03 07:15)
+### 1. Organic Bezier Edge Connector (Natural Layout)
+
+```javascript
+// ponytail: horizontal auto-tangents; upgrade to obstacle avoidance when nodes overlap
+export const getNaturalPath = (x1, y1, x2, y2) => {
+  const cx = (x2 - x1) * 0.5;
+  return `M ${x1} ${y1} C ${x1 + cx} ${y1}, ${x2 - cx} ${y2}, ${x2} ${y2}`;
+};
+```
+`skipped: A* pathfinding, add when node collisions block readability.`
+
+---
+
+### 2. Ambient Warm Canvas Backdrop (Nature UI)
+
+```css
+.spatial-canvas {
+  background-color: #f8f7f4;
+  background-image: radial-gradient(rgba(120, 113, 108, 0.14) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+```
+`skipped: WebGL paper-grain shader, add when ambient static background hurts 60fps pan/zoom.`
+
+---
+
+### 3. Tactile Frosted Node Surface (Apple Precision Interaction)
+
+```css
+.canvas-node {
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 2px 10px -2px rgba(44, 38, 34, 0.06), 0 0 0 1px rgba(44, 38, 34, 0.07);
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease;
+}
+
+.canvas-node:active {
+  transform: scale(0.985);
+  box-shadow: 0 1px 4px rgba(44, 38, 34, 0.04), 0 0 0 1px rgba(44, 38, 34, 0.12);
+}
+```
+`skipped: Multi-state physics spring lib, add when dynamic gesture velocity throws nodes on release.`

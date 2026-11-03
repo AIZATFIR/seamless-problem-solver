@@ -6909,3 +6909,63 @@ console.assert(
 skipped: Obstacle avoidance routing, add when node overlap occurs.
 skipped: Canvas noise SVG textures, add when CSS radial dot contrast feels flat.
 skipped: Spring physics JS library, add when gesture momentum flicking is required.
+
+
+### Cycle #117 Directive (2026-11-03 08:06)
+### 1. Nature UI Canvas Substrate
+
+```css
+/* Ambient warm paper substrate with organic micro-grid */
+.spatial-canvas {
+  background-color: #fcfbf9;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(228, 222, 214, 0.4) 0%, transparent 80%),
+    radial-gradient(rgba(60, 50, 40, 0.07) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+  touch-action: none;
+}
+```
+skipped: WebGL shaders and noise textures; add when canvas needs dynamic time-of-day lighting.
+
+---
+
+### 2. Natural Flowchart Connector Curves
+
+```ts
+// ponytail: fixed horizontal bezier; upgrade to dynamic port-direction vectors when nodes support multi-edge docking.
+export function naturalConnector(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Runnable self-check
+console.assert(
+  naturalConnector(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50",
+  "naturalConnector output invalid"
+);
+```
+skipped: A* orthogonal routing; add when edge crossing density causes visual ambiguity.
+
+---
+
+### 3. Tactile Node Elevation & Drag Optimization
+
+```css
+.canvas-node {
+  position: absolute;
+  contain: layout style;
+  will-change: transform;
+  border-radius: 12px;
+  border: 1px solid rgba(45, 40, 35, 0.08);
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(35, 30, 25, 0.04), 0 6px 18px -2px rgba(35, 30, 25, 0.05);
+  transition: box-shadow 160ms cubic-bezier(0.2, 0, 0, 1);
+  user-select: none;
+}
+
+.canvas-node.is-dragging {
+  box-shadow: 0 14px 32px -4px rgba(35, 30, 25, 0.12), 0 2px 8px rgba(35, 30, 25, 0.04);
+  cursor: grabbing;
+}
+```
+skipped: Spring physics library (Framer Motion/GSAP); add when nodes require throw-and-fling momentum.

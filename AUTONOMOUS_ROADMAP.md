@@ -7305,3 +7305,67 @@ add when: Connectors cross intersecting node boundaries.
 ```
 skipped: Spring physics JS library (Framer Motion/React Spring).  
 add when: Physics velocity needs to preserve drag momentum on release.
+
+
+### Cycle #124 Directive (2026-11-03 08:46)
+### 1. Zen Canvas Texture (CSS-only ambient grid)
+
+```css
+/* styles/canvas.css */
+.canvas-ambient {
+  background-color: #fcfbf9; /* Zen paper tone */
+  background-image: radial-gradient(rgba(52, 49, 44, 0.075) 1px, transparent 1px);
+  background-size: calc(24px * var(--zoom, 1)) calc(24px * var(--zoom, 1));
+  background-position: var(--pan-x, 0px) var(--pan-y, 0px);
+}
+```
+* Skipped: WebGL/Canvas noise shaders.
+* Add when: User explicitly toggles dynamic paper-grain simulation.
+
+---
+
+### 2. Organic Flowchart Curvature (Native SVG Cubic Bézier)
+
+```typescript
+// utils/flowGeometry.ts
+export function getOrganicConnector(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = (x2 - x1) * 0.5;
+  // ponytail: smooth horizontal S-curve; upgrade to orthogonal routing if nodes overlap
+  return `M ${x1} ${y1} C ${x1 + Math.max(dx, 40)} ${y1}, ${x2 - Math.max(dx, 40)} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getOrganicConnector(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100",
+  "Organic connector math failed"
+);
+```
+* Skipped: Heavy routing engines (`elkjs`, `dagre`).
+* Add when: Connectors cross intersecting node boundaries.
+
+---
+
+### 3. Tactile Flowchart Node (Subtle Apple-grade lift)
+
+```css
+/* styles/node.css */
+.flow-node {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(44, 40, 35, 0.07);
+  border-radius: 12px;
+  box-shadow: 0 4px 14px -2px rgba(44, 38, 30, 0.04), 0 1px 2px rgba(44, 38, 30, 0.02);
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  cursor: grab;
+}
+
+.flow-node:active {
+  cursor: grabbing;
+  transform: scale(0.992) translateY(-1px);
+  box-shadow: 0 14px 28px -4px rgba(44, 38, 30, 0.08), 0 3px 8px rgba(44, 38, 30, 0.04);
+}
+```
+* Skipped: Framer Motion / JS gesture spring physics.
+* Add when: Multi-touch gestural pinch-to-cluster interactions are required.

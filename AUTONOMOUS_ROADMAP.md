@@ -8676,3 +8676,61 @@ add when: Explicit collision-avoiding obstacle routing between overlapping block
 
 skipped: JS-driven spring physics loop (Framer Motion / Popmotion).  
 add when: Canvas drag gesture requires non-linear momentum release or velocity-based inertia.
+
+
+### Cycle #147 Directive (2026-11-03 10:56)
+### 1. Nature Ambient Grid (Warm Zen Canvas Base)
+
+```css
+/* Replace harsh digital dots with warm organic tint + subtle fiber grid */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(138, 126, 107, 0.12) 1.25px, transparent 1.25px),
+    radial-gradient(circle at 100% 0%, rgba(223, 228, 218, 0.45) 0%, transparent 50%),
+    radial-gradient(circle at 0% 100%, rgba(238, 230, 220, 0.4) 0%, transparent 60%);
+  background-size: 24px 24px, 100% 100%, 100% 100%;
+}
+```
+`→ skipped: Canvas API background rasterizer, add when viewport render drops below 60fps on low-end mobile.`
+
+---
+
+### 2. Natural Bezier Connectors (Organic Tangent Flow)
+
+```ts
+// ponytail: horizontal cubic curve; upgrade to orthogonal A* pathing if nodes support multi-axis manual placement
+export function getFlowPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.45, 32);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getFlowPath(0, 0, 100, 100) === 'M 0 0 C 45 0, 55 100, 100 100',
+  'Flow path tangent calculation failed'
+);
+```
+`→ skipped: dynamic connector port detection (top/bottom/left/right), add when flowchart supports cyclic/backward loops.`
+
+---
+
+### 3. Tactile Node Rest & Lift (Subtle Physics)
+
+```css
+.flow-node {
+  touch-action: none;
+  background: rgba(255, 253, 250, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(120, 110, 95, 0.14);
+  border-radius: 14px;
+  box-shadow: 0 2px 8px -2px rgba(60, 50, 35, 0.04), 0 1px 2px rgba(60, 50, 35, 0.02);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.flow-node.is-dragging {
+  transform: scale(1.015);
+  box-shadow: 0 16px 32px -6px rgba(60, 50, 35, 0.08), 0 4px 8px -2px rgba(60, 50, 35, 0.03);
+}
+```
+`→ skipped: Framer Motion/spring physics library, add when gesture momentum/toss-to-pan is requested.`

@@ -7596,3 +7596,91 @@ console.assert(
 skipped: Graph layout library (dagre/elkjs); add when automatic dag auto-layout is explicitly required.
 skipped: Canvas/WebGL rendering engine; add when node count exceeds 250 visible DOM elements.
 skipped: Multi-point collision routing; add when connectors cross over intermediate nodes.
+
+
+### Cycle #129 Directive (2026-11-03 09:15)
+### 1. Organic Zen Connectors (Native SVG S-Curve)
+
+```tsx
+// components/Connector.tsx
+export function Connector({ from, to }: { from: [number, number]; to: [number, number] }) {
+  const [x1, y1] = from;
+  const [x2, y2] = to;
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 32);
+  // ponytail: horizontal cubic S-curve; upgrade to dynamic 4-way orthogonal router if nodes overlap vertically
+  const d = `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+
+  return (
+    <path
+      d={d}
+      fill="none"
+      stroke="currentColor"
+      className="text-stone-300 dark:text-stone-700 transition-colors duration-150"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      vectorEffect="non-scaling-stroke"
+    />
+  );
+}
+```
+* Skipped: Collision detection and multi-segment pathfinding libraries.
+* Add when: Connectors must route around intervening obstacle nodes.
+
+---
+
+### 2. Nature Ambient Canvas Atmosphere (Zero-JS CSS Grid)
+
+```css
+/* styles/canvas.css */
+.zen-canvas {
+  background-color: var(--canvas-bg, #fbfaf8);
+  background-image: radial-gradient(circle at 50% 50%, rgba(120, 113, 108, 0.14) 1px, transparent 1px);
+  background-size: 24px 24px;
+  touch-action: none;
+}
+
+.dark .zen-canvas {
+  --canvas-bg: #141312;
+  background-image: radial-gradient(circle at 50% 50%, rgba(214, 211, 209, 0.08) 1px, transparent 1px);
+}
+
+.zen-node {
+  box-shadow: 0 1px 3px rgba(44, 38, 34, 0.05), 0 8px 24px -4px rgba(44, 38, 34, 0.08);
+  backdrop-filter: blur(8px);
+}
+```
+* Skipped: Canvas-drawn procedural patterns and multi-layer backdrop blurs.
+* Add when: Infinite zoom requires dynamic level-of-detail mipmapping.
+
+---
+
+### 3. 120fps Direct DOM Node Drag (Bypassing Render Loops)
+
+```ts
+// lib/drag.ts
+export function bindZenDrag(el: HTMLElement, onCommit: (x: number, y: number) => void) {
+  el.onpointerdown = (e) => {
+    if (e.button !== 0 || (e.target as HTMLElement).closest('button, input')) return;
+    el.setPointerCapture(e.pointerId);
+    
+    const [startX, startY] = [e.clientX, e.clientY];
+    const m = new DOMMatrix(getComputedStyle(el).transform);
+    const [initX, initY] = [m.m41, m.m42];
+    el.style.willChange = 'transform';
+
+    el.onpointermove = (ev) => {
+      // ponytail: continuous direct translate; add grid-rounding (Math.round(x / 24) * 24) when snap-to-grid is toggled
+      el.style.transform = `translate3d(${initX + (ev.clientX - startX)}px, ${initY + (ev.clientY - startY)}px, 0)`;
+    };
+
+    el.onpointerup = (ev) => {
+      el.releasePointerCapture(ev.pointerId);
+      el.onpointermove = el.onpointerup = null;
+      el.style.willChange = 'auto';
+      onCommit(initX + (ev.clientX - startX), initY + (ev.clientY - startY));
+    };
+  };
+}
+```
+* Skipped: React state subscriptions and physics/spring dependencies (`framer-motion`).
+* Add when: Multi-node lasso dragging or momentum-based fling kinetics are required.

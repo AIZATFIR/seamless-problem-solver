@@ -7029,3 +7029,67 @@ export function getNaturalPath(x1: number, y1: number, x2: number, y2: number): 
 ```
 → skipped: Spring physics animation libraries (Framer Motion / React Spring).  
 → add when: Multi-node velocity throw & flick momentum are required.
+
+
+### Cycle #119 Directive (2026-11-03 08:17)
+### 1. Zen Ambient Canvas Backdrop
+
+```css
+/* Replace harsh tech-grids with warm paper vignette + organic dot field */
+.spatial-canvas {
+  background-color: #faf9f5;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.7) 0%, rgba(243, 240, 233, 0.3) 100%),
+    radial-gradient(rgba(45, 41, 35, 0.07) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+}
+```
+→ skipped: WebGL/Canvas noise shaders.  
+→ add when: static CSS gradients cause banding on non-Retina displays.
+
+---
+
+### 2. Natural Dynamic Flowchart Connectors
+
+```js
+// Native organic Bezier path with horizontal tension
+export function getOrganicPath(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  // ponytail: horizontal left-to-right bias; upgrade to 4-port routing when auto-layout is introduced.
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getOrganicPath(0, 0, 100, 100) === 'M 0 0 C 50 0, 50 100, 100 100',
+  'Connector path generation failed'
+);
+```
+→ skipped: A* / Dijkstra orthogonal edge routing engines.  
+→ add when: diagram density causes high line-crossing overlap.
+
+---
+
+### 3. Tactile Node Lift & Micro-Interaction
+
+```css
+/* Apple-spec subtle physics lift using CSS transforms */
+.canvas-node {
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(40, 36, 30, 0.08);
+  box-shadow: 0 1px 3px rgba(30, 26, 20, 0.04), 0 4px 12px rgba(30, 26, 20, 0.03);
+  transition: transform 160ms cubic-bezier(0.2, 0, 0, 1), box-shadow 160ms cubic-bezier(0.2, 0, 0, 1);
+  will-change: transform;
+}
+
+.canvas-node:active,
+.canvas-node[data-dragging="true"] {
+  transform: scale(1.02) translateY(-2px);
+  box-shadow: 0 12px 28px -4px rgba(30, 26, 20, 0.08), 0 4px 10px -2px rgba(30, 26, 20, 0.04);
+  cursor: grabbing;
+}
+```
+→ skipped: JS spring physics libraries (Framer Motion / Popmotion).  
+→ add when: canvas needs multi-node velocity momentum or throw inertia.

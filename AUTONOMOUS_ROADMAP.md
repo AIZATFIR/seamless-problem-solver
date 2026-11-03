@@ -8573,3 +8573,46 @@ export const bindCanvasPan = (canvasEl, onDelta) => {
 ```
 * Skipped: Inertial momentum physics and multi-touch pinch-to-zoom calculation.
 * Add when: Mobile viewport usage or trackpad pinch becomes a core requirement.
+
+
+### Cycle #145 Directive (2026-11-03 10:45)
+### 1. Natural S-Curve Connectors
+
+```typescript
+export function getOrganicPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 32);
+  // ponytail: fixed horizontal control points; upgrade to dynamic port normal vectors if nodes rotate
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+```
+
+### 2. Nature Warm Canvas Surface
+
+```css
+.spatial-canvas {
+  background-color: #FBF9F5;
+  background-image: 
+    radial-gradient(ellipse at 50% 40%, rgba(244, 239, 228, 0.7) 0%, transparent 80%),
+    radial-gradient(circle, #D8D2C5 0.8px, transparent 0.8px);
+  background-size: 100% 100%, 24px 24px;
+}
+```
+
+### 3. Tactile Spring-Damped Nodes
+
+```css
+.canvas-node {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(216, 210, 197, 0.5);
+  border-radius: 14px;
+  box-shadow: 0 2px 8px -2px rgba(78, 68, 54, 0.04), 0 8px 20px -4px rgba(78, 68, 54, 0.06);
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms ease;
+}
+.canvas-node:hover {
+  transform: translateY(-1.5px) scale(1.005);
+  box-shadow: 0 4px 12px -2px rgba(78, 68, 54, 0.06), 0 12px 28px -6px rgba(78, 68, 54, 0.09);
+}
+```
+
+skipped: A* edge-routing and custom shaders; add when node density causes edge overlap or pan performance drops below 60fps.

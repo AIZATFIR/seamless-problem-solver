@@ -6757,3 +6757,46 @@ console.assert(getOrganicPath(0, 0, 100, 100).startsWith("M 0 0 C 45 0, 55 100, 
 skipped: Dynamic collision obstacle-avoidance routing, add when edge crossing causes readability issues.  
 skipped: Multi-octave SVG canvas noise textures, add when target hardware profile is verified 60fps+.  
 skipped: Custom physics simulation library, add when freeform force-directed layout is requested.
+
+
+### Cycle #114 Directive (2026-11-03 07:49)
+```css
+/* 1. Nature ambient canvas background & tactile glass nodes */
+.spatial-canvas {
+  background-color: #fbfaf8;
+  background-image: 
+    radial-gradient(#e5e0d8 0.75px, transparent 0.75px),
+    radial-gradient(at 0% 0%, rgba(228, 220, 206, 0.35) 0, transparent 40%);
+  background-size: 24px 24px, 100% 100%;
+}
+
+.canvas-node {
+  touch-action: none;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(60, 45, 30, 0.07);
+  box-shadow: 0 1px 2px rgba(40, 30, 20, 0.03), 0 10px 24px -8px rgba(40, 30, 20, 0.06);
+  transition: transform 160ms cubic-bezier(0.2, 0, 0, 1), box-shadow 160ms ease;
+}
+.canvas-node:active {
+  transform: scale(0.985);
+}
+```
+
+```javascript
+// 2. Natural organic bezier connector (Native SVG Path)
+export function getOrganicWire(x1, y1, x2, y2) {
+  // ponytail: horizontal auto-tangents; upgrade to obstacle-avoiding A* if nodes overlap frequently
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getOrganicWire(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50",
+  "Bezier wire path miscalculated"
+);
+```
+
+skipped: D3/dagre layout engine and canvas particle layers.
+add when: Graph exceeds 50 simultaneous nodes requiring auto-untangling.

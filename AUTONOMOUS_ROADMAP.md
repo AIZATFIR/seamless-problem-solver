@@ -8616,3 +8616,63 @@ export function getOrganicPath(x1: number, y1: number, x2: number, y2: number): 
 ```
 
 skipped: A* edge-routing and custom shaders; add when node density causes edge overlap or pan performance drops below 60fps.
+
+
+### Cycle #146 Directive (2026-11-03 10:51)
+### 1. Ambient Zen Warmth Canvas (Native CSS)
+
+```css
+.canvas-viewport {
+  background-color: #fbf9f5;
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(238, 232, 222, 0.5) 0%, transparent 75%),
+    radial-gradient(circle, #e3ded6 1px, transparent 1px);
+  background-size: 100% 100%, 28px 28px;
+  /* ponytail: static dot-grid; scale dot pitch via CSS var(--zoom) when pan-zoom is hooked */
+}
+```
+
+skipped: Canvas/WebGL texture rendering or shader passes.  
+add when: Scene graph exceeds 1,000 nodes or dynamic level-of-detail mipmapping is required.
+
+---
+
+### 2. Natural Organic Flowchart Splines
+
+```javascript
+// Native smooth cubic bezier with horizontal tension
+export function getOrganicSpline(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 32);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getOrganicSpline(0, 0, 100, 100) === "M 0 0 C 55 0, 45 100, 100 100",
+  "Spline calculation failed"
+);
+```
+
+skipped: External routing graph libraries (e.g., Dagre, ELK, pathfinding A*).  
+add when: Explicit collision-avoiding obstacle routing between overlapping blocks is required.
+
+---
+
+### 3. Tactile Fluid Node Elevation (Native CSS)
+
+```css
+.canvas-node {
+  will-change: transform;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+  box-shadow: 0 1px 2px rgba(60, 50, 40, 0.04), 0 4px 16px rgba(60, 50, 40, 0.03);
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.015);
+  box-shadow: 0 8px 28px rgba(60, 50, 40, 0.08), 0 2px 6px rgba(60, 50, 40, 0.04);
+}
+```
+
+skipped: JS-driven spring physics loop (Framer Motion / Popmotion).  
+add when: Canvas drag gesture requires non-linear momentum release or velocity-based inertia.

@@ -7806,3 +7806,47 @@ console.assert(
 ```
 *skipped: JS-driven spring physics engines (e.g., Framer Motion, Popmotion).*  
 *add when: Velocity-inheriting inertial drag-throws are required.*
+
+
+### Cycle #132 Directive (2026-11-03 09:32)
+```css
+/* 1. Nature ambient canvas: warm paper tone + zero-cost CSS dot grid */
+.canvas-viewport {
+  background-color: #fbfaf8;
+  background-image: radial-gradient(circle, rgba(80, 65, 45, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+
+/* 2. Tactile frosted node cards with Apple-grade micro-interaction */
+.canvas-node {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(60, 45, 30, 0.07);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(40, 30, 15, 0.04), 0 10px 24px -4px rgba(40, 30, 15, 0.03);
+  transition: box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1), transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+.canvas-node:active {
+  box-shadow: 0 12px 32px -4px rgba(40, 30, 15, 0.1);
+  transform: scale(1.008);
+}
+```
+
+```javascript
+// 3. Natural organic S-curve connector without layout library overhead
+export function getOrganicEdge(x1, y1, x2, y2) {
+  const dx = (x2 - x1) * 0.45;
+  // ponytail: horizontal-flow bias; upgrade to auto port-normal vectors if vertical tree mode is enabled
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(getOrganicEdge(0, 0, 100, 50) === "M 0 0 C 45 0, 55 50, 100 50", "Edge path calculation failed");
+```
+
+skipped: Canvas/WebGL rendering loops; add when node count exceeds 1,500 active DOM elements.
+skipped: External spring-physics libraries; add when multi-touch pinch-momentum feels constrained by CSS transforms.
+skipped: Complex obstacle-avoidance router; add when overlapping parallel edge density causes visual ambiguity.

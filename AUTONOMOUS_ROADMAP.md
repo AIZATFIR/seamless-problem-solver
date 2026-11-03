@@ -8503,3 +8503,73 @@ add when: Dynamic time-of-day ambient light shifting is explicitly requested.
 ```
 skipped: JavaScript spring physics libraries (Framer Motion / react-spring).  
 add when: Velocity-based inertia flicking across large canvas distances is required.
+
+
+### Cycle #144 Directive (2026-11-03 10:39)
+### 1. Organic Bézier Edge Router
+
+```javascript
+// organic-edge.js
+export const getOrganicPath = (x1, y1, x2, y2) => {
+  const dx = x2 - x1;
+  const tension = Math.max(Math.abs(dx) * 0.5, 40);
+  // ponytail: horizontal flow only; upgrade to 4-port dynamic tangents when multi-direction links exist.
+  return `M ${x1} ${y1} C ${x1 + tension} ${y1}, ${x2 - tension} ${y2}, ${x2} ${y2}`;
+};
+
+// Self-check
+console.assert(getOrganicPath(0, 0, 100, 100) === 'M 0 0 C 50 0, 50 100, 100 100', 'Edge router failed');
+```
+* Skipped: Collision avoidance and edge crossing penalty solvers.
+* Add when: Canvas graph density causes severe overlapping lines.
+
+---
+
+### 2. Nature Ambient Canvas & Card Tokens
+
+```css
+/* ambient-canvas.css */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: radial-gradient(rgba(140, 130, 115, 0.18) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.canvas-node {
+  background: rgba(255, 254, 251, 0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(120, 105, 85, 0.14);
+  box-shadow: 0 1px 2px rgba(60, 48, 30, 0.04), 0 8px 24px rgba(60, 48, 30, 0.04);
+  border-radius: 14px;
+  contain: layout paint;
+  will-change: transform;
+}
+```
+* Skipped: Dynamic canvas themes, noise SVG filters, and WebGL glow shaders.
+* Add when: Dark mode or accessibility contrast-override modes are requested.
+
+---
+
+### 3. Native Pointer-Capture Pan
+
+```javascript
+// canvas-pan.js
+export const bindCanvasPan = (canvasEl, onDelta) => {
+  let anchor = null;
+  canvasEl.addEventListener('pointerdown', (e) => {
+    if (e.target !== canvasEl) return;
+    canvasEl.setPointerCapture(e.pointerId);
+    anchor = { x: e.clientX, y: e.clientY };
+  });
+  canvasEl.addEventListener('pointermove', (e) => {
+    if (!anchor) return;
+    onDelta(e.clientX - anchor.x, e.clientY - anchor.y);
+    anchor = { x: e.clientX, y: e.clientY };
+  });
+  const stop = (e) => { anchor = null; canvasEl.hasPointerCapture(e.pointerId) && canvasEl.releasePointerCapture(e.pointerId); };
+  canvasEl.addEventListener('pointerup', stop);
+  canvasEl.addEventListener('pointercancel', stop);
+};
+```
+* Skipped: Inertial momentum physics and multi-touch pinch-to-zoom calculation.
+* Add when: Mobile viewport usage or trackpad pinch becomes a core requirement.

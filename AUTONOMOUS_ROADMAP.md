@@ -6623,3 +6623,67 @@ console.assert(getFlowPath(0, 0, 100, 100).startsWith("M 0 0 C 50 0, 50 100, 100
 }
 ```
 *skipped: JS spring animation libraries (Framer Motion/React Spring); add when drag-release requires momentum physics.*
+
+
+### Cycle #112 Directive (2026-11-03 07:38)
+### 1. Zen Canvas Texture & Tactile Node Elevation (CSS)
+
+```css
+/* Ambient warm paper grid + Apple-grade responsive elevation */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: radial-gradient(rgba(78, 68, 60, 0.09) 1px, transparent 1px);
+  background-size: 24px 24px;
+  touch-action: none;
+}
+
+.canvas-node {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(82, 68, 54, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(48, 38, 28, 0.03), 0 8px 24px -4px rgba(48, 38, 28, 0.06);
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease;
+  will-change: transform;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.018);
+  box-shadow: 0 14px 32px -6px rgba(48, 38, 28, 0.12);
+}
+```
+* Skipped: Dynamic canvas-rendered WebGL noise and heavy CSS filters.
+* Add when: User requests vintage parchment or custom skeuomorphic theme skins.
+
+---
+
+### 2. Natural S-Curve Flowchart Connectors (SVG Native)
+
+```ts
+// ponytail: Horizontal Bezier layout ceiling. Add A* edge avoidance if manual routing overlaps nodes.
+export function getFlowPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+```
+
+```svg
+<!-- Ambient edge rendering -->
+<path
+  d={getFlowPath(source.x, source.y, target.x, target.y)}
+  fill="none"
+  stroke="#8c8275"
+  stroke-width="1.5"
+  stroke-linecap="round"
+  opacity="0.55"
+/>
+```
+
+```ts
+// self-check
+import assert from "node:assert";
+assert.strictEqual(getFlowPath(0, 0, 100, 50), "M 0 0 C 50 0, 50 50, 100 50");
+```
+* Skipped: External graph router packages (Dagre/ELK/ReactFlow layout engines).
+* Add when: Canvas requires automatic dense DAG auto-layout.

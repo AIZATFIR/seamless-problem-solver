@@ -6292,3 +6292,66 @@ function applyCanvasPan(viewportEl, x, y) {
 ---
 skipped: Layout physics engine & dynamic port re-routing.
 add when: Flowcharts exceed 50 interrelated nodes or require automated orthogonal collision avoidance.
+
+
+### Cycle #106 Directive (2026-11-03 07:04)
+```css
+/* 1. Nature UI ambient warmth & tactile card lift */
+.canvas-viewport {
+  background-color: #fcfbf9;
+  background-image: radial-gradient(circle at 50% 25%, #ffffff 0%, #f4f1ea 100%);
+}
+
+.canvas-node {
+  border: 1px solid rgba(138, 130, 115, 0.16);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 6px rgba(45, 40, 30, 0.03), 0 8px 20px rgba(45, 40, 30, 0.04);
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+  cursor: grab;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: translateY(-1px) scale(1.008);
+  box-shadow: 0 4px 12px rgba(45, 40, 30, 0.06), 0 16px 32px rgba(45, 40, 30, 0.08);
+}
+```
+
+```javascript
+/* 2. Natural organic flowchart connectors (smooth horizontal s-curve) */
+function getCurvedPath(x1, y1, x2, y2) {
+  // ponytail: fixed horizontal tension curve; upgrade to path-finding (A*) if auto-routing around cards is needed
+  const deltaX = Math.abs(x2 - x1) * 0.5;
+  return `M ${x1} ${y1} C ${x1 + deltaX} ${y1}, ${x2 - deltaX} ${y2}, ${x2} ${y2}`;
+}
+
+// Runnable assertion
+console.assert(
+  getCurvedPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100",
+  "getCurvedPath layout assertion failed"
+);
+```
+
+```css
+/* 3. Ambient connector lines with subtle organic tone */
+.canvas-edge {
+  fill: none;
+  stroke: #989487;
+  stroke-width: 1.5px;
+  stroke-linecap: round;
+  opacity: 0.65;
+  transition: stroke 150ms ease, opacity 150ms ease;
+}
+
+.canvas-edge:hover,
+.canvas-edge.active {
+  stroke: #4a483f;
+  opacity: 1;
+  stroke-width: 2px;
+}
+```
+
+skipped: dynamic obstacle-avoidance routing, add when cards frequently overlap and occlude connecting lines.
+skipped: canvas particle/paper-texture shaders, add when static CSS radial gradient fails high-DPI visual target.
+skipped: physics-based spring animation libraries, add when native CSS transforms feel noticeably stiff during user testing.

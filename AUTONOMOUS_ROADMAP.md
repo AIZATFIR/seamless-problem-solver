@@ -8451,3 +8451,55 @@ add when: Users produce dense diagrams (>50 nodes) with frequent line-crossings.
 ```
 skipped: Spring physics JS runtime (Framer Motion / Spring-JS).  
 add when: Multi-touch drag gestures require continuous velocity-preserving release momentum.
+
+
+### Cycle #143 Directive (2026-11-03 10:34)
+### 1. Organic Flowchart Connectors (Adaptive S-Curve)
+
+```typescript
+export function getOrganicPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.55, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+  // ponytail: horizontal-first layout; upgrade to 4-quadrant dynamic tangents for vertical layouts.
+}
+```
+skipped: Orthogonal obstacle routing and edge-label layout engines.  
+add when: Graph density causes persistent node-overlap collisions.
+
+---
+
+### 2. Warm Stone Ambient Canvas Surface
+
+```css
+.spatial-canvas {
+  background-color: #fbfaf6;
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(230, 224, 210, 0.35) 0%, transparent 70%),
+    radial-gradient(circle, #e6e0d3 1px, transparent 1px);
+  background-size: 100% 100%, 28px 28px;
+}
+```
+skipped: Heavy WebGL grain shaders or procedural canvas textures.  
+add when: Dynamic time-of-day ambient light shifting is explicitly requested.
+
+---
+
+### 3. Tactile Node Lift Interaction
+
+```css
+.canvas-node {
+  touch-action: none;
+  user-select: none;
+  border: 1px solid rgba(80, 70, 60, 0.08);
+  box-shadow: 0 1px 3px rgba(60, 50, 40, 0.04);
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.015);
+  box-shadow: 0 14px 28px -6px rgba(60, 50, 40, 0.1), 0 2px 6px -1px rgba(60, 50, 40, 0.06);
+}
+```
+skipped: JavaScript spring physics libraries (Framer Motion / react-spring).  
+add when: Velocity-based inertia flicking across large canvas distances is required.

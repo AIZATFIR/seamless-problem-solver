@@ -7850,3 +7850,64 @@ console.assert(getOrganicEdge(0, 0, 100, 50) === "M 0 0 C 45 0, 55 50, 100 50", 
 skipped: Canvas/WebGL rendering loops; add when node count exceeds 1,500 active DOM elements.
 skipped: External spring-physics libraries; add when multi-touch pinch-momentum feels constrained by CSS transforms.
 skipped: Complex obstacle-avoidance router; add when overlapping parallel edge density causes visual ambiguity.
+
+
+### Cycle #133 Directive (2026-11-03 09:38)
+### 1. Organic Bezier Connectors (Native Path Math)
+
+```typescript
+// ponytail: Horizontal S-curve; upgrade to dynamic port-axis orientation if vertical layouts are supported.
+export const getNaturalEdgePath = (x1: number, y1: number, x2: number, y2: number): string => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.45, 32);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+```
+skipped: Obstacle avoidance & collision-routing algorithms.  
+add when: Flowcharts routinely exceed 50+ intersecting nodes.
+
+---
+
+### 2. Nature UI Ambient Warm Canvas (Pure CSS)
+
+```css
+/* Warm washi-paper ambient backdrop with low-contrast micro-grid */
+.spatial-canvas {
+  background-color: #faf8f5;
+  background-image: radial-gradient(circle at 1px 1px, rgba(120, 113, 108, 0.18) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .spatial-canvas {
+    background-color: #161514;
+    background-image: radial-gradient(circle at 1px 1px, rgba(168, 162, 158, 0.12) 1px, transparent 0);
+  }
+}
+```
+skipped: Canvas/WebGL procedural grain generator.  
+add when: Dynamic zoom level renders the 24px fixed SVG grid visually aliased.
+
+---
+
+### 3. Tactile Node Lift & Smooth Interaction (Native Hardware Acceleration)
+
+```css
+.canvas-node {
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(120, 113, 108, 0.14);
+  box-shadow: 0 1px 2px rgba(60, 50, 40, 0.03), 0 4px 12px rgba(60, 50, 40, 0.04);
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+  will-change: transform;
+}
+
+.canvas-node:active,
+.canvas-node[data-dragging="true"] {
+  transform: scale(1.02) translateZ(0);
+  box-shadow: 0 12px 32px rgba(60, 50, 40, 0.08), 0 2px 6px rgba(60, 50, 40, 0.04);
+  cursor: grabbing;
+}
+```
+skipped: Physics-based spring simulation library (e.g., Framer Motion / Popmotion).  
+add when: Multi-selection inertia/flings require momentum handoff.

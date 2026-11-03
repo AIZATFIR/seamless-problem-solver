@@ -8138,3 +8138,64 @@ add when: Dynamic interactive light sources follow the cursor.
 
 skipped: Custom spring-physics JS animation libraries (e.g., Framer Motion / Spring).  
 add when: Canvas elements need velocity-inherited drag-and-throw inertia.
+
+
+### Cycle #138 Directive (2026-11-03 10:05)
+### 1. Organic Bezier Flowchart Connections
+
+```javascript
+// ponytail: Horizontal S-curve; upgrade to orthogonal A* routing if overlap avoidance fails.
+export const getSmoothEdge = (x1, y1, x2, y2) => {
+  const offset = Math.max(Math.abs(x2 - x1) * 0.45, 40);
+  return `M ${x1} ${y1} C ${x1 + offset} ${y1}, ${x2 - offset} ${y2}, ${x2} ${y2}`;
+};
+```
+skipped: Obstacle routing and self-loop edge detection.  
+add when: Nodes consistently overlap or graph density exceeds ~20 nodes per viewport.
+
+---
+
+### 2. Zen Warm Nature Ambient Canvas (CSS)
+
+```css
+/* Ambient warm stone canvas with soft depth and 24px grounding grid */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image: 
+    radial-gradient(circle at 50% 10%, rgba(214, 203, 187, 0.35) 0%, transparent 65%),
+    radial-gradient(rgba(44, 38, 34, 0.08) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+```
+skipped: SVG noise textures, Canvas-level render loops, and dynamic lighting.  
+add when: The project transitions from CSS-driven DOM layout to WebGL.
+
+---
+
+### 3. Native Direct-Manipulation Node Drag
+
+```javascript
+// ponytail: Direct pointer capture; upgrade to spring physics if nodes feel disconnected.
+export const makeDraggable = (nodeEl, onUpdate) => {
+  nodeEl.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('button, input, [data-no-drag]')) return;
+    nodeEl.setPointerCapture(e.pointerId);
+    let ox = e.clientX, oy = e.clientY;
+
+    const onMove = (ev) => {
+      onUpdate(ev.clientX - ox, ev.clientY - oy);
+      ox = ev.clientX;
+      oy = ev.clientY;
+    };
+
+    nodeEl.addEventListener('pointermove', onMove);
+    nodeEl.addEventListener('pointerup', () => {
+      nodeEl.removeEventListener('pointermove', onMove);
+    }, { once: true });
+  });
+};
+```
+skipped: Momentum fling physics and external gesture libraries.  
+add when: Users demand touch-screen flick gestures with natural kinetic decay.

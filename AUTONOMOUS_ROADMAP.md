@@ -8325,3 +8325,62 @@ export const getNaturePath = ([x1, y1], [x2, y2]) => {
 }
 ```
 `skipped: Framer-Motion / Spring physics engine, add when interactive multi-axis velocity dragging is needed.`
+
+
+### Cycle #141 Directive (2026-11-03 10:22)
+### 1. Organic Ambient Canvas (CSS)
+
+```css
+/* Warm alabaster canvas with soft paper dot grid */
+.spatial-canvas {
+  background-color: #fbf9f5;
+  background-image:
+    radial-gradient(circle at 50% 30%, rgba(242, 236, 224, 0.6) 0%, transparent 70%),
+    radial-gradient(#d8d1c5 0.75px, transparent 0.75px);
+  background-size: 100% 100%, 24px 24px;
+}
+```
+skipped: Custom WebGL/noise shaders.  
+add when: Dynamic paper grain or lighting effects are explicitly requested.
+
+---
+
+### 2. Natural Flowchart Connectors (SVG Cubic Bézier)
+
+```javascript
+// ponytail: horizontal cubic curve; upgrade to path-finding (A*) if auto-routing around nodes is required.
+export function getFlowPath(x1, y1, x2, y2) {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 32);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(
+  getFlowPath(0, 0, 100, 100) === "M 0 0 C 50 0, 50 100, 100 100",
+  "Path generation failed"
+);
+```
+skipped: Custom SVG routing libraries and edge collision checks.  
+add when: Graph nodes cross multiple horizontal tiers or overlap.
+
+---
+
+### 3. Apple-Grade Spring Physics for Drop & Drag (CSS)
+
+```css
+.canvas-node {
+  touch-action: none;
+  user-select: none;
+  will-change: transform;
+  /* Zen spring settle on release */
+  transition: transform 0.36s cubic-bezier(0.175, 0.885, 0.32, 1.12), box-shadow 0.2s ease;
+}
+
+.canvas-node.is-dragging {
+  transition: none;
+  cursor: grabbing;
+  box-shadow: 0 14px 28px -4px rgba(60, 50, 38, 0.12), 0 4px 10px -2px rgba(60, 50, 38, 0.06);
+}
+```
+skipped: JS spring physics engines (`framer-motion` or custom RAF loops).  
+add when: Velocity-based inertia or drag momentum is needed.

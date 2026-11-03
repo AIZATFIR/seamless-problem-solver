@@ -8199,3 +8199,77 @@ export const makeDraggable = (nodeEl, onUpdate) => {
 ```
 skipped: Momentum fling physics and external gesture libraries.  
 add when: Users demand touch-screen flick gestures with natural kinetic decay.
+
+
+### Cycle #139 Directive (2026-11-03 10:11)
+### 1. Organic S-Curve Flowchart Connectors
+
+```javascript
+// ponytail: Fixed horizontal bezier; upgrade to obstacle routing if nodes overlap heavily.
+export function getFlowPath(p1, p2) {
+  const dx = Math.max(Math.abs(p2.x - p1.x) * 0.5, 40);
+  return `M ${p1.x} ${p1.y} C ${p1.x + dx} ${p1.y}, ${p2.x - dx} ${p2.y}, ${p2.x} ${p2.y}`;
+}
+```
+skipped: Obstacle collision avoidance, arrowhead math.  
+add when: Nodes overlap or flow requires cyclic multi-directional loops.
+
+---
+
+### 2. Ambient Nature Canvas & Frosted Stone Nodes
+
+```css
+/* Ambient sunlit-parchment background */
+.canvas-root {
+  background-color: #fbfaf7;
+  background-image: 
+    radial-gradient(circle at 10% 10%, rgba(225, 215, 195, 0.45) 0%, transparent 45%),
+    radial-gradient(circle at 90% 90%, rgba(200, 210, 195, 0.35) 0%, transparent 50%);
+  touch-action: none;
+}
+
+/* Warm tactile frosted-paper node */
+.flow-node {
+  background: rgba(255, 255, 255, 0.76);
+  backdrop-filter: blur(12px) saturate(120%);
+  border: 1px solid rgba(80, 70, 50, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 4px 14px -3px rgba(60, 50, 30, 0.06), 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.16s ease;
+}
+.flow-node:hover {
+  box-shadow: 0 8px 24px -4px rgba(60, 50, 30, 0.1), 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+```
+skipped: Dynamic CSS theme switches and animated gradient canvas.  
+add when: Dark/Night mode or daylight-shifting theme is requested.
+
+---
+
+### 3. Native Inertial Pan Controller
+
+```javascript
+// ponytail: Translation-only pan; upgrade to 2D matrix when pinch-zoom is needed.
+export function bindFluidPan(viewport, canvas) {
+  let isPanning = false, startX = 0, startY = 0, x = 0, y = 0;
+  viewport.addEventListener('pointerdown', (e) => {
+    if (e.target !== viewport) return;
+    isPanning = true;
+    startX = e.clientX - x;
+    startY = e.clientY - y;
+    viewport.setPointerCapture(e.pointerId);
+  });
+  viewport.addEventListener('pointermove', (e) => {
+    if (!isPanning) return;
+    x = e.clientX - startX;
+    y = e.clientY - startY;
+    canvas.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+  });
+  viewport.addEventListener('pointerup', (e) => {
+    isPanning = false;
+    viewport.releasePointerCapture(e.pointerId);
+  });
+}
+```
+skipped: Momentum physics and zoom scaling matrix.  
+add when: Pinch-to-zoom or multi-level canvas scaling is introduced.

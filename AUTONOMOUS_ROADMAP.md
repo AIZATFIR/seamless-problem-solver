@@ -8012,3 +8012,66 @@ console.assert(
 
 skipped: dynamic obstacle-avoidance routing, add when node overlap becomes an observed user issue.
 skipped: canvas physics simulation/force engine, add when user creates >50 interconnected nodes without manual positioning.
+
+
+### Cycle #136 Directive (2026-11-03 09:54)
+### 1. Zen Ambient Ground (CSS)
+
+```css
+/* Replaces stark grids with warm stone texture & natural vignette */
+.spatial-canvas {
+  background-color: #faf8f5;
+  background-image: 
+    radial-gradient(circle at center, rgba(140, 120, 100, 0.12) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 0%, rgba(245, 235, 220, 0.6) 0%, transparent 75%);
+  background-size: 24px 24px, 100% 100%;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+```
+*skipped: WebGL/Canvas grain shader; add when user requests animated tactile paper textures.*
+
+---
+
+### 2. Natural Flowchart Connectors (TypeScript)
+
+```typescript
+// Organic cubic curve: auto-adapts control handles along the dominant axis
+export function naturalPath(x1: number, y1: number, x2: number, y2: number): string {
+  const dx = (x2 - x1) * 0.5;
+  // ponytail: fixed horizontal-dominant handles; add 4-quadrant routing when nodes stack vertically
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// Self-check
+console.assert(naturalPath(0, 0, 100, 50) === "M 0 0 C 50 0, 50 50, 100 50", "Bad path calc");
+```
+*skipped: Dijkstra/A* path obstacle avoidance; add when nodes visibly overlap connector segments.*
+
+---
+
+### 3. Tactile Node Elevation (CSS)
+
+```css
+/* Apple-spec frosted card with warm shadow */
+.canvas-node {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(20px) saturate(170%);
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
+  border: 1px solid rgba(80, 60, 40, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 4px 20px -2px rgba(80, 60, 40, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: transform 0.15s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.15s ease;
+  user-select: none;
+}
+
+.canvas-node:hover {
+  box-shadow: 0 8px 24px -2px rgba(80, 60, 40, 0.09), 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.canvas-node:active {
+  transform: scale(0.985);
+  cursor: grabbing;
+}
+```
+*skipped: JS spring animation libraries (Framer Motion/React Spring); add when dragging requires multi-axis inertia physics.*

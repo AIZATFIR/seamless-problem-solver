@@ -7369,3 +7369,68 @@ console.assert(
 ```
 * Skipped: Framer Motion / JS gesture spring physics.
 * Add when: Multi-touch gestural pinch-to-cluster interactions are required.
+
+
+### Cycle #125 Directive (2026-11-03 08:52)
+### 1. Organic Bezier Connectors (Fluid Flow)
+Replace rigid elbow or straight lines with an organic cubic S-curve and warm stroke.
+
+```tsx
+// Ponytail: standard horizontal bezier; upgrade to dynamic obstacle-avoidance only if nodes overlap heavily.
+export const connectorPath = (x1: number, y1: number, x2: number, y2: number) => {
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 40);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+};
+
+// SVG stroke styling:
+// stroke="#8A857B" strokeWidth="1.5" strokeLinecap="round" strokeOpacity="0.4" fill="none"
+```
+→ skipped: full layout physics engine or dagre layout  
+→ add when: automated auto-routing around intermediate nodes is explicitly requested.
+
+---
+
+### 2. Ambient Zen-Warmth Canvas (CSS Only)
+Replace raw monochrome or generic dot grids with warm parchment tone and optical dot falloff.
+
+```css
+.canvas-ambient {
+  background-color: #fbf9f5;
+  background-image: radial-gradient(circle at 50% 50%, rgba(94, 82, 64, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+  box-shadow: inset 0 0 100px rgba(78, 66, 50, 0.03);
+}
+
+.canvas-node {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(138, 133, 123, 0.18);
+  box-shadow: 0 4px 20px -2px rgba(60, 50, 40, 0.06), 0 1px 3px rgba(60, 50, 40, 0.04);
+  border-radius: 14px;
+}
+```
+→ skipped: canvas render loop or noise texture images  
+→ add when: user requests custom procedural textures or custom themes.
+
+---
+
+### 3. Apple-Grade Native Node Easing & Grab Feel
+Eliminate layout jank and spring library bloat using native CSS hardware transitions and cursor state.
+
+```css
+.canvas-node {
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+  will-change: transform;
+}
+
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.015);
+  box-shadow: 0 12px 32px -4px rgba(60, 50, 40, 0.12), 0 2px 6px rgba(60, 50, 40, 0.06);
+}
+```
+→ skipped: Framer Motion / react-spring dependencies  
+→ add when: complex multi-step choreographies or gesture velocity handoffs are required.

@@ -6355,3 +6355,45 @@ console.assert(
 skipped: dynamic obstacle-avoidance routing, add when cards frequently overlap and occlude connecting lines.
 skipped: canvas particle/paper-texture shaders, add when static CSS radial gradient fails high-DPI visual target.
 skipped: physics-based spring animation libraries, add when native CSS transforms feel noticeably stiff during user testing.
+
+
+### Cycle #107 Directive (2026-11-03 07:09)
+```css
+/* 1. Ambient Warmth Canvas */
+.canvas-viewport {
+  background-color: #fbf9f5;
+  background-image: 
+    radial-gradient(circle at 50% 50%, transparent 60%, rgba(215, 204, 185, 0.2) 100%),
+    radial-gradient(#d6cebe 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px;
+  touch-action: none;
+}
+
+/* 2. Tactile Zen Node Surface */
+.canvas-node {
+  background: rgba(255, 253, 249, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(215, 205, 190, 0.7);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(60, 50, 40, 0.03), 0 8px 20px -4px rgba(60, 50, 40, 0.06);
+  transition: transform 0.15s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.15s ease;
+  user-select: none;
+}
+.canvas-node:active {
+  cursor: grabbing;
+  transform: scale(1.015);
+  box-shadow: 0 14px 28px -4px rgba(60, 50, 40, 0.12);
+}
+```
+
+```javascript
+// 3. Natural Organic Flowchart Bezier Edge
+export function getEdgePath(x1, y1, x2, y2) {
+  // ponytail: horizontal S-curve only; upgrade to directional multi-port routing when nodes support 4-sided anchors.
+  const dx = Math.max(Math.abs(x2 - x1) * 0.5, 32);
+  return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+```
+
+skipped: Graph layout libraries (ELK/dagre) and WebGL canvas backgrounds.
+add when: Graph exceeds 200 concurrent nodes or requires automated cycle avoidance.

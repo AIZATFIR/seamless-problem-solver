@@ -829,6 +829,7 @@ class SeamlessProblemSolverApp {
       const resTitle = isEn ? (node.title_en || node.title_id || 'Conclusion') : (node.title_id || 'Kesimpulan');
       const resMsg = isEn ? (node.msg_en || node.msg_id || '') : (node.msg_id || '');
       const resAdv = isEn ? (node.adv_en || node.adv_id || '') : (node.adv_id || '');
+      const safeResAdv = this.escapeHtml(resAdv).replace(/quran\.com\/(\d+)\/(\d+)\b/gi, '<a class="text-primary underline underline-offset-2" href="https://quran.com/$1/$2" target="_blank" rel="noopener noreferrer">quran.com/$1/$2</a>');
       const dict = translations[this.currentLang];
 
       canvas.innerHTML = `
@@ -850,7 +851,7 @@ class SeamlessProblemSolverApp {
 
           ${resAdv ? `
             <div class="p-4 rounded-2xl bg-surface-container/90 border border-primary/20 text-xs sm:text-sm font-semibold text-on-surface max-w-md w-full text-center">
-              💡 ${resAdv}
+              💡 ${safeResAdv}
             </div>
           ` : ''}
 

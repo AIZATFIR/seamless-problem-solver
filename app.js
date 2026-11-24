@@ -44,6 +44,7 @@ const translations = {
     catHumor: "Humor & Meme",
     catStoic: "Stoik & Hidup",
     catWork: "Kerja & Logika",
+    catRahm: "Qur’an & Fitrah",
     btnPlayFlow: "Mainkan Flowchart",
 
     // Three Pillars
@@ -107,6 +108,7 @@ const translations = {
     catHumor: "Humor & Meme",
     catStoic: "Stoic & Life",
     catWork: "Work & Logic",
+    catRahm: "Qur’an & Fitrah",
     btnPlayFlow: "Play Flowchart",
 
     // Three Pillars
@@ -417,6 +419,130 @@ if (!adminFlowcharts || adminFlowcharts.length === 0) {
           msg_en: "\"If it is stuck and should move, WD-40 is the ultimate universal lubricant!\"",
           adv_id: "Kocok kaleng WD-40 dan semprotkan langsung ke engsel atau baut.",
           adv_en: "Shake can and spray generously on joints and bolts."
+        }
+      }
+    },
+    {
+      id: "rahm_state_reflection",
+      title_id: "Membaca State dan Dorongan",
+      title_en: "Reading Your State and Impulse",
+      author: "Terra Flow · Refleksi Rahm",
+      category: "rahm",
+      isAdmin: true,
+      likes: 0,
+      plays: 0,
+      desc_id: "Peta pilihan singkat untuk melihat state, lensa nafs yang mungkin dekat, lalu menentukan langkah yang selaras dengan nilai dan keadaanmu.",
+      desc_en: "A short reflection map to notice your state, consider a nearby nafs lens, and choose a step that fits your values and situation.",
+      startNode: "state",
+      nodes: {
+        state: {
+          tag_id: "Kenali keadaan", tag_en: "Notice your state",
+          q_id: "Apa yang paling terasa dalam persoalan ini?",
+          q_en: "What feels strongest in this situation?",
+          sub_id: "Pilih yang paling dekat. Ini titik mulai, bukan penilaian tentang dirimu.",
+          sub_en: "Choose what feels closest. This is a starting point, not a judgment about you.",
+          options: [
+            { text_id: "Aku menyesal dan ingin memperbaiki", text_en: "I regret something and want to repair it", next: "lawwama", btnStyle: "btn-primary" },
+            { text_id: "Ada dorongan kuat yang sulit kutahan", text_en: "A strong impulse is hard to resist", next: "ammara", btnStyle: "btn-secondary" },
+            { text_id: "Aku sedang menimbang pilihan dan nilai", text_en: "I am weighing choices and values", next: "mulhamah", btnStyle: "btn-secondary" },
+            { text_id: "Aku belum tahu, atau rasanya lebih rumit", text_en: "I am unsure, or it feels more complicated", next: "open", btnStyle: "btn-secondary" }
+          ]
+        },
+        lawwama: {
+          tag_id: "Lensa muhasabah", tag_en: "A lens for self-reflection",
+          q_id: "Nafs al-lawwāmah mungkin dekat sebagai lensa muhasabah.",
+          q_en: "Nafs al-lawwāmah may be a useful lens for self-reflection.",
+          sub_id: "Al-Qur’an menyebut nafs lawwāmah (75:2). Sebagian tradisi membacanya sebagai jiwa yang mencela diri; flow ini memakainya untuk menimbang penyesalan, tanggung jawab, dan perubahan, bukan untuk memberi tingkat pada seseorang.",
+          sub_en: "The Qur’an mentions the self-reproaching soul (75:2). This flow uses it to consider regret, responsibility, and change, not to assign anyone a rank.",
+          options: [
+            { text_id: "Aku bisa mengakui dampak dan memperbaikinya", text_en: "I can acknowledge the impact and repair it", next: "repair", btnStyle: "btn-primary" },
+            { text_id: "Aku terus menghukum diri", text_en: "I keep punishing myself", next: "self-blame", btnStyle: "btn-secondary" }
+          ]
+        },
+        repair: {
+          isResult: true,
+          title_id: "Jadikan penyesalan arah perbaikan",
+          title_en: "Let regret point toward repair",
+          msg_id: "Akui bagianmu dengan jujur. Pilih perbaikan yang nyata dan sepadan, lalu pikirkan apa yang ingin kamu lakukan berbeda lain kali. Penyesalan tidak harus menjadi hukuman tanpa akhir.",
+          msg_en: "Name your part honestly. Choose a real, proportionate repair, then consider what you would do differently next time. Regret does not have to become endless punishment.",
+          adv_id: "QS. Al-Qiyāmah 75:2 · Baca ayat dan konteksnya di quran.com/75/2",
+          adv_en: "Qur’an 75:2 · Read the verse and context at quran.com/75/2"
+        },
+        "self-blame": {
+          isResult: true,
+          title_id: "Tanggung jawab tidak sama dengan menyiksa diri",
+          title_en: "Responsibility is not self-punishment",
+          msg_id: "Lihat apakah ada dampak yang masih bisa diperbaiki. Kalau tidak, belajar dari pilihan itu mungkin sudah cukup untuk langkah berikutnya. Kamu boleh menutup flow ini tanpa menyelesaikan semuanya sekarang.",
+          msg_en: "See whether any impact can still be repaired. If not, learning from the choice may be enough for the next step. You can close this flow without resolving everything now.",
+          adv_id: "QS. Az-Zumar 39:53 · Baca ayat dan konteksnya di quran.com/39/53",
+          adv_en: "Qur’an 39:53 · Read the verse and context at quran.com/39/53"
+        },
+        ammarah: {
+          tag_id: "Lensa dorongan", tag_en: "A lens for impulses",
+          q_id: "Nafs al-ammārah mungkin berguna untuk memeriksa dorongan.",
+          q_en: "Nafs al-ammārah may help you examine an impulse.",
+          sub_id: "Istilah ini muncul dalam QS. Yūsuf 12:53. Perhatikan dorongan dan akibatnya tanpa menyimpulkan bahwa dirimu buruk.",
+          sub_en: "The term appears in Qur’an 12:53. Notice the impulse and its effects without concluding that you are a bad person.",
+          options: [
+            { text_id: "Jeda sebelum bertindak", text_en: "Pause before acting", next: "pause", btnStyle: "btn-primary" },
+            { text_id: "Cari pilihan yang tidak menambah mudarat", text_en: "Find a choice that avoids more harm", next: "harm", btnStyle: "btn-secondary" }
+          ]
+        },
+        pause: {
+          isResult: true,
+          title_id: "Buat ruang antara dorongan dan tindakan",
+          title_en: "Make room between impulse and action",
+          msg_id: "Tunda keputusan sebentar bila situasinya aman. Amati apa yang kamu inginkan dan apa akibatnya, lalu pilih respons yang masih bisa kamu pertanggungjawabkan.",
+          msg_en: "If it is safe, delay the decision briefly. Notice what you want and what it may cause, then choose a response you can stand behind.",
+          adv_id: "QS. Yūsuf 12:53 · Baca ayat dan konteksnya di quran.com/12/53",
+          adv_en: "Qur’an 12:53 · Read the verse and context at quran.com/12/53"
+        },
+        harm: {
+          isResult: true,
+          title_id: "Pilih respons yang lebih aman",
+          title_en: "Choose a safer response",
+          msg_id: "Jauhkan diri sejenak dari tindakan yang bisa melukai. Kamu bisa meninjau kembali persoalannya setelah intensitasnya turun, tanpa harus mengabaikan batas atau kebutuhanmu.",
+          msg_en: "Step away from an action that could hurt someone. You can revisit the issue when the intensity drops without ignoring your boundaries or needs.",
+          adv_id: "QS. Yūsuf 12:53 · Baca ayat dan konteksnya di quran.com/12/53",
+          adv_en: "Qur’an 12:53 · Read the verse and context at quran.com/12/53"
+        },
+        mulhamah: {
+          tag_id: "Lensa pilihan", tag_en: "A lens for choosing",
+          q_id: "Nafs al-mulhamah bisa menjadi lensa untuk menimbang pilihan.",
+          q_en: "Nafs al-mulhamah can be a lens for weighing a choice.",
+          sub_id: "QS. Asy-Syams 91:7–10 berbicara tentang jiwa dan jalan keburukan serta ketakwaan. Flow ini tidak menebak sumber bisikan; ia mengajakmu melihat nilai dan dampak pilihan.",
+          sub_en: "Qur’an 91:7–10 speaks of the soul and paths of wrongdoing and mindfulness. This flow does not guess the source of thoughts; it asks you to consider values and consequences.",
+          options: [
+            { text_id: "Tulis nilai yang ingin kujaga", text_en: "Name the value I want to keep", next: "values", btnStyle: "btn-primary" },
+            { text_id: "Aku butuh informasi atau waktu", text_en: "I need more information or time", next: "time", btnStyle: "btn-secondary" }
+          ]
+        },
+        values: {
+          isResult: true,
+          title_id: "Ubah nilai menjadi pilihan yang terlihat",
+          title_en: "Turn a value into a visible choice",
+          msg_id: "Pikirkan satu tindakan yang sejalan dengan nilai itu dan dampak yang mungkin muncul. Pilih langkah yang ukurannya sesuai dengan keadaanmu.",
+          msg_en: "Consider one action that fits that value and the effect it may have. Choose a step that fits your circumstances.",
+          adv_id: "QS. Asy-Syams 91:7–10 · Baca ayat dan konteksnya di quran.com/91/7",
+          adv_en: "Qur’an 91:7–10 · Read the verse and context at quran.com/91/7"
+        },
+        time: {
+          isResult: true,
+          title_id: "Belum memilih juga bagian dari proses",
+          title_en: "Not choosing yet can be part of the process",
+          msg_id: "Catat apa yang belum jelas. Tunda keputusan yang memang bisa menunggu, lalu kembali ketika informasi atau tenagamu cukup.",
+          msg_en: "Name what is still unclear. Delay what can wait, then return when you have enough information or energy.",
+          adv_id: "QS. Asy-Syams 91:7–10 · Baca ayat dan konteksnya di quran.com/91/7",
+          adv_en: "Qur’an 91:7–10 · Read the verse and context at quran.com/91/7"
+        },
+        open: {
+          isResult: true,
+          title_id: "Kamu tidak harus memilih satu nama",
+          title_en: "You do not have to choose one label",
+          msg_id: "Keadaan bisa memuat beberapa hal sekaligus, atau belum punya nama. Mulai dari bagian yang paling nyata bagimu: apa yang terjadi, apa yang terasa, atau apa yang ingin kamu jaga.",
+          msg_en: "A situation can hold several things at once, or remain hard to name. Start where it feels clearest: what happened, what you feel, or what you want to protect.",
+          adv_id: "QS. Ar-Rūm 30:30 · Baca ayat dan konteksnya di quran.com/30/30",
+          adv_en: "Qur’an 30:30 · Read the verse and context at quran.com/30/30"
         }
       }
     }
